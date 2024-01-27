@@ -1,0 +1,215 @@
+MONGO:
+  URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
+  DATABASE: "praxi"
+SCOREBOARD:
+  TITLE: "&4&lZonix Practice"
+JOIN_MESSAGES:
+  - " &7&l* &c&lWelcome to Zonix Practice Season 1!"
+  - " &7&l* &c&lPlease report any issues to an administrator!"
+KIT_EDITOR:
+  START_RENAMING: "&eNow renaming &a{0}&e... Enter the new name now. &7&o(Chat colors work)"
+  RENAMED: "&eYou have renamed your &a{0} &ekit to &a{1}&e."
+  NAME_TOO_LONG: "&cYour kit name cannot be more than 16 characters long."
+PARTY:
+  HELP:
+    - "&7&m------------------------------------------------"
+    - "&6Party Help"
+    - "&9/party create &7- &fCreate a party"
+    - "&9/party disband &7- &fDisband your party"
+    - "&9/party leave &7- &fLeave your party"
+    - "&9/party join <name> &7- &fJoin a party"
+    - "&9/party kick <player> &7- &fKick a member"
+    - "&9/party open &7- &fMake your party open"
+    - "&9/party close &7- &fMake your party closed"
+    - "&9/party chat <msg> &7- &fSend a chat message"
+    - "&7&m------------------------------------------------"
+  CREATE: "&9You have created a party."
+  DISBAND: "&9Your party has been disbanded."
+  INVITE:
+    - "{1} &9has sent you an invite to their party."
+    - "%CLICKABLE%&6Click here or type &b/party join {0} &6to accept."
+  INVITE_HOVER: "&6Click here to accept."
+  INVITE_BROADCAST: "{0} &9has been invited to your party."
+  JOIN: "{0} &9has joined your party."
+  LEAVE: "{0} &9has {1} your party."
+  PRIVACY_CHANGE: "&9Your party privacy has been set to &a{0}&e."
+  CHAT_PREFIX: "&6[Party] &r"
+EVENT:
+  HELP:
+    - "&7&m------------------------------------------------"
+    - "&6Event Help"
+    - "&9/events &7- &fShow events that can be hosted"
+    - "&9/event host <type> &7- &fHost an event by name"
+    - "&9/event info &7- &fShows active event information"
+    - "&9/event join &7- &fJoin the event"
+    - "&9/event leave &7- &fLeave the event"
+    - "&7&m------------------------------------------------"
+  JOIN_BROADCAST:
+    - "&7███████"
+    - "&7██&4███&7██"
+    - "&7██&4█&7████  &6&l[{0} Event]"
+    - "&7██&4███&7██  &r{1} &eis hosting an event!"
+    - "&7██&4█&7████  &r&a&lClick to join!"
+    - "&7██&4███&7██"
+    - "&7███████"
+  JOIN_HOVER: "&eClick to join,"
+  PLAYER_JOIN: "&7[&a&lEvent&7] &r{0} &ehas joined the event. &7&o({1}/{2})"
+  PLAYER_LEAVE: "&7[&a&lEvent&7] &r{0} &ehas left the event. &7&o({1}/{2})"
+  PLAYER_VOTE: "&7[&a&lEvent&7] &r{0} &ehas voted for the &a{1} &emap. &7&o({2} votes)"
+  ROUND_START: "&7[&a&lEvent&7] &a{1} &evs &a{2}"
+  ROUND_START_TIMER: "&7[&a&lEvent&7] &aRound {0} &ewill start in &a{1} {2}&e."
+  ROUND_ELIMINATION: "&7[&a&lEvent&7] &a{0} &e{1} eliminated."
+  ROUND_OPPONENT: "&7[&a&lEvent&7] &eYour Opponent{0}: &a{1}"
+  STARTED:
+    - "&7[&a&lEvent&7] &a{0} &ehas started. &7&o({1}/{2})"
+  FINISHED:
+    - "&7███████"
+    - "&7██&4███&7██"
+    - "&7██&4█&7████  &6&l[{0} Event]"
+    - "&7██&4███&7██  &r{1} won the event!"
+    - "&7██&4█&7████  &r&6&lGood game!"
+    - "&7██&4███&7██"
+    - "&7███████"
+DUEL:
+  SENT: "&6You sent a &a{0} &6duel request to &a{1} &6on arena &a{2}&6."
+  SENT_PARTY: "&6Your party sent a &a{0} &6duel request to &a{1}''s party &6(&a{2}&6) &6on arena &a{3}&6."
+  RECEIVED:
+    - "&a{1} &6sent you a &a{0} &6duel request on arena &a{2}&6."
+    - "%CLICKABLE%"
+  RECEIVED_PARTY:
+    - "&a{1}''s party &6(&a{2}&6) &6sent your party a &a{0} &6duel request on arena &a{3}&6."
+    - "%CLICKABLE%"
+  RECEIVED_HOVER: "&eClick to accept this duel request."
+  RECEIVED_CLICKABLE: "&6Click here or type &b/duel accept {0} &6to accept."
+QUEUE:
+  JOIN_UNRANKED: "&eYou have been added to the &aUnranked {0} &equeue."
+  LEAVE_UNRANKED: "&eYou have been removed from &aUnranked {0} &equeue."
+  JOIN_RANKED: "&eYou have been added to the &aRanked {0} &equeue. &7&o[{1} ELO]"
+  LEAVE_RANKED: "&eYou have been removed from &aRanked {0} &equeue."
+  RANGE_INCREMENT: "&eSearching in ELO range &a[{1} -> {2}]&e..."
+MATCH:
+  GIVE_KIT: "&eGiving you the &a{0} &ekit."
+  ENDERPEARL_COOLDOWN: "&cYou may not use your &c&lEnderpearl &cfor another &c&l{0} second{1}&c."
+  ENDERPEARL_COOLDOWN_EXPIRED: "&eYour enderpearl cooldown has now expired."
+  START_SPECTATING: "&eYou are spectating {0}{1} &evs {2}{3}"
+  START_SPECTATING_RANKED: "&eYou are spectating {0}{1} &7({2}) &evs {3}{4} &7({5})"
+  NOW_SPECTATING: "&b{0} &eis now spectating."
+  NO_LONGER_SPECTATING: "&b{0} &eis no longer spectating."
+  PLAYING_ARENA: "&eYou are playing on arena &a{0}&e."
+  START_TIMER: "&eThe match starts in &a{0} &esecond{1}..."
+  STARTED: "&eThe match has started."
+  END_DETAILS:
+    - "&7&m------------------------------------------------"
+    - "&6Match Information &7(click to view)"
+    - "%INVENTORIES%"
+    - "%ELO_CHANGES%"
+    - "&7&m------------------------------------------------"
+  END_WINNER_INVENTORY: "&aWinner{0}: "
+  END_LOSER_INVENTORY: "&cLoser{0}: "
+  CLICK_TO_VIEW_NAME: "&e{0}"
+  CLICK_TO_VIEW_HOVER: "&eClick to view &b{0}&e''s inventory."
+  ELO_CHANGES:
+    - "&7&oELO Changes: &a{0} +{1} ({2}) &c{3} +{4} ({5})"
+  PLAYER_KILLED: "{0} &7was slain by {1}&7."
+  PLAYER_DIED: "{0} &7committed suicide."
+  ROUNDS_TO_WIN: ""
+REMATCH:
+  SENT_REQUEST:
+    - "&eYou have sent &a{0} &ea rematch on arena &a{1}&e."
+  RECEIVED_REQUEST:
+    - "&a{0} &ehas sent you a rematch on arena &a{1}&e."
+    - "&6Click here or type &b/rematch &6to accept the request."
+  RECEIVED_REQUEST_HOVER: "&6Click to accept."
+ARROW_DAMAGE_INDICATOR: "&7[&9&lArrow Range &e({0})&7] &e{1} &9is now at &c{2}&4{3}&e."
+VIEWING_INVENTORY: "&eYou are viewing &b{0}&e''s inventory..."
+HOTBAR_ITEMS:
+  QUEUE_JOIN_UNRANKED:
+    MATERIAL: "IRON_SWORD"
+    DURABILITY: 0
+    NAME: "&e&lUnranked Queue"
+    LORE: []
+  QUEUE_JOIN_RANKED:
+    MATERIAL: "DIAMOND_SWORD"
+    DURABILITY: 0
+    NAME: "&a&lRanked Queue"
+    LORE: []
+  QUEUE_LEAVE:
+    MATERIAL: "INK_SACK"
+    DURABILITY: 1
+    NAME: "&c&lLeave Queue"
+    LORE: []
+  PARTY_EVENTS:
+    MATERIAL: "DIAMOND_SWORD"
+    DURABILITY: 0
+    NAME: "&a&lParty Events"
+    LORE: []
+  PARTY_CREATE:
+    MATERIAL: "NAME_TAG"
+    DURABILITY: 0
+    NAME: "&9&lCreate Party"
+    LORE: []
+  PARTY_DISBAND:
+    MATERIAL: "INK_SACK"
+    DURABILITY: 1
+    NAME: "&c&lDisband Party"
+    LORE: []
+  PARTY_LEAVE:
+    MATERIAL: "INK_SACK"
+    DURABILITY: 1
+    NAME: "&c&lLeave Party"
+    LORE: []
+  PARTY_INFORMATION:
+    MATERIAL: "SKULL_ITEM"
+    DURABILITY: 3
+    NAME: "&6&lParty Information"
+    LORE: []
+  OTHER_PARTIES:
+    MATERIAL: "CHEST"
+    DURABILITY: 0
+    NAME: "&9&lOther Parties"
+    LORE: []
+  KIT_EDITOR:
+    MATERIAL: "BOOK"
+    DURABILITY: 0
+    NAME: "&d&lKit Editor"
+    LORE: []
+  SPECTATE_STOP:
+    MATERIAL: "INK_SACK"
+    DURABILITY: 1
+    NAME: "&c&lStop Spectating"
+    LORE: []
+  VIEW_INVENTORY:
+    MATERIAL: "BOOK"
+    DURABILITY: 0
+    NAME: "&6&lView Inventory"
+    LORE: []
+  EVENT_JOIN:
+    MATERIAL: "NETHER_STAR"
+    DURABILITY: 0
+    NAME: "&b&lJoin Event"
+    LORE: []
+  EVENT_LEAVE:
+    MATERIAL: "NETHER_STAR"
+    DURABILITY: 0
+    NAME: "&b&lLeave Event"
+    LORE: []
+  MAP_SELECTION:
+    MATERIAL: "MAP"
+    DURABILITY: 0
+    NAME: "&7» &6&l%MAP% &7«"
+    LORE: []
+  REMATCH_REQUEST:
+    MATERIAL: "BLAZE_POWDER"
+    DURABILITY: 0
+    NAME: "&2&lRequest Rematch"
+    LORE: []
+  REMATCH_ACCEPT:
+    MATERIAL: "DIAMOND"
+    DURABILITY: 0
+    NAME: "&b&lAccept Rematch"
+    LORE: []
+  KIT_SELECTION:
+    MATERIAL: "ENCHANTED_BOOK"
+    DURABILITY: 0
+    NAME: "&7» &6&l%KIT% &7«"
+    LORE: []

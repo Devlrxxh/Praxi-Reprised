@@ -1,0 +1,9 @@
+EVENTS:
+  SUMO:
+    LOBBY_LOCATION: "null"
+    ALLOWED_MAPS: []
+EVENT_MAPS: {}
+HOST_SLOTS:
+  1:
+    PERMISSION: "zonix.ranks.gold"
+    SLOTS: 64

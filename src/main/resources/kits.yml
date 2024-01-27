@@ -1,0 +1,121 @@
+kits:
+  Classic:
+    enabled: true
+    icon:
+      material: IRON_SWORD
+      durability: 0
+    loadout:
+      armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
+      contents: t@276:e@16@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8259;t@373:d@8226;t@373:d@16388;t@373:d@16426;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16388;t@373:d@16426;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;
+    game-rules:
+      build: false
+      sumo: false
+      spleef: false
+      parkour: false
+      health-regeneration: true
+      hit-delay: 20
+    edit-rules:
+      allow-potion-fill: true
+      items:
+        1:
+          material: COOKED_BEEF
+          amount: 64
+          durability: 0
+        2:
+          material: GOLDEN_CARROT
+          amount: 64
+          durability: 0
+        3:
+          material: POTION
+          amount: 1
+          durability: 16388
+        4:
+          material: POTION
+          amount: 1
+          durability: 16426
+        5:
+          material: POTION
+          amount: 1
+          durability: 16421
+        6:
+          material: POTION
+          amount: 1
+          durability: 8226
+  NoDebuff:
+    enabled: true
+    icon:
+      material: DIAMOND_SWORD
+      durability: 0
+    loadout:
+      armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
+      contents: t@276:e@16@3:e@34@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8259;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;
+    game-rules:
+      enabled: true
+      build: false
+      sumo: false
+      spleef: false
+      parkour: false
+      health-regeneration: true
+      hit-delay: 20
+    edit-rules:
+      allow-potion-fill: true
+      items:
+        1:
+          material: COOKED_BEEF
+          durability: 0
+          amount: 64
+        2:
+          material: GOLDEN_CARROT
+          durability: 0
+          amount: 64
+        3:
+          material: POTION
+          durability: 16421
+          amount: 1
+        4:
+          material: POTION
+          durability: 8226
+          amount: 1
+  BuildUHC:
+    enabled: true
+    icon:
+      material: LAVA_BUCKET
+      durability: 0
+    loadout:
+      armor: t@313:e@4@2:e@34@3;t@312:e@0@1:e@34@3;t@311:e@0@1:e@34@3;t@310:e@4@2:e@34@3;
+      contents: t@276:e@16@1:e@34@3;t@346:e@34@3;t@261:e@48@2:e@34@3;t@322:a@6;t@322:a@3:dn@ยง6Golden Head;t@327;t@326;t@4:a@64;t@278;t@262:a@64;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;t@327;t@326;t@4:a@64;t@279;
+    game-rules:
+      build: true
+      sumo: false
+      spleef: false
+      parkour: false
+      health-regeneration: false
+      hit-delay: 20
+    edit-rules:
+      allow-potion-fill: false
+      items:
+        '1':
+          material: COOKED_BEEF
+          durability: 0
+          amount: 64
+        '2':
+          material: GOLDEN_CARROT
+          durability: 0
+          amount: 64
+  Sumo:
+    enabled: true
+    icon:
+      material: FEATHER
+      durability: 0
+    loadout:
+      armor: null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+    game-rules:
+      build: false
+      sumo: true
+      spleef: false
+      parkour: false
+      health-regeneration: true
+      hit-delay: 20
+    edit-rules:
+      allow-potion-fill: false
+      items:
