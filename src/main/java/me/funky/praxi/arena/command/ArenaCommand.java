@@ -125,7 +125,7 @@ public class ArenaCommand extends BaseCommand {
         } else {
             player.getInventory().addItem(Selection.SELECTION_WAND);
         }
-
+        player.sendMessage(CC.translate("&aSuccessfully given selection wand!"));
         player.updateInventory();
     }
 
