@@ -5,9 +5,6 @@ import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
 import me.funky.praxi.profile.hotbar.HotbarItem;
-
-import java.util.regex.Matcher;
-
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -20,6 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.regex.Matcher;
 
 public class EventGameListener implements Listener {
 

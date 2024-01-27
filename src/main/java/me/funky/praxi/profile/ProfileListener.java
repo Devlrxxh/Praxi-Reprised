@@ -122,22 +122,16 @@ public class ProfileListener implements Listener {
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
 
+        Hotbar.giveHotbarItems(event.getPlayer());
+        Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
+
+        for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
+            VisibilityLogic.handle(event.getPlayer(), otherPlayer);
+            VisibilityLogic.handle(otherPlayer, event.getPlayer());
+        }
         for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGES")) {
             event.getPlayer().sendMessage(CC.translate(line));
         }
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Hotbar.giveHotbarItems(event.getPlayer());
-                Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
-
-                for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
-                    VisibilityLogic.handle(event.getPlayer(), otherPlayer);
-                    VisibilityLogic.handle(otherPlayer, event.getPlayer());
-                }
-            }
-        }.runTaskLater(Praxi.getInstance(), 4L);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

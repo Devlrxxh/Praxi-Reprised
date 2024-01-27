@@ -18,13 +18,13 @@ public class DuelRequest {
     private final UUID target;
     @Getter
     private final boolean party;
+    private final long timestamp = System.currentTimeMillis();
     @Getter
     @Setter
     private Kit kit;
     @Getter
     @Setter
     private Arena arena;
-    private final long timestamp = System.currentTimeMillis();
 
     DuelRequest(UUID sender, UUID target, boolean party) {
         this.sender = sender;

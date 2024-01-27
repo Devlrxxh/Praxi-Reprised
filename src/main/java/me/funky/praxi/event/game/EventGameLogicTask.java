@@ -1,8 +1,8 @@
 package me.funky.praxi.event.game;
 
-import me.funky.praxi.Locale;
 import lombok.Getter;
 import lombok.Setter;
+import me.funky.praxi.Locale;
 import me.funky.praxi.util.TimeUtil;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;

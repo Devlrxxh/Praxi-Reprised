@@ -36,6 +36,12 @@ public class EventGame {
     @Getter
     private final Event event;
     @Getter
+    private final GamePlayer gameHost;
+    @Getter
+    private final List<GameParticipant<GamePlayer>> participants;
+    @Getter
+    private final int maximumPlayers;
+    @Getter
     @Setter
     private EventGameState gameState;
     @Getter
@@ -43,12 +49,6 @@ public class EventGame {
     @Getter
     @Setter
     private EventGameMap gameMap;
-    @Getter
-    private final GamePlayer gameHost;
-    @Getter
-    private final List<GameParticipant<GamePlayer>> participants;
-    @Getter
-    private final int maximumPlayers;
 
     public EventGame(Event event, Player player, int maximumPlayers) {
         this.event = event;

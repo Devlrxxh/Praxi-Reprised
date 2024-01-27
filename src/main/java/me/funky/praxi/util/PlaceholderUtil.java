@@ -44,7 +44,7 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<opponent>", match.getOpponent(player).getName());
                 line = line.replaceAll("<opponent-ping>", String.valueOf((((CraftPlayer) match.getOpponent(player)).getHandle()).ping));
             }
-                formattedLines.add(line);
+            formattedLines.add(line);
         }
         return formattedLines;
     }

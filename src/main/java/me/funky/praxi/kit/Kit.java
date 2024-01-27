@@ -17,31 +17,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Kit {
 
     @Getter
     private static final List<Kit> kits = new ArrayList<>();
-
-    @Getter
     private final String name;
-    @Getter
     private final KitLoadout kitLoadout = new KitLoadout();
-    @Getter
     private final KitEditRules editRules = new KitEditRules();
-    @Getter
     private final KitGameRules gameRules = new KitGameRules();
-    @Getter
-    @Setter
     private boolean enabled;
-    @Getter
-    @Setter
     private String knockbackProfile;
-    @Setter
     private ItemStack displayIcon;
+    private int queuing;
 
     public Kit(String name) {
         this.name = name;
         this.displayIcon = new ItemStack(Material.DIAMOND_SWORD);
+        this.queuing = 0;
     }
 
     public static void init() {
@@ -108,6 +102,14 @@ public class Kit {
         }
 
         return null;
+    }
+
+    public void addQueue(byte i) {
+        queuing += i;
+    }
+
+    public void removeQueue(byte i) {
+        queuing -= i;
     }
 
     public ItemStack getDisplayIcon() {

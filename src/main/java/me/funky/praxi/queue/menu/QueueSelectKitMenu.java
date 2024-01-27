@@ -56,7 +56,7 @@ public class QueueSelectKitMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
             lore.add("&cFighting: &r" + Match.getInFightsCount(queue));
-            lore.add("&cQueueing: &r" + Praxi.getInstance().getCache().getPlayers().size());
+            lore.add("&cQueueing: &r" + queue.getKit().getQueuing());
 
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name("&4&l" + queue.getKit().getName())
@@ -85,6 +85,7 @@ public class QueueSelectKitMenu extends Menu {
             player.closeInventory();
 
             queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0);
+            queue.getKit().addQueue((byte) 1);
         }
 
     }

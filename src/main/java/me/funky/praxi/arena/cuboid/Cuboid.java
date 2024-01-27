@@ -472,10 +472,10 @@ public class Cuboid implements Iterable<Location> {
         private final int baseX;
         private final int baseY;
         private final int baseZ;
-        private int x, y, z;
         private final int sizeX;
         private final int sizeY;
         private final int sizeZ;
+        private int x, y, z;
 
         public LocationCuboidIterator(World w, int x1, int y1, int z1, int x2, int y2, int z2) {
             this.w = w;

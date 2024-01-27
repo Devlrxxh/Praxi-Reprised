@@ -140,7 +140,8 @@ public class BlockUtil {
             }
         } else if (fracZ < 0.3) {
             return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId());
-        } else return fracZ > 0.7 && !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId());
+        } else
+            return fracZ > 0.7 && !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId());
         return false;
     }
 

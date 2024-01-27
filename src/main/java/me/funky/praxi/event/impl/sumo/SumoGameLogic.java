@@ -36,13 +36,13 @@ public class SumoGameLogic implements EventGameLogic {
 
     private final EventGame game;
     @Getter
+    private final EventGameLogicTask logicTask;
+    @Getter
     private GameParticipant<GamePlayer> participantA;
     @Getter
     private GameParticipant<GamePlayer> participantB;
     @Getter
     private int roundNumber;
-    @Getter
-    private final EventGameLogicTask logicTask;
     private GameParticipant winningParticipant;
 
     SumoGameLogic(EventGame game) {

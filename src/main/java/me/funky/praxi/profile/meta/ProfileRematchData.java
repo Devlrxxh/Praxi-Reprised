@@ -30,11 +30,11 @@ public class ProfileRematchData {
     private final UUID sender;
     private final UUID target;
     private final Kit kit;
+    private final long timestamp;
     private Arena arena;
     private boolean sent;
     private boolean receive;
     private boolean cancelled;
-    private final long timestamp;
 
     public ProfileRematchData(UUID key, UUID sender, UUID target, Kit kit) {
         this.key = key;

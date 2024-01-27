@@ -41,10 +41,10 @@ public class ScoreboardAdapter implements AssembleAdapter {
 
         if (profile.getState() == ProfileState.FIGHTING) {
             Match match = profile.getMatch();
-            if(match.getState().equals(MatchState.STARTING_ROUND)){
+            if (match.getState().equals(MatchState.STARTING_ROUND)) {
                 return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.STARTING")), player);
             }
-            if(match.getState().equals(MatchState.ENDING_MATCH)){
+            if (match.getState().equals(MatchState.ENDING_MATCH)) {
                 return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.ENDING")), player);
             }
             return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
