@@ -14,6 +14,13 @@ KIT_EDITOR:
   START_RENAMING: "&eNow renaming &a{0}&e... Enter the new name now. &7&o(Chat colors work)"
   RENAMED: "&eYou have renamed your &a{0} &ekit to &a{1}&e."
   NAME_TOO_LONG: "&cYour kit name cannot be more than 16 characters long."
+OPTIONS:
+  SCOREBOARD_ENABLED: "&aEnabled Scoreboard!"
+  SCOREBOARD_DISABLED: "&cDisabled Scoreboard!"
+  RECEIVE_DUEL_REQUESTS_ENABLED: "&aEnabled duel requests"
+  RECEIVE_DUEL_REQUESTS_DISABLED: "&cDisabled duel requests"
+  SPECTATORS_ENABLED: "&aEnabled Spectators!"
+  SPECTATORS_DISABLED: "&cDisabled Spectators!"
 PARTY:
   HELP:
     - "&7&m------------------------------------------------"

@@ -1,5 +1,6 @@
 package me.funky.praxi.util.assemble;
 
+import me.funky.praxi.profile.Profile;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -39,7 +40,12 @@ public class AssembleThread extends Thread {
      */
     private void tick() {
         for (Player player : this.assemble.getPlugin().getServer().getOnlinePlayers()) {
+            Profile profile = Profile.getByUuid(player.getUniqueId());
+
             try {
+                if(!profile.getOptions().showScoreboard()){
+                    return;
+                }
                 AssembleBoard board = this.assemble.getBoards().get(player.getUniqueId());
 
                 // This shouldn't happen, but just in case.
