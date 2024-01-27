@@ -16,10 +16,16 @@ public class QueueProfile {
     private int range = 25;
     private long start = System.currentTimeMillis();
     private int ticked;
+    private final boolean ranked;
 
-    public QueueProfile(Queue queue, UUID playerUuid) {
+    public QueueProfile(Queue queue, UUID playerUuid, boolean ranked) {
         this.queue = queue;
         this.playerUuid = playerUuid;
+        this.ranked = ranked;
+    }
+
+    public boolean areSame(QueueProfile queueProfile){
+        return queueProfile.getQueue().getKit().equals(this.queue.getKit()) && queueProfile.getQueue().isRanked() == this.ranked;
     }
 
     public void tickRange() {

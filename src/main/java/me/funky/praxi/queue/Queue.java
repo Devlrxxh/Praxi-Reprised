@@ -43,8 +43,8 @@ public class Queue {
         return (ranked ? "Ranked" : "Unranked") + " " + kit.getName();
     }
 
-    public void addPlayer(Player player, int elo) {
-        QueueProfile queueProfile = new QueueProfile(this, player.getUniqueId());
+    public void addPlayer(Player player, int elo, boolean ranked) {
+        QueueProfile queueProfile = new QueueProfile(this, player.getUniqueId(), ranked);
         queueProfile.setElo(elo);
 
         Profile profile = Profile.getByUuid(player.getUniqueId());

@@ -32,8 +32,10 @@ public class QueueThread extends Thread {
                         }
 
                         for (QueueProfile secondQueueProfile : Praxi.getInstance().getCache().getPlayers()) {
-                            if (firstQueueProfile.equals(secondQueueProfile)) {
-                                continue;
+                            if(secondQueueProfile.getPlayerUuid() == firstQueueProfile.getPlayerUuid()) break;
+
+                            if (!firstQueueProfile.areSame(secondQueueProfile)) {
+                                break;
                             }
 
                             Player secondPlayer = Bukkit.getPlayer(secondQueueProfile.getPlayerUuid());

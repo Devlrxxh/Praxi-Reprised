@@ -284,6 +284,7 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
+            kit.removeQueue((byte) 1);
         }
 
         // Set time data

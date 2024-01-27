@@ -68,10 +68,6 @@ public class QueueSelectKitMenu extends Menu {
         public void clicked(Player player, ClickType clickType) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile == null) {
-                return;
-            }
-
             if (player.hasMetadata("frozen")) {
                 player.sendMessage(CC.RED + "You cannot queue while frozen.");
                 return;
@@ -84,7 +80,7 @@ public class QueueSelectKitMenu extends Menu {
 
             player.closeInventory();
 
-            queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0);
+            queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0, ranked);
             queue.getKit().addQueue((byte) 1);
         }
 
