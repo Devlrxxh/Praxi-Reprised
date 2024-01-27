@@ -69,6 +69,7 @@ public class Praxi extends JavaPlugin {
     private BasicConfigurationFile kitsConfig;
     private BasicConfigurationFile eventsConfig;
     private BasicConfigurationFile scoreboardConfig;
+    private BasicConfigurationFile menusConfig;
     private MongoDatabase mongoDatabase;
     private Honcho honcho;
     private Essentials essentials;
@@ -91,6 +92,7 @@ public class Praxi extends JavaPlugin {
         kitsConfig = new BasicConfigurationFile(this, "kits");
         eventsConfig = new BasicConfigurationFile(this, "events");
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
+        menusConfig = new BasicConfigurationFile(this, "menus");
 
         this.essentials = new Essentials(this);
         loadMongo();

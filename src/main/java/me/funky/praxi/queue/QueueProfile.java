@@ -12,11 +12,11 @@ public class QueueProfile {
 
     private final Queue queue;
     private final UUID playerUuid;
+    private final boolean ranked;
     private int elo;
     private int range = 25;
     private long start = System.currentTimeMillis();
     private int ticked;
-    private final boolean ranked;
 
     public QueueProfile(Queue queue, UUID playerUuid, boolean ranked) {
         this.queue = queue;
@@ -24,7 +24,7 @@ public class QueueProfile {
         this.ranked = ranked;
     }
 
-    public boolean areSame(QueueProfile queueProfile){
+    public boolean areSame(QueueProfile queueProfile) {
         return queueProfile.getQueue().getKit().equals(this.queue.getKit()) && queueProfile.getQueue().isRanked() == this.ranked;
     }
 

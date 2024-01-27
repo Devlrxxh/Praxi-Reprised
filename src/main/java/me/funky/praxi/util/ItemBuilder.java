@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -114,6 +115,15 @@ public class ItemBuilder implements Listener {
 
         return this;
     }
+
+    public ItemBuilder clearFlags() {
+        ItemMeta itemMeta = is.getItemMeta();
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_PLACED_ON);
+        is.setItemMeta(itemMeta);
+
+        return this;
+    }
+
 
     public ItemStack build() {
         return is;

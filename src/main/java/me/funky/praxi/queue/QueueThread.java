@@ -32,7 +32,7 @@ public class QueueThread extends Thread {
                         }
 
                         for (QueueProfile secondQueueProfile : Praxi.getInstance().getCache().getPlayers()) {
-                            if(secondQueueProfile.getPlayerUuid() == firstQueueProfile.getPlayerUuid()) break;
+                            if (secondQueueProfile.getPlayerUuid() == firstQueueProfile.getPlayerUuid()) break;
 
                             if (!firstQueueProfile.areSame(secondQueueProfile)) {
                                 break;

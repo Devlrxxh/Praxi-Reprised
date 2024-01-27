@@ -29,7 +29,11 @@ public class QueueSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6&lSelect a kit (" + (ranked ? "Ranked" : "Unranked") + ")";
+        if (!ranked) {
+            return Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.TITLE");
+        } else {
+            return Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.TITLE");
+        }
     }
 
     @Override
@@ -54,14 +58,39 @@ public class QueueSelectKitMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            List<String> lore = new ArrayList<>();
-            lore.add("&cFighting: &r" + Match.getInFightsCount(queue));
-            lore.add("&cQueueing: &r" + queue.getKit().getQueuing());
 
-            return new ItemBuilder(queue.getKit().getDisplayIcon())
-                    .name("&4&l" + queue.getKit().getName())
-                    .lore(lore)
-                    .build();
+            List<String> lore = new ArrayList<>();
+            if (!ranked) {
+                for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE")) {
+                    line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
+                    line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                    lore.add(line);
+                }
+            } else {
+                for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE")) {
+                    line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
+                    line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                    lore.add(line);
+                }
+            }
+
+
+            if (!ranked) {
+                return new ItemBuilder(queue.getKit().getDisplayIcon())
+                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.KIT-NAME").replace("<kit>", queue.getKit().getName()))
+                        .lore(lore)
+                        .clearEnchantments()
+                        .clearFlags()
+                        .build();
+            } else {
+                return new ItemBuilder(queue.getKit().getDisplayIcon())
+                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.KIT-NAME").replace("<kit>", queue.getKit().getName()))
+                        .lore(lore)
+                        .clearEnchantments()
+                        .clearFlags()
+                        .build();
+            }
+
         }
 
         @Override

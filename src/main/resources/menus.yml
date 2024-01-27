@@ -1,0 +1,19 @@
+QUEUES-MENUS:
+  UNRANKED:
+    TITLE: "&7Select a kit"
+    KIT-NAME: "&c<kit>"
+    LORE:
+      - " "
+      - " &7* &cFighting: &7<playing>"
+      - " &7* &cQueueing: &7<queueing>"
+      - ""
+      - " &aClick to Play!"
+  RANKED:
+    TITLE: "&7Select a kit"
+    KIT-NAME: "&c<kit>"
+    LORE:
+      - " "
+      - " &7* &cFighting: &7<playing>"
+      - " &7* &cQueueing: &7<queueing>"
+      - ""
+      - " &aClick to Play!"
