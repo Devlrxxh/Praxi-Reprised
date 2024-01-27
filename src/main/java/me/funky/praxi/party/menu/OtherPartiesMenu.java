@@ -71,7 +71,8 @@ public class OtherPartiesMenu extends PaginatedMenu {
                     .durability(3)
                     .lore(lore)
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

@@ -80,7 +80,8 @@ public class EventHostMenu extends Menu {
                     .name("&6&l" + event.getDisplayName())
                     .lore(lore)
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

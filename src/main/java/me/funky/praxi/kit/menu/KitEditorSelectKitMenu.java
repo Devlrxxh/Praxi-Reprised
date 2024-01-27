@@ -49,7 +49,8 @@ public class KitEditorSelectKitMenu extends Menu {
                     .lore(lore)
                     .clearFlags()
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

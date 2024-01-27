@@ -41,7 +41,8 @@ public class PartyEventSelectEventMenu extends Menu {
             return new ItemBuilder(partyEvent == PartyEvent.FFA ? Material.QUARTZ : Material.REDSTONE)
                     .name(Praxi.getInstance().getMenusConfig().getString("PARTY.EVENTS.EVENT-COLOR").replace("<event>", partyEvent.getName()))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

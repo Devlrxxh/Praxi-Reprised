@@ -88,7 +88,8 @@ public class MatchDetailsMenu extends Menu {
                         .name("&6&lOpponent's Inventory")
                         .lore("&eSwitch to &a" + snapshot.getUsername() + "&e's inventory")
                         .clearFlags()
-                    .build();            } else {
+                        .build();
+            } else {
                 return new ItemStack(Material.AIR);
             }
         }
@@ -113,7 +114,8 @@ public class MatchDetailsMenu extends Menu {
                     .name("&6&lHealth: &a" + health + "/10 &4" + StringEscapeUtils.unescapeJava("\u2764"))
                     .amount((int) (health == 0 ? 1 : health))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -128,7 +130,8 @@ public class MatchDetailsMenu extends Menu {
                     .name("&6&lHunger: &a" + hunger + "/20")
                     .amount(hunger == 0 ? 1 : hunger)
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -174,7 +177,8 @@ public class MatchDetailsMenu extends Menu {
                     .name("&6&lPotions")
                     .lore("&a" + name + " &ehad &a" + potions + " &epotion" + (potions == 1 ? "" : "s") + " left.")
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -195,7 +199,8 @@ public class MatchDetailsMenu extends Menu {
                             "&aPotion Accuracy: &e" + snapshot.getPotionAccuracy()
                     ))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 

@@ -7,7 +7,6 @@ import me.funky.praxi.event.game.EventGameState;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.PlayerUtil;
-import net.minecraft.server.v1_8_R3.Item;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -55,7 +54,7 @@ public class Hotbar {
     }
 
 
-        public static void giveHotbarItems(Player player) {
+    public static void giveHotbarItems(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         ItemStack[] itemStacks = new ItemStack[9];
@@ -145,7 +144,7 @@ public class Hotbar {
         return null;
     }
 
-    public static int getSlot(HotbarItem hotbarItem){
+    public static int getSlot(HotbarItem hotbarItem) {
         return Praxi.getInstance().getMainConfig().getInteger("HOTBAR_ITEMS." + hotbarItem.toString() + ".SLOT");
     }
 

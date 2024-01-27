@@ -74,6 +74,14 @@ public class Praxi extends JavaPlugin {
     private Honcho honcho;
     private Essentials essentials;
     private Cache cache;
+
+    public static Praxi getInstance() {
+        if (praxi == null) {
+            praxi = new Praxi();
+        }
+        return praxi;
+    }
+
     @Override
     public void onEnable() {
         praxi = this;
@@ -211,13 +219,6 @@ public class Praxi extends JavaPlugin {
         } else {
             getLogger().warning("MongoDB URI is not in the config.yml.");
         }
-    }
-
-    public static Praxi getInstance() {
-        if (praxi == null) {
-            praxi = new Praxi();
-        }
-        return praxi;
     }
 
 }

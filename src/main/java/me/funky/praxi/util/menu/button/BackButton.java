@@ -2,7 +2,6 @@ package me.funky.praxi.util.menu.button;
 
 import lombok.AllArgsConstructor;
 import me.funky.praxi.Praxi;
-import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
@@ -10,8 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 @AllArgsConstructor
 public class BackButton extends Button {

@@ -77,7 +77,8 @@ public class ViewInventoryMenu extends Menu {
                     .name("&e&lHealth: &d" + health + "/10 " + StringEscapeUtils.unescapeJava("\u2764"))
                     .amount(health == 0 ? 1 : health)
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -92,7 +93,8 @@ public class ViewInventoryMenu extends Menu {
                     .name("&e&lHunger: &d" + hunger + "/20")
                     .amount(hunger == 0 ? 1 : hunger)
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 

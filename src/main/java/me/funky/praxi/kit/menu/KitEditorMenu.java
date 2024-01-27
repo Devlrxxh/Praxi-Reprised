@@ -22,7 +22,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,7 +128,8 @@ public class KitEditorMenu extends Menu {
                     .name(CC.AQUA + BukkitReflection.getItemStackName(itemStack))
                     .lore(CC.YELLOW + "This is automatically equipped.")
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -144,7 +144,8 @@ public class KitEditorMenu extends Menu {
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName()))
                     .clearFlags()
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
@@ -158,7 +159,8 @@ public class KitEditorMenu extends Menu {
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
                     .clearFlags()
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -183,7 +185,8 @@ public class KitEditorMenu extends Menu {
                     .durability(7)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.LOAD-DEFAULT-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -212,7 +215,8 @@ public class KitEditorMenu extends Menu {
                     .durability(5)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.SAVE-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -243,7 +247,8 @@ public class KitEditorMenu extends Menu {
                     .durability(14)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CANCEL-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {

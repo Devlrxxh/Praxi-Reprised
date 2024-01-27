@@ -75,7 +75,8 @@ public class DuelSelectArenaMenu extends Menu {
             return new ItemBuilder(Material.PAPER)
                     .name("&a&l" + arena.getName())
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

@@ -28,7 +28,8 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "to the next page."
                         ))
                         .clearFlags()
-                    .build();            } else {
+                        .build();
+            } else {
                 return new ItemBuilder(Material.LEVER)
                         .name(ChatColor.GRAY + "Next Page")
                         .lore(Arrays.asList(
@@ -36,7 +37,8 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "next page."
                         ))
                         .clearFlags()
-                    .build();            }
+                        .build();
+            }
         } else {
             if (hasPrevious(player)) {
                 return new ItemBuilder(Material.REDSTONE_TORCH_ON)
@@ -46,7 +48,8 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "to the previous page."
                         ))
                         .clearFlags()
-                    .build();            } else {
+                        .build();
+            } else {
                 return new ItemBuilder(Material.LEVER)
                         .name(ChatColor.GRAY + "Previous Page")
                         .lore(Arrays.asList(
@@ -54,7 +57,8 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "previous page."
                         ))
                         .clearFlags()
-                    .build();            }
+                        .build();
+            }
         }
     }
 

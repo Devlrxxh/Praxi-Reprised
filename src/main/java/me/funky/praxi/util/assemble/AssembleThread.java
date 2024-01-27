@@ -43,7 +43,7 @@ public class AssembleThread extends Thread {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
             try {
-                if(!profile.getOptions().showScoreboard()){
+                if (!profile.getOptions().showScoreboard()) {
                     return;
                 }
                 AssembleBoard board = this.assemble.getBoards().get(player.getUniqueId());

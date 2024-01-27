@@ -58,7 +58,8 @@ public class PartyEventSelectKitMenu extends Menu {
             return new ItemBuilder(kit.getDisplayIcon())
                     .name("&6&l" + kit.getName())
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

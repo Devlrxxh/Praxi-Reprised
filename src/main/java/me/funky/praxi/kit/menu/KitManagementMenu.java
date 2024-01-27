@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,7 +82,8 @@ public class KitManagementMenu extends Menu {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.DELETE-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {
@@ -105,7 +105,8 @@ public class KitManagementMenu extends Menu {
             return new ItemBuilder(Material.IRON_SWORD)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.CREATE-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {
@@ -149,7 +150,8 @@ public class KitManagementMenu extends Menu {
             return new ItemBuilder(Material.SIGN)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.RENAME-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int slot, ClickType clickType, int hotbarSlot) {
@@ -177,7 +179,8 @@ public class KitManagementMenu extends Menu {
             return new ItemBuilder(Material.BOOK)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.LOAD-BUTTON"))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
         @Override
         public void clicked(Player player, int slot, ClickType clickType, int hotbarSlot) {
@@ -215,7 +218,8 @@ public class KitManagementMenu extends Menu {
             return new ItemBuilder(Material.BOOK)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.KIT-NAME").replace("<kit>", kitLoadout.getCustomName()))
                     .clearFlags()
-                    .build();        }
+                    .build();
+        }
 
     }
 
