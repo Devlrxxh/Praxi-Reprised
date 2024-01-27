@@ -81,15 +81,15 @@ public class QueueSelectKitMenu extends Menu {
                         .lore(lore)
                         .clearEnchantments()
                         .clearFlags()
-                        .build();
-            } else {
+                        .clearFlags()
+                    .build();            } else {
                 return new ItemBuilder(queue.getKit().getDisplayIcon())
                         .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.KIT-NAME").replace("<kit>", queue.getKit().getName()))
                         .lore(lore)
                         .clearEnchantments()
                         .clearFlags()
-                        .build();
-            }
+                        .clearFlags()
+                    .build();            }
 
         }
 

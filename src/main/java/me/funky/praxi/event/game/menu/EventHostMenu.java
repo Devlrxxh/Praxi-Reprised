@@ -79,8 +79,8 @@ public class EventHostMenu extends Menu {
             return new ItemBuilder(event.getIcon().clone())
                     .name("&6&l" + event.getDisplayName())
                     .lore(lore)
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

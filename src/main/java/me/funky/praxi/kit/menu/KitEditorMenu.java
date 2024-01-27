@@ -46,7 +46,7 @@ public class KitEditorMenu extends Menu {
     @Override
     public String getTitle(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        return "&6&lEditing: &a" + profile.getKitEditorData().getSelectedKit().getName();
+        return Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName());
     }
 
     @Override
@@ -128,8 +128,8 @@ public class KitEditorMenu extends Menu {
             return new ItemBuilder(itemStack.clone())
                     .name(CC.AQUA + BukkitReflection.getItemStackName(itemStack))
                     .lore(CC.YELLOW + "This is automatically equipped.")
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -141,9 +141,10 @@ public class KitEditorMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
             return new ItemBuilder(Material.NAME_TAG)
-                    .name("&6&lEditing: &a" + profile.getKitEditorData().getSelectedKit().getName())
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName()))
+                    .clearFlags()
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -154,13 +155,10 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(7)
-                    .name("&e&lClear Inventory")
-                    .lore(Arrays.asList(
-                            "&eThis will clear your inventory",
-                            "&eso you can start over."
-                    ))
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
+                    .clearFlags()
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -183,13 +181,9 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(7)
-                    .name(CC.YELLOW + CC.BOLD + "Load default kit")
-                    .lore(Arrays.asList(
-                            CC.YELLOW + "Click this to load the default kit",
-                            CC.YELLOW + "into the kit editing menu."
-                    ))
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.LOAD-DEFAULT-BUTTON"))
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -216,10 +210,9 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(5)
-                    .name("&a&lSave")
-                    .lore("&eClick this to save your kit.")
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.SAVE-BUTTON"))
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {
@@ -248,13 +241,9 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(14)
-                    .name("&c&lCancel")
-                    .lore(Arrays.asList(
-                            "&eClick this to abort editing your kit,",
-                            "&eand return to the kit menu."
-                    ))
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CANCEL-BUTTON"))
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, int i, ClickType clickType, int hb) {

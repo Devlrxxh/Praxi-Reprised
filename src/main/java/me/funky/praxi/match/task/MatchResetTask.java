@@ -25,8 +25,7 @@ public class MatchResetTask extends BukkitRunnable {
                         .allowedRegionsEverywhere()
                         .autoQueue(false)
                         .limitUnlimited()
-                        .build();
-
+                    .build();
                 for (Location location : match.getPlacedBlocks()) {
                     try {
                         editSession.setBlock(
@@ -52,8 +51,7 @@ public class MatchResetTask extends BukkitRunnable {
                         .allowedRegionsEverywhere()
                         .autoQueue(false)
                         .limitUnlimited()
-                        .build();
-
+                    .build();
                 for (BlockState blockState : match.getChangedBlocks()) {
                     try {
                         editSession.setBlock(

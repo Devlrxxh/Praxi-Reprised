@@ -76,8 +76,8 @@ public class ViewInventoryMenu extends Menu {
             return new ItemBuilder(Material.MELON)
                     .name("&e&lHealth: &d" + health + "/10 " + StringEscapeUtils.unescapeJava("\u2764"))
                     .amount(health == 0 ? 1 : health)
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -91,8 +91,8 @@ public class ViewInventoryMenu extends Menu {
             return new ItemBuilder(Material.COOKED_BEEF)
                     .name("&e&lHunger: &d" + hunger + "/20")
                     .amount(hunger == 0 ? 1 : hunger)
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 

@@ -51,8 +51,8 @@ public class DuelSelectKitMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(kit.getDisplayIcon())
                     .name("&6&l" + kit.getName())
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

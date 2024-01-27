@@ -87,8 +87,8 @@ public class MatchDetailsMenu extends Menu {
                 return new ItemBuilder(Material.LEVER)
                         .name("&6&lOpponent's Inventory")
                         .lore("&eSwitch to &a" + snapshot.getUsername() + "&e's inventory")
-                        .build();
-            } else {
+                        .clearFlags()
+                    .build();            } else {
                 return new ItemStack(Material.AIR);
             }
         }
@@ -112,8 +112,8 @@ public class MatchDetailsMenu extends Menu {
             return new ItemBuilder(Material.MELON)
                     .name("&6&lHealth: &a" + health + "/10 &4" + StringEscapeUtils.unescapeJava("\u2764"))
                     .amount((int) (health == 0 ? 1 : health))
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -127,8 +127,8 @@ public class MatchDetailsMenu extends Menu {
             return new ItemBuilder(Material.COOKED_BEEF)
                     .name("&6&lHunger: &a" + hunger + "/20")
                     .amount(hunger == 0 ? 1 : hunger)
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -173,8 +173,8 @@ public class MatchDetailsMenu extends Menu {
                     .amount(potions == 0 ? 1 : potions)
                     .name("&6&lPotions")
                     .lore("&a" + name + " &ehad &a" + potions + " &epotion" + (potions == 1 ? "" : "s") + " left.")
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 
@@ -194,8 +194,8 @@ public class MatchDetailsMenu extends Menu {
                             "&aPotions Missed: &e" + snapshot.getPotionsMissed(),
                             "&aPotion Accuracy: &e" + snapshot.getPotionAccuracy()
                     ))
-                    .build();
-        }
+                    .clearFlags()
+                    .build();        }
 
     }
 

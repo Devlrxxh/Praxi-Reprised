@@ -27,16 +27,16 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "Click here to jump",
                                 ChatColor.YELLOW + "to the next page."
                         ))
-                        .build();
-            } else {
+                        .clearFlags()
+                    .build();            } else {
                 return new ItemBuilder(Material.LEVER)
                         .name(ChatColor.GRAY + "Next Page")
                         .lore(Arrays.asList(
                                 ChatColor.YELLOW + "There is no available",
                                 ChatColor.YELLOW + "next page."
                         ))
-                        .build();
-            }
+                        .clearFlags()
+                    .build();            }
         } else {
             if (hasPrevious(player)) {
                 return new ItemBuilder(Material.REDSTONE_TORCH_ON)
@@ -45,16 +45,16 @@ public class PageButton extends Button {
                                 ChatColor.YELLOW + "Click here to jump",
                                 ChatColor.YELLOW + "to the previous page."
                         ))
-                        .build();
-            } else {
+                        .clearFlags()
+                    .build();            } else {
                 return new ItemBuilder(Material.LEVER)
                         .name(ChatColor.GRAY + "Previous Page")
                         .lore(Arrays.asList(
                                 ChatColor.YELLOW + "There is no available",
                                 ChatColor.YELLOW + "previous page."
                         ))
-                        .build();
-            }
+                        .clearFlags()
+                    .build();            }
         }
     }
 

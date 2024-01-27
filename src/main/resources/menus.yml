@@ -20,7 +20,30 @@ QUEUES-MENUS:
 PARTY:
   EVENTS:
     TITLE: "&aSelect an Event"
+    EVENT-COLOR: "&c<event>"
     SELECT-KIT:
       TITLE: "&6Select a Kit"
   OTHER-PARTIES:
     TITLE: "&9Other Parties"
+KIT-EDITOR:
+  TITLE: "&7Select a Kit"
+  KIT-NAME: "&c<kit>"
+  LORE:
+    - ""
+    - " &aClick to edit Kit."
+  MANAGEMENT:
+    TITLE: "&cViewing <kit> kits"
+    KIT-NAME: "&c<kit>"
+    BUTTONS:
+      CREATE-BUTTON: "&aCreate Loadout"
+      RENAME-BUTTON: "&cRename Loadout"
+      LOAD-BUTTON: "&aLoad/Edit"
+      DELETE-BUTTON: "&cDelete"
+      BACK-BUTTON: "&cBack"
+  EDITOR:
+    TITLE: "&cEditing <kit>"
+    BUTTONS:
+      SAVE-BUTTON: "&aSave"
+      CANCEL-BUTTON: "&cCancel"
+      CLEAR-BUTTON: "&cClear Inventory"
+      LOAD-DEFAULT-BUTTON: "&eLoad Default Kit"

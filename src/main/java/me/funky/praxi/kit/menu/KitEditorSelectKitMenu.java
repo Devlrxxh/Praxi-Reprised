@@ -1,6 +1,7 @@
 package me.funky.praxi.kit.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.ItemBuilder;
@@ -10,14 +11,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class KitEditorSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6&lSelect a kit";
+        return Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.TITLE");
     }
 
     @Override
@@ -40,10 +43,13 @@ public class KitEditorSelectKitMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
+            List<String> lore = new ArrayList<>(Praxi.getInstance().getMenusConfig().getStringList("KIT-EDITOR.LORE"));
             return new ItemBuilder(kit.getDisplayIcon())
-                    .name("&a&l" + kit.getName())
-                    .build();
-        }
+                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.KIT-NAME").replace("<kit>", kit.getName()))
+                    .lore(lore)
+                    .clearFlags()
+                    .clearFlags()
+                    .build();        }
 
         @Override
         public void clicked(Player player, ClickType clickType) {

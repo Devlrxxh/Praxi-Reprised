@@ -1,6 +1,7 @@
 package me.funky.praxi.util.menu.button;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
@@ -20,11 +21,7 @@ public class BackButton extends Button {
     @Override
     public ItemStack getButtonItem(Player player) {
         return new ItemBuilder(Material.REDSTONE)
-                .name(CC.RED + CC.BOLD + "Back")
-                .lore(Arrays.asList(
-                        CC.RED + "Click here to return to",
-                        CC.RED + "the previous menu.")
-                )
+                .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.BACK-BUTTON"))
                 .build();
     }
 
