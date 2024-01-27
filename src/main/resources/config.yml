@@ -217,7 +217,7 @@ HOTBAR_ITEMS:
     DURABILITY: 0
     NAME: "&bLeave Event &7(Right Click)"
     LORE: []
-    SLOT: 2
+    SLOT: 0
   MAP_SELECTION:
     MATERIAL: "MAP"
     DURABILITY: 0
