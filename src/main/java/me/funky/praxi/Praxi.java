@@ -1,12 +1,15 @@
 package me.funky.praxi;
 
+import co.aikar.commands.BukkitCommandCompletionContext;
+import co.aikar.commands.CommandCompletions;
+import co.aikar.commands.PaperCommandManager;
 import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.arena.*;
-import me.funky.praxi.commands.admin.arena.*;
+import me.funky.praxi.arena.command.ArenaCommand;
 import me.funky.praxi.commands.admin.general.SetSpawnCommand;
 import me.funky.praxi.commands.admin.kits.KitCreateCommand;
 import me.funky.praxi.commands.admin.kits.KitGetLoadoutCommand;
@@ -53,11 +56,14 @@ import me.funky.praxi.util.assemble.Assemble;
 import me.funky.praxi.util.command.Honcho;
 import me.funky.praxi.util.config.BasicConfigurationFile;
 import me.funky.praxi.util.menu.MenuListener;
+import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Getter
 public class Praxi extends JavaPlugin {
@@ -74,6 +80,7 @@ public class Praxi extends JavaPlugin {
     private Honcho honcho;
     private Essentials essentials;
     private Cache cache;
+    private PaperCommandManager paperCommandManager;
 
     public static Praxi getInstance() {
         if (praxi == null) {
@@ -106,7 +113,7 @@ public class Praxi extends JavaPlugin {
         Party.init();
         Event.init();
         EventGameMap.init();
-
+        loadCommandManager();
         new Assemble(this, new ScoreboardAdapter());
         new QueueThread().start();
 
@@ -117,17 +124,6 @@ public class Praxi extends JavaPlugin {
         getHoncho().registerTypeAdapter(Event.class, new EventTypeAdapter());
 
         Arrays.asList(
-                new ArenaAddKitCommand(),
-                new ArenaRemoveKitCommand(),
-                new ArenaCreateCommand(),
-                new ArenaDeleteCommand(),
-                new ArenaGenerateCommand(),
-                new ArenaGenHelperCommand(),
-                new ArenaSaveCommand(),
-                new ArenasCommand(),
-                new ArenaSelectionCommand(),
-                new ArenaSetSpawnCommand(),
-                new ArenaStatusCommand(),
                 new DuelCommand(),
                 new DuelAcceptCommand(),
                 new EventAdminCommand(),
@@ -203,6 +199,25 @@ public class Praxi extends JavaPlugin {
             getEssentials().clearEntities(world);
 
         });
+    }
+
+    private void loadCommandManager() {
+        paperCommandManager = new PaperCommandManager(getInstance());
+        loadCommandCompletions();
+        registerCommands();
+    }
+
+    private void registerCommands() {
+        Arrays.asList(
+                new ArenaCommand()
+        ).forEach(command -> paperCommandManager.registerCommand(command));
+    }
+
+    private void loadCommandCompletions() {
+        CommandCompletions<BukkitCommandCompletionContext> commandCompletions = getPaperCommandManager().getCommandCompletions();
+        commandCompletions.registerCompletion("names", c -> Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()));
+        commandCompletions.registerCompletion("arenas", c -> Arena.getArenas().stream().map(Arena::getName).collect(Collectors.toList()));
+        commandCompletions.registerCompletion("kits", c -> Kit.getKits().stream().map(Kit::getName).collect(Collectors.toList()));
     }
 
     @Override
