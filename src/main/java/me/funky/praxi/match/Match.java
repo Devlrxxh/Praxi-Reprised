@@ -69,6 +69,7 @@ public abstract class Match {
         Praxi.getInstance().getCache().getMatches().add(this);
     }
 
+
     public static void init() {
         new MatchPearlCooldownTask().runTaskTimerAsynchronously(Praxi.getInstance(), 2L, 2L);
         new MatchSnapshotCleanupTask().runTaskTimerAsynchronously(Praxi.getInstance(), 20L * 5, 20L * 5);
@@ -171,6 +172,23 @@ public abstract class Match {
             }
         }
     }
+
+    public Player getOpponent(Player player) {
+        GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(player);
+        if (playerParticipant != null) {
+            for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+                if (!gameParticipant.equals(playerParticipant)) {
+                    for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                        if (!gamePlayer.isDisconnected()) {
+                            return gamePlayer.getPlayer();
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     public void start() {
         // Set state

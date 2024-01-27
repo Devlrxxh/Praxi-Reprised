@@ -6,22 +6,16 @@ import me.funky.praxi.participant.GamePlayer;
 
 import java.util.UUID;
 
+@Getter
 public class MatchGamePlayer extends GamePlayer {
 
-    @Getter
     private final int elo;
-    @Getter
     @Setter
     private int eloMod;
-    @Getter
     private int hits;
-    @Getter
     private int longestCombo;
-    @Getter
     private int combo;
-    @Getter
     private int potionsThrown;
-    @Getter
     private int potionsMissed;
 
     public MatchGamePlayer(UUID uuid, String username) {

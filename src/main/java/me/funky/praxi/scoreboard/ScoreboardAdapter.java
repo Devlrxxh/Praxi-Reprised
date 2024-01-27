@@ -1,6 +1,8 @@
 package me.funky.praxi.scoreboard;
 
 import me.funky.praxi.Praxi;
+import me.funky.praxi.match.Match;
+import me.funky.praxi.match.MatchState;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.queue.QueueProfile;
@@ -34,6 +36,18 @@ public class ScoreboardAdapter implements AssembleAdapter {
                 return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("QUEUE.RANKED")), player);
             }
             return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("QUEUE.UNRANKED")), player);
+        }
+
+
+        if (profile.getState() == ProfileState.FIGHTING) {
+            Match match = profile.getMatch();
+            if(match.getState().equals(MatchState.STARTING_ROUND)){
+                return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.STARTING")), player);
+            }
+            if(match.getState().equals(MatchState.ENDING_MATCH)){
+                return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.ENDING")), player);
+            }
+            return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
         }
 
 

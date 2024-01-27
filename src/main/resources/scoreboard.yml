@@ -16,6 +16,29 @@ IN-PARTY:
   - " "
   - "&cpraxi.gg"
   - "&7&m----------------"
+MATCH:
+  STARTING:
+    - "&7&m----------------"
+    - "&cOpponent: &7<opponent>"
+    - " "
+    - "&aYour Ping: &7<ping>ms"
+    - "&cTheir Ping: &7<opponent-ping>ms"
+    - " "
+    - "&cpraxi.gg"
+    - "&7&m----------------"
+  IN-MATCH:
+    - "&7&m----------------"
+    - "&aYour Ping: &7<ping>ms"
+    - "&cTheir Ping: &7<opponent-ping>ms"
+    - " "
+    - "&cpraxi.gg"
+    - "&7&m----------------"
+  ENDING:
+    - "&7&m----------------"
+    - "&7Match Ended"
+    - " "
+    - "&cpraxi.gg"
+    - "&7&m----------------"
 QUEUE:
   UNRANKED:
     - "&7&m----------------"

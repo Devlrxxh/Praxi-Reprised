@@ -9,14 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public class GameParticipant<T extends GamePlayer> {
 
-    @Getter
     private final T leader;
-    @Getter
     @Setter
     private int roundWins;
-    @Getter
     @Setter
     private boolean eliminated;
 

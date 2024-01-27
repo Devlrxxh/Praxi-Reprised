@@ -1,8 +1,6 @@
 MONGO:
   URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
   DATABASE: "praxi"
-SCOREBOARD:
-  TITLE: "&4&lZonix Practice"
 JOIN_MESSAGES:
   - " &7&l* &c&lWelcome to Zonix Practice Season 1!"
   - " &7&l* &c&lPlease report any issues to an administrator!"
