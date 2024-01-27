@@ -7,6 +7,7 @@ import me.funky.praxi.event.game.EventGameState;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.PlayerUtil;
+import net.minecraft.server.v1_8_R3.Item;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -53,7 +54,8 @@ public class Hotbar {
         }
     }
 
-    public static void giveHotbarItems(Player player) {
+
+        public static void giveHotbarItems(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         ItemStack[] itemStacks = new ItemStack[9];
@@ -66,62 +68,60 @@ public class Hotbar {
         switch (profile.getState()) {
             case LOBBY: {
                 if (profile.getParty() == null) {
-                    itemStacks[0] = items.get(HotbarItem.QUEUE_JOIN_UNRANKED);
-                    itemStacks[1] = items.get(HotbarItem.QUEUE_JOIN_RANKED);
+
+                    itemStacks[getSlot(HotbarItem.QUEUE_JOIN_UNRANKED)] = items.get(HotbarItem.QUEUE_JOIN_UNRANKED);
+                    itemStacks[getSlot(HotbarItem.QUEUE_JOIN_RANKED)] = items.get(HotbarItem.QUEUE_JOIN_RANKED);
 
                     if (activeRematch && activeEvent) {
                         if (profile.getRematchData().isReceive()) {
-                            itemStacks[2] = items.get(HotbarItem.REMATCH_ACCEPT);
+                            itemStacks[getSlot(HotbarItem.REMATCH_ACCEPT)] = items.get(HotbarItem.REMATCH_ACCEPT);
                         } else {
-                            itemStacks[2] = items.get(HotbarItem.REMATCH_REQUEST);
+                            itemStacks[getSlot(HotbarItem.REMATCH_ACCEPT)] = items.get(HotbarItem.REMATCH_REQUEST);
                         }
 
-                        itemStacks[3] = items.get(HotbarItem.EVENT_JOIN);
-                        itemStacks[5] = items.get(HotbarItem.PARTY_CREATE);
+                        itemStacks[getSlot(HotbarItem.EVENT_JOIN)] = items.get(HotbarItem.EVENT_JOIN);
+                        itemStacks[getSlot(HotbarItem.PARTY_CREATE)] = items.get(HotbarItem.PARTY_CREATE);
                     } else if (activeRematch) {
                         if (profile.getRematchData().isReceive()) {
-                            itemStacks[2] = items.get(HotbarItem.REMATCH_ACCEPT);
+                            itemStacks[getSlot(HotbarItem.REMATCH_ACCEPT)] = items.get(HotbarItem.REMATCH_ACCEPT);
                         } else {
-                            itemStacks[2] = items.get(HotbarItem.REMATCH_REQUEST);
+                            itemStacks[getSlot(HotbarItem.REMATCH_REQUEST)] = items.get(HotbarItem.REMATCH_REQUEST);
                         }
 
-                        itemStacks[4] = items.get(HotbarItem.PARTY_CREATE);
+                        itemStacks[getSlot(HotbarItem.PARTY_CREATE)] = items.get(HotbarItem.PARTY_CREATE);
                     } else if (activeEvent) {
-                        itemStacks[3] = items.get(HotbarItem.EVENT_JOIN);
-                        itemStacks[5] = items.get(HotbarItem.PARTY_CREATE);
+                        itemStacks[getSlot(HotbarItem.EVENT_JOIN)] = items.get(HotbarItem.EVENT_JOIN);
+                        itemStacks[getSlot(HotbarItem.PARTY_CREATE)] = items.get(HotbarItem.PARTY_CREATE);
                     } else {
-                        itemStacks[4] = items.get(HotbarItem.PARTY_CREATE);
+                        itemStacks[getSlot(HotbarItem.PARTY_CREATE)] = items.get(HotbarItem.PARTY_CREATE);
                     }
                 } else {
                     if (profile.getParty().getLeader().getUniqueId().equals(profile.getUuid())) {
-                        itemStacks[0] = items.get(HotbarItem.PARTY_EVENTS);
-                        itemStacks[2] = items.get(HotbarItem.PARTY_INFORMATION);
-                        itemStacks[4] = items.get(HotbarItem.OTHER_PARTIES);
-                        itemStacks[6] = items.get(HotbarItem.PARTY_DISBAND);
+                        itemStacks[getSlot(HotbarItem.PARTY_EVENTS)] = items.get(HotbarItem.PARTY_EVENTS);
+                        itemStacks[getSlot(HotbarItem.PARTY_INFORMATION)] = items.get(HotbarItem.PARTY_INFORMATION);
+                        itemStacks[getSlot(HotbarItem.OTHER_PARTIES)] = items.get(HotbarItem.OTHER_PARTIES);
+                        itemStacks[getSlot(HotbarItem.PARTY_DISBAND)] = items.get(HotbarItem.PARTY_DISBAND);
                     } else {
-                        itemStacks[0] = items.get(HotbarItem.PARTY_INFORMATION);
-                        itemStacks[3] = items.get(HotbarItem.OTHER_PARTIES);
-                        itemStacks[5] = items.get(HotbarItem.PARTY_LEAVE);
+                        itemStacks[getSlot(HotbarItem.PARTY_INFORMATION)] = items.get(HotbarItem.PARTY_INFORMATION);
+                        itemStacks[getSlot(HotbarItem.OTHER_PARTIES)] = items.get(HotbarItem.OTHER_PARTIES);
+                        itemStacks[getSlot(HotbarItem.PARTY_LEAVE)] = items.get(HotbarItem.PARTY_LEAVE);
                     }
                 }
 
-                itemStacks[8] = items.get(HotbarItem.KIT_EDITOR);
+                itemStacks[getSlot(HotbarItem.KIT_EDITOR)] = items.get(HotbarItem.KIT_EDITOR);
             }
             break;
             case QUEUEING: {
-                itemStacks[0] = items.get(HotbarItem.QUEUE_LEAVE);
+                itemStacks[getSlot(HotbarItem.QUEUE_LEAVE)] = items.get(HotbarItem.QUEUE_LEAVE);
             }
             break;
-            case SPECTATING: {
-                itemStacks[0] = items.get(HotbarItem.SPECTATE_STOP);
+            case SPECTATING:
+            case FIGHTING: {
+                itemStacks[getSlot(HotbarItem.SPECTATE_STOP)] = items.get(HotbarItem.SPECTATE_STOP);
             }
             break;
             case EVENT: {
-                itemStacks[8] = items.get(HotbarItem.EVENT_LEAVE);
-            }
-            break;
-            case FIGHTING: {
-                itemStacks[8] = items.get(HotbarItem.SPECTATE_STOP);
+                itemStacks[getSlot(HotbarItem.EVENT_LEAVE)] = items.get(HotbarItem.EVENT_LEAVE);
             }
             break;
         }
@@ -143,6 +143,10 @@ public class Hotbar {
         }
 
         return null;
+    }
+
+    public static int getSlot(HotbarItem hotbarItem){
+        return Praxi.getInstance().getMainConfig().getInteger("HOTBAR_ITEMS." + hotbarItem.toString() + ".SLOT");
     }
 
 }

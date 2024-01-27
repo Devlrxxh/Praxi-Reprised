@@ -58,27 +58,27 @@ EVENT:
   JOIN_BROADCAST:
     - "&7███████"
     - "&7██&4███&7██"
-    - "&7██&4█&7████  &6&l[{0} Event]"
+    - "&7██&4█&7████  &6[{0} Event]"
     - "&7██&4███&7██  &r{1} &eis hosting an event!"
-    - "&7██&4█&7████  &r&a&lClick to join!"
+    - "&7██&4█&7████  &r&aClick to join!"
     - "&7██&4███&7██"
     - "&7███████"
   JOIN_HOVER: "&eClick to join,"
-  PLAYER_JOIN: "&7[&a&lEvent&7] &r{0} &ehas joined the event. &7&o({1}/{2})"
-  PLAYER_LEAVE: "&7[&a&lEvent&7] &r{0} &ehas left the event. &7&o({1}/{2})"
-  PLAYER_VOTE: "&7[&a&lEvent&7] &r{0} &ehas voted for the &a{1} &emap. &7&o({2} votes)"
-  ROUND_START: "&7[&a&lEvent&7] &a{1} &evs &a{2}"
-  ROUND_START_TIMER: "&7[&a&lEvent&7] &aRound {0} &ewill start in &a{1} {2}&e."
-  ROUND_ELIMINATION: "&7[&a&lEvent&7] &a{0} &e{1} eliminated."
-  ROUND_OPPONENT: "&7[&a&lEvent&7] &eYour Opponent{0}: &a{1}"
+  PLAYER_JOIN: "&7[&aEvent&7] &r{0} &ehas joined the event. &7&o({1}/{2})"
+  PLAYER_LEAVE: "&7[&aEvent&7] &r{0} &ehas left the event. &7&o({1}/{2})"
+  PLAYER_VOTE: "&7[&aEvent&7] &r{0} &ehas voted for the &a{1} &emap. &7&o({2} votes)"
+  ROUND_START: "&7[&aEvent&7] &a{1} &evs &a{2}"
+  ROUND_START_TIMER: "&7[&aEvent&7] &aRound {0} &ewill start in &a{1} {2}&e."
+  ROUND_ELIMINATION: "&7[&aEvent&7] &a{0} &e{1} eliminated."
+  ROUND_OPPONENT: "&7[&aEvent&7] &eYour Opponent{0}: &a{1}"
   STARTED:
-    - "&7[&a&lEvent&7] &a{0} &ehas started. &7&o({1}/{2})"
+    - "&7[&aEvent&7] &a{0} &ehas started. &7&o({1}/{2})"
   FINISHED:
     - "&7███████"
     - "&7██&4███&7██"
-    - "&7██&4█&7████  &6&l[{0} Event]"
+    - "&7██&4█&7████  &6[{0} Event]"
     - "&7██&4███&7██  &r{1} won the event!"
-    - "&7██&4█&7████  &r&6&lGood game!"
+    - "&7██&4█&7████  &r&6Good game!"
     - "&7██&4███&7██"
     - "&7███████"
 DUEL:
@@ -100,7 +100,7 @@ QUEUE:
   RANGE_INCREMENT: "&eSearching in ELO range &a[{1} -> {2}]&e..."
 MATCH:
   GIVE_KIT: "&eGiving you the &a{0} &ekit."
-  ENDERPEARL_COOLDOWN: "&cYou may not use your &c&lEnderpearl &cfor another &c&l{0} second{1}&c."
+  ENDERPEARL_COOLDOWN: "&cYou may not use your &cEnderpearl &cfor another &c{0} second{1}&c."
   ENDERPEARL_COOLDOWN_EXPIRED: "&eYour enderpearl cooldown has now expired."
   START_SPECTATING: "&eYou are spectating {0}{1} &evs {2}{3}"
   START_SPECTATING_RANKED: "&eYou are spectating {0}{1} &7({2}) &evs {3}{4} &7({5})"
@@ -131,96 +131,114 @@ REMATCH:
     - "&a{0} &ehas sent you a rematch on arena &a{1}&e."
     - "&6Click here or type &b/rematch &6to accept the request."
   RECEIVED_REQUEST_HOVER: "&6Click to accept."
-ARROW_DAMAGE_INDICATOR: "&7[&9&lArrow Range &e({0})&7] &e{1} &9is now at &c{2}&4{3}&e."
+ARROW_DAMAGE_INDICATOR: "&7[&9Arrow Range &e({0})&7] &e{1} &9is now at &c{2}&4{3}&e."
 VIEWING_INVENTORY: "&eYou are viewing &b{0}&e''s inventory..."
 HOTBAR_ITEMS:
   QUEUE_JOIN_UNRANKED:
     MATERIAL: "IRON_SWORD"
     DURABILITY: 0
-    NAME: "&e&lUnranked Queue"
+    NAME: "&eUnranked Queue &7(Right Click)"
     LORE: []
+    SLOT: 0
   QUEUE_JOIN_RANKED:
     MATERIAL: "DIAMOND_SWORD"
     DURABILITY: 0
-    NAME: "&a&lRanked Queue"
+    NAME: "&aRanked Queue &7(Right Click)"
     LORE: []
+    SLOT: 1
   QUEUE_LEAVE:
     MATERIAL: "INK_SACK"
     DURABILITY: 1
-    NAME: "&c&lLeave Queue"
+    NAME: "&cLeave Queue &7(Right Click)"
     LORE: []
+    SLOT: 2
   PARTY_EVENTS:
     MATERIAL: "DIAMOND_SWORD"
     DURABILITY: 0
-    NAME: "&a&lParty Events"
+    NAME: "&aParty Events &7(Right Click)"
     LORE: []
+    SLOT: 2
   PARTY_CREATE:
     MATERIAL: "NAME_TAG"
     DURABILITY: 0
-    NAME: "&9&lCreate Party"
+    NAME: "&9Create Party &7(Right Click)"
     LORE: []
+    SLOT: 4
   PARTY_DISBAND:
     MATERIAL: "INK_SACK"
     DURABILITY: 1
-    NAME: "&c&lDisband Party"
+    NAME: "&cDisband Party &7(Right Click)"
     LORE: []
+    SLOT: 6
   PARTY_LEAVE:
     MATERIAL: "INK_SACK"
     DURABILITY: 1
-    NAME: "&c&lLeave Party"
+    NAME: "&cLeave Party &7(Right Click)"
     LORE: []
+    SLOT: 6
   PARTY_INFORMATION:
     MATERIAL: "SKULL_ITEM"
     DURABILITY: 3
-    NAME: "&6&lParty Information"
+    NAME: "&6Party Information &7(Right Click)"
     LORE: []
+    SLOT: 0
   OTHER_PARTIES:
     MATERIAL: "CHEST"
     DURABILITY: 0
-    NAME: "&9&lOther Parties"
+    NAME: "&9Other Parties &7(Right Click)"
     LORE: []
+    SLOT: 4
   KIT_EDITOR:
     MATERIAL: "BOOK"
     DURABILITY: 0
-    NAME: "&d&lKit Editor"
+    NAME: "&dKit Editor &7(Right Click)"
     LORE: []
+    SLOT: 8
   SPECTATE_STOP:
     MATERIAL: "INK_SACK"
     DURABILITY: 1
-    NAME: "&c&lStop Spectating"
+    NAME: "&cStop Spectating &7(Right Click)"
     LORE: []
+    SLOT: 9
   VIEW_INVENTORY:
     MATERIAL: "BOOK"
     DURABILITY: 0
-    NAME: "&6&lView Inventory"
+    NAME: "&6View Inventory &7(Right Click)"
     LORE: []
+    SLOT: 0
   EVENT_JOIN:
     MATERIAL: "NETHER_STAR"
     DURABILITY: 0
-    NAME: "&b&lJoin Event"
+    NAME: "&bJoin Event &7(Right Click)"
     LORE: []
+    SLOT: 1
   EVENT_LEAVE:
     MATERIAL: "NETHER_STAR"
     DURABILITY: 0
-    NAME: "&b&lLeave Event"
+    NAME: "&bLeave Event &7(Right Click)"
     LORE: []
+    SLOT: 2
   MAP_SELECTION:
     MATERIAL: "MAP"
     DURABILITY: 0
-    NAME: "&7» &6&l%MAP% &7«"
+    NAME: "&7» &6%MAP% &7« &7(Right Click)"
     LORE: []
+    SLOT: 3
   REMATCH_REQUEST:
     MATERIAL: "BLAZE_POWDER"
     DURABILITY: 0
-    NAME: "&2&lRequest Rematch"
+    NAME: "&2Request Rematch &7(Right Click)"
     LORE: []
+    SLOT: 4
   REMATCH_ACCEPT:
     MATERIAL: "DIAMOND"
     DURABILITY: 0
-    NAME: "&b&lAccept Rematch"
+    NAME: "&bAccept Rematch &7(Right Click)"
     LORE: []
+    SLOT: 5
   KIT_SELECTION:
     MATERIAL: "ENCHANTED_BOOK"
     DURABILITY: 0
-    NAME: "&7» &6&l%KIT% &7«"
+    NAME: "&7» &6%KIT% &7« &7(Right Click)"
     LORE: []
+    SLOT: 6

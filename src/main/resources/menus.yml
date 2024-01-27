@@ -17,3 +17,10 @@ QUEUES-MENUS:
       - " &7* &cQueueing: &7<queueing>"
       - ""
       - " &aClick to Play!"
+PARTY:
+  EVENTS:
+    TITLE: "&aSelect an Event"
+    SELECT-KIT:
+      TITLE: "&6Select a Kit"
+  OTHER-PARTIES:
+    TITLE: "&9Other Parties"

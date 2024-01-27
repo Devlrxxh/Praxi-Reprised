@@ -1,6 +1,7 @@
 package me.funky.praxi.party.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.party.Party;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
@@ -22,7 +23,7 @@ public class OtherPartiesMenu extends PaginatedMenu {
 
     @Override
     public String getPrePaginatedTitle(Player player) {
-        return "&9&lOther Parties";
+        return Praxi.getInstance().getMenusConfig().getString("PARTY.OTHER-PARTIES.TITLE");
     }
 
     @Override

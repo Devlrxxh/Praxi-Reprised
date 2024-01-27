@@ -1,6 +1,7 @@
 package me.funky.praxi.party.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.party.PartyEvent;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
@@ -19,7 +20,7 @@ public class PartyEventSelectEventMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&a&lSelect an event";
+        return Praxi.getInstance().getMenusConfig().getString("PARTY.EVENTS.TITLE");
     }
 
     @Override
