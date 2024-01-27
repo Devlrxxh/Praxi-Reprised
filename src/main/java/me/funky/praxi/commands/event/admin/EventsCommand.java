@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 @CommandMeta(label = "events", permission = "praxi.event.host")
 public class EventsCommand {
 
-	public void execute(Player player) {
-		player.sendMessage("WIP");
-	}
+    public void execute(Player player) {
+        player.sendMessage("WIP");
+    }
 
 }

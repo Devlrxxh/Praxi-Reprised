@@ -1,11 +1,12 @@
 package me.funky.praxi.util;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class BukkitReflection {
 

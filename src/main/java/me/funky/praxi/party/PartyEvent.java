@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public enum PartyEvent {
 
-	FFA("FFA"),
-	SPLIT("Split");
+    FFA("FFA"),
+    SPLIT("Split");
 
-	private String name;
+    private String name;
 
 }

@@ -1,22 +1,30 @@
 package me.funky.praxi.util.command.command.adapter.impl;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
-
 import me.funky.praxi.util.command.command.adapter.CommandTypeAdapter;
 import org.bukkit.GameMode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class GameModeTypeAdapter implements CommandTypeAdapter
-{
+public class GameModeTypeAdapter implements CommandTypeAdapter {
     private static final Map<String, GameMode> MAP;
-    
+
+    static {
+        (MAP = new HashMap<String, GameMode>()).put("0", GameMode.SURVIVAL);
+        GameModeTypeAdapter.MAP.put("s", GameMode.SURVIVAL);
+        GameModeTypeAdapter.MAP.put("survival", GameMode.SURVIVAL);
+        GameModeTypeAdapter.MAP.put("1", GameMode.CREATIVE);
+        GameModeTypeAdapter.MAP.put("c", GameMode.CREATIVE);
+        GameModeTypeAdapter.MAP.put("creative", GameMode.CREATIVE);
+    }
+
     @Override
     public <T> T convert(final String string, final Class<T> type) {
         return type.cast(GameModeTypeAdapter.MAP.get(string.toLowerCase()));
     }
-    
+
     @Override
     public <T> List<String> tabComplete(final String string, final Class<T> type) {
         if (string.isEmpty()) {
@@ -29,14 +37,5 @@ public class GameModeTypeAdapter implements CommandTypeAdapter
             }
         }
         return completed;
-    }
-    
-    static {
-        (MAP = new HashMap<String, GameMode>()).put("0", GameMode.SURVIVAL);
-        GameModeTypeAdapter.MAP.put("s", GameMode.SURVIVAL);
-        GameModeTypeAdapter.MAP.put("survival", GameMode.SURVIVAL);
-        GameModeTypeAdapter.MAP.put("1", GameMode.CREATIVE);
-        GameModeTypeAdapter.MAP.put("c", GameMode.CREATIVE);
-        GameModeTypeAdapter.MAP.put("creative", GameMode.CREATIVE);
     }
 }

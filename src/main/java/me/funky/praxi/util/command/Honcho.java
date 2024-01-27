@@ -27,17 +27,17 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
-public class Honcho implements Listener
-{
+public class Honcho implements Listener {
     private final JavaPlugin plugin;
     private final Map<Class, CommandTypeAdapter> adapters;
     private final Map<String, CommandData> commands;
-    
+
     public Honcho(final JavaPlugin plugin) {
         this.adapters = new HashMap<>();
         this.commands = new HashMap<>();
@@ -65,8 +65,7 @@ public class Honcho implements Listener
                         response.getStringArrays().write(0, completed.toArray(new String[0]));
                         try {
                             ProtocolLibrary.getProtocolManager().sendServerPacket(event.getPlayer(), response);
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -74,28 +73,26 @@ public class Honcho implements Listener
             }
         });
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onServerCommandEvent(final ServerCommandEvent event) {
         if (event instanceof Cancellable) {
             try {
                 final Method method = event.getClass().getDeclaredMethod("setCancelled", Boolean.TYPE);
                 method.invoke(event, this.handleExecution(event.getSender(), "/" + event.getCommand()));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             this.handleExecution(event.getSender(), "/" + event.getCommand());
         }
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onPlayerCommandPreprocessEvent(final PlayerCommandPreprocessEvent event) {
         event.setCancelled(this.handleExecution(event.getPlayer(), event.getMessage()));
     }
-    
+
     private List<String> handleTabCompletion(final Player player, final String message) {
         final String[] messageSplit = message.substring(1).split(" ");
         CommandData commandData = null;
@@ -122,7 +119,7 @@ public class Honcho implements Listener
         }
         return null;
     }
-    
+
     private boolean handleExecution(final CommandSender commandSender, final String message) {
         final String[] messageSplit = message.substring(1).split(" ");
         CommandData commandData = null;
@@ -149,36 +146,35 @@ public class Honcho implements Listener
                         executor.execute();
                     }
                 }.runTaskAsynchronously(this.plugin);
-            }
-            else {
+            } else {
                 executor.execute();
             }
             return true;
         }
         return false;
     }
-    
+
     public void forceCommand(final Player player, String command) {
         if (!command.startsWith("/")) {
             command = "/" + command;
         }
         this.handleExecution(player, command);
     }
-    
+
     public void registerTypeAdapter(final Class clazz, final CommandTypeAdapter adapter) {
         this.adapters.put(clazz, adapter);
     }
-    
+
     public CommandTypeAdapter getTypeAdapter(final Class clazz) {
         return this.adapters.get(clazz);
     }
-    
+
     public void registerCommand(final Object object) {
         final CommandMeta meta = object.getClass().getAnnotation(CommandMeta.class);
         if (meta == null) {
             throw new RuntimeException(new ClassNotFoundException(object.getClass().getName() + " is missing CommandMeta Annotation, Please Contact a Developer"));
         }
-        final List<MethodData> methodDataList =new ArrayList<>();
+        final List<MethodData> methodDataList = new ArrayList<>();
         for (final Method method : object.getClass().getMethods()) {
             if (method.getParameterCount() != 0) {
                 if (CommandSender.class.isAssignableFrom(method.getParameters()[0].getType())) {
@@ -200,32 +196,31 @@ public class Honcho implements Listener
                 if (clazz.getSuperclass().equals(object.getClass())) {
                     try {
                         this.registerCommand(clazz.getDeclaredConstructor(object.getClass()).newInstance(object));
-                    }
-                    catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                             InvocationTargetException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
     }
-    
+
     private List<String> getLabels(final Class clazz, List<String> list) {
         final List<String> toReturn = new ArrayList<>();
         final Class superClass = clazz.getSuperclass();
         if (superClass != null) {
-            final CommandMeta meta = (CommandMeta)superClass.getAnnotation(CommandMeta.class);
+            final CommandMeta meta = (CommandMeta) superClass.getAnnotation(CommandMeta.class);
             if (meta != null) {
                 list = this.getLabels(superClass, list);
             }
         }
-        final CommandMeta meta = (CommandMeta)clazz.getAnnotation(CommandMeta.class);
+        final CommandMeta meta = (CommandMeta) clazz.getAnnotation(CommandMeta.class);
         if (meta == null) {
             return list;
         }
         if (list.isEmpty()) {
             toReturn.addAll(Arrays.asList(meta.label()));
-        }
-        else {
+        } else {
             for (final String prefix : list) {
                 for (final String label : meta.label()) {
                     toReturn.add(prefix + " " + label);

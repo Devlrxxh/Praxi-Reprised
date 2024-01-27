@@ -1,7 +1,5 @@
 package me.funky.praxi.util.command;
 
-import java.util.List;
-
 import me.funky.praxi.util.command.command.CommandOption;
 import me.funky.praxi.util.command.command.adapter.CommandTypeAdapter;
 import me.funky.praxi.util.command.map.CommandData;
@@ -9,14 +7,15 @@ import me.funky.praxi.util.command.map.MethodData;
 import me.funky.praxi.util.command.map.ParameterData;
 import org.bukkit.command.CommandSender;
 
-public class HonchoTabCompleter
-{
+import java.util.List;
+
+public class HonchoTabCompleter {
     private final Honcho honcho;
     private final CommandSender sender;
     private final CommandData commandData;
     private final String fullMessage;
     private final String[] args;
-    
+
     public HonchoTabCompleter(final Honcho honcho, final CommandSender sender, final CommandData commandData, final String fullMessage, final String[] args) {
         this.honcho = honcho;
         this.sender = sender;
@@ -24,7 +23,7 @@ public class HonchoTabCompleter
         this.fullMessage = fullMessage;
         this.args = args;
     }
-    
+
     public List<String> execute() {
         if (!this.commandData.getMeta().permission().equalsIgnoreCase("") && !this.sender.hasPermission(this.commandData.getMeta().permission())) {
             return null;

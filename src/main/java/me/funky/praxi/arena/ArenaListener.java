@@ -1,8 +1,9 @@
 package me.funky.praxi.arena;
 
+import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.selection.Selection;
-import me.funky.praxi.match.MatchState;
 import me.funky.praxi.match.Match;
+import me.funky.praxi.match.MatchState;
 import me.funky.praxi.util.CC;
 import org.bukkit.Difficulty;
 import org.bukkit.block.Block;
@@ -11,12 +12,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBurnEvent;
-import org.bukkit.event.block.BlockFromToEvent;
-import org.bukkit.event.block.BlockIgniteEvent;
-import org.bukkit.event.block.BlockSpreadEvent;
-import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
@@ -27,138 +23,138 @@ import org.bukkit.inventory.ItemStack;
 
 public class ArenaListener implements Listener {
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		if (!(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-			return;
-		}
+    @EventHandler(priority = EventPriority.LOW)
+    public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        if (!(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+            return;
+        }
 
-		ItemStack item = event.getItem();
+        ItemStack item = event.getItem();
 
-		if (item != null && item.equals(Selection.SELECTION_WAND)) {
-			Player player = event.getPlayer();
-			Block clicked = event.getClickedBlock();
-			int location = 0;
+        if (item != null && item.equals(Selection.SELECTION_WAND)) {
+            Player player = event.getPlayer();
+            Block clicked = event.getClickedBlock();
+            int location = 0;
 
-			Selection selection = Selection.createOrGetSelection(player);
+            Selection selection = Selection.createOrGetSelection(player);
 
-			if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-				selection.setPoint2(clicked.getLocation());
-				location = 2;
-			} else if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
-				selection.setPoint1(clicked.getLocation());
-				location = 1;
-			}
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                selection.setPoint2(clicked.getLocation());
+                location = 2;
+            } else if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                selection.setPoint1(clicked.getLocation());
+                location = 1;
+            }
 
-			event.setCancelled(true);
-			event.setUseItemInHand(Event.Result.DENY);
-			event.setUseInteractedBlock(Event.Result.DENY);
+            event.setCancelled(true);
+            event.setUseItemInHand(Event.Result.DENY);
+            event.setUseInteractedBlock(Event.Result.DENY);
 
-			String message = CC.AQUA + (location == 1 ? "First" : "Second") +
-			                 " location " + CC.YELLOW + "(" + CC.GREEN +
-			                 clicked.getX() + CC.YELLOW + ", " + CC.GREEN +
-			                 clicked.getY() + CC.YELLOW + ", " + CC.GREEN +
-			                 clicked.getZ() + CC.YELLOW + ")" + CC.AQUA + " has been set!";
+            String message = CC.AQUA + (location == 1 ? "First" : "Second") +
+                    " location " + CC.YELLOW + "(" + CC.GREEN +
+                    clicked.getX() + CC.YELLOW + ", " + CC.GREEN +
+                    clicked.getY() + CC.YELLOW + ", " + CC.GREEN +
+                    clicked.getZ() + CC.YELLOW + ")" + CC.AQUA + " has been set!";
 
-			if (selection.isFullObject()) {
-				message += CC.RED + " (" + CC.YELLOW + selection.getCuboid().volume() + CC.AQUA + " blocks" +
-				           CC.RED + ")";
-			}
+            if (selection.isFullObject()) {
+                message += CC.RED + " (" + CC.YELLOW + selection.getCuboid().volume() + CC.AQUA + " blocks" +
+                        CC.RED + ")";
+            }
 
-			player.sendMessage(message);
-		}
-	}
+            player.sendMessage(message);
+        }
+    }
 
-	@EventHandler
-	public void onBlockFromTo(BlockFromToEvent event) {
-		final int x = event.getBlock().getX();
-		final int y = event.getBlock().getY();
-		final int z = event.getBlock().getZ();
+    @EventHandler
+    public void onBlockFromTo(BlockFromToEvent event) {
+        final int x = event.getBlock().getX();
+        final int y = event.getBlock().getY();
+        final int z = event.getBlock().getZ();
 
-		Arena foundArena = null;
+        Arena foundArena = null;
 
-		for (Arena arena : Arena.getArenas()) {
-			if (!(arena.getType() == ArenaType.STANDALONE || arena.getType() == ArenaType.DUPLICATE)) {
-				continue;
-			}
+        for (Arena arena : Arena.getArenas()) {
+            if (!(arena.getType() == ArenaType.STANDALONE || arena.getType() == ArenaType.DUPLICATE)) {
+                continue;
+            }
 
-			if (!arena.isActive()) {
-				continue;
-			}
+            if (!arena.isActive()) {
+                continue;
+            }
 
-			if (x >= arena.getX1() && x <= arena.getX2() && y >= arena.getY1() && y <= arena.getY2() &&
-			    z >= arena.getZ1() && z <= arena.getZ2()) {
-				foundArena = arena;
-				break;
-			}
-		}
+            if (x >= arena.getX1() && x <= arena.getX2() && y >= arena.getY1() && y <= arena.getY2() &&
+                    z >= arena.getZ1() && z <= arena.getZ2()) {
+                foundArena = arena;
+                break;
+            }
+        }
 
-		if (foundArena == null) {
-			return;
-		}
+        if (foundArena == null) {
+            return;
+        }
 
-		for (Match match : Match.getMatches()) {
-			if (match.getArena().equals(foundArena)) {
-				if (match.getState() == MatchState.PLAYING_ROUND) {
-					match.getPlacedBlocks().add(event.getToBlock().getLocation());
-				}
+        for (Match match : Praxi.getInstance().getCache().getMatches()) {
+            if (match.getArena().equals(foundArena)) {
+                if (match.getState() == MatchState.PLAYING_ROUND) {
+                    match.getPlacedBlocks().add(event.getToBlock().getLocation());
+                }
 
-				break;
-			}
-		}
-	}
+                break;
+            }
+        }
+    }
 
-	@EventHandler
-	public void onCreatureSpawnEvent(CreatureSpawnEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onCreatureSpawnEvent(CreatureSpawnEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onWorldLoad(WorldLoadEvent event) {
-		event.getWorld().getEntities().clear();
-		event.getWorld().setDifficulty(Difficulty.HARD);
-	}
+    @EventHandler
+    public void onWorldLoad(WorldLoadEvent event) {
+        event.getWorld().getEntities().clear();
+        event.getWorld().setDifficulty(Difficulty.HARD);
+    }
 
-	@EventHandler
-	public void onWeatherChange(WeatherChangeEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onWeatherChange(WeatherChangeEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onCreatureSpawn(CreatureSpawnEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onBlockIgnite(BlockIgniteEvent event) {
-		if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING) {
-			event.setCancelled(true);
-		}
-	}
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event) {
+        if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING) {
+            event.setCancelled(true);
+        }
+    }
 
-	@EventHandler
-	public void onLeavesDecay(LeavesDecayEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onLeavesDecay(LeavesDecayEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onHangingBreak(HangingBreakEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onHangingBreak(HangingBreakEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onBlockBurn(BlockBurnEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onBlockBurn(BlockBurnEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onBlockSpread(BlockSpreadEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onBlockSpread(BlockSpreadEvent event) {
+        event.setCancelled(true);
+    }
 
-	@EventHandler
-	public void onPrime(ExplosionPrimeEvent event) {
-		event.setCancelled(true);
-	}
+    @EventHandler
+    public void onPrime(ExplosionPrimeEvent event) {
+        event.setCancelled(true);
+    }
 
 }

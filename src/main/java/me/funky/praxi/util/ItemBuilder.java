@@ -1,7 +1,5 @@
 package me.funky.praxi.util;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -9,9 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemBuilder implements Listener {
 
-    private ItemStack is;
+    private final ItemStack is;
 
     public ItemBuilder(Material mat) {
         is = new ItemStack(mat);

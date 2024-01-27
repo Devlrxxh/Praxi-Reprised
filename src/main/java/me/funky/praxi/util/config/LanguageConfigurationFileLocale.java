@@ -9,12 +9,12 @@ public enum LanguageConfigurationFileLocale {
 
     private final String abbreviation;
 
-    private LanguageConfigurationFileLocale(String abbreviation) {
+    LanguageConfigurationFileLocale(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
     public static LanguageConfigurationFileLocale getByAbbreviation(String abbreviation) {
-        for ( LanguageConfigurationFileLocale locale : values() ) {
+        for (LanguageConfigurationFileLocale locale : values()) {
             if (locale.getAbbreviation().equalsIgnoreCase(abbreviation)) {
                 return locale;
             }
@@ -24,7 +24,7 @@ public enum LanguageConfigurationFileLocale {
     }
 
     public static LanguageConfigurationFileLocale getByName(String name) {
-        for ( LanguageConfigurationFileLocale locale : values() ) {
+        for (LanguageConfigurationFileLocale locale : values()) {
             if (locale.name().equalsIgnoreCase(name)) {
                 return locale;
             }

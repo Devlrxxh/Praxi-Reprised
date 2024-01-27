@@ -2,11 +2,10 @@ package me.funky.praxi.commands.user.settings;
 
 import me.funky.praxi.Locale;
 import me.funky.praxi.profile.Profile;
-import me.funky.praxi.util.command.command.CPL;
 import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = { "togglescoreboard", "tsb" })
+@CommandMeta(label = {"togglescoreboard", "tsb"})
 public class ToggleScoreboardCommand {
 
     public void execute(Player player) {

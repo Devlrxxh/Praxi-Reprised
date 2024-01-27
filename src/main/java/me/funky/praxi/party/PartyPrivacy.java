@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public enum PartyPrivacy {
 
-	OPEN("Open"),
-	CLOSED("Closed");
+    OPEN("Open"),
+    CLOSED("Closed");
 
-	private String readable;
+    private String readable;
 
 }

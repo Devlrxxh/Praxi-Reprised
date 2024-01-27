@@ -14,172 +14,6 @@ public class BlockUtil {
     private static Set<Byte> blockWebsSet;
     private static Set<Byte> blockIceSet;
 
-    @SuppressWarnings("deprecation")
-    public static boolean isOnGround(final Location location, final int down) {
-        final double posX = location.getX();
-        final double posZ = location.getZ();
-        final double fracX = (posX % 1.0 > 0.0) ? Math.abs(posX % 1.0) : (1.0 - Math.abs(posX % 1.0));
-        final double fracZ = (posZ % 1.0 > 0.0) ? Math.abs(posZ % 1.0) : (1.0 - Math.abs(posZ % 1.0));
-        final int blockX = location.getBlockX();
-        final int blockY = location.getBlockY() - down;
-        final int blockZ = location.getBlockZ();
-        final World world = location.getWorld();
-        if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ).getTypeId())) {
-            return true;
-        }
-        if (fracX < 0.3) {
-            if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ).getTypeId())) {
-                return true;
-            }
-            if (fracZ < 0.3) {
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-            } else if (fracZ > 0.7) {
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-            }
-        } else if (fracX > 0.7) {
-            if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ).getTypeId())) {
-                return true;
-            }
-            if (fracZ < 0.3) {
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-            } else if (fracZ > 0.7) {
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-            }
-        } else if (fracZ < 0.3) {
-            if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                return true;
-            }
-        } else if (fracZ > 0.7 && !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isOnStairs(final Location location, final int down) {
-        return isUnderBlock(location, BlockUtil.blockStairsSet, down);
-    }
-
-    public static boolean isOnCarpet(final Location location, final int down) {
-        return isUnderBlock(location, BlockUtil.blockCarpetSet, down);
-    }
-
-    @SuppressWarnings("deprecation")
-    private static boolean isUnderBlock(final Location location, final Set<Byte> itemIDs, final int down) {
-        final double posX = location.getX();
-        final double posZ = location.getZ();
-        final double fracX = (posX % 1.0 > 0.0) ? Math.abs(posX % 1.0) : (1.0 - Math.abs(posX % 1.0));
-        final double fracZ = (posZ % 1.0 > 0.0) ? Math.abs(posZ % 1.0) : (1.0 - Math.abs(posZ % 1.0));
-        final int blockX = location.getBlockX();
-        final int blockY = location.getBlockY() - down;
-        final int blockZ = location.getBlockZ();
-        final World world = location.getWorld();
-        if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ).getTypeId())) {
-            return true;
-        }
-        if (fracX < 0.3) {
-            if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ).getTypeId())) {
-                return true;
-            }
-            if (fracZ < 0.3) {
-                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-            } else if (fracZ > 0.7) {
-                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-            }
-        } else if (fracX > 0.7) {
-            if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ).getTypeId())) {
-                return true;
-            }
-            if (fracZ < 0.3) {
-                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId())) {
-                    return true;
-                }
-            } else if (fracZ > 0.7) {
-                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-                if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId())) {
-                    return true;
-                }
-            }
-        } else if (fracZ < 0.3) {
-            if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
-                return true;
-            }
-        } else if (fracZ > 0.7 && itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isOnLiquid(final Location location, final int down) {
-        return isUnderBlock(location, BlockUtil.blockLiquidsSet, down);
-    }
-
-    public static boolean isOnWeb(final Location location, final int down) {
-        return isUnderBlock(location, BlockUtil.blockWebsSet, down);
-    }
-
-    public static boolean isOnIce(final Location location, final int down) {
-        return isUnderBlock(location, BlockUtil.blockIceSet, down);
-    }
-
     static {
         BlockUtil.blockSolidPassSet = new HashSet<Byte>();
         BlockUtil.blockStairsSet = new HashSet<Byte>();
@@ -247,5 +81,147 @@ public class BlockUtil {
         BlockUtil.blockWebsSet.add((byte) 30);
         BlockUtil.blockIceSet.add((byte) 79);
         BlockUtil.blockIceSet.add((byte) (-82));
+    }
+
+    @SuppressWarnings("deprecation")
+    public static boolean isOnGround(final Location location, final int down) {
+        final double posX = location.getX();
+        final double posZ = location.getZ();
+        final double fracX = (posX % 1.0 > 0.0) ? Math.abs(posX % 1.0) : (1.0 - Math.abs(posX % 1.0));
+        final double fracZ = (posZ % 1.0 > 0.0) ? Math.abs(posZ % 1.0) : (1.0 - Math.abs(posZ % 1.0));
+        final int blockX = location.getBlockX();
+        final int blockY = location.getBlockY() - down;
+        final int blockZ = location.getBlockZ();
+        final World world = location.getWorld();
+        if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ).getTypeId())) {
+            return true;
+        }
+        if (fracX < 0.3) {
+            if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ).getTypeId())) {
+                return true;
+            }
+            if (fracZ < 0.3) {
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId());
+            } else if (fracZ > 0.7) {
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId());
+            }
+        } else if (fracX > 0.7) {
+            if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ).getTypeId())) {
+                return true;
+            }
+            if (fracZ < 0.3) {
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId());
+            } else if (fracZ > 0.7) {
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                if (!BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId());
+            }
+        } else if (fracZ < 0.3) {
+            return !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId());
+        } else return fracZ > 0.7 && !BlockUtil.blockSolidPassSet.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId());
+        return false;
+    }
+
+    public static boolean isOnStairs(final Location location, final int down) {
+        return isUnderBlock(location, BlockUtil.blockStairsSet, down);
+    }
+
+    public static boolean isOnCarpet(final Location location, final int down) {
+        return isUnderBlock(location, BlockUtil.blockCarpetSet, down);
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean isUnderBlock(final Location location, final Set<Byte> itemIDs, final int down) {
+        final double posX = location.getX();
+        final double posZ = location.getZ();
+        final double fracX = (posX % 1.0 > 0.0) ? Math.abs(posX % 1.0) : (1.0 - Math.abs(posX % 1.0));
+        final double fracZ = (posZ % 1.0 > 0.0) ? Math.abs(posZ % 1.0) : (1.0 - Math.abs(posZ % 1.0));
+        final int blockX = location.getBlockX();
+        final int blockY = location.getBlockY() - down;
+        final int blockZ = location.getBlockZ();
+        final World world = location.getWorld();
+        if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ).getTypeId())) {
+            return true;
+        }
+        if (fracX < 0.3) {
+            if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ).getTypeId())) {
+                return true;
+            }
+            if (fracZ < 0.3) {
+                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                return itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId());
+            } else if (fracZ > 0.7) {
+                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                return itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId());
+            }
+        } else if (fracX > 0.7) {
+            if (itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ).getTypeId())) {
+                return true;
+            }
+            if (fracZ < 0.3) {
+                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId())) {
+                    return true;
+                }
+                return itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ - 1).getTypeId());
+            } else if (fracZ > 0.7) {
+                if (itemIDs.contains((byte) world.getBlockAt(blockX - 1, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                if (itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId())) {
+                    return true;
+                }
+                return itemIDs.contains((byte) world.getBlockAt(blockX + 1, blockY, blockZ + 1).getTypeId());
+            }
+        } else if (fracZ < 0.3) {
+            return itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ - 1).getTypeId());
+        } else return fracZ > 0.7 && itemIDs.contains((byte) world.getBlockAt(blockX, blockY, blockZ + 1).getTypeId());
+        return false;
+    }
+
+    public static boolean isOnLiquid(final Location location, final int down) {
+        return isUnderBlock(location, BlockUtil.blockLiquidsSet, down);
+    }
+
+    public static boolean isOnWeb(final Location location, final int down) {
+        return isUnderBlock(location, BlockUtil.blockWebsSet, down);
+    }
+
+    public static boolean isOnIce(final Location location, final int down) {
+        return isUnderBlock(location, BlockUtil.blockIceSet, down);
     }
 }

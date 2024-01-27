@@ -1,13 +1,10 @@
 package me.funky.praxi.queue.menu;
 
+import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.queue.Queue;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import lombok.AllArgsConstructor;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
@@ -16,74 +13,79 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @AllArgsConstructor
 public class QueueSelectKitMenu extends Menu {
 
-	private boolean ranked;
+    private boolean ranked;
 
-	{
-		setAutoUpdate(true);
-	}
+    {
+        setAutoUpdate(true);
+    }
 
-	@Override
-	public String getTitle(Player player) {
-		return "&6&lSelect a kit (" + (ranked ? "Ranked" : "Unranked") + ")";
-	}
+    @Override
+    public String getTitle(Player player) {
+        return "&6&lSelect a kit (" + (ranked ? "Ranked" : "Unranked") + ")";
+    }
 
-	@Override
-	public Map<Integer, Button> getButtons(Player player) {
-		Map<Integer, Button> buttons = new HashMap<>();
+    @Override
+    public Map<Integer, Button> getButtons(Player player) {
+        Map<Integer, Button> buttons = new HashMap<>();
 
-		int i = 0;
+        int i = 0;
 
-		for (Queue queue : Queue.getQueues()) {
-			if (queue.isRanked() == ranked) {
-				buttons.put(i++, new SelectKitButton(queue));
-			}
-		}
+        for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
+            if (queue.isRanked() == ranked) {
+                buttons.put(i++, new SelectKitButton(queue));
+            }
+        }
 
-		return buttons;
-	}
+        return buttons;
+    }
 
-	@AllArgsConstructor
-	private class SelectKitButton extends Button {
+    @AllArgsConstructor
+    private class SelectKitButton extends Button {
 
-		private Queue queue;
+        private Queue queue;
 
-		@Override
-		public ItemStack getButtonItem(Player player) {
-			List<String> lore = new ArrayList<>();
-			lore.add("&cFighting: &r" + Match.getInFightsCount(queue));
-			lore.add("&cQueueing: &r" + queue.getPlayers().size());
+        @Override
+        public ItemStack getButtonItem(Player player) {
+            List<String> lore = new ArrayList<>();
+            lore.add("&cFighting: &r" + Match.getInFightsCount(queue));
+            lore.add("&cQueueing: &r" + Praxi.getInstance().getCache().getPlayers().size());
 
-			return new ItemBuilder(queue.getKit().getDisplayIcon())
-					.name("&4&l" + queue.getKit().getName())
-					.lore(lore)
-					.build();
-		}
+            return new ItemBuilder(queue.getKit().getDisplayIcon())
+                    .name("&4&l" + queue.getKit().getName())
+                    .lore(lore)
+                    .build();
+        }
 
-		@Override
-		public void clicked(Player player, ClickType clickType) {
-			Profile profile = Profile.getByUuid(player.getUniqueId());
+        @Override
+        public void clicked(Player player, ClickType clickType) {
+            Profile profile = Profile.getByUuid(player.getUniqueId());
 
-			if (profile == null) {
-				return;
-			}
+            if (profile == null) {
+                return;
+            }
 
-			if (player.hasMetadata("frozen")) {
-				player.sendMessage(CC.RED + "You cannot queue while frozen.");
-				return;
-			}
+            if (player.hasMetadata("frozen")) {
+                player.sendMessage(CC.RED + "You cannot queue while frozen.");
+                return;
+            }
 
-			if (profile.isBusy()) {
-				player.sendMessage(CC.RED + "You cannot queue right now.");
-				return;
-			}
+            if (profile.isBusy()) {
+                player.sendMessage(CC.RED + "You cannot queue right now.");
+                return;
+            }
 
-			player.closeInventory();
+            player.closeInventory();
 
-			queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0);
-		}
+            queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0);
+        }
 
-	}
+    }
 }

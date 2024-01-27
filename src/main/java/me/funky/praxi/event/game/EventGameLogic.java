@@ -1,49 +1,50 @@
 package me.funky.praxi.event.game;
 
 import me.funky.praxi.event.game.map.EventGameMap;
-import java.util.List;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public interface EventGameLogic {
 
-	EventGameLogicTask getGameLogicTask();
+    EventGameLogicTask getGameLogicTask();
 
-	void startEvent();
+    void startEvent();
 
-	boolean canStartEvent();
+    boolean canStartEvent();
 
-	void preEndEvent();
+    void preEndEvent();
 
-	void endEvent();
+    void endEvent();
 
-	boolean canEndEvent();
+    boolean canEndEvent();
 
-	void cancelEvent();
+    void cancelEvent();
 
-	void preStartRound();
+    void preStartRound();
 
-	void startRound();
+    void startRound();
 
-	boolean canStartRound();
+    boolean canStartRound();
 
-	void endRound();
+    void endRound();
 
-	boolean canEndRound();
+    boolean canEndRound();
 
-	void onVote(Player player, EventGameMap gameMap);
+    void onVote(Player player, EventGameMap gameMap);
 
-	void onJoin(Player player);
+    void onJoin(Player player);
 
-	void onLeave(Player player);
+    void onLeave(Player player);
 
-	void onMove(Player player);
+    void onMove(Player player);
 
-	void onDeath(Player player, Player killer);
+    void onDeath(Player player, Player killer);
 
-	boolean isPlaying(Player player);
+    boolean isPlaying(Player player);
 
-	List<String> getScoreboardEntries();
+    List<String> getScoreboardEntries();
 
-	int getRoundNumber();
+    int getRoundNumber();
 
 }

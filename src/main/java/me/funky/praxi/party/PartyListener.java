@@ -16,53 +16,53 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PartyListener implements Listener {
 
-	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-		Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+        Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-		if (event.getMessage().startsWith("@") || event.getMessage().startsWith("!")) {
-			if (profile.getParty() != null) {
-				event.setCancelled(true);
-				profile.getParty().sendChat(event.getPlayer(), ChatColor.stripColor(event.getMessage().substring(1)));
-			}
-		}
-	}
+        if (event.getMessage().startsWith("@") || event.getMessage().startsWith("!")) {
+            if (profile.getParty() != null) {
+                event.setCancelled(true);
+                profile.getParty().sendChat(event.getPlayer(), ChatColor.stripColor(event.getMessage().substring(1)));
+            }
+        }
+    }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR ||
-		                                event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-			HotbarItem hotbarItem = Hotbar.fromItemStack(event.getItem());
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR ||
+                event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+            HotbarItem hotbarItem = Hotbar.fromItemStack(event.getItem());
 
-			if (hotbarItem != null) {
-				boolean cancelled = true;
+            if (hotbarItem != null) {
+                boolean cancelled = true;
 
-				if (hotbarItem == HotbarItem.PARTY_EVENTS) {
-					new PartyEventSelectEventMenu().openMenu(event.getPlayer());
-				} else if (hotbarItem == HotbarItem.OTHER_PARTIES) {
-					new OtherPartiesMenu().openMenu(event.getPlayer());
-				} else {
-					cancelled = false;
-				}
+                if (hotbarItem == HotbarItem.PARTY_EVENTS) {
+                    new PartyEventSelectEventMenu().openMenu(event.getPlayer());
+                } else if (hotbarItem == HotbarItem.OTHER_PARTIES) {
+                    new OtherPartiesMenu().openMenu(event.getPlayer());
+                } else {
+                    cancelled = false;
+                }
 
-				event.setCancelled(cancelled);
-			}
-		}
-	}
+                event.setCancelled(cancelled);
+            }
+        }
+    }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onPlayerQuitEvent(PlayerQuitEvent event) {
-		Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
+    @EventHandler(priority = EventPriority.LOW)
+    public void onPlayerQuitEvent(PlayerQuitEvent event) {
+        Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
 
-		if (profile != null) {
-			if (profile.getParty() != null) {
-				if (profile.getParty().getLeader().equals(event.getPlayer())) {
-					profile.getParty().disband();
-				} else {
-					profile.getParty().leave(event.getPlayer(), false);
-				}
-			}
-		}
-	}
+        if (profile != null) {
+            if (profile.getParty() != null) {
+                if (profile.getParty().getLeader().equals(event.getPlayer())) {
+                    profile.getParty().disband();
+                } else {
+                    profile.getParty().leave(event.getPlayer(), false);
+                }
+            }
+        }
+    }
 
 }

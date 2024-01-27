@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ArenaType {
-	STANDALONE,
-	SHARED,
-	DUPLICATE
+    STANDALONE,
+    SHARED,
+    DUPLICATE
 }

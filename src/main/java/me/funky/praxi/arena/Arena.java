@@ -1,175 +1,183 @@
 package me.funky.praxi.arena;
 
-import me.funky.praxi.Praxi;
-import me.funky.praxi.arena.impl.SharedArena;
-import me.funky.praxi.arena.impl.StandaloneArena;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.Getter;
 import lombok.Setter;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.cuboid.Cuboid;
+import me.funky.praxi.arena.impl.SharedArena;
+import me.funky.praxi.arena.impl.StandaloneArena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.util.LocationUtil;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Arena extends Cuboid {
 
-	@Getter private static List<Arena> arenas = new ArrayList<>();
+    @Getter
+    private static final List<Arena> arenas = new ArrayList<>();
 
-	@Getter protected String name;
-	@Setter protected Location spawnA;
-	@Setter protected Location spawnB;
-	@Getter protected boolean active;
-	@Getter @Setter private List<String> kits = new ArrayList<>();
+    @Getter
+    protected String name;
+    @Setter
+    protected Location spawnA;
+    @Setter
+    protected Location spawnB;
+    @Getter
+    protected boolean active;
+    @Getter
+    @Setter
+    private List<String> kits = new ArrayList<>();
 
-	public Arena(String name, Location location1, Location location2) {
-		super(location1, location2);
+    public Arena(String name, Location location1, Location location2) {
+        super(location1, location2);
 
-		this.name = name;
-	}
+        this.name = name;
+    }
 
-	public ArenaType getType() {
-		return ArenaType.DUPLICATE;
-	}
+    public static void init() {
+        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
 
-	public boolean isSetup() {
-		return getLowerCorner() != null && getUpperCorner() != null && spawnA != null && spawnB != null;
-	}
+        if (configuration.contains("arenas")) {
+            for (String arenaName : configuration.getConfigurationSection("arenas").getKeys(false)) {
+                String path = "arenas." + arenaName;
 
-	public int getMaxBuildHeight() {
-		int highest = (int) (spawnA.getY() >= spawnB.getY() ? spawnA.getY() : spawnB.getY());
-		return highest + 5;
-	}
+                ArenaType arenaType = ArenaType.valueOf(configuration.getString(path + ".type"));
+                Location location1 = LocationUtil.deserialize(configuration.getString(path + ".cuboid.location1"));
+                Location location2 = LocationUtil.deserialize(configuration.getString(path + ".cuboid.location2"));
 
-	public Location getSpawnA() {
-		if (spawnA == null) {
-			return null;
-		}
+                Arena arena;
 
-		return spawnA.clone();
-	}
+                if (arenaType == ArenaType.STANDALONE) {
+                    arena = new StandaloneArena(arenaName, location1, location2);
+                } else if (arenaType == ArenaType.SHARED) {
+                    arena = new SharedArena(arenaName, location1, location2);
+                } else {
+                    continue;
+                }
 
-	public Location getSpawnB() {
-		if (spawnB == null) {
-			return null;
-		}
+                if (configuration.contains(path + ".spawnA")) {
+                    arena.setSpawnA(LocationUtil.deserialize(configuration.getString(path + ".spawnA")));
+                }
 
-		return spawnB.clone();
-	}
+                if (configuration.contains(path + ".spawnB")) {
+                    arena.setSpawnB(LocationUtil.deserialize(configuration.getString(path + ".spawnB")));
+                }
 
-	public void setActive(boolean active) {
-		if (getType() != ArenaType.SHARED) {
-			this.active = active;
-		}
-	}
+                if (configuration.contains(path + ".kits")) {
+                    for (String kitName : configuration.getStringList(path + ".kits")) {
+                        arena.getKits().add(kitName);
+                    }
+                }
 
-	public void save() {
+                if (arena instanceof StandaloneArena && configuration.contains(path + ".duplicates")) {
+                    for (String duplicateId : configuration.getConfigurationSection(path + ".duplicates").getKeys(false)) {
+                        location1 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".cuboid.location1"));
+                        location2 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".cuboid.location2"));
+                        Location spawn1 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".spawnA"));
+                        Location spawn2 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".spawnB"));
 
-	}
+                        Arena duplicate = new Arena(arenaName, location1, location2);
 
-	public void delete() {
-		arenas.remove(this);
-	}
+                        duplicate.setSpawnA(spawn1);
+                        duplicate.setSpawnB(spawn2);
+                        duplicate.setKits(arena.getKits());
 
-	public static void init() {
-		FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+                        ((StandaloneArena) arena).getDuplicates().add(duplicate);
 
-		if (configuration.contains("arenas")) {
-			for (String arenaName : configuration.getConfigurationSection("arenas").getKeys(false)) {
-				String path = "arenas." + arenaName;
+                        Arena.getArenas().add(duplicate);
+                    }
+                }
 
-				ArenaType arenaType = ArenaType.valueOf(configuration.getString(path + ".type"));
-				Location location1 = LocationUtil.deserialize(configuration.getString(path + ".cuboid.location1"));
-				Location location2 = LocationUtil.deserialize(configuration.getString(path + ".cuboid.location2"));
+                Arena.getArenas().add(arena);
+            }
+        }
 
-				Arena arena;
+        Praxi.getInstance().getLogger().info("Loaded " + Arena.getArenas().size() + " arenas");
+    }
 
-				if (arenaType == ArenaType.STANDALONE) {
-					arena = new StandaloneArena(arenaName, location1, location2);
-				} else if (arenaType == ArenaType.SHARED) {
-					arena = new SharedArena(arenaName, location1, location2);
-				} else {
-					continue;
-				}
+    public static Arena getByName(String name) {
+        for (Arena arena : arenas) {
+            if (arena.getType() != ArenaType.DUPLICATE && arena.getName() != null &&
+                    arena.getName().equalsIgnoreCase(name)) {
+                return arena;
+            }
+        }
 
-				if (configuration.contains(path + ".spawnA")) {
-					arena.setSpawnA(LocationUtil.deserialize(configuration.getString(path + ".spawnA")));
-				}
+        return null;
+    }
 
-				if (configuration.contains(path + ".spawnB")) {
-					arena.setSpawnB(LocationUtil.deserialize(configuration.getString(path + ".spawnB")));
-				}
+    public static Arena getRandomArena(Kit kit) {
+        List<Arena> _arenas = new ArrayList<>();
 
-				if (configuration.contains(path + ".kits")) {
-					for (String kitName : configuration.getStringList(path + ".kits")) {
-						arena.getKits().add(kitName);
-					}
-				}
+        for (Arena arena : arenas) {
+            if (!arena.isSetup()) {
+                continue;
+            }
 
-				if (arena instanceof StandaloneArena && configuration.contains(path + ".duplicates")) {
-					for (String duplicateId : configuration.getConfigurationSection(path + ".duplicates").getKeys(false)) {
-						location1 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".cuboid.location1"));
-						location2 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".cuboid.location2"));
-						Location spawn1 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".spawnA"));
-						Location spawn2 = LocationUtil.deserialize(configuration.getString(path + ".duplicates." + duplicateId + ".spawnB"));
+            if (!arena.getKits().contains(kit.getName())) {
+                continue;
+            }
 
-						Arena duplicate = new Arena(arenaName, location1, location2);
+            if (kit.getGameRules().isBuild() && !arena.isActive() && (arena.getType() == ArenaType.STANDALONE ||
+                    arena.getType() == ArenaType.DUPLICATE)) {
+                _arenas.add(arena);
+            } else if (!kit.getGameRules().isBuild() && arena.getType() == ArenaType.SHARED) {
+                _arenas.add(arena);
+            }
+        }
 
-						duplicate.setSpawnA(spawn1);
-						duplicate.setSpawnB(spawn2);
-						duplicate.setKits(arena.getKits());
+        if (_arenas.isEmpty()) {
+            return null;
+        }
 
-						((StandaloneArena) arena).getDuplicates().add(duplicate);
+        return _arenas.get(ThreadLocalRandom.current().nextInt(_arenas.size()));
+    }
 
-						Arena.getArenas().add(duplicate);
-					}
-				}
+    public ArenaType getType() {
+        return ArenaType.DUPLICATE;
+    }
 
-				Arena.getArenas().add(arena);
-			}
-		}
+    public boolean isSetup() {
+        return getLowerCorner() != null && getUpperCorner() != null && spawnA != null && spawnB != null;
+    }
 
-		Praxi.getInstance().getLogger().info("Loaded " + Arena.getArenas().size() + " arenas");
-	}
+    public int getMaxBuildHeight() {
+        int highest = (int) (spawnA.getY() >= spawnB.getY() ? spawnA.getY() : spawnB.getY());
+        return highest + 5;
+    }
 
-	public static Arena getByName(String name) {
-		for (Arena arena : arenas) {
-			if (arena.getType() != ArenaType.DUPLICATE && arena.getName() != null &&
-			    arena.getName().equalsIgnoreCase(name)) {
-				return arena;
-			}
-		}
+    public Location getSpawnA() {
+        if (spawnA == null) {
+            return null;
+        }
 
-		return null;
-	}
+        return spawnA.clone();
+    }
 
-	public static Arena getRandomArena(Kit kit) {
-		List<Arena> _arenas = new ArrayList<>();
+    public Location getSpawnB() {
+        if (spawnB == null) {
+            return null;
+        }
 
-		for (Arena arena : arenas) {
-			if (!arena.isSetup()) {
-				continue;
-			}
+        return spawnB.clone();
+    }
 
-			if (!arena.getKits().contains(kit.getName())) {
-				continue;
-			}
+    public void setActive(boolean active) {
+        if (getType() != ArenaType.SHARED) {
+            this.active = active;
+        }
+    }
 
-			if (kit.getGameRules().isBuild() && !arena.isActive() && (arena.getType() == ArenaType.STANDALONE ||
-			                                                          arena.getType() == ArenaType.DUPLICATE)) {
-				_arenas.add(arena);
-			} else if (!kit.getGameRules().isBuild() && arena.getType() == ArenaType.SHARED) {
-				_arenas.add(arena);
-			}
-		}
+    public void save() {
 
-		if (_arenas.isEmpty()) {
-			return null;
-		}
+    }
 
-		return _arenas.get(ThreadLocalRandom.current().nextInt(_arenas.size()));
-	}
+    public void delete() {
+        arenas.remove(this);
+    }
 
 }

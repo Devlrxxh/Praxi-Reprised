@@ -14,21 +14,21 @@ import org.bukkit.inventory.ItemStack;
 @Setter
 public class DisplayButton extends Button {
 
-	private ItemStack itemStack;
-	private boolean cancel;
+    private ItemStack itemStack;
+    private boolean cancel;
 
-	@Override
-	public ItemStack getButtonItem(Player player) {
-		if (this.itemStack == null) {
-			return new ItemStack(Material.AIR);
-		} else {
-			return this.itemStack;
-		}
-	}
+    @Override
+    public ItemStack getButtonItem(Player player) {
+        if (this.itemStack == null) {
+            return new ItemStack(Material.AIR);
+        } else {
+            return this.itemStack;
+        }
+    }
 
-	@Override
-	public boolean shouldCancel(Player player, ClickType clickType) {
-		return this.cancel;
-	}
+    @Override
+    public boolean shouldCancel(Player player, ClickType clickType) {
+        return this.cancel;
+    }
 
 }

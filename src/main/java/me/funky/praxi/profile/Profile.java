@@ -4,257 +4,274 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.funky.praxi.kit.Kit;
-import me.funky.praxi.kit.KitLoadout;
-import me.funky.praxi.profile.meta.ProfileKitEditorData;
-import me.funky.praxi.profile.meta.ProfileKitData;
-import me.funky.praxi.profile.meta.ProfileRematchData;
-import me.funky.praxi.profile.meta.option.ProfileOptions;
-import me.funky.praxi.util.CC;
-import me.funky.praxi.util.Cooldown;
-import me.funky.praxi.util.InventoryUtil;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.duel.DuelProcedure;
 import me.funky.praxi.duel.DuelRequest;
+import me.funky.praxi.kit.Kit;
+import me.funky.praxi.kit.KitLoadout;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.party.Party;
+import me.funky.praxi.profile.meta.ProfileKitData;
+import me.funky.praxi.profile.meta.ProfileKitEditorData;
+import me.funky.praxi.profile.meta.ProfileRematchData;
+import me.funky.praxi.profile.meta.option.ProfileOptions;
 import me.funky.praxi.queue.QueueProfile;
+import me.funky.praxi.util.CC;
+import me.funky.praxi.util.Cooldown;
+import me.funky.praxi.util.InventoryUtil;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.*;
+
 public class Profile {
 
-	@Getter private static Map<UUID, Profile> profiles = new HashMap<>();
-	private static MongoCollection<Document> collection;
+    @Getter
+    private static final Map<UUID, Profile> profiles = new HashMap<>();
+    private static MongoCollection<Document> collection;
+    @Getter
+    private final ProfileOptions options;
+    @Getter
+    private final ProfileKitEditorData kitEditorData;
+    @Getter
+    private final Map<Kit, ProfileKitData> kitData;
+    @Getter
+    private final List<DuelRequest> duelRequests;
+    @Getter
+    private final UUID uuid;
+    @Getter
+    @Setter
+    private ProfileState state;
+    @Getter
+    @Setter
+    private DuelProcedure duelProcedure;
+    @Getter
+    @Setter
+    private ProfileRematchData rematchData;
+    @Getter
+    @Setter
+    private Party party;
+    @Getter
+    @Setter
+    private Match match;
+    @Getter
+    @Setter
+    private QueueProfile queueProfile;
+    @Getter
+    @Setter
+    private Cooldown enderpearlCooldown;
+    @Getter
+    @Setter
+    private Cooldown voteCooldown;
 
-	@Getter private UUID uuid;
-	@Getter @Setter private ProfileState state;
-	@Getter private final ProfileOptions options;
-	@Getter private final ProfileKitEditorData kitEditorData;
-	@Getter private final Map<Kit, ProfileKitData> kitData;
-	@Getter private final List<DuelRequest> duelRequests;
-	@Getter @Setter private DuelProcedure duelProcedure;
-	@Getter @Setter private ProfileRematchData rematchData;
-	@Getter @Setter private Party party;
-	@Getter @Setter private Match match;
-	@Getter @Setter private QueueProfile queueProfile;
-	@Getter @Setter private Cooldown enderpearlCooldown;
-	@Getter @Setter private Cooldown voteCooldown;
+    public Profile(UUID uuid) {
+        this.uuid = uuid;
+        this.state = ProfileState.LOBBY;
+        this.options = new ProfileOptions();
+        this.kitEditorData = new ProfileKitEditorData();
+        this.kitData = new HashMap<>();
+        this.duelRequests = new ArrayList<>();
+        this.enderpearlCooldown = new Cooldown(0);
+        this.voteCooldown = new Cooldown(0);
 
-	public Profile(UUID uuid) {
-		this.uuid = uuid;
-		this.state = ProfileState.LOBBY;
-		this.options = new ProfileOptions();
-		this.kitEditorData = new ProfileKitEditorData();
-		this.kitData = new HashMap<>();
-		this.duelRequests = new ArrayList<>();
-		this.enderpearlCooldown = new Cooldown(0);
-		this.voteCooldown = new Cooldown(0);
+        for (Kit kit : Kit.getKits()) {
+            this.kitData.put(kit, new ProfileKitData());
+        }
+    }
 
-		for (Kit kit : Kit.getKits()) {
-			this.kitData.put(kit, new ProfileKitData());
-		}
-	}
+    public static void init() {
+        collection = Praxi.getInstance().getMongoDatabase().getCollection("profiles");
 
-	public Player getPlayer() {
-		return Bukkit.getPlayer(uuid);
-	}
+        // Players might have joined before the plugin finished loading
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            Profile profile = new Profile(player.getUniqueId());
 
-	public DuelRequest getDuelRequest(Player sender) {
-		for (DuelRequest duelRequest : duelRequests) {
-			if (duelRequest.getSender().equals(sender.getUniqueId())) {
-				return duelRequest;
-			}
-		}
+            try {
+                profile.load();
+            } catch (Exception e) {
+                player.kickPlayer(CC.RED + "The server is loading...");
+                continue;
+            }
 
-		return null;
-	}
+            profiles.put(player.getUniqueId(), profile);
+        }
 
-	public boolean isDuelRequestExpired(DuelRequest duelRequest) {
-		if (duelRequest != null) {
-			if (duelRequest.isExpired()) {
-				duelRequests.remove(duelRequest);
-				return true;
-			}
-		}
+        // Expire duel requests
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Profile profile : Profile.getProfiles().values()) {
+                    Iterator<DuelRequest> iterator = profile.duelRequests.iterator();
 
-		return false;
-	}
+                    while (iterator.hasNext()) {
+                        DuelRequest duelRequest = iterator.next();
 
-	public boolean isBusy() {
-		return state != ProfileState.LOBBY;
-	}
+                        if (duelRequest.isExpired()) {
+                            duelRequest.expire();
+                            iterator.remove();
+                        }
+                    }
+                }
+            }
+        }.runTaskTimerAsynchronously(Praxi.getInstance(), 60L, 60L);
 
-	void load() {
-		Document document = collection.find(Filters.eq("uuid", uuid.toString())).first();
+        // Save every 5 minutes to prevent data loss
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Profile profile : Profile.getProfiles().values()) {
+                    profile.save();
+                }
+            }
+        }.runTaskTimerAsynchronously(Praxi.getInstance(), 6000L, 6000L);
+    }
 
-		if (document == null) {
-			this.save();
-			return;
-		}
+    public static Profile getByUuid(UUID uuid) {
+        Profile profile = profiles.get(uuid);
 
-		Document options = (Document) document.get("options");
+        if (profile == null) {
+            profile = new Profile(uuid);
+        }
 
-		this.options.showScoreboard(options.getBoolean("showScoreboard"));
-		this.options.allowSpectators(options.getBoolean("allowSpectators"));
-		this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
+        return profile;
+    }
 
-		Document kitStatistics = (Document) document.get("kitStatistics");
+    public Player getPlayer() {
+        return Bukkit.getPlayer(uuid);
+    }
 
-		for (String key : kitStatistics.keySet()) {
-			Document kitDocument = (Document) kitStatistics.get(key);
-			Kit kit = Kit.getByName(key);
+    public DuelRequest getDuelRequest(Player sender) {
+        for (DuelRequest duelRequest : duelRequests) {
+            if (duelRequest.getSender().equals(sender.getUniqueId())) {
+                return duelRequest;
+            }
+        }
 
-			if (kit != null) {
-				ProfileKitData profileKitData = new ProfileKitData();
-				profileKitData.setElo(kitDocument.getInteger("elo"));
-				profileKitData.setWon(kitDocument.getInteger("won"));
-				profileKitData.setLost(kitDocument.getInteger("lost"));
+        return null;
+    }
 
-				kitData.put(kit, profileKitData);
-			}
-		}
+    public boolean isDuelRequestExpired(DuelRequest duelRequest) {
+        if (duelRequest != null) {
+            if (duelRequest.isExpired()) {
+                duelRequests.remove(duelRequest);
+                return true;
+            }
+        }
 
-		Document kitsDocument = (Document) document.get("loadouts");
+        return false;
+    }
 
-		for (String key : kitsDocument.keySet()) {
-			Kit kit = Kit.getByName(key);
+    public boolean isBusy() {
+        return state != ProfileState.LOBBY;
+    }
 
-			if (kit != null) {
-				JsonArray kitsArray = new JsonParser().parse(kitsDocument.getString(key)).getAsJsonArray();
-				KitLoadout[] loadouts = new KitLoadout[4];
+    void load() {
+        Document document = collection.find(Filters.eq("uuid", uuid.toString())).first();
 
-				for (JsonElement kitElement : kitsArray) {
-					JsonObject kitObject = kitElement.getAsJsonObject();
+        if (document == null) {
+            this.save();
+            return;
+        }
 
-					KitLoadout loadout = new KitLoadout(kitObject.get("name").getAsString());
-					loadout.setArmor(InventoryUtil.deserializeInventory(kitObject.get("armor").getAsString()));
-					loadout.setContents(InventoryUtil.deserializeInventory(kitObject.get("contents").getAsString()));
+        Document options = (Document) document.get("options");
 
-					loadouts[kitObject.get("index").getAsInt()] = loadout;
-				}
+        this.options.showScoreboard(options.getBoolean("showScoreboard"));
+        this.options.allowSpectators(options.getBoolean("allowSpectators"));
+        this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
 
-				kitData.get(kit).setLoadouts(loadouts);
-			}
-		}
-	}
+        Document kitStatistics = (Document) document.get("kitStatistics");
 
-	public void save() {
-		Document document = new Document();
-		document.put("uuid", uuid.toString());
+        for (String key : kitStatistics.keySet()) {
+            Document kitDocument = (Document) kitStatistics.get(key);
+            Kit kit = Kit.getByName(key);
 
-		Document optionsDocument = new Document();
-		optionsDocument.put("showScoreboard", options.showScoreboard());
-		optionsDocument.put("allowSpectators", options.allowSpectators());
-		optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
-		document.put("options", optionsDocument);
+            if (kit != null) {
+                ProfileKitData profileKitData = new ProfileKitData();
+                profileKitData.setElo(kitDocument.getInteger("elo"));
+                profileKitData.setWon(kitDocument.getInteger("won"));
+                profileKitData.setLost(kitDocument.getInteger("lost"));
 
-		Document kitStatisticsDocument = new Document();
+                kitData.put(kit, profileKitData);
+            }
+        }
 
-		for (Map.Entry<Kit, ProfileKitData> entry : kitData.entrySet()) {
-			Document kitDocument = new Document();
-			kitDocument.put("elo", entry.getValue().getElo());
-			kitDocument.put("won", entry.getValue().getWon());
-			kitDocument.put("lost", entry.getValue().getLost());
-			kitStatisticsDocument.put(entry.getKey().getName(), kitDocument);
-		}
+        Document kitsDocument = (Document) document.get("loadouts");
 
-		document.put("kitStatistics", kitStatisticsDocument);
+        for (String key : kitsDocument.keySet()) {
+            Kit kit = Kit.getByName(key);
 
-		Document kitsDocument = new Document();
+            if (kit != null) {
+                JsonArray kitsArray = new JsonParser().parse(kitsDocument.getString(key)).getAsJsonArray();
+                KitLoadout[] loadouts = new KitLoadout[4];
 
-		for (Map.Entry<Kit, ProfileKitData> entry : kitData.entrySet()) {
-			JsonArray kitsArray = new JsonArray();
+                for (JsonElement kitElement : kitsArray) {
+                    JsonObject kitObject = kitElement.getAsJsonObject();
 
-			for (int i = 0; i < 4; i++) {
-				KitLoadout loadout = entry.getValue().getLoadout(i);
+                    KitLoadout loadout = new KitLoadout(kitObject.get("name").getAsString());
+                    loadout.setArmor(InventoryUtil.deserializeInventory(kitObject.get("armor").getAsString()));
+                    loadout.setContents(InventoryUtil.deserializeInventory(kitObject.get("contents").getAsString()));
 
-				if (loadout != null) {
-					JsonObject kitObject = new JsonObject();
-					kitObject.addProperty("index", i);
-					kitObject.addProperty("name", loadout.getCustomName());
-					kitObject.addProperty("armor", InventoryUtil.serializeInventory(loadout.getArmor()));
-					kitObject.addProperty("contents", InventoryUtil.serializeInventory(loadout.getContents()));
-					kitsArray.add(kitObject);
-				}
-			}
+                    loadouts[kitObject.get("index").getAsInt()] = loadout;
+                }
 
-			kitsDocument.put(entry.getKey().getName(), kitsArray.toString());
-		}
+                kitData.get(kit).setLoadouts(loadouts);
+            }
+        }
+    }
 
-		document.put("loadouts", kitsDocument);
+    public void save() {
+        Document document = new Document();
+        document.put("uuid", uuid.toString());
 
-		collection.replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
-	}
+        Document optionsDocument = new Document();
+        optionsDocument.put("showScoreboard", options.showScoreboard());
+        optionsDocument.put("allowSpectators", options.allowSpectators());
+        optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
+        document.put("options", optionsDocument);
 
-	public static void init() {
-		collection = Praxi.getInstance().getMongoDatabase().getCollection("profiles");
+        Document kitStatisticsDocument = new Document();
 
-		// Players might have joined before the plugin finished loading
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			Profile profile = new Profile(player.getUniqueId());
+        for (Map.Entry<Kit, ProfileKitData> entry : kitData.entrySet()) {
+            Document kitDocument = new Document();
+            kitDocument.put("elo", entry.getValue().getElo());
+            kitDocument.put("won", entry.getValue().getWon());
+            kitDocument.put("lost", entry.getValue().getLost());
+            kitStatisticsDocument.put(entry.getKey().getName(), kitDocument);
+        }
 
-			try {
-				profile.load();
-			} catch (Exception e) {
-				player.kickPlayer(CC.RED + "The server is loading...");
-				continue;
-			}
+        document.put("kitStatistics", kitStatisticsDocument);
 
-			profiles.put(player.getUniqueId(), profile);
-		}
+        Document kitsDocument = new Document();
 
-		// Expire duel requests
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				for (Profile profile : Profile.getProfiles().values()) {
-					Iterator<DuelRequest> iterator = profile.duelRequests.iterator();
+        for (Map.Entry<Kit, ProfileKitData> entry : kitData.entrySet()) {
+            JsonArray kitsArray = new JsonArray();
 
-					while (iterator.hasNext()) {
-						DuelRequest duelRequest = iterator.next();
+            for (int i = 0; i < 4; i++) {
+                KitLoadout loadout = entry.getValue().getLoadout(i);
 
-						if (duelRequest.isExpired()) {
-							duelRequest.expire();
-							iterator.remove();
-						}
-					}
-				}
-			}
-		}.runTaskTimerAsynchronously(Praxi.getInstance(), 60L, 60L);
+                if (loadout != null) {
+                    JsonObject kitObject = new JsonObject();
+                    kitObject.addProperty("index", i);
+                    kitObject.addProperty("name", loadout.getCustomName());
+                    kitObject.addProperty("armor", InventoryUtil.serializeInventory(loadout.getArmor()));
+                    kitObject.addProperty("contents", InventoryUtil.serializeInventory(loadout.getContents()));
+                    kitsArray.add(kitObject);
+                }
+            }
 
-		// Save every 5 minutes to prevent data loss
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				for (Profile profile : Profile.getProfiles().values()) {
-					profile.save();
-				}
-			}
-		}.runTaskTimerAsynchronously(Praxi.getInstance(), 6000L, 6000L);
-	}
+            kitsDocument.put(entry.getKey().getName(), kitsArray.toString());
+        }
 
-	public static Profile getByUuid(UUID uuid) {
-		Profile profile = profiles.get(uuid);
+        document.put("loadouts", kitsDocument);
 
-		if (profile == null) {
-			profile = new Profile(uuid);
-		}
-
-		return profile;
-	}
+        collection.replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
+    }
 
 }

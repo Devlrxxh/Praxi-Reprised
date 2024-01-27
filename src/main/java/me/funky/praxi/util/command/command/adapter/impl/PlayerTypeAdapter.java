@@ -1,18 +1,18 @@
 package me.funky.praxi.util.command.command.adapter.impl;
 
 import me.funky.praxi.util.command.command.adapter.CommandTypeAdapter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.Bukkit;
 
-public class PlayerTypeAdapter implements CommandTypeAdapter
-{
+public class PlayerTypeAdapter implements CommandTypeAdapter {
     @Override
     public <T> T convert(final String string, final Class<T> type) {
         return type.cast(Bukkit.getPlayer(string));
     }
-    
+
     @Override
     public <T> List<String> tabComplete(final String string, final Class<T> type) {
         final List<String> completed = new ArrayList<String>();

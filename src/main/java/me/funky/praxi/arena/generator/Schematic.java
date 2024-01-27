@@ -7,35 +7,36 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldedit.world.DataException;
-import java.io.File;
-import java.io.IOException;
 import lombok.Getter;
 import org.bukkit.World;
+
+import java.io.File;
+import java.io.IOException;
 
 @Getter
 public class Schematic {
 
-	private CuboidClipboard clipBoard;
+    private CuboidClipboard clipBoard;
 
-	public Schematic(File file) throws IOException {
-		SchematicFormat format = SchematicFormat.MCEDIT;
+    public Schematic(File file) throws IOException {
+        SchematicFormat format = SchematicFormat.MCEDIT;
 
-		try {
-			clipBoard = format.load(file);
-		} catch (DataException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            clipBoard = format.load(file);
+        } catch (DataException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void pasteSchematic(World world, int x, int y, int z) {
-		Vector pastePos = new Vector(x, y, z);
-		EditSession editSession = new EditSession(new BukkitWorld(world), 999999);
+    public void pasteSchematic(World world, int x, int y, int z) {
+        Vector pastePos = new Vector(x, y, z);
+        EditSession editSession = new EditSession(new BukkitWorld(world), 999999);
 
-		try {
-			clipBoard.place(editSession, pastePos, true);
-		} catch (MaxChangedBlocksException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            clipBoard.place(editSession, pastePos, true);
+        } catch (MaxChangedBlocksException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

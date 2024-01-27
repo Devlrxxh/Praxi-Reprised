@@ -8,23 +8,23 @@ import org.bukkit.entity.Player;
 @CommandMeta(label = "arena set spawn", permission = "praxi.admin.arena")
 public class ArenaSetSpawnCommand {
 
-	public void execute(Player player, Arena arena, String pos) {
-		if (arena != null) {
-			if (pos.equalsIgnoreCase("a")) {
-				arena.setSpawnA(player.getLocation());
-			} else if (pos.equalsIgnoreCase("b")) {
-				arena.setSpawnB(player.getLocation());
-			} else {
-				player.sendMessage(CC.RED + "Invalid spawn point. Try \"a\" or \"b\".");
-				return;
-			}
+    public void execute(Player player, Arena arena, String pos) {
+        if (arena != null) {
+            if (pos.equalsIgnoreCase("a")) {
+                arena.setSpawnA(player.getLocation());
+            } else if (pos.equalsIgnoreCase("b")) {
+                arena.setSpawnB(player.getLocation());
+            } else {
+                player.sendMessage(CC.RED + "Invalid spawn point. Try \"a\" or \"b\".");
+                return;
+            }
 
-			arena.save();
+            arena.save();
 
-			player.sendMessage(CC.GOLD + "Updated spawn point \"" + pos + "\" for arena \"" + arena.getName() + "\"");
-		} else {
-			player.sendMessage(CC.RED + "An arena with that name already exists.");
-		}
-	}
+            player.sendMessage(CC.GOLD + "Updated spawn point \"" + pos + "\" for arena \"" + arena.getName() + "\"");
+        } else {
+            player.sendMessage(CC.RED + "An arena with that name already exists.");
+        }
+    }
 
 }

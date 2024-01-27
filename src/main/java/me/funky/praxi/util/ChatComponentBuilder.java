@@ -1,15 +1,12 @@
 package me.funky.praxi.util;
 
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.*;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public class ChatComponentBuilder extends ComponentBuilder {
 

@@ -7,13 +7,13 @@ import lombok.Getter;
 @Getter
 public enum EventGameState {
 
-	WAITING_FOR_PLAYERS("Waiting For Players"),
-	STARTING_EVENT("Starting Event"),
-	STARTING_ROUND("Starting Round"),
-	PLAYING_ROUND("Playing Round"),
-	ENDING_ROUND("Ending Round"),
-	ENDING_EVENT("Ending Event");
+    WAITING_FOR_PLAYERS("Waiting For Players"),
+    STARTING_EVENT("Starting Event"),
+    STARTING_ROUND("Starting Round"),
+    PLAYING_ROUND("Playing Round"),
+    ENDING_ROUND("Ending Round"),
+    ENDING_EVENT("Ending Event");
 
-	private String readable;
+    private String readable;
 
 }

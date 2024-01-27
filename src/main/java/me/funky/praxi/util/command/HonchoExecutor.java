@@ -13,8 +13,7 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class HonchoExecutor
-{
+public class HonchoExecutor {
     private final Honcho honcho;
     private final CommandSender sender;
     private final String label;
@@ -37,10 +36,10 @@ public class HonchoExecutor
         for (final MethodData methodData : this.commandData.getMethodData()) {
             if (methodData.getMethod().getDeclaringClass().equals(this.commandData.getInstance().getClass())) {
                 if (methodData.getParameterData().length - 1 > this.args.length) {
-                    boolean doContinue=true;
-                    for ( final ParameterData parameterData : methodData.getParameterData() ) {
+                    boolean doContinue = true;
+                    for (final ParameterData parameterData : methodData.getParameterData()) {
                         if (parameterData.getType().equals(CommandOption.class) && methodData.getParameterData().length - 2 <= this.args.length) {
-                            doContinue=false;
+                            doContinue = false;
                             break;
                         }
                     }
@@ -48,7 +47,7 @@ public class HonchoExecutor
                         break;
                     }
                 }
-                for ( final MethodData otherMethodData : this.commandData.getMethodData() ) {
+                for (final MethodData otherMethodData : this.commandData.getMethodData()) {
                     if (!otherMethodData.equals(methodData)) {
                         if (methodData.getParameterData().length == otherMethodData.getParameterData().length && methodData.getParameterData()[0].getType().equals(CommandSender.class) && otherMethodData.getParameterData()[0].getType().equals(Player.class) && this.sender instanceof Player) {
                             break;
@@ -59,8 +58,8 @@ public class HonchoExecutor
                     }
                 }
                 if (methodData.getParameterData().length > 0 && (methodData.getParameterData()[0].getType().equals(CommandSender.class) || methodData.getParameterData()[0].getType().equals(Player.class))) {
-                    List<Object> arguments=new ArrayList<>();
-                    ParameterData[] parameters=methodData.getParameterData();
+                    List<Object> arguments = new ArrayList<>();
+                    ParameterData[] parameters = methodData.getParameterData();
 
                     arguments.add(sender);
 
@@ -68,9 +67,9 @@ public class HonchoExecutor
                         continue;
                     }
 
-                    for ( int i=1; i < parameters.length; i++ ) {
-                        ParameterData parameter=parameters[i];
-                        CommandTypeAdapter adapter=honcho.getTypeAdapter(parameter.getType());
+                    for (int i = 1; i < parameters.length; i++) {
+                        ParameterData parameter = parameters[i];
+                        CommandTypeAdapter adapter = honcho.getTypeAdapter(parameter.getType());
 
                         if (adapter == null) {
                             arguments.add(null);
@@ -79,19 +78,19 @@ public class HonchoExecutor
 
                         Object object;
                         if (i == (parameters.length - 1)) {
-                            object=adapter.convert(StringUtils.join(args, " ", i - 1, args.length), parameter.getType());
+                            object = adapter.convert(StringUtils.join(args, " ", i - 1, args.length), parameter.getType());
                         } else {
-                            object=adapter.convert(args[i - 1], parameter.getType());
+                            object = adapter.convert(args[i - 1], parameter.getType());
                         }
 
                         if (parameter.getType().equals(CommandOption.class) && object == null) {
-                            List<String> replacement=new ArrayList<>(Arrays.asList(args));
+                            List<String> replacement = new ArrayList<>(Arrays.asList(args));
                             replacement.add(i - 1, null);
-                            args=replacement.toArray(new String[0]);
+                            args = replacement.toArray(new String[0]);
                         }
 
                         if (object instanceof CommandOption) {
-                            CommandOption option=(CommandOption) object;
+                            CommandOption option = (CommandOption) object;
                             if (!(Arrays.asList(this.commandData.getMeta().options())).contains(option.getTag().toLowerCase())) {
                                 sender.sendMessage(ChatColor.RED + "Unrecognized command option \"-" + option.getTag().toLowerCase() + "\"!");
                                 break;
@@ -114,7 +113,7 @@ public class HonchoExecutor
 
             }
         }
-    this.sender.sendMessage(this.getUsage());
+        this.sender.sendMessage(this.getUsage());
     }
 
 
@@ -138,12 +137,10 @@ public class HonchoExecutor
                 final ParameterData parameterData = parameters[i];
                 if (parameterData.getType().equals(CommandOption.class)) {
                     arguments.put(i - 1, null);
-                }
-                else {
+                } else {
                     if (parameterData.getCpl() != null) {
                         argument.add(parameterData.getCpl().value().toLowerCase());
-                    }
-                    else {
+                    } else {
                         final String name = parameterData.getName();
                         if (!argument.contains(name)) {
                             argument.add(name);
