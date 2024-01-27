@@ -129,8 +129,8 @@ public class ProfileListener implements Listener {
             VisibilityLogic.handle(event.getPlayer(), otherPlayer);
             VisibilityLogic.handle(otherPlayer, event.getPlayer());
         }
-        for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGES")) {
-            event.getPlayer().sendMessage(CC.translate(line));
+        for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
+            event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
         }
     }
 

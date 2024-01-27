@@ -1,9 +1,15 @@
 MONGO:
   URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
   DATABASE: "praxi"
-JOIN_MESSAGES:
-  - " &7&l* &c&lWelcome to Zonix Practice Season 1!"
-  - " &7&l* &c&lPlease report any issues to an administrator!"
+JOIN_MESSAGE:
+  - "&7&m--------------------------------"
+  - "&cWelcome &7<player>&c to Praxi Practice!"
+  - ' '
+  - " &7* &cDiscord: &7discord.gg/server"
+  - " &7* &cTwitter: &7twitter.com/server"
+  - " &7* &cStore: &7server.com/store"
+  - ' '
+  - '&7&m--------------------------------'
 KIT_EDITOR:
   START_RENAMING: "&eNow renaming &a{0}&e... Enter the new name now. &7&o(Chat colors work)"
   RENAMED: "&eYou have renamed your &a{0} &ekit to &a{1}&e."
