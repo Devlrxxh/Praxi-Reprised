@@ -221,7 +221,7 @@ HOTBAR_ITEMS:
   MAP_SELECTION:
     MATERIAL: "MAP"
     DURABILITY: 0
-    NAME: "&7» &6%MAP% &7« &7(Right Click)"
+    NAME: "&7» &6&l%MAP% &7«"
     LORE: []
     SLOT: 3
   REMATCH_REQUEST:
@@ -239,6 +239,6 @@ HOTBAR_ITEMS:
   KIT_SELECTION:
     MATERIAL: "ENCHANTED_BOOK"
     DURABILITY: 0
-    NAME: "&7» &6%KIT% &7« &7(Right Click)"
+    NAME: "&7» &6&l%KIT% &7«"
     LORE: []
     SLOT: 6
