@@ -19,7 +19,7 @@ public class DuelSelectArenaMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&9&lSelect an arena";
+        return "&9Select an arena";
     }
 
     @Override
@@ -73,7 +73,7 @@ public class DuelSelectArenaMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.PAPER)
-                    .name("&a&l" + arena.getName())
+                    .name("&a" + arena.getName())
                     .clearFlags()
                     .build();
         }

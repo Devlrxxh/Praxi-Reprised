@@ -56,7 +56,7 @@ public class PartyEventSelectKitMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(kit.getDisplayIcon())
-                    .name("&6&l" + kit.getName())
+                    .name("&6" + kit.getName())
                     .clearFlags()
                     .build();
         }

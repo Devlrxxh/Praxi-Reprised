@@ -122,7 +122,6 @@ public class ProfileListener implements Listener {
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
 
-        Hotbar.giveHotbarItems(event.getPlayer());
         Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
@@ -132,6 +131,7 @@ public class ProfileListener implements Listener {
         for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
             event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
         }
+        Hotbar.giveHotbarItems(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

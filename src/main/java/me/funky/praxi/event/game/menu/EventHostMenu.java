@@ -27,7 +27,7 @@ public class EventHostMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6&lSelect an Event";
+        return "&6Select an Event";
     }
 
     @Override
@@ -77,7 +77,7 @@ public class EventHostMenu extends Menu {
             lore.add(CC.MENU_BAR);
 
             return new ItemBuilder(event.getIcon().clone())
-                    .name("&6&l" + event.getDisplayName())
+                    .name("&6" + event.getDisplayName())
                     .lore(lore)
                     .clearFlags()
                     .build();

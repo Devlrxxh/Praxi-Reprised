@@ -22,7 +22,7 @@ public class Selection {
 
     static {
         SELECTION_WAND = new ItemBuilder(Material.GOLD_AXE)
-                .name("&6&lSelection Wand")
+                .name("&6Selection Wand")
                 .lore(Arrays.asList(
                         "&eLeft-click to set position 1.",
                         "&eRight-click to set position 2."

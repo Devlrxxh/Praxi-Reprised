@@ -430,21 +430,21 @@ public class SumoGameLogic implements EventGameLogic {
     public List<String> getScoreboardEntries() {
         List<String> lines = new ArrayList<>();
         lines.add("&cEvent &7(" + game.getEvent().getDisplayName() + ")");
-        lines.add("&4&l* &rPlayers: &7" + game.getRemainingPlayers() + "/" + game.getMaximumPlayers());
+        lines.add("&4* &rPlayers: &7" + game.getRemainingPlayers() + "/" + game.getMaximumPlayers());
 
         if (game.getGameState() == EventGameState.STARTING_ROUND ||
                 game.getGameState() == EventGameState.PLAYING_ROUND ||
                 game.getGameState() == EventGameState.ENDING_ROUND) {
-            lines.add("&4&l* &rRound: &7" + roundNumber);
+            lines.add("&4* &rRound: &7" + roundNumber);
         }
 
         switch (game.getGameState()) {
             case WAITING_FOR_PLAYERS: {
-                lines.add("&4&l* &rWaiting for players");
+                lines.add("&4* &rWaiting for players");
             }
             break;
             case STARTING_EVENT: {
-                lines.add("&4&l* &rStarting In: &7" + game.getGameLogic().getGameLogicTask().getNextActionTime());
+                lines.add("&4* &rStarting In: &7" + game.getGameLogic().getGameLogicTask().getNextActionTime());
             }
             break;
             case PLAYING_ROUND: {
@@ -467,7 +467,7 @@ public class SumoGameLogic implements EventGameLogic {
             break;
             case ENDING_EVENT: {
                 if (winningParticipant != null) {
-                    lines.add("&4&l* &rRounds: &7" + roundNumber);
+                    lines.add("&4* &rRounds: &7" + roundNumber);
                     lines.add(CC.SB_BAR);
                     lines.add("&cWinner: &4" + winningParticipant.getConjoinedNames());
                 }
@@ -481,7 +481,7 @@ public class SumoGameLogic implements EventGameLogic {
             lines.add("&cMap Votes");
 
             game.getVotesData().forEach((map, voteData) -> {
-                lines.add("&4&l* &r" + map.getMapName() + " &7(" +
+                lines.add("&4* &r" + map.getMapName() + " &7(" +
                         voteData.getPlayers().size() + " votes)");
             });
         }

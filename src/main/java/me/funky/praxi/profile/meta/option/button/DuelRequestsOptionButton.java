@@ -22,7 +22,7 @@ public class DuelRequestsOptionButton extends ProfileOptionButton {
 
     @Override
     public String getOptionName() {
-        return "&b&lDuel Requests";
+        return "&bDuel Requests";
     }
 
     @Override

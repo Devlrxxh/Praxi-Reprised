@@ -18,7 +18,7 @@ public class DuelSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6&lSelect a kit";
+        return "&6Select a kit";
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DuelSelectKitMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(kit.getDisplayIcon())
-                    .name("&6&l" + kit.getName())
+                    .name("&6" + kit.getName())
                     .clearFlags()
                     .build();
         }

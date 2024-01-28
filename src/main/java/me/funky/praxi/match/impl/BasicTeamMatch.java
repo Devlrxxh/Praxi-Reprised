@@ -236,7 +236,7 @@ public class BasicTeamMatch extends Match {
                     if (friendly.getPlayers().size() + opponent.getPlayers().size() <= 6) {
                         lines.add("&cDuration: &7" + getDuration());
                         lines.add("");
-                        lines.add("&a&lTeam &a(" + friendly.getAliveCount() + "/" + friendly.getPlayers().size() + ")");
+                        lines.add("&aTeam &a(" + friendly.getAliveCount() + "/" + friendly.getPlayers().size() + ")");
 
                         for (MatchGamePlayer gamePlayer : friendly.getPlayers()) {
                             lines.add(" " + (gamePlayer.isDead() || gamePlayer.isDisconnected() ? "&7&m" : "") +
@@ -244,7 +244,7 @@ public class BasicTeamMatch extends Match {
                         }
 
                         lines.add("");
-                        lines.add("&c&lOpponents &c(" + opponent.getAliveCount() + "/" + opponent.getPlayers().size() +
+                        lines.add("&cOpponents &c(" + opponent.getAliveCount() + "/" + opponent.getPlayers().size() +
                                 ")");
 
                         for (MatchGamePlayer gamePlayer : opponent.getPlayers()) {
