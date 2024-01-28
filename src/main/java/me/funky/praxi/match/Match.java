@@ -37,6 +37,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static org.bukkit.Bukkit.getServer;
+
 @Getter
 public abstract class Match {
 
@@ -281,11 +283,11 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            //if(kit.getKnockbackProfile() != null){
-            //    for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-            //        Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
-            //    }
-            //}
+            if(kit.getKnockbackProfile() != null){
+                for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " "  + gamePlayer.getPlayer().getName());
+                }
+            }
 
             kit.removeQueue((byte) 1);
         }

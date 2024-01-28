@@ -57,7 +57,6 @@ import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.refinedev.spigot.SpigotHandler;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -78,7 +77,6 @@ public class Praxi extends JavaPlugin {
     private Essentials essentials;
     private Cache cache;
     private PaperCommandManager paperCommandManager;
-    //private SpigotHandler spigotHandler;
 
     public static Praxi getInstance() {
         if (praxi == null) {
@@ -98,7 +96,6 @@ public class Praxi extends JavaPlugin {
         eventsConfig = new BasicConfigurationFile(this, "events");
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
         menusConfig = new BasicConfigurationFile(this, "menus");
-        //spigotHandler = new SpigotHandler(praxi);
 
         this.essentials = new Essentials(this);
         loadMongo();

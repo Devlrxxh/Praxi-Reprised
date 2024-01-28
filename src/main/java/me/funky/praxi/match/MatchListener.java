@@ -414,7 +414,7 @@ public class MatchListener implements Listener {
                             range,
                             damaged.getName(),
                             health,
-                            StringEscapeUtils.unescapeJava("\u2764")
+                            StringEscapeUtils.unescapeJava("❤")
                     ));
                 }
             }
