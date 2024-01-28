@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.util.Objects;
 
 @CommandAlias("arena")
 @CommandPermission("praxi.admin.arena")
@@ -42,7 +43,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena create &7<value> - &fCreate arena"));
         player.sendMessage(CC.translate("&7* &c/arena remove &7<arena> - &fRemove arena"));
         player.sendMessage(CC.translate("&7* &c/arena save &7- &fSave arenas to file"));
-        player.sendMessage(CC.translate("&7* &c/arena selection - &fGet Selection wand"));
+        player.sendMessage(CC.translate("&7* &c/arena selection &7- &fGet Selection wand"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -54,7 +55,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena create &7<value> - &fCreate arena"));
         player.sendMessage(CC.translate("&7* &c/arena remove &7<arena> - &fRemove arena"));
         player.sendMessage(CC.translate("&7* &c/arena save &7- &fSave arenas to file"));
-        player.sendMessage(CC.translate("&7* &c/arena selection - &fGet Selection wand"));
+        player.sendMessage(CC.translate("&7* &c/arena selection &7- &fGet Selection wand"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -64,19 +65,20 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&cArena Management &7[&f2/3&7] - &f/arena help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/arena status &7<arena> - &fSee arena status"));
-        player.sendMessage(CC.translate("&7* &c/arena genhelper - &fPlace Generator Helper"));
+        player.sendMessage(CC.translate("&7* &c/arena genhelper &7- &fPlace Generator Helper"));
         player.sendMessage(CC.translate("&7* &c/arena addKit &7<arena> &7<kit> &7- &fAdd arena to kit"));
         player.sendMessage(CC.translate("&7* &c/arena removeKit &7<arena> &7<kit> &7- &fRemove arena to kit"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
+
     @Subcommand("help 3")
     public void help3(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
         player.sendMessage(CC.translate("&cArena Management &7[&f3/3&7] - &f/arena help <page>"));
         player.sendMessage(" ");
-        player.sendMessage(CC.translate("&7* &c/arena generate - &fArena Generator"));
-        player.sendMessage(CC.translate("&7* &c/arena list - &fList all arenas"));
-        player.sendMessage(CC.translate("&7* &c/arena setspawn &7<arena> &7<pos> &7- &Set arena spawns"));
+        player.sendMessage(CC.translate("&7* &c/arena generate &7- &fArena Generator"));
+        player.sendMessage(CC.translate("&7* &c/arena list &7- &fList all arenas"));
+        player.sendMessage(CC.translate("&7* &c/arena setspawn &7<arena> &7<a/b> &7- &fSet arena spawns"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -104,7 +106,7 @@ public class ArenaCommand extends BaseCommand {
     @CommandCompletion("@arenas")
     @Syntax("<arena>")
     public void remove(Player player, String arenaName) {
-        if (!checkArena(arenaName)) {
+        if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
@@ -119,7 +121,7 @@ public class ArenaCommand extends BaseCommand {
     }
 
     @Subcommand("selection")
-    public void selection(Player player){
+    public void selection(Player player) {
         if (player.getInventory().first(Selection.SELECTION_WAND) != -1) {
             player.getInventory().remove(Selection.SELECTION_WAND);
         } else {
@@ -142,7 +144,7 @@ public class ArenaCommand extends BaseCommand {
     @CommandCompletion("@arenas")
     @Syntax("<arena>")
     public void status(Player player, String arenaName) {
-        if (!checkArena(arenaName)) {
+        if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
@@ -199,7 +201,7 @@ public class ArenaCommand extends BaseCommand {
     @CommandCompletion("@arenas @kits")
     @Syntax("<arena> <kits>")
     public void addKit(Player player, String arenaName, String kitName) {
-        if (!checkArena(arenaName)) {
+        if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
@@ -209,6 +211,8 @@ public class ArenaCommand extends BaseCommand {
         }
         Arena arena = Arena.getByName(arenaName);
         Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+        if (arena == null) return;
 
 
         arena.getKits().remove(kit.getName());
@@ -222,7 +226,7 @@ public class ArenaCommand extends BaseCommand {
     @CommandCompletion("@arenas @kits")
     @Syntax("<arena> <kits>")
     public void removeKit(Player player, String arenaName, String kitName) {
-        if (!checkArena(arenaName)) {
+        if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
@@ -232,6 +236,8 @@ public class ArenaCommand extends BaseCommand {
         }
         Arena arena = Arena.getByName(arenaName);
         Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+        if (arena == null) return;
 
         arena.getKits().remove(kit.getName());
         arena.save();
@@ -249,7 +255,7 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
 
-        for (File file : schematicsFolder.listFiles()) {
+        for (File file : Objects.requireNonNull(schematicsFolder.listFiles())) {
             if (!file.isDirectory() && file.getName().contains(".schematic")) {
                 boolean duplicate = file.getName().endsWith("_duplicate.schematic");
 
@@ -273,8 +279,7 @@ public class ArenaCommand extends BaseCommand {
                             new ArenaGenerator(name, Bukkit.getWorlds().get(0), new Schematic(file), duplicate ?
                                     (parent != null ? ArenaType.DUPLICATE : ArenaType.STANDALONE) : ArenaType.SHARED)
                                     .generate(file, (StandaloneArena) parent);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception ignored) {
                         }
                     }
                 }.runTask(Praxi.getInstance());
@@ -318,7 +323,7 @@ public class ArenaCommand extends BaseCommand {
     @CommandCompletion("@arenas")
     @Syntax("<arena> <pos>")
     public void setspawn(Player player, String arenaName, String pos) {
-        if (!checkArena(arenaName)) {
+        if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
@@ -342,6 +347,6 @@ public class ArenaCommand extends BaseCommand {
     }
 
     private boolean checkArena(String arena) {
-        return Arena.getArenas().contains(Arena.getByName(arena));
+        return !Arena.getArenas().contains(Arena.getByName(arena));
     }
 }

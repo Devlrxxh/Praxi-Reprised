@@ -10,12 +10,7 @@ import lombok.Getter;
 import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.arena.*;
 import me.funky.praxi.arena.command.ArenaCommand;
-import me.funky.praxi.commands.admin.general.SetSpawnCommand;
-import me.funky.praxi.commands.admin.kits.KitCreateCommand;
-import me.funky.praxi.commands.admin.kits.KitGetLoadoutCommand;
-import me.funky.praxi.commands.admin.kits.KitSetLoadoutCommand;
-import me.funky.praxi.commands.admin.kits.KitsCommand;
-import me.funky.praxi.commands.admin.match.MatchTestCommand;
+import me.funky.praxi.commands.admin.general.MainCommand;
 import me.funky.praxi.commands.donater.FlyCommand;
 import me.funky.praxi.commands.event.admin.*;
 import me.funky.praxi.commands.event.map.*;
@@ -41,6 +36,7 @@ import me.funky.praxi.event.game.map.EventGameMapTypeAdapter;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.kit.KitEditorListener;
 import me.funky.praxi.kit.KitTypeAdapter;
+import me.funky.praxi.kit.command.KitCommand;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.match.MatchListener;
 import me.funky.praxi.party.Party;
@@ -59,8 +55,8 @@ import me.funky.praxi.util.menu.MenuListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -149,7 +145,6 @@ public class Praxi extends JavaPlugin {
                 new SpectateCommand(),
                 new StopSpectatingCommand(),
                 new FlyCommand(),
-                new SetSpawnCommand(),
                 new PartyChatCommand(),
                 new PartyCloseCommand(),
                 new PartyCreateCommand(),
@@ -161,12 +156,7 @@ public class Praxi extends JavaPlugin {
                 new PartyKickCommand(),
                 new PartyLeaveCommand(),
                 new PartyOpenCommand(),
-                new KitCreateCommand(),
-                new KitGetLoadoutCommand(),
-                new KitSetLoadoutCommand(),
-                new KitsCommand(),
                 new ViewInventoryCommand(),
-                new MatchTestCommand(),
                 new ToggleScoreboardCommand(),
                 new ToggleSpectatorsCommand(),
                 new ToggleDuelRequestsCommand(),
@@ -209,7 +199,9 @@ public class Praxi extends JavaPlugin {
 
     private void registerCommands() {
         Arrays.asList(
-                new ArenaCommand()
+                new ArenaCommand(),
+                new MainCommand(),
+                new KitCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 
