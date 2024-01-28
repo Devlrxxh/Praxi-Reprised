@@ -64,7 +64,6 @@ public abstract class Menu {
     }
 
 
-
     private ItemStack createItemStack(Player player, Button button) {
         ItemStack item = button.getButtonItem(player);
 
@@ -122,7 +121,7 @@ public abstract class Menu {
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
             inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
         }
-        if(fill){
+        if (fill) {
             fillBorder(inventory);
         }
 

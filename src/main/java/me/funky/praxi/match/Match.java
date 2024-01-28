@@ -152,7 +152,6 @@ public abstract class Match {
         PlayerUtil.reset(player);
 
 
-
         // Set the player's max damage ticks
         player.setMaximumNoDamageTicks(getKit().getGameRules().getHitDelay());
 
@@ -283,9 +282,9 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            if(kit.getKnockbackProfile() != null){
+            if (kit.getKnockbackProfile() != null) {
                 for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                    getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " "  + gamePlayer.getPlayer().getName());
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
                 }
             }
 

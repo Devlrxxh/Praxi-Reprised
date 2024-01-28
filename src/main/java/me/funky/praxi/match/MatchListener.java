@@ -52,8 +52,8 @@ public class MatchListener implements Listener {
                 Block block = playerLocation.getBlock();
 
                 if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER) {
-                        match.onDeath(event.getPlayer());
-                    }
+                    match.onDeath(event.getPlayer());
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package me.funky.praxi.util.assemble;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.funky.praxi.scoreboard.ScoreboardAdapter;
 import me.funky.praxi.util.assemble.events.AssembleBoardCreateEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,7 +20,7 @@ public class Assemble {
 
     private final JavaPlugin plugin;
     private final ChatColor[] chatColorCache = ChatColor.values();
-    private AssembleAdapter adapter;
+    private ScoreboardAdapter adapter;
     private AssembleThread thread;
     private AssembleListener listeners;
     private AssembleStyle assembleStyle = AssembleStyle.MODERN;
@@ -33,7 +34,7 @@ public class Assemble {
      * @param plugin  instance.
      * @param adapter that is being provided.
      */
-    public Assemble(JavaPlugin plugin, AssembleAdapter adapter) {
+    public Assemble(JavaPlugin plugin, ScoreboardAdapter adapter) {
         if (plugin == null) {
             throw new RuntimeException("Assemble can not be instantiated without a plugin instance!");
         }

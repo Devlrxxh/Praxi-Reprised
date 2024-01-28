@@ -8,7 +8,6 @@ import co.aikar.commands.annotation.Description;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.util.CC;
-import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
 @CommandAlias("fly")

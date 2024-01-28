@@ -24,12 +24,12 @@ public class DuelSelectArenaMenu extends Menu {
     }
 
     @Override
-    public int getSize(){
+    public int getSize() {
         return Praxi.getInstance().getMenusConfig().getInteger("DUEL.SIZE");
     }
 
     @Override
-    public boolean getFill(){
+    public boolean getFill() {
         return true;
     }
 

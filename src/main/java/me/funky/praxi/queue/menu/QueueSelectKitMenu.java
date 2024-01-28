@@ -21,6 +21,12 @@ import java.util.Map;
 @AllArgsConstructor
 public class QueueSelectKitMenu extends Menu {
 
+    private boolean ranked;
+
+    {
+        setAutoUpdate(true);
+    }
+
     @Override
     public int getSize() {
         return 36;
@@ -29,13 +35,6 @@ public class QueueSelectKitMenu extends Menu {
     @Override
     public boolean getFill() {
         return true;
-    }
-
-
-    private boolean ranked;
-
-    {
-        setAutoUpdate(true);
     }
 
     @Override

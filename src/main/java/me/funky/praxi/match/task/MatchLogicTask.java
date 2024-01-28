@@ -38,13 +38,13 @@ public class MatchLogicTask extends BukkitRunnable {
 
 
         if (match.getState() == MatchState.STARTING_ROUND) {
-        if (match.getKit().getGameRules().isSumo()) {
-            for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
-                for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                    PlayerUtil.denyMovement(gamePlayer.getPlayer());
+            if (match.getKit().getGameRules().isSumo()) {
+                for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
+                    for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                        PlayerUtil.denyMovement(gamePlayer.getPlayer());
+                    }
                 }
             }
-        }
             if (nextAction == 0) {
                 match.onRoundStart();
                 match.setState(MatchState.PLAYING_ROUND);
