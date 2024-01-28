@@ -1,6 +1,7 @@
 package me.funky.praxi.duel.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
 import me.funky.praxi.profile.Profile;
@@ -19,7 +20,17 @@ public class DuelSelectArenaMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&9Select an arena";
+        return Praxi.getInstance().getMenusConfig().getString("DUEL.ARENA-SELECTOR.TITLE");
+    }
+
+    @Override
+    public int getSize(){
+        return Praxi.getInstance().getMenusConfig().getInteger("DUEL.SIZE");
+    }
+
+    @Override
+    public boolean getFill(){
+        return true;
     }
 
     @Override
@@ -27,6 +38,7 @@ public class DuelSelectArenaMenu extends Menu {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         Map<Integer, Button> buttons = new HashMap<>();
+        int i = 10;
 
         for (Arena arena : Arena.getArenas()) {
             if (!arena.isSetup()) {
@@ -51,7 +63,7 @@ public class DuelSelectArenaMenu extends Menu {
                 }
             }
 
-            buttons.put(buttons.size(), new SelectArenaButton(arena));
+            buttons.put(i++, new SelectArenaButton(arena));
         }
 
         return buttons;
@@ -73,7 +85,7 @@ public class DuelSelectArenaMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.PAPER)
-                    .name("&a" + arena.getName())
+                    .name(Praxi.getInstance().getMenusConfig().getString("DUEL.ARENA-SELECTOR.ARENA-NAME").replace("<arena>", arena.getName()))
                     .clearFlags()
                     .build();
         }

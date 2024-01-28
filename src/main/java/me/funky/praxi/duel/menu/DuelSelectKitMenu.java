@@ -1,6 +1,7 @@
 package me.funky.praxi.duel.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
@@ -18,16 +19,27 @@ public class DuelSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6Select a kit";
+        return Praxi.getInstance().getMenusConfig().getString("DUEL.KIT-SELECTOR.TITLE");
+    }
+
+    @Override
+    public int getSize(){
+        return Praxi.getInstance().getMenusConfig().getInteger("DUEL.SIZE");
+    }
+
+    @Override
+    public boolean getFill(){
+        return true;
     }
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
+        int i = 10;
 
         for (Kit kit : Kit.getKits()) {
             if (kit.isEnabled()) {
-                buttons.put(buttons.size(), new SelectKitButton(kit));
+                buttons.put(i++, new SelectKitButton(kit));
             }
         }
 
@@ -50,7 +62,7 @@ public class DuelSelectKitMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(kit.getDisplayIcon())
-                    .name("&6" + kit.getName())
+                    .name(Praxi.getInstance().getMenusConfig().getString("DUEL.KIT-SELECTOR.KIT-NAME").replace("<kit>", kit.getName()))
                     .clearFlags()
                     .build();
         }
@@ -76,7 +88,5 @@ public class DuelSelectKitMenu extends Menu {
             // Open arena selection menu
             new DuelSelectArenaMenu().openMenu(player);
         }
-
     }
-
 }

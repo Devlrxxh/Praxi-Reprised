@@ -28,10 +28,10 @@ public class DuelCommand {
             return;
         }
 
-        if (sender.getUniqueId().equals(target.getUniqueId())) {
-            sender.sendMessage(CC.RED + "You cannot duel yourself.");
-            return;
-        }
+        //if (sender.getUniqueId().equals(target.getUniqueId())) {
+        //    sender.sendMessage(CC.RED + "You cannot duel yourself.");
+        //    return;
+        //}
 
         Profile senderProfile = Profile.getByUuid(sender.getUniqueId());
         Profile targetProfile = Profile.getByUuid(target.getUniqueId());

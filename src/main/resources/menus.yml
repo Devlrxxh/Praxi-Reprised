@@ -47,3 +47,11 @@ KIT-EDITOR:
       CANCEL-BUTTON: "&cCancel"
       CLEAR-BUTTON: "&cClear Inventory"
       LOAD-DEFAULT-BUTTON: "&eLoad Default Kit"
+DUEL:
+  SIZE: 27
+  KIT-SELECTOR:
+    TITLE: "&7Select a Kit"
+    KIT-NAME: "&c<kit>"
+  ARENA-SELECTOR:
+    TITLE: "&7Select a Arena"
+    ARENA-NAME: "&c<arena>"
