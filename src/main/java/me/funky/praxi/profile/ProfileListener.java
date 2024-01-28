@@ -131,7 +131,13 @@ public class ProfileListener implements Listener {
         for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
             event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
         }
-        Hotbar.giveHotbarItems(event.getPlayer());
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Hotbar.giveHotbarItems(event.getPlayer());
+            }
+        }.runTaskLater(Praxi.getInstance(), 4L);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

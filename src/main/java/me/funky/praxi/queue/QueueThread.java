@@ -1,5 +1,6 @@
 package me.funky.praxi.queue;
 
+import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.match.Match;
@@ -95,9 +96,12 @@ public class QueueThread extends Thread {
                                     secondPlayer.getName(), firstQueueProfile.getElo(), secondQueueProfile.getElo(),
                                     queueProfile.isRanked());
 
+                            firstPlayer.sendMessage(Locale.MATCH_START.format(secondPlayer.getName()));
+                            secondPlayer.sendMessage(Locale.MATCH_START.format(firstPlayer.getName()));
+
                             firstPlayer.sendMessage(opponentMessages[0]);
                             secondPlayer.sendMessage(opponentMessages[1]);
-                            match.getKit().removeQueue((byte) 1);
+                            match.getKit().removeQueue((byte) 2);
 
                             new BukkitRunnable() {
                                 @Override
@@ -133,9 +137,9 @@ public class QueueThread extends Thread {
         String player2Format = player2 + (ranked ? CC.PINK + " (" + player2Elo + ")" : "");
 
         return new String[]{
-                CC.YELLOW + CC.BOLD + "Found opponent: " + CC.GREEN + player1Format + CC.YELLOW + " vs. " +
+                CC.YELLOW + "Found opponent: " + CC.GREEN + player1Format + CC.YELLOW + " vs. " +
                         CC.RED + player2Format,
-                CC.YELLOW + CC.BOLD + "Found opponent: " + CC.GREEN + player2Format + CC.YELLOW + " vs. " +
+                CC.YELLOW + "Found opponent: " + CC.GREEN + player2Format + CC.YELLOW + " vs. " +
                         CC.RED + player1Format
         };
     }
