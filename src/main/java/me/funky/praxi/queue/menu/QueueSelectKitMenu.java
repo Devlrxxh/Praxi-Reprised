@@ -21,6 +21,17 @@ import java.util.Map;
 @AllArgsConstructor
 public class QueueSelectKitMenu extends Menu {
 
+    @Override
+    public int getSize() {
+        return 36;
+    }
+
+    @Override
+    public boolean getFill() {
+        return true;
+    }
+
+
     private boolean ranked;
 
     {
@@ -40,7 +51,7 @@ public class QueueSelectKitMenu extends Menu {
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
 
-        int i = 0;
+        int i = 10;
 
         for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
             if (queue.isRanked() == ranked) {

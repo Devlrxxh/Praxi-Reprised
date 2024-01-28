@@ -1,14 +1,22 @@
 package me.funky.praxi.commands.donater;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Description;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "fly", permission = "praxi.donor.fly")
-public class FlyCommand {
+@CommandAlias("fly")
+@CommandPermission("praxi.donor.fly")
+@Description("Fly Command.")
+public class FlyCommand extends BaseCommand {
 
+    @Default
     public void execute(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 

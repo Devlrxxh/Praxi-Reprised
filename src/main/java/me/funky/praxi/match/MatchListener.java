@@ -226,6 +226,7 @@ public class MatchListener implements Listener {
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         event.getEntity().spigot().respawn();
         event.setDeathMessage(null);
+        event.getDrops().clear();
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 

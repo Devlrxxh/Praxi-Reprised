@@ -20,7 +20,6 @@ public abstract class Menu {
 
     public static Map<String, Menu> currentlyOpenedMenus = new HashMap<>();
 
-    @Getter
     protected Praxi praxi = Praxi.getInstance();
     private Map<Integer, Button> buttons = new HashMap<>();
     private boolean autoUpdate = false;
@@ -28,6 +27,43 @@ public abstract class Menu {
     private boolean closedByMenu = false;
     private boolean placeholder = false;
     private Button placeholderButton = Button.placeholder(Material.STAINED_GLASS_PANE, (byte) 15, " ");
+    private ItemStack fillerType;
+    private int size = 9;
+    private boolean fill = false;
+
+    {
+        setFillerType(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7));
+        ItemMeta fillerMeta = getFillerType().getItemMeta();
+        if (fillerMeta != null) {
+            fillerMeta.setDisplayName(" ");
+            getFillerType().setItemMeta(fillerMeta);
+        }
+    }
+
+    private void fillBorder(Inventory inventory) {
+        int size = inventory.getSize();
+
+        if (size < 9) return;
+
+        ItemStack fillerItem = this.fillerType;
+
+        for (int i = 1; i <= 7 && size >= 18; i++) {
+            inventory.setItem(i, fillerItem);
+            inventory.setItem(size - i - 1, fillerItem);
+        }
+
+        for (int i = 1; i <= 2 && size >= 18; i++) {
+            inventory.setItem(i * 9, fillerItem);
+            inventory.setItem(i * 9 + 8, fillerItem);
+        }
+
+        inventory.setItem(0, fillerItem);
+        inventory.setItem(8, fillerItem);
+        inventory.setItem(size - 9, fillerItem);
+        inventory.setItem(size - 1, fillerItem);
+    }
+
+
 
     private ItemStack createItemStack(Player player, Button button) {
         ItemStack item = button.getButtonItem(player);
@@ -51,6 +87,7 @@ public abstract class Menu {
         Menu previousMenu = Menu.currentlyOpenedMenus.get(player.getName());
         Inventory inventory = null;
         int size = this.getSize() == -1 ? this.size(this.buttons) : this.getSize();
+        this.fill = getFill();
         boolean update = false;
         String title = CC.translate(this.getTitle(player));
 
@@ -84,6 +121,9 @@ public abstract class Menu {
 
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
             inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
+        }
+        if(fill){
+            fillBorder(inventory);
         }
 
         if (this.isPlaceholder()) {
@@ -119,6 +159,10 @@ public abstract class Menu {
 
     public int getSize() {
         return -1;
+    }
+
+    public boolean getFill() {
+        return false;
     }
 
     public int getSlot(int x, int y) {

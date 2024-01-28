@@ -97,6 +97,7 @@ public class QueueThread extends Thread {
 
                             firstPlayer.sendMessage(opponentMessages[0]);
                             secondPlayer.sendMessage(opponentMessages[1]);
+                            match.getKit().removeQueue((byte) 1);
 
                             new BukkitRunnable() {
                                 @Override

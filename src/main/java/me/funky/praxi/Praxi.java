@@ -144,7 +144,6 @@ public class Praxi extends JavaPlugin {
                 new RematchCommand(),
                 new SpectateCommand(),
                 new StopSpectatingCommand(),
-                new FlyCommand(),
                 new PartyChatCommand(),
                 new PartyCloseCommand(),
                 new PartyCreateCommand(),
@@ -201,7 +200,8 @@ public class Praxi extends JavaPlugin {
         Arrays.asList(
                 new ArenaCommand(),
                 new MainCommand(),
-                new KitCommand()
+                new KitCommand(),
+                new FlyCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

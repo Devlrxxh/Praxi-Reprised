@@ -289,7 +289,6 @@ public abstract class Match {
                 }
             }
 
-            kit.removeQueue((byte) 1);
         }
 
         // Set time data
