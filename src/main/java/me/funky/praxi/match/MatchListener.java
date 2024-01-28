@@ -14,6 +14,7 @@ import me.funky.praxi.util.PlayerUtil;
 import me.funky.praxi.util.TimeUtil;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -37,21 +38,22 @@ import java.util.regex.Matcher;
 
 public class MatchListener implements Listener {
 
+
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
+
 
         if (profile.getState() == ProfileState.FIGHTING) {
             if (profile.getMatch().getKit().getGameRules().isSumo() ||
                     profile.getMatch().getKit().getGameRules().isSpleef()) {
                 Match match = profile.getMatch();
+                Location playerLocation = event.getPlayer().getLocation();
+                Block block = playerLocation.getBlock();
 
-                if (match.getState() == MatchState.PLAYING_ROUND) {
-                    if (event.getPlayer().getLocation().getBlock().getType() == Material.WATER ||
-                            event.getPlayer().getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
+                if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER) {
                         match.onDeath(event.getPlayer());
                     }
-                }
             }
         }
     }

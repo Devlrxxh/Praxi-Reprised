@@ -149,10 +149,7 @@ public abstract class Match {
         // Reset the player's inventory
         PlayerUtil.reset(player);
 
-        // Deny movement if the kit is sumo
-        if (getKit().getGameRules().isSumo()) {
-            PlayerUtil.denyMovement(player);
-        }
+
 
         // Set the player's max damage ticks
         player.setMaximumNoDamageTicks(getKit().getGameRules().getHitDelay());
