@@ -12,14 +12,12 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@Getter
 public class Queue {
 
 
-    @Getter
     private final UUID uuid = UUID.randomUUID();
-    @Getter
     private final Kit kit;
-    @Getter
     private final boolean ranked;
 
     public Queue(Kit kit, boolean ranked) {

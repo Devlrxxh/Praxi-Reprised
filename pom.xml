@@ -76,10 +76,18 @@
             <systemPath>${project.basedir}/libs/ProtocolLib.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>xyz.refinedev.api</groupId>
+            <artifactId>SpigotAPI</artifactId>
+            <version>latest</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/SpigotAPI-Main.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>co.aikar</groupId>
             <artifactId>acf-paper</artifactId>
             <version>0.5.1-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
 
     <build>

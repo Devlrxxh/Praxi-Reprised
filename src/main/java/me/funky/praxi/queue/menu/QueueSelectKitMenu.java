@@ -110,7 +110,6 @@ public class QueueSelectKitMenu extends Menu {
             }
 
             player.closeInventory();
-
             queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0, ranked);
             queue.getKit().addQueue((byte) 1);
         }

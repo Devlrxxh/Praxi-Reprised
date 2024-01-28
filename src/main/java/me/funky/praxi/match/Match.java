@@ -284,6 +284,12 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
+            //if(kit.getKnockbackProfile() != null){
+            //    for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+            //        Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
+            //    }
+            //}
+
             kit.removeQueue((byte) 1);
         }
 

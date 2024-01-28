@@ -214,12 +214,11 @@ public class ArenaCommand extends BaseCommand {
         if (kit == null) return;
         if (arena == null) return;
 
-
-        arena.getKits().remove(kit.getName());
+        arena.getKits().add(kit.getName());
         arena.save();
 
-        player.sendMessage(ChatColor.GOLD + "Removed kit \"" + kit.getName() +
-                "\" from arena \"" + arena.getName() + "\"");
+        player.sendMessage(ChatColor.GOLD + "Added kit \"" + kit.getName() +
+                "\" to arena \"" + arena.getName() + "\"");
     }
 
     @Subcommand("removeKit")

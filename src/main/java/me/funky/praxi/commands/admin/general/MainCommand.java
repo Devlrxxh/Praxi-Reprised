@@ -26,6 +26,6 @@ public class MainCommand extends BaseCommand {
     @Subcommand("setspawn")
     public void setspawn(Player player) {
         Praxi.getInstance().getEssentials().setSpawn(player.getLocation());
-        player.sendMessage(CC.translate("&bSpawn set successfully!"));
+        player.sendMessage(CC.translate("&cSpawn set successfully!"));
     }
 }

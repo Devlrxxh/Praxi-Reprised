@@ -17,7 +17,7 @@ public class QueueThread extends Thread {
     public void run() {
         while (true) {
             try {
-                for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
+                for (QueueProfile queueProfile : Praxi.getInstance().getCache().getPlayers()) {
                     Praxi.getInstance().getCache().getPlayers().forEach(QueueProfile::tickRange);
 
                     if (Praxi.getInstance().getCache().getPlayers().size() < 2) {
@@ -57,7 +57,7 @@ public class QueueThread extends Thread {
 //								}
 //							}
 
-                            if (queue.isRanked()) {
+                            if (queueProfile.isRanked()) {
                                 if (!firstQueueProfile.isInRange(secondQueueProfile.getElo()) ||
                                         !secondQueueProfile.isInRange(firstQueueProfile.getElo())) {
                                     continue;
@@ -65,7 +65,7 @@ public class QueueThread extends Thread {
                             }
 
                             // Find arena
-                            final Arena arena = Arena.getRandomArena(queue.getKit());
+                            final Arena arena = Arena.getRandomArena(queueProfile.getQueue().getKit());
 
                             if (arena == null) {
                                 continue;
@@ -88,12 +88,12 @@ public class QueueThread extends Thread {
                             GameParticipant<MatchGamePlayer> participantB = new GameParticipant<>(playerB);
 
                             // Create match
-                            Match match = new BasicTeamMatch(queue, queue.getKit(), arena, queue.isRanked(),
+                            Match match = new BasicTeamMatch(queueProfile.getQueue(), queueProfile.getQueue().getKit(), arena, queueProfile.isRanked(),
                                     participantA, participantB);
 
                             String[] opponentMessages = formatMessages(firstPlayer.getName(),
                                     secondPlayer.getName(), firstQueueProfile.getElo(), secondQueueProfile.getElo(),
-                                    queue.isRanked());
+                                    queueProfile.isRanked());
 
                             firstPlayer.sendMessage(opponentMessages[0]);
                             secondPlayer.sendMessage(opponentMessages[1]);

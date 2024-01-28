@@ -18,14 +18,15 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/arena help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit create &7<value> - &fCreate kit"));
-        player.sendMessage(CC.translate("&7* &c/kit getinv &7<arena> - &fGet kit loadout"));
+        player.sendMessage(CC.translate("&7* &c/kit getinv &7<kit> - &fGet kit loadout"));
         player.sendMessage(CC.translate("&7* &c/kit list &7- &fList all kits"));
-        player.sendMessage(CC.translate("&7* &c/arena setinv &7- &fSet kit loadout"));
+        player.sendMessage(CC.translate("&7* &c/arena setinv &7<kit> &7- &fSet kit loadout"));
+        player.sendMessage(CC.translate("&7* &c/arena setkb &7<kit> &7<kb> &7- &fSet kit KB Profile"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
     @Subcommand("create")
-    @CommandCompletion("@kit")
+    @CommandCompletion("@kits")
     @Syntax("<kit>")
     public void create(Player player, String kitName) {
         if (Kit.getByName(kitName) != null) {
@@ -42,7 +43,7 @@ public class KitCommand extends BaseCommand {
     }
 
     @Subcommand("getinv")
-    @CommandCompletion("@kit")
+    @CommandCompletion("@kits")
     @Syntax("<kit>")
     public void getinv(Player player, String kitName) {
         if (!Kit.getKits().contains(Kit.getByName(kitName))) {
@@ -69,7 +70,7 @@ public class KitCommand extends BaseCommand {
     }
 
     @Subcommand("setinv")
-    @CommandCompletion("@kit")
+    @CommandCompletion("@kits")
     @Syntax("<kit>")
     public void setinv(Player player, String kitName) {
         if (!Kit.getKits().contains(Kit.getByName(kitName))) {
@@ -84,5 +85,22 @@ public class KitCommand extends BaseCommand {
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's loadout.");
+    }
+
+    @Subcommand("setkb")
+    @CommandCompletion("@kits")
+    @Syntax("<kit> <kb>")
+    public void setkb(Player player, String kitName, String kbName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.setKnockbackProfile(kbName);
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's kb.");
     }
 }
