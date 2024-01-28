@@ -92,15 +92,9 @@ public class QueueThread extends Thread {
                             Match match = new BasicTeamMatch(queueProfile.getQueue(), queueProfile.getQueue().getKit(), arena, queueProfile.isRanked(),
                                     participantA, participantB);
 
-                            String[] opponentMessages = formatMessages(firstPlayer.getName(),
-                                    secondPlayer.getName(), firstQueueProfile.getElo(), secondQueueProfile.getElo(),
-                                    queueProfile.isRanked());
 
                             firstPlayer.sendMessage(Locale.MATCH_START.format(secondPlayer.getName()));
                             secondPlayer.sendMessage(Locale.MATCH_START.format(firstPlayer.getName()));
-
-                            firstPlayer.sendMessage(opponentMessages[0]);
-                            secondPlayer.sendMessage(opponentMessages[1]);
                             match.getKit().removeQueue((byte) 2);
 
                             new BukkitRunnable() {
@@ -131,17 +125,4 @@ public class QueueThread extends Thread {
             }
         }
     }
-
-    private String[] formatMessages(String player1, String player2, int player1Elo, int player2Elo, boolean ranked) {
-        String player1Format = player1 + (ranked ? CC.PINK + " (" + player1Elo + ")" : "");
-        String player2Format = player2 + (ranked ? CC.PINK + " (" + player2Elo + ")" : "");
-
-        return new String[]{
-                CC.YELLOW + "Found opponent: " + CC.GREEN + player1Format + CC.YELLOW + " vs. " +
-                        CC.RED + player2Format,
-                CC.YELLOW + "Found opponent: " + CC.GREEN + player2Format + CC.YELLOW + " vs. " +
-                        CC.RED + player1Format
-        };
-    }
-
 }

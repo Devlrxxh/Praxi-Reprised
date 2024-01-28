@@ -120,7 +120,7 @@ MATCH:
     - "%INVENTORIES%"
     - "%ELO_CHANGES%"
     - "&7&m------------------------------------------------"
-  END_WINNER_INVENTORY: "&7Winner{0}: "
+  END_WINNER_INVENTORY: "&aWinner{0}: "
   END_LOSER_INVENTORY: "&cLoser{0}: "
   CLICK_TO_VIEW_NAME: "&e{0}"
   CLICK_TO_VIEW_HOVER: "&eClick to view &b{0}&e''s inventory."
