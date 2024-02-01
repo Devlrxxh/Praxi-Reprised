@@ -68,8 +68,8 @@ public class QueueSelectKitMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-
             List<String> lore = new ArrayList<>();
+
             if (!ranked) {
                 for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE")) {
                     line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));

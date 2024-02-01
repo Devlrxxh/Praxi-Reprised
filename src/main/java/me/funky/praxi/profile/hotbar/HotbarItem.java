@@ -2,6 +2,7 @@ package me.funky.praxi.profile.hotbar;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.funky.praxi.profile.ProfileState;
 
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ public enum HotbarItem {
     QUEUE_JOIN_UNRANKED(null),
     QUEUE_LEAVE(null),
     PARTY_EVENTS(null),
+    SETTINGS("settings"),
     PARTY_CREATE("party create"),
     PARTY_DISBAND("party disband"),
     PARTY_LEAVE("party leave"),
@@ -31,6 +33,15 @@ public enum HotbarItem {
     @Getter
     @Setter
     private Pattern pattern;
+    @Getter
+    @Setter
+    private ProfileState state;
+    @Getter
+    @Setter
+    private int slot;
+    @Getter
+    @Setter
+    private boolean party;
 
     HotbarItem(String command) {
         this.command = command;

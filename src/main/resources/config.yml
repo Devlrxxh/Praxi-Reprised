@@ -139,111 +139,104 @@ REMATCH:
 ARROW_DAMAGE_INDICATOR: "&7[&9Arrow Range &e({0})&7] &e{1} &9is now at &c{2}&4{3}&e."
 VIEWING_INVENTORY: "&eYou are viewing &b{0}&e''s inventory..."
 HOTBAR_ITEMS:
-  QUEUE_JOIN_UNRANKED:
-    MATERIAL: "IRON_SWORD"
-    DURABILITY: 0
-    NAME: "&eUnranked Queue &7(Right Click)"
-    LORE: []
-    SLOT: 0
-  QUEUE_JOIN_RANKED:
-    MATERIAL: "DIAMOND_SWORD"
-    DURABILITY: 0
-    NAME: "&cRanked Queue &7(Right Click)"
-    LORE: []
-    SLOT: 1
-  QUEUE_LEAVE:
-    MATERIAL: "INK_SACK"
-    DURABILITY: 1
-    NAME: "&cLeave Queue &7(Right Click)"
-    LORE: []
-    SLOT: 0
-  PARTY_EVENTS:
-    MATERIAL: "DIAMOND_SWORD"
-    DURABILITY: 0
-    NAME: "&7Party Events &7(Right Click)"
-    LORE: []
-    SLOT: 2
-  PARTY_CREATE:
-    MATERIAL: "NAME_TAG"
-    DURABILITY: 0
-    NAME: "&9Create Party &7(Right Click)"
-    LORE: []
-    SLOT: 4
-  PARTY_DISBAND:
-    MATERIAL: "INK_SACK"
-    DURABILITY: 1
-    NAME: "&cDisband Party &7(Right Click)"
-    LORE: []
-    SLOT: 6
-  PARTY_LEAVE:
-    MATERIAL: "INK_SACK"
-    DURABILITY: 1
-    NAME: "&cLeave Party &7(Right Click)"
-    LORE: []
-    SLOT: 6
-  PARTY_INFORMATION:
-    MATERIAL: "SKULL_ITEM"
-    DURABILITY: 3
-    NAME: "&cParty Information &7(Right Click)"
-    LORE: []
-    SLOT: 0
-  OTHER_PARTIES:
-    MATERIAL: "CHEST"
-    DURABILITY: 0
-    NAME: "&9Other Parties &7(Right Click)"
-    LORE: []
-    SLOT: 4
-  KIT_EDITOR:
-    MATERIAL: "BOOK"
-    DURABILITY: 0
-    NAME: "&dKit Editor &7(Right Click)"
-    LORE: []
-    SLOT: 8
-  SPECTATE_STOP:
-    MATERIAL: "INK_SACK"
-    DURABILITY: 1
-    NAME: "&cStop Spectating &7(Right Click)"
-    LORE: []
-    SLOT: 9
-  VIEW_INVENTORY:
-    MATERIAL: "BOOK"
-    DURABILITY: 0
-    NAME: "&cView Inventory &7(Right Click)"
-    LORE: []
-    SLOT: 0
-  EVENT_JOIN:
-    MATERIAL: "NETHER_STAR"
-    DURABILITY: 0
-    NAME: "&bJoin Event &7(Right Click)"
-    LORE: []
-    SLOT: 1
-  EVENT_LEAVE:
-    MATERIAL: "NETHER_STAR"
-    DURABILITY: 0
-    NAME: "&bLeave Event &7(Right Click)"
-    LORE: []
-    SLOT: 2
-  MAP_SELECTION:
-    MATERIAL: "MAP"
-    DURABILITY: 0
-    NAME: "&7» &c%MAP% &7«"
-    LORE: []
-    SLOT: 3
-  REMATCH_REQUEST:
-    MATERIAL: "BLAZE_POWDER"
-    DURABILITY: 0
-    NAME: "&2Request Rematch &7(Right Click)"
-    LORE: []
-    SLOT: 4
-  REMATCH_ACCEPT:
-    MATERIAL: "DIAMOND"
-    DURABILITY: 0
-    NAME: "&bAccept Rematch &7(Right Click)"
-    LORE: []
-    SLOT: 5
-  KIT_SELECTION:
-    MATERIAL: "ENCHANTED_BOOK"
-    DURABILITY: 0
-    NAME: "&7» &c%KIT% &7«"
-    LORE: []
-    SLOT: 6
+  LOBBY:
+    QUEUE_JOIN_UNRANKED:
+      MATERIAL: "IRON_SWORD"
+      DURABILITY: 0
+      NAME: "&eUnranked Queue &7(Right Click)"
+      LORE: []
+      SLOT: 0
+    QUEUE_JOIN_RANKED:
+      MATERIAL: "DIAMOND_SWORD"
+      DURABILITY: 0
+      NAME: "&cRanked Queue &7(Right Click)"
+      LORE: []
+      SLOT: 1
+    PARTY_CREATE:
+      MATERIAL: "NAME_TAG"
+      DURABILITY: 0
+      NAME: "&9Create Party &7(Right Click)"
+      LORE: [ ]
+      SLOT: 4
+    SETTINGS:
+      MATERIAL: "PAPER"
+      DURABILITY: 0
+      NAME: "&aSettings &7(Right Click)"
+      LORE: [ ]
+      SLOT: 7
+    KIT_EDITOR:
+      MATERIAL: "BOOK"
+      DURABILITY: 0
+      NAME: "&dKit Editor &7(Right Click)"
+      LORE: [ ]
+      SLOT: 8
+  QUEUEING:
+    QUEUE_LEAVE:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cLeave Queue &7(Right Click)"
+      LORE: []
+      SLOT: 0
+    KIT_EDITOR:
+      MATERIAL: "BOOK"
+      DURABILITY: 0
+      NAME: "&dKit Editor &7(Right Click)"
+      LORE: [ ]
+      SLOT: 8
+  SPECTATING:
+    SPECTATE_STOP:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cStop Spectating &7(Right Click)"
+      LORE: [ ]
+      SLOT: 9
+  EVENT:
+    EVENT_LEAVE:
+      MATERIAL: "NETHER_STAR"
+      DURABILITY: 0
+      NAME: "&bLeave Event &7(Right Click)"
+      LORE: [ ]
+      SLOT: 2
+    MAP_SELECTION:
+      MATERIAL: "MAP"
+      DURABILITY: 0
+      NAME: "&7» &c%MAP% &7«"
+      LORE: [ ]
+      SLOT: 3
+  PARTY:
+    PARTY_EVENTS:
+      MATERIAL: "DIAMOND_SWORD"
+      DURABILITY: 0
+      NAME: "&7Party Events &7(Right Click)"
+      LORE: [ ]
+      SLOT: 2
+    PARTY_DISBAND:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cDisband Party &7(Right Click)"
+      LORE: [ ]
+      SLOT: 6
+    PARTY_LEAVE:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cLeave Party &7(Right Click)"
+      LORE: [ ]
+      SLOT: 6
+    PARTY_INFORMATION:
+      MATERIAL: "SKULL_ITEM"
+      DURABILITY: 3
+      NAME: "&cParty Information &7(Right Click)"
+      LORE: [ ]
+      SLOT: 0
+    OTHER_PARTIES:
+      MATERIAL: "CHEST"
+      DURABILITY: 0
+      NAME: "&9Other Parties &7(Right Click)"
+      LORE: [ ]
+      SLOT: 4
+    KIT_EDITOR:
+      MATERIAL: "BOOK"
+      DURABILITY: 0
+      NAME: "&dKit Editor &7(Right Click)"
+      LORE: [ ]
+      SLOT: 8

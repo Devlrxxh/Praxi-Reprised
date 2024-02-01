@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class KitEditorSelectKitMenu extends Menu {
 
@@ -24,12 +25,22 @@ public class KitEditorSelectKitMenu extends Menu {
     }
 
     @Override
+    public int getSize() {
+        return Praxi.getInstance().getMenusConfig().getInteger("KIT-EDITOR.SIZE");
+    }
+
+    @Override
+    public boolean getFill() {
+        return true;
+    }
+
+    @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
-
+        AtomicInteger i = new AtomicInteger(10);
         Kit.getKits().forEach(kit -> {
             if (kit.isEnabled()) {
-                buttons.put(buttons.size(), new KitDisplayButton(kit));
+                buttons.put(i.getAndIncrement(), new KitDisplayButton(kit));
             }
         });
 

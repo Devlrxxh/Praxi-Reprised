@@ -47,6 +47,7 @@ import me.funky.praxi.profile.hotbar.Hotbar;
 import me.funky.praxi.queue.QueueListener;
 import me.funky.praxi.queue.QueueThread;
 import me.funky.praxi.scoreboard.ScoreboardAdapter;
+import me.funky.praxi.setting.SettingsCommand;
 import me.funky.praxi.util.InventoryUtil;
 import me.funky.praxi.util.assemble.Assemble;
 import me.funky.praxi.util.command.Honcho;
@@ -188,6 +189,7 @@ public class Praxi extends JavaPlugin {
             getEssentials().clearEntities(world);
 
         });
+        System.gc();
     }
 
     private void loadCommandManager() {
@@ -201,7 +203,8 @@ public class Praxi extends JavaPlugin {
                 new ArenaCommand(),
                 new MainCommand(),
                 new KitCommand(),
-                new FlyCommand()
+                new FlyCommand(),
+                new SettingsCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

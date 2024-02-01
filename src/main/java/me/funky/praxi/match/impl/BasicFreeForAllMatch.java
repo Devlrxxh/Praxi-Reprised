@@ -60,13 +60,14 @@ public class BasicFreeForAllMatch extends Match {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             ProfileKitData kitData = profile.getKitData().get(getKit());
 
-            if (kitData.getKitCount() > 0) {
-                profile.getKitData().get(getKit()).giveBooks(player);
-            } else {
-                player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
-                player.getInventory().setContents(getKit().getKitLoadout().getContents());
-                player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
-            }
+            //if (kitData.getKitCount() > 0) {
+            //    profile.getKitData().get(getKit()).giveBooks(player);
+            //} else {
+            //TODO: MAKE THIS WORK WITH NEW HOTBAR SYSTEM
+            player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
+            player.getInventory().setContents(getKit().getKitLoadout().getContents());
+            player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
+            //}
         }
 
         // Teleport the player to their spawn point

@@ -28,6 +28,7 @@ PARTY:
 KIT-EDITOR:
   TITLE: "&7Select a Kit"
   KIT-NAME: "&c<kit>"
+  SIZE: 27
   LORE:
     - ""
     - " &aClick to edit Kit."
@@ -55,3 +56,6 @@ DUEL:
   ARENA-SELECTOR:
     TITLE: "&7Select a Arena"
     ARENA-NAME: "&c<arena>"
+SETTINGS:
+  TITLE: "&7Settings"
+  SIZE: 27

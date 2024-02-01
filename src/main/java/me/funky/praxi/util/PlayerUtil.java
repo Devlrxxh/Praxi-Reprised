@@ -26,10 +26,6 @@ public class PlayerUtil {
     }
 
     public static void reset(Player player) {
-        reset(player, true);
-    }
-
-    public static void reset(Player player, boolean resetHeldSlot) {
         if (!player.hasMetadata("frozen")) {
             player.setWalkSpeed(0.2F);
             player.setFlySpeed(0.1F);
@@ -50,9 +46,6 @@ public class PlayerUtil {
         player.getInventory().setContents(new ItemStack[36]);
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
 
-        if (resetHeldSlot) {
-            player.getInventory().setHeldItemSlot(0);
-        }
 
         player.updateInventory();
     }

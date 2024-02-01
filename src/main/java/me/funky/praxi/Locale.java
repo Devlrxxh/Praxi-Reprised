@@ -101,4 +101,9 @@ public enum Locale {
         return lines;
     }
 
+    @Override
+    public String toString() {
+        return format();
+    }
+
 }

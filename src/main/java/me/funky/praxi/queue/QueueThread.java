@@ -7,7 +7,6 @@ import me.funky.praxi.match.Match;
 import me.funky.praxi.match.impl.BasicTeamMatch;
 import me.funky.praxi.match.participant.MatchGamePlayer;
 import me.funky.praxi.participant.GameParticipant;
-import me.funky.praxi.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -107,12 +106,9 @@ public class QueueThread extends Thread {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-
                 try {
                     Thread.sleep(1000L);
-                } catch (InterruptedException e2) {
-                    e2.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
 
                 continue;
@@ -120,8 +116,7 @@ public class QueueThread extends Thread {
 
             try {
                 Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
             }
         }
     }

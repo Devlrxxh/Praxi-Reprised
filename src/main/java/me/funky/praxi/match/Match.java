@@ -161,13 +161,14 @@ public abstract class Match {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             ProfileKitData kitData = profile.getKitData().get(getKit());
 
-            if (kitData.getKitCount() > 0) {
-                profile.getKitData().get(getKit()).giveBooks(player);
-            } else {
-                player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
-                player.getInventory().setContents(getKit().getKitLoadout().getContents());
-                player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
-            }
+            // if (kitData.getKitCount() > 0) {
+            //     profile.getKitData().get(getKit()).giveBooks(player);
+            //} else {
+            //TODO: MAKE THIS WORK WITH NEW HOTBAR SYSTEM
+            player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
+            player.getInventory().setContents(getKit().getKitLoadout().getContents());
+            player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
+            //}
         }
     }
 
@@ -284,7 +285,8 @@ public abstract class Match {
             gameParticipant.reset();
             if (kit.getKnockbackProfile() != null) {
                 for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                    getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
+            //        getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
+              //TODO: USE REFINE SPIGOTAPI
                 }
             }
 
