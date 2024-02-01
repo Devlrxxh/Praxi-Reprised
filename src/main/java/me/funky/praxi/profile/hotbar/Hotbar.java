@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Hotbar {
 
@@ -48,19 +49,6 @@ public class Hotbar {
         }
 
 
-        //TODO: FIX THIS
-
-        //Map<HotbarItem, String> dynamicContent = new HashMap<>();
-        //dynamicContent.put(HotbarItem.MAP_SELECTION, "%MAP%");
-        //dynamicContent.put(HotbarItem.KIT_SELECTION, "%KIT%");
-
-        //for (Map.Entry<HotbarItem, String> entry : dynamicContent.entrySet()) {
-        //    String voteName = Hotbar.getItems().get(entry.getKey()).getItemMeta().getDisplayName();
-        //    String[] nameSplit = voteName.split(entry.getValue());
-
-        //    entry.getKey().setPattern(
-        //            Pattern.compile("(" + nameSplit[0] + ")(.*)(" + (nameSplit.length > 1 ? nameSplit[1] : "") + ")"));
-        //}
     }
 
     public static void giveHotbarItems(Player player) {

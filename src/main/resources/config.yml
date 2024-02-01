@@ -103,7 +103,7 @@ QUEUE:
   LEAVE_RANKED: "&cYou have been removed from queue."
   RANGE_INCREMENT: "&eSearching in ELO range &7[{1} -> {2}]&e..."
 MATCH:
-  START: "&cMatch Found against &c{0}&e."
+  START: "&cMatch Found against &f{0}&c."
   GIVE_KIT: "&cGiving you the &7{0} &ckit."
   ENDERPEARL_COOLDOWN: "&cEnderpearl Cooldown: &e{0} second{1}."
   ENDERPEARL_COOLDOWN_EXPIRED: "&aYour enderpearl cooldown expired."

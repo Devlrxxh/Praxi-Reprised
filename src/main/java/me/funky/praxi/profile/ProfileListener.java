@@ -121,19 +121,20 @@ public class ProfileListener implements Listener {
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
+        Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
+
+        for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
+            VisibilityLogic.handle(event.getPlayer(), otherPlayer);
+            VisibilityLogic.handle(otherPlayer, event.getPlayer());
+        }
+        for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
+            event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
+        }
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 Hotbar.giveHotbarItems(event.getPlayer());
-                Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
-
-                for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
-                    VisibilityLogic.handle(event.getPlayer(), otherPlayer);
-                    VisibilityLogic.handle(otherPlayer, event.getPlayer());
-                }
-                for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
-                    event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
-                }
             }
         }.runTaskLater(Praxi.getInstance(), 4L);
     }
@@ -143,7 +144,10 @@ public class ProfileListener implements Listener {
         event.setQuitMessage(null);
 
         Profile profile = Profile.getProfiles().remove(event.getPlayer().getUniqueId());
-
+        if(profile.getQueueProfile() == null) return;
+        if (Praxi.getInstance().getCache().getPlayers().contains(profile.getQueueProfile())){
+            profile.getQueueProfile().getQueue().removePlayer(profile.getQueueProfile());
+        }
         new BukkitRunnable() {
             @Override
             public void run() {

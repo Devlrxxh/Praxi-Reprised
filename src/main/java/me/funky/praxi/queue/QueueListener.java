@@ -1,5 +1,6 @@
 package me.funky.praxi.queue;
 
+import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
@@ -14,14 +15,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QueueListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerQuitEvent(PlayerQuitEvent event) {
-        Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
-
-        if (profile.getState() == ProfileState.QUEUEING) {
-            profile.getQueueProfile().getQueue().removePlayer(profile.getQueueProfile());
-        }
-    }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
