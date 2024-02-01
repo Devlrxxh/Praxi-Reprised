@@ -7,8 +7,8 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import org.bukkit.entity.Player;
 
-@CommandAlias(value="settings")
-@Description(value="Settings Command.")
+@CommandAlias(value = "settings")
+@Description(value = "Settings Command.")
 public class SettingsCommand extends BaseCommand {
     @Default
     public void open(Player player) {

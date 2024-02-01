@@ -37,8 +37,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static org.bukkit.Bukkit.getServer;
-
 @Getter
 public abstract class Match {
 
@@ -285,8 +283,8 @@ public abstract class Match {
             gameParticipant.reset();
             if (kit.getKnockbackProfile() != null) {
                 for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-            //        getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
-              //TODO: USE REFINE SPIGOTAPI
+                    //        getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
+                    //TODO: USE REFINE SPIGOTAPI
                 }
             }
 

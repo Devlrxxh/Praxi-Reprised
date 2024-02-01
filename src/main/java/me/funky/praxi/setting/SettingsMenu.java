@@ -1,8 +1,5 @@
 package me.funky.praxi.setting;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.ItemBuilder;
@@ -12,7 +9,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class SettingsMenu extends Menu {
+    public SettingsMenu() {
+        this.setUpdateAfterClick(false);
+    }
+
     @Override
     public String getTitle(Player player) {
         return Praxi.getInstance().getMenusConfig().getString("SETTINGS.TITLE");
@@ -38,12 +43,12 @@ public class SettingsMenu extends Menu {
         return buttons;
     }
 
-    public SettingsMenu() {
-        this.setUpdateAfterClick(false);
-    }
-
     private class SettingsButton extends Button {
         private final Settings settings;
+
+        public SettingsButton(Settings settings) {
+            this.settings = settings;
+        }
 
         @Override
         public ItemStack getButtonItem(Player player) {
@@ -116,10 +121,6 @@ public class SettingsMenu extends Menu {
             }
             new SettingsMenu().openMenu(player);
             player.updateInventory();
-        }
-
-        public SettingsButton(Settings settings) {
-            this.settings = settings;
         }
     }
 }

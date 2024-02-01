@@ -13,7 +13,7 @@ public enum Settings {
     private final Material material;
     private final String description;
 
-    private Settings(String name, Material material, String description) {
+    Settings(String name, Material material, String description) {
         this.name = name;
         this.material = material;
         this.description = description;

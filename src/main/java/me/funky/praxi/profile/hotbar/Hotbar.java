@@ -14,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class Hotbar {
 
@@ -72,30 +71,13 @@ public class Hotbar {
                 }
                 break;
             case QUEUEING:
-                for (HotbarItem item : items.keySet()) {
-                    if (item.getState() != null && item.getState().equals(ProfileState.QUEUEING)) {
-                        player.getInventory().setItem(item.getSlot(), items.get(item));
-
-                    }
-                }
-                break;
             case SPECTATING:
-                for (HotbarItem item : items.keySet()) {
-                    if (item.getState() != null && item.getState().equals(ProfileState.SPECTATING)) {
-                        player.getInventory().setItem(item.getSlot(), items.get(item));
-
-
-                    }
-                }
-                break;
             case EVENT:
                 for (HotbarItem item : items.keySet()) {
-                    if (item.getState() != null && item.getState().equals(ProfileState.EVENT)) {
+                    if (item.getState() != null && item.getState().equals(profile.getState())) {
                         player.getInventory().setItem(item.getSlot(), items.get(item));
 
-
                     }
-
                 }
                 break;
         }

@@ -1,6 +1,5 @@
 package me.funky.praxi.queue;
 
-import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
@@ -11,7 +10,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QueueListener implements Listener {
 
