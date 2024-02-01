@@ -109,7 +109,6 @@ public class ProfileListener implements Listener {
         try {
             profile.load();
         } catch (Exception e) {
-            e.printStackTrace();
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage(ChatColor.RED + "Failed to load your profile. Try again later.");
             return;
@@ -136,18 +135,19 @@ public class ProfileListener implements Listener {
             public void run() {
                 Hotbar.giveHotbarItems(event.getPlayer());
             }
-        }.runTaskLater(Praxi.getInstance(), 4L);
+        }.runTaskLater(Praxi.getInstance(), 10L);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         event.setQuitMessage(null);
+        Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
 
-        Profile profile = Profile.getProfiles().remove(event.getPlayer().getUniqueId());
         if (profile.getQueueProfile() == null) return;
-        if (Praxi.getInstance().getCache().getPlayers().contains(profile.getQueueProfile())) {
-            profile.getQueueProfile().getQueue().removePlayer(profile.getQueueProfile());
-        }
+        profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
+        Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
+
+
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -158,6 +158,7 @@ public class ProfileListener implements Listener {
         if (profile.getRematchData() != null) {
             profile.getRematchData().validate();
         }
+        Profile.getProfiles().remove(event.getPlayer().getUniqueId());
     }
 
     @EventHandler

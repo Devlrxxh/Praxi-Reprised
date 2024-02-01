@@ -157,6 +157,7 @@ public class Profile {
         return null;
     }
 
+
     public boolean isDuelRequestExpired(DuelRequest duelRequest) {
         if (duelRequest != null) {
             if (duelRequest.isExpired()) {

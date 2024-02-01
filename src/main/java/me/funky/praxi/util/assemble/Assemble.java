@@ -20,11 +20,12 @@ public class Assemble {
 
     private final JavaPlugin plugin;
     private final ChatColor[] chatColorCache = ChatColor.values();
+    @Getter
+    public Map<UUID, AssembleBoard> boards;
     private ScoreboardAdapter adapter;
     private AssembleThread thread;
     private AssembleListener listeners;
     private AssembleStyle assembleStyle = AssembleStyle.MODERN;
-    private Map<UUID, AssembleBoard> boards;
     private long ticks = 2;
     private boolean hook = false, debugMode = true, callEvents = true;
 

@@ -78,6 +78,7 @@ public class Praxi extends JavaPlugin {
     private Essentials essentials;
     private Cache cache;
     private PaperCommandManager paperCommandManager;
+    private Assemble assemble;
 
     public static Praxi getInstance() {
         if (praxi == null) {
@@ -97,7 +98,6 @@ public class Praxi extends JavaPlugin {
         eventsConfig = new BasicConfigurationFile(this, "events");
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
         menusConfig = new BasicConfigurationFile(this, "menus");
-
         this.essentials = new Essentials(this);
         loadMongo();
         new CoreManager();
@@ -111,7 +111,7 @@ public class Praxi extends JavaPlugin {
         Event.init();
         EventGameMap.init();
         loadCommandManager();
-        new Assemble(this, new ScoreboardAdapter());
+        assemble = new Assemble(this, new ScoreboardAdapter());
         new QueueThread().start();
 
         getHoncho().registerTypeAdapter(Arena.class, new ArenaTypeAdapter());

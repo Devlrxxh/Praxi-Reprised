@@ -3,8 +3,12 @@ package me.funky.praxi.setting;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.ItemBuilder;
+import me.funky.praxi.util.assemble.AssembleBoard;
+import me.funky.praxi.util.assemble.events.AssembleBoardCreateEvent;
+import me.funky.praxi.util.assemble.events.AssembleBoardDestroyEvent;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -107,8 +111,7 @@ public class SettingsMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             switch (this.settings) {
                 case SHOW_SCOREBOARD: {
-                    profile.getOptions().showScoreboard(!profile.getOptions().showScoreboard());
-                    System.out.println(profile.getOptions().showScoreboard());
+                    showScoreboard(profile, !profile.getOptions().showScoreboard());
                     break;
                 }
                 case ALLOW_DUELS: {
@@ -121,6 +124,37 @@ public class SettingsMenu extends Menu {
             }
             new SettingsMenu().openMenu(player);
             player.updateInventory();
+        }
+
+        public void showScoreboard(Profile profile, boolean b) {
+            profile.getOptions().showScoreboard(!profile.getOptions().showScoreboard());
+
+            profile.getOptions().showScoreboard(b);
+            if (profile.getOptions().showScoreboard()) {
+                if (Praxi.getInstance().getAssemble().isCallEvents()) {
+                    AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(profile.getPlayer());
+
+                    Bukkit.getPluginManager().callEvent(createEvent);
+                    if (createEvent.isCancelled()) {
+                        return;
+                    }
+                }
+
+                Praxi.getInstance().getAssemble().getBoards().put(profile.getPlayer().getUniqueId(),
+                        new AssembleBoard(profile.getPlayer(), Praxi.getInstance().getAssemble()));
+            } else {
+                if (Praxi.getInstance().getAssemble().isCallEvents()) {
+                    AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(profile.getPlayer());
+
+                    Bukkit.getPluginManager().callEvent(destroyEvent);
+                    if (destroyEvent.isCancelled()) {
+                        return;
+                    }
+                }
+
+                Praxi.getInstance().getAssemble().getBoards().get(profile.getPlayer().getUniqueId()).getObjective().unregister();
+                Praxi.getInstance().getAssemble().getBoards().remove(profile.getPlayer().getUniqueId());
+            }
         }
     }
 }

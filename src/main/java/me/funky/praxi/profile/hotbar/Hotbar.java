@@ -42,7 +42,6 @@ public class Hotbar {
                 } else {
                     hotbarItem.setState(ProfileState.valueOf(section));
                 }
-                System.out.println(path);
                 items.put(hotbarItem, builder.build());
             }
         }
