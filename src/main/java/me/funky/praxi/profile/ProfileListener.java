@@ -10,6 +10,7 @@ import me.funky.praxi.profile.meta.option.button.ShowScoreboardOptionButton;
 import me.funky.praxi.profile.option.OptionsOpenedEvent;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.CC;
+import org.apache.logging.log4j.core.net.Priority;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -117,7 +118,7 @@ public class ProfileListener implements Listener {
         Profile.getProfiles().put(event.getUniqueId(), profile);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
         Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
@@ -138,7 +139,7 @@ public class ProfileListener implements Listener {
         }.runTaskLater(Praxi.getInstance(), 10L);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         event.setQuitMessage(null);
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());

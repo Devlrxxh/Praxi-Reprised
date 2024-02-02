@@ -39,7 +39,7 @@ public class KitEditorSelectKitMenu extends Menu {
         Map<Integer, Button> buttons = new HashMap<>();
         AtomicInteger i = new AtomicInteger(10);
         Kit.getKits().forEach(kit -> {
-            if (kit.isEnabled()) {
+            if (kit.isEnabled() && kit.getKitLoadout().getContents() != null) {
                 buttons.put(i.getAndIncrement(), new KitDisplayButton(kit));
             }
         });

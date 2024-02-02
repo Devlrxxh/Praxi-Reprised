@@ -8,7 +8,9 @@ import me.funky.praxi.arena.impl.SharedArena;
 import me.funky.praxi.arena.impl.StandaloneArena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.util.LocationUtil;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -146,8 +148,20 @@ public class Arena extends Cuboid {
     }
 
     public int getMaxBuildHeight() {
-        int highest = (int) (spawnA.getY() >= spawnB.getY() ? spawnA.getY() : spawnB.getY());
+        int highest = (int) (Math.max(spawnA.getY(), spawnB.getY()));
         return highest + 5;
+    }
+
+    public void unloadArena(){
+        for(Chunk chunk : getChunks()) {
+            chunk.getWorld().unloadChunk(chunk);
+        }
+    }
+
+    public void loadArena(){
+        for(Chunk chunk : getChunks()) {
+            chunk.getWorld().loadChunk(chunk);
+        }
     }
 
     public Location getSpawnA() {

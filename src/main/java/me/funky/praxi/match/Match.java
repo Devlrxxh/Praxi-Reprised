@@ -188,6 +188,7 @@ public abstract class Match {
 
 
     public void start() {
+        arena.loadArena();
         // Set state
         state = MatchState.STARTING_ROUND;
 
@@ -229,6 +230,7 @@ public abstract class Match {
     }
 
     public void end() {
+        arena.unloadArena();
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 if (!gamePlayer.isDisconnected()) {
