@@ -15,7 +15,7 @@ public class KitCommand extends BaseCommand {
     @Subcommand("help")
     public void help(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
-        player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/arena help <page>"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f1/1&7] - &f/kit help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit create &7<value> - &fCreate kit"));
         player.sendMessage(CC.translate("&7* &c/kit getinv &7<kit> - &fGet kit loadout"));

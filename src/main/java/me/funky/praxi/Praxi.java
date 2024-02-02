@@ -103,7 +103,7 @@ public class Praxi extends JavaPlugin {
         this.essentials = new Essentials(this);
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
-        spigotHandler.init(false);
+        spigotHandler.init(true);
         new CoreManager();
         cache = new Cache();
         Hotbar.init();
