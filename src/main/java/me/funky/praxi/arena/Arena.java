@@ -16,21 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Getter
+@Setter
 public class Arena extends Cuboid {
 
     @Getter
     private static final List<Arena> arenas = new ArrayList<>();
 
-    @Getter
     protected String name;
-    @Setter
     protected Location spawnA;
-    @Setter
     protected Location spawnB;
-    @Getter
     protected boolean active;
-    @Getter
-    @Setter
     private List<String> kits = new ArrayList<>();
 
     public Arena(String name, Location location1, Location location2) {
@@ -110,6 +106,7 @@ public class Arena extends Cuboid {
 
         return null;
     }
+
 
     public static Arena getRandomArena(Kit kit) {
         List<Arena> _arenas = new ArrayList<>();
