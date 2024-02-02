@@ -125,7 +125,7 @@ MATCH:
   CLICK_TO_VIEW_NAME: "&e{0}"
   CLICK_TO_VIEW_HOVER: "&eClick to view &b{0}&e''s inventory."
   ELO_CHANGES:
-    - "&7&oELO Changes: &7{0} +{1} ({2}) &c{3} +{4} ({5})"
+    - "&a{0} +{1} ({2}) &7| &c{3} +{4} ({5})"
   PLAYER_KILLED: "{0} &7was slain by {1}&7."
   PLAYER_DIED: "{0} &7committed suicide."
   ROUNDS_TO_WIN: ""
