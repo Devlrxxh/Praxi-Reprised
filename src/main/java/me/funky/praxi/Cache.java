@@ -8,7 +8,6 @@ import me.funky.praxi.queue.QueueProfile;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class Cache {

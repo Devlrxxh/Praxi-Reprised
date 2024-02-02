@@ -283,13 +283,11 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            if (kit.getKnockbackProfile() != null) {
-                for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                    //        getServer().dispatchCommand(getServer().getConsoleSender(), "kb set " + getKit().getKnockbackProfile() + " " + gamePlayer.getPlayer().getName());
-                    //TODO: USE REFINE SPIGOTAPI
-                }
+            if (Praxi.getInstance().getSpigotHandler() == null) return;
+            if (kit.getKnockbackProfile() == null) return;
+            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
             }
-
         }
 
         // Set time data

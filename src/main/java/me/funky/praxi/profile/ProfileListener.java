@@ -10,7 +10,6 @@ import me.funky.praxi.profile.meta.option.button.ShowScoreboardOptionButton;
 import me.funky.praxi.profile.option.OptionsOpenedEvent;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.CC;
-import org.apache.logging.log4j.core.net.Priority;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -103,24 +102,20 @@ public class ProfileListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onAsyncPlayerPreLoginEvent(AsyncPlayerPreLoginEvent event) {
-        Profile profile = new Profile(event.getUniqueId());
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerJoinEvent(PlayerJoinEvent event) {
+        event.setJoinMessage(null);
+
+        Profile profile = new Profile(event.getPlayer().getUniqueId());
 
         try {
             profile.load();
         } catch (Exception e) {
-            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
-            event.setKickMessage(ChatColor.RED + "Failed to load your profile. Try again later.");
+            event.getPlayer().kickPlayer(ChatColor.RED + "Failed to load your profile. Try again later.");
             return;
         }
+        Profile.getProfiles().put(event.getPlayer().getUniqueId(), profile);
 
-        Profile.getProfiles().put(event.getUniqueId(), profile);
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        event.setJoinMessage(null);
         Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
@@ -146,7 +141,6 @@ public class ProfileListener implements Listener {
 
         if (profile.getQueueProfile() == null) return;
         profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
-        Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
 
 
         new BukkitRunnable() {
@@ -159,6 +153,7 @@ public class ProfileListener implements Listener {
         if (profile.getRematchData() != null) {
             profile.getRematchData().validate();
         }
+        Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         Profile.getProfiles().remove(event.getPlayer().getUniqueId());
     }
 
