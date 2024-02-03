@@ -24,10 +24,20 @@ public class PartyEventSelectEventMenu extends Menu {
     }
 
     @Override
+    public int getSize() {
+        return Praxi.getInstance().getMenusConfig().getInteger("PARTY.EVENTS.SIZE");
+    }
+
+    @Override
+    public boolean getFill() {
+        return true;
+    }
+
+    @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
-        buttons.put(3, new SelectEventButton(PartyEvent.FFA));
-        buttons.put(5, new SelectEventButton(PartyEvent.SPLIT));
+        buttons.put(12, new SelectEventButton(PartyEvent.FFA));
+        buttons.put(14, new SelectEventButton(PartyEvent.SPLIT));
         return buttons;
     }
 

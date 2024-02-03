@@ -32,7 +32,7 @@ public abstract class Menu {
     private boolean fill = false;
 
     {
-        setFillerType(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7));
+        setFillerType(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15));
         ItemMeta fillerMeta = getFillerType().getItemMeta();
         if (fillerMeta != null) {
             fillerMeta.setDisplayName(" ");
