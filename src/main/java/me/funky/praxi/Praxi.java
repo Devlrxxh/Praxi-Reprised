@@ -90,7 +90,7 @@ public class Praxi extends JavaPlugin {
         return praxi;
     }
 
-    public void loadConfigs(){
+    public void loadConfigs() {
         mainConfig = new BasicConfigurationFile(this, "config");
         arenasConfig = new BasicConfigurationFile(this, "arenas");
         kitsConfig = new BasicConfigurationFile(this, "kits");
@@ -109,7 +109,7 @@ public class Praxi extends JavaPlugin {
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
         spigotHandler.init(true);
-        if(spigotHandler != null){
+        if (spigotHandler != null) {
             Bukkit.getServer().getConsoleSender().sendMessage(CC.translate("&cHooked into: &7" + spigotHandler.getType()));
         }
         new CoreManager();

@@ -93,13 +93,13 @@ public class QueueThread extends Thread {
                                     participantA, participantB);
 
 
-                                    for (String line : Locale.MATCH_START.formatLines(secondPlayer.getName(), queueProfile.getQueue().getKit().getName(), PlayerUtil.getPing(secondPlayer))) {
-                                        firstPlayer.sendMessage(line);
-                                    }
+                            for (String line : Locale.MATCH_START.formatLines(secondPlayer.getName(), queueProfile.getQueue().getKit().getName(), PlayerUtil.getPing(secondPlayer))) {
+                                firstPlayer.sendMessage(line);
+                            }
                             for (String line : Locale.MATCH_START.formatLines(firstPlayer.getName(), queueProfile.getQueue().getKit().getName(), PlayerUtil.getPing(firstPlayer))) {
                                 secondPlayer.sendMessage(line);
                             }
-                                        match.getKit().removeQueue((byte) 2);
+                            match.getKit().removeQueue((byte) 2);
 
                             new BukkitRunnable() {
                                 @Override

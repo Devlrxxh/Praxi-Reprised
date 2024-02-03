@@ -3,7 +3,6 @@ package me.funky.praxi.party;
 import lombok.Getter;
 import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
-import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.duel.DuelRequest;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
@@ -86,7 +85,7 @@ public class Party {
     public void invite(Player target) {
         invites.add(new PartyInvite(target.getUniqueId()));
 
-        for (String msg : Locale.PARTY_INVITE.formatLines(leader.getName(), getColoredName(leader))) {
+        for (String msg : Locale.PARTY_INVITE.formatLines(leader.getName(), (leader.getName()))) {
             if (msg.contains("%CLICKABLE%")) {
                 msg = msg.replace("%CLICKABLE%", "");
 
@@ -100,14 +99,14 @@ public class Party {
             }
         }
 
-        sendMessage(Locale.PARTY_INVITE_BROADCAST.format(getColoredName(target)));
+        sendMessage(Locale.PARTY_INVITE_BROADCAST.format((target.getName())));
     }
 
     public void join(Player player) {
         invites.removeIf(invite -> invite.getUuid().equals(player.getUniqueId()));
         players.add(player.getUniqueId());
 
-        sendMessage(Locale.PARTY_JOIN.format(getColoredName(player)));
+        sendMessage(Locale.PARTY_JOIN.format(player.getName()));
 
         Profile profile = Profile.getByUuid(player.getUniqueId());
         profile.setParty(this);
@@ -128,7 +127,7 @@ public class Party {
     }
 
     public void leave(Player player, boolean kick) {
-        sendMessage(Locale.PARTY_LEAVE.format(getColoredName(player), (kick ? "been kicked from" : "left")));
+        sendMessage(Locale.PARTY_LEAVE.format((player.getName()), (kick ? "been kicked from" : "left")));
 
         players.removeIf(uuid -> uuid.equals(player.getUniqueId()));
 
@@ -182,7 +181,7 @@ public class Party {
                     .append(", ");
         }
 
-        for (String line : Locale.PARTY_INFORMATION.formatLines(privacy.getReadable(), leader.getName(),  getPlayers().size(), builder.substring(0, builder.length() - 2))) {
+        for (String line : Locale.PARTY_INFORMATION.formatLines(privacy.getReadable(), leader.getName(), getPlayers().size(), builder.substring(0, builder.length() - 2))) {
             sendTo.sendMessage(CC.translate(line));
         }
     }
@@ -212,7 +211,4 @@ public class Party {
         return players;
     }
 
-    private String getColoredName(Player player) {
-        return CoreManager.getInstance().getCore().getColoredName(player.getUniqueId());
-    }
 }

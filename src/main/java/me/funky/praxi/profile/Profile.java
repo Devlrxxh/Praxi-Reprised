@@ -31,44 +31,24 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
+@Getter
+@Setter
 public class Profile {
 
-    @Getter
-    private static final Map<UUID, Profile> profiles = new HashMap<>();
+    @Getter private static final Map<UUID, Profile> profiles = new HashMap<>();
     private static MongoCollection<Document> collection;
-    @Getter
     private final ProfileOptions options;
-    @Getter
     private final ProfileKitEditorData kitEditorData;
-    @Getter
     private final Map<Kit, ProfileKitData> kitData;
-    @Getter
     private final List<DuelRequest> duelRequests;
-    @Getter
     private final UUID uuid;
-    @Getter
-    @Setter
     private ProfileState state;
-    @Getter
-    @Setter
     private DuelProcedure duelProcedure;
-    @Getter
-    @Setter
     private ProfileRematchData rematchData;
-    @Getter
-    @Setter
     private Party party;
-    @Getter
-    @Setter
     private Match match;
-    @Getter
-    @Setter
     private QueueProfile queueProfile;
-    @Getter
-    @Setter
     private Cooldown enderpearlCooldown;
-    @Getter
-    @Setter
     private Cooldown voteCooldown;
 
     public Profile(UUID uuid) {

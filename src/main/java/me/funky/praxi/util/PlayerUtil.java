@@ -67,7 +67,7 @@ public class PlayerUtil {
         player.removePotionEffect(PotionEffectType.JUMP);
     }
 
-    public static int getPing(Player player){
+    public static int getPing(Player player) {
         return (((CraftPlayer) player).getHandle()).ping;
     }
 

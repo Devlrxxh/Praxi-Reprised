@@ -5,9 +5,11 @@ import org.bukkit.Material;
 
 @Getter
 public enum Settings {
+    SHOW_PLAYERS("Show Players", Material.COMPASS, "Show or Hide players."),
     SHOW_SCOREBOARD("Show Scoreboard", Material.EYE_OF_ENDER, "Show or Hide Scoreboard."),
     ALLOW_SPECTATORS("Allow Spectators", Material.EGG, "Show or Hide Players."),
     ALLOW_DUELS("Allow Duels", Material.DIAMOND_SWORD, "Allow Duel Requests.");
+
 
     private final String name;
     private final Material material;

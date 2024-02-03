@@ -2,6 +2,7 @@ package me.funky.praxi.setting;
 
 import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
+import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.assemble.AssembleBoard;
 import me.funky.praxi.util.assemble.events.AssembleBoardCreateEvent;
@@ -102,8 +103,21 @@ public class SettingsMenu extends Menu {
                     lore.add(" ");
                     lore.add("&aClick to enable");
                 }
+                case SHOW_PLAYERS: {
+                    if (profile.getOptions().showPlayers()) {
+                        lore.add(" &7&l* &aYes");
+                        lore.add(" &7&l* &7No");
+                        lore.add(" ");
+                        lore.add("&aClick to disable");
+                        break;
+                    }
+                    lore.add(" &7&l* &7Yes");
+                    lore.add(" &7&l* &cNo");
+                    lore.add(" ");
+                    lore.add("&aClick to enable");
+                }
             }
-            return new ItemBuilder(this.settings.getMaterial()).name("&c" + this.settings.getName()).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
+            return new ItemBuilder(this.settings.getMaterial()).name(Praxi.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
         }
 
         @Override
@@ -120,6 +134,10 @@ public class SettingsMenu extends Menu {
                 }
                 case ALLOW_SPECTATORS: {
                     profile.getOptions().allowSpectators(!profile.getOptions().allowSpectators());
+                }
+                case SHOW_PLAYERS: {
+                    profile.getOptions().showPlayers(!profile.getOptions().showPlayers());
+                    VisibilityLogic.handle(player);
                 }
             }
             new SettingsMenu().openMenu(player);

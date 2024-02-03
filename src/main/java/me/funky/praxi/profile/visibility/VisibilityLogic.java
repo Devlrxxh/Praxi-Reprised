@@ -31,12 +31,19 @@ public class VisibilityLogic {
                 return;
             }
 
+
             if (viewerProfile.getParty() != null && viewerProfile.getParty().containsPlayer(target.getUniqueId())) {
                 viewer.showPlayer(target);
                 NameTags.color(viewer, target, ChatColor.BLUE, false);
             } else {
                 viewer.hidePlayer(target);
                 NameTags.reset(viewer, target);
+            }
+            if(viewerProfile.getOptions().showPlayers()){
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    viewer.showPlayer(players);
+                    NameTags.color(viewer, target, ChatColor.GREEN, false);
+                }
             }
         } else if (viewerProfile.getState() == ProfileState.FIGHTING) {
             if (viewer.equals(target)) {

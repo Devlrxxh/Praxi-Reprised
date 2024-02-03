@@ -19,7 +19,6 @@ import me.funky.praxi.participant.GamePlayer;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
-import me.funky.praxi.profile.meta.ProfileKitData;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.queue.Queue;
 import me.funky.praxi.util.*;
@@ -89,7 +88,7 @@ public abstract class Match {
         for (Match match : Praxi.getInstance().getCache().getMatches()) {
             if (match.getQueue() != null &&
                     (match.getState() == MatchState.STARTING_ROUND || match.getState() == MatchState.PLAYING_ROUND)) {
-                if (match.getQueue() != null && match.getQueue().equals(queue)) {
+                if (match.getQueue().equals(queue)) {
                     for (GameParticipant<? extends GamePlayer> gameParticipant : match.getParticipants()) {
                         i += gameParticipant.getPlayers().size();
                     }
@@ -156,8 +155,8 @@ public abstract class Match {
         // If the player has no kits, apply the default kit, otherwise
         // give the player a list of kit books to choose from
         if (!getKit().getGameRules().isSumo()) {
-            Profile profile = Profile.getByUuid(player.getUniqueId());
-            ProfileKitData kitData = profile.getKitData().get(getKit());
+            //Profile profile = Profile.getByUuid(player.getUniqueId());
+            //ProfileKitData kitData = profile.getKitData().get(getKit());
 
             // if (kitData.getKitCount() > 0) {
             //     profile.getKitData().get(getKit()).giveBooks(player);
@@ -543,13 +542,14 @@ public abstract class Match {
     }
 
     public String getDuration() {
-        if (state == MatchState.STARTING_ROUND) {
+        if (state.equals(MatchState.STARTING_ROUND)) {
             return "00:00";
-        } else if (state == MatchState.ENDING_ROUND) {
+        } else if (state.equals(MatchState.ENDING_ROUND)) {
             return "Ending";
-        } else {
+        } else if (state.equals(MatchState.PLAYING_ROUND)) {
             return TimeUtil.millisToTimer(System.currentTimeMillis() - this.timeData);
         }
+        return "Ending";
     }
 
     public void sendMessage(String message) {
@@ -612,8 +612,7 @@ public abstract class Match {
                             if (!bukkitPlayer.equals(player)) {
                                 ProtocolLibrary.getProtocolManager().sendServerPacket(bukkitPlayer, statusPacket);
                             }
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
+                        } catch (InvocationTargetException ignored) {
                         }
 
                         bukkitPlayer.playSound(location, Sound.AMBIENCE_THUNDER, 1.0F, 1.0F);
@@ -629,8 +628,7 @@ public abstract class Match {
                 if (!spectator.equals(player)) {
                     ProtocolLibrary.getProtocolManager().sendServerPacket(spectator, statusPacket);
                 }
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (InvocationTargetException ignored) {
             }
 
             spectator.playSound(location, Sound.AMBIENCE_THUNDER, 1.0F, 1.0F);

@@ -11,4 +11,5 @@ public class ProfileOptions {
     private boolean showScoreboard = true;
     private boolean receiveDuelRequests = true;
     private boolean allowSpectators = true;
+    private boolean showPlayers = false;
 }
