@@ -170,7 +170,7 @@ HOTBAR_ITEMS:
       DURABILITY: 0
       NAME: "&aSettings &7(Right Click)"
       LORE: [ ]
-      SLOT: 7
+      SLOT: 8
     KIT_EDITOR:
       MATERIAL: "BOOK"
       DURABILITY: 0
@@ -183,20 +183,7 @@ HOTBAR_ITEMS:
       DURABILITY: 1
       NAME: "&cLeave Queue &7(Right Click)"
       LORE: []
-      SLOT: 0
-    KIT_EDITOR:
-      MATERIAL: "BOOK"
-      DURABILITY: 0
-      NAME: "&dKit Editor &7(Right Click)"
-      LORE: [ ]
       SLOT: 8
-  SPECTATING:
-    SPECTATE_STOP:
-      MATERIAL: "INK_SACK"
-      DURABILITY: 1
-      NAME: "&cStop Spectating &7(Right Click)"
-      LORE: [ ]
-      SLOT: 9
   EVENT:
     EVENT_LEAVE:
       MATERIAL: "NETHER_STAR"
@@ -211,39 +198,39 @@ HOTBAR_ITEMS:
       LORE: [ ]
       SLOT: 3
   PARTY:
-    PARTY_EVENTS:
-      MATERIAL: "DIAMOND_SWORD"
-      DURABILITY: 0
-      NAME: "&7Party Events &7(Right Click)"
-      LORE: [ ]
-      SLOT: 2
-    PARTY_DISBAND:
-      MATERIAL: "INK_SACK"
-      DURABILITY: 1
-      NAME: "&cDisband Party &7(Right Click)"
-      LORE: [ ]
-      SLOT: 6
-    PARTY_LEAVE:
-      MATERIAL: "INK_SACK"
-      DURABILITY: 1
-      NAME: "&cLeave Party &7(Right Click)"
-      LORE: [ ]
-      SLOT: 6
     PARTY_INFORMATION:
       MATERIAL: "NETHER_STAR"
       DURABILITY: 0
       NAME: "&cParty Information &7(Right Click)"
       LORE: [ ]
       SLOT: 0
+    PARTY_EVENTS:
+      MATERIAL: "DIAMOND_SWORD"
+      DURABILITY: 0
+      NAME: "&7Party Events &7(Right Click)"
+      LORE: [ ]
+      SLOT: 1
     OTHER_PARTIES:
       MATERIAL: "CHEST"
       DURABILITY: 0
       NAME: "&9Other Parties &7(Right Click)"
       LORE: [ ]
-      SLOT: 4
+      SLOT: 2
     KIT_EDITOR:
       MATERIAL: "BOOK"
       DURABILITY: 0
       NAME: "&dKit Editor &7(Right Click)"
+      LORE: [ ]
+      SLOT: 7
+    PARTY_DISBAND:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cDisband Party &7(Right Click)"
+      LORE: [ ]
+      SLOT: 8
+    PARTY_LEAVE:
+      MATERIAL: "INK_SACK"
+      DURABILITY: 1
+      NAME: "&cLeave Party &7(Right Click)"
       LORE: [ ]
       SLOT: 8
