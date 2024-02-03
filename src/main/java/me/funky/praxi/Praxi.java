@@ -105,7 +105,7 @@ public class Praxi extends JavaPlugin {
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
         spigotHandler.init(true);
-        if (spigotHandler != null) {
+        if(spigotHandler != null){
             Bukkit.getServer().getConsoleSender().sendMessage(CC.translate("&cHooked into: &7" + spigotHandler.getType()));
         }
         new CoreManager();

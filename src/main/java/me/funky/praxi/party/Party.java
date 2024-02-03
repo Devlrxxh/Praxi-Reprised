@@ -182,7 +182,7 @@ public class Party {
                     .append(", ");
         }
 
-        for (String line : Locale.PARTY_INFORMATION.formatLines(privacy.getReadable(), leader.getName(), getPlayers().size(), builder.substring(0, builder.length() - 2))) {
+        for (String line : Locale.PARTY_INFORMATION.formatLines(privacy.getReadable(), leader.getName(),  getPlayers().size(), builder.substring(0, builder.length() - 2))) {
             sendTo.sendMessage(CC.translate(line));
         }
     }
