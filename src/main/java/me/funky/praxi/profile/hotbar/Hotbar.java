@@ -36,6 +36,7 @@ public class Hotbar {
                 builder.durability(config.getInt(path + "DURABILITY"));
                 builder.name(config.getString(path + "NAME"));
                 builder.lore(config.getStringList(path + "LORE"));
+                builder.clearFlags();
                 hotbarItem.setSlot(config.getInt(path + "SLOT"));
                 if (section.equals("PARTY")) {
                     hotbarItem.setParty(true);
