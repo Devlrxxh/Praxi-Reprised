@@ -29,6 +29,7 @@ public final class PlaceholderUtil {
 
             if (profile.getState() == ProfileState.QUEUEING) {
                 line = line.replaceAll("<kit>", queueProfile.getQueue().getKit().getName());
+                line = line.replaceAll("<type>", queueProfile.getQueue().isRanked() ? "Unranked" : "Ranked");
                 line = line.replaceAll("<time>", TimeUtil.millisToTimer(queueProfile.getPassed()));
                 line = line.replaceAll("<minElo>", String.valueOf(queueProfile.getMinRange()));
                 line = line.replaceAll("<maxElo>", String.valueOf(queueProfile.getMaxRange()));
@@ -42,6 +43,7 @@ public final class PlaceholderUtil {
             if (profile.getState() == ProfileState.FIGHTING) {
                 Match match = profile.getMatch();
                 line = line.replaceAll("<opponent>", match.getOpponent(player).getName());
+                line = line.replaceAll("<duration>", match.getDuration());
                 line = line.replaceAll("<opponent-ping>", String.valueOf((((CraftPlayer) match.getOpponent(player)).getHandle()).ping));
             }
             formattedLines.add(line);

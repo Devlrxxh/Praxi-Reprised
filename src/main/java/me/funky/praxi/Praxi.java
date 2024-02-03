@@ -90,11 +90,7 @@ public class Praxi extends JavaPlugin {
         return praxi;
     }
 
-    @Override
-    public void onEnable() {
-        praxi = this;
-        getServer().getPluginManager().registerEvents(new MenuListener(), this);
-        honcho = new Honcho(this);
+    public void loadConfigs(){
         mainConfig = new BasicConfigurationFile(this, "config");
         arenasConfig = new BasicConfigurationFile(this, "arenas");
         kitsConfig = new BasicConfigurationFile(this, "kits");
@@ -102,6 +98,14 @@ public class Praxi extends JavaPlugin {
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
         menusConfig = new BasicConfigurationFile(this, "menus");
         this.essentials = new Essentials(this);
+    }
+
+    @Override
+    public void onEnable() {
+        praxi = this;
+        getServer().getPluginManager().registerEvents(new MenuListener(), this);
+        honcho = new Honcho(this);
+        loadConfigs();
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
         spigotHandler.init(true);

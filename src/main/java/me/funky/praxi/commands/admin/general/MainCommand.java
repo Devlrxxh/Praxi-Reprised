@@ -19,6 +19,7 @@ public class MainCommand extends BaseCommand {
         player.sendMessage(CC.translate("&c" + Praxi.getInstance().getName() + " Practice Core"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/praxi setspawn &7- &fSet server spawn"));
+        player.sendMessage(CC.translate("&7* &c/praxi reload &7- &fReload all configs"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
@@ -26,6 +27,12 @@ public class MainCommand extends BaseCommand {
     @Subcommand("setspawn")
     public void setspawn(Player player) {
         Praxi.getInstance().getEssentials().setSpawn(player.getLocation());
-        player.sendMessage(CC.translate("&cSpawn set successfully!"));
+        player.sendMessage(CC.translate("&aSuccessfully set spawn!"));
+    }
+
+    @Subcommand("reload")
+    public void reload(Player player) {
+        Praxi.getInstance().loadConfigs();
+        player.sendMessage(CC.translate("&aSuccessfully reloaded configs!"));
     }
 }

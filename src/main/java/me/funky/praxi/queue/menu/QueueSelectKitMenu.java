@@ -89,7 +89,9 @@ public class QueueSelectKitMenu extends Menu {
 
             if (!ranked) {
                 return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.KIT-NAME").replace("<kit>", queue.getKit().getName()))
+                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.KIT-NAME")
+                                .replace("<kit>", queue.getKit().getName())
+                                .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
                         .lore(lore)
                         .clearEnchantments()
                         .clearFlags()
@@ -97,7 +99,9 @@ public class QueueSelectKitMenu extends Menu {
                         .build();
             } else {
                 return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.KIT-NAME").replace("<kit>", queue.getKit().getName()))
+                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.KIT-NAME")
+                                .replace("<kit>", queue.getKit().getName())
+                                .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
                         .lore(lore)
                         .clearEnchantments()
                         .clearFlags()

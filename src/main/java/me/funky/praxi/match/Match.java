@@ -279,6 +279,7 @@ public abstract class Match {
     public void onRoundStart() {
         // Reset snapshots
         snapshots.clear();
+        timeData = System.currentTimeMillis() - timeData;
 
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
@@ -290,8 +291,6 @@ public abstract class Match {
             }
         }
 
-        // Set time data
-        timeData = System.currentTimeMillis();
     }
 
     public abstract boolean canStartRound();
@@ -549,7 +548,7 @@ public abstract class Match {
         } else if (state == MatchState.ENDING_ROUND) {
             return "Ending";
         } else {
-            return TimeUtil.millisToTimer(System.currentTimeMillis() - timeData);
+            return TimeUtil.millisToTimer(System.currentTimeMillis() - this.timeData);
         }
     }
 
