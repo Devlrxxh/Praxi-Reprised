@@ -1,6 +1,7 @@
 kits:
   Classic:
     enabled: true
+    description: "&7Kit with no enchantments"
     icon:
       material: IRON_SWORD
       durability: 0
@@ -43,6 +44,7 @@ kits:
           durability: 8226
   NoDebuff:
     enabled: true
+    description: "&7The PotPvP"
     icon:
       material: DIAMOND_SWORD
       durability: 0
@@ -78,6 +80,7 @@ kits:
           amount: 1
   BuildUHC:
     enabled: true
+    description: "&7Ultra Hardcore"
     icon:
       material: LAVA_BUCKET
       durability: 0
@@ -104,6 +107,7 @@ kits:
           amount: 64
   Sumo:
     enabled: true
+    description: "&7First to fall loses"
     icon:
       material: FEATHER
       durability: 0

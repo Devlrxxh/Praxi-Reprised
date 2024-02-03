@@ -3,6 +3,7 @@ QUEUES-MENUS:
     TITLE: "&7Select a kit"
     KIT-NAME: "&c<kit>"
     LORE:
+      - "<description>"
       - " "
       - " &7* &cFighting: &7<playing>"
       - " &7* &cQueueing: &7<queueing>"
@@ -12,6 +13,7 @@ QUEUES-MENUS:
     TITLE: "&7Select a kit"
     KIT-NAME: "&c<kit>"
     LORE:
+      - "<description>"
       - " "
       - " &7* &cFighting: &7<playing>"
       - " &7* &cQueueing: &7<queueing>"

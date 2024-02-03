@@ -31,10 +31,12 @@ public class Kit {
     private String knockbackProfile;
     private ItemStack displayIcon;
     private int queuing;
+    private String description;
 
     public Kit(String name) {
         this.name = name;
         this.displayIcon = new ItemStack(Material.DIAMOND_SWORD);
+        this.description = "&7" + name + "description";
         this.queuing = 0;
     }
 
@@ -54,7 +56,7 @@ public class Kit {
             kit.setDisplayIcon(new ItemBuilder(Material.valueOf(config.getString(path + ".icon.material")))
                     .durability(config.getInt(path + ".icon.durability"))
                     .build());
-
+            kit.setDescription(config.getString(path + ".description"));
             if (config.contains(path + ".loadout.armor")) {
                 kit.getKitLoadout().setArmor(InventoryUtil.deserializeInventory(config.getString(path + ".loadout.armor")));
             }
@@ -121,6 +123,7 @@ public class Kit {
 
         BasicConfigurationFile configFile = Praxi.getInstance().getKitsConfig();
         configFile.getConfiguration().set(path + ".enabled", enabled);
+        configFile.getConfiguration().set(path + ".description", description);
         configFile.getConfiguration().set(path + ".icon.material", displayIcon.getType().name());
         configFile.getConfiguration().set(path + ".icon.durability", displayIcon.getDurability());
         configFile.getConfiguration().set(path + ".loadout.armor", InventoryUtil.serializeInventory(kitLoadout.getArmor()));

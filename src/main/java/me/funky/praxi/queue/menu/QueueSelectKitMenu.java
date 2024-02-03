@@ -74,12 +74,14 @@ public class QueueSelectKitMenu extends Menu {
                 for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE")) {
                     line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
                     line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                    line = line.replaceAll("<description>", queue.getKit().getDescription());
                     lore.add(line);
                 }
             } else {
                 for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE")) {
                     line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
                     line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                    line = line.replaceAll("<description>", queue.getKit().getDescription());
                     lore.add(line);
                 }
             }
