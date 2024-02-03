@@ -34,8 +34,15 @@ PARTY:
     - "&9/party close &7- &7Make your party closed"
     - "&9/party chat <msg> &7- &7Send a chat message"
     - "&7&m------------------------------------------------"
+  INFORMATION:
+    - "&7&m------------------------------------------------"
+    - "&cPrivacy: &7{0}"
+    - "&cLeader: &7{1}"
+    - "&cMember: &7({2}) {3}"
+    - "&7&m------------------------------------------------"
   CREATE: "&9You have created a party."
   DISBAND: "&9Your party has been disbanded."
+
   INVITE:
     - "{1} &9has sent you an invite to their party."
     - "%CLICKABLE%&cClick here or type &b/party join {0} &cto accept."
@@ -223,8 +230,8 @@ HOTBAR_ITEMS:
       LORE: [ ]
       SLOT: 6
     PARTY_INFORMATION:
-      MATERIAL: "SKULL_ITEM"
-      DURABILITY: 3
+      MATERIAL: "NETHER_STAR"
+      DURABILITY: 0
       NAME: "&cParty Information &7(Right Click)"
       LORE: [ ]
       SLOT: 0

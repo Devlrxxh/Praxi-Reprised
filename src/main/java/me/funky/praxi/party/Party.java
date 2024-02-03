@@ -177,23 +177,14 @@ public class Party {
         StringBuilder builder = new StringBuilder();
 
         for (Player player : getListOfPlayers()) {
-            builder.append(CC.RESET)
-                    .append(player.getName())
+            builder.append(player.getName())
                     .append(CC.GRAY)
                     .append(", ");
         }
 
-        String[] lines = new String[]{
-                CC.CHAT_BAR,
-                CC.GOLD + "Party Information",
-                CC.BLUE + "Privacy: " + CC.GRAY + privacy.getReadable(),
-                CC.BLUE + "Leader: " + CC.RESET + leader.getName(),
-                CC.BLUE + "Members: " + CC.GRAY + "(" + getPlayers().size() + ") " +
-                        builder.substring(0, builder.length() - 2),
-                CC.CHAT_BAR
-        };
-
-        sendTo.sendMessage(lines);
+        for (String line : Locale.PARTY_INFORMATION.formatLines(privacy.getReadable(), leader.getName(),  getPlayers().size(), builder.substring(0, builder.length() - 2))) {
+            sendTo.sendMessage(CC.translate(line));
+        }
     }
 
     public void sendChat(Player player, String message) {
