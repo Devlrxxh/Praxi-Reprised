@@ -1,64 +1,65 @@
 QUEUES-MENUS:
   UNRANKED:
-    TITLE: "&7Select a kit"
-    KIT-NAME: "&c<kit>"
+    TITLE: "&7Join Unranked Queue"
+    KIT-NAME: "&a<kit>"
     LORE:
       - "<description>"
       - " "
-      - " &7* &cFighting: &7<playing>"
-      - " &7* &cQueueing: &7<queueing>"
+      - " &fIn Fights: &b<playing>"
+      - " &fQueued: &b<queueing>"
       - ""
-      - " &aClick to Play!"
+      - " &aClick to here play."
   RANKED:
-    TITLE: "&7Select a kit"
-    KIT-NAME: "&c<kit>"
+    TITLE: "&7Join Ranked Queue"
+    KIT-NAME: "&a<kit>"
     LORE:
       - "<description>"
       - " "
-      - " &7* &cFighting: &7<playing>"
-      - " &7* &cQueueing: &7<queueing>"
+      - " &fIn Fights: &b<playing>"
+      - " &fQueued: &b<queueing>"
       - ""
-      - " &aClick to Play!"
+      - " &aClick to here play."
 PARTY:
   EVENTS:
     TITLE: "&7Select an Event"
     SIZE: 27
-    EVENT-COLOR: "&c<event>"
+    EVENT-COLOR: "&b<event>"
     SELECT-KIT:
       TITLE: "&6Select a Kit"
   OTHER-PARTIES:
     TITLE: "&9Other Parties"
 KIT-EDITOR:
   TITLE: "&7Select a Kit"
-  KIT-NAME: "&c<kit>"
+  KIT-NAME: "&b<kit>"
   SIZE: 27
   LORE:
     - ""
     - "&aClick to edit Kit."
   MANAGEMENT:
-    TITLE: "&cViewing <kit> kits"
-    KIT-NAME: "&c<kit>"
+    TITLE: "&bViewing <kit> kits"
+    KIT-NAME: "&b<kit>"
     BUTTONS:
       CREATE-BUTTON: "&aCreate Loadout"
-      RENAME-BUTTON: "&cRename Loadout"
+      RENAME-BUTTON: "&bRename Loadout"
       LOAD-BUTTON: "&aLoad/Edit"
-      DELETE-BUTTON: "&cDelete"
-      BACK-BUTTON: "&cBack"
+      DELETE-BUTTON: "&bDelete"
+      BACK-BUTTON: "&bBack"
   EDITOR:
-    TITLE: "&cEditing <kit>"
+    TITLE: "&bEditing <kit>"
     BUTTONS:
       SAVE-BUTTON: "&aSave"
-      CANCEL-BUTTON: "&cCancel"
-      CLEAR-BUTTON: "&cClear Inventory"
+      CANCEL-BUTTON: "&bCancel"
+      CLEAR-BUTTON: "&bClear Inventory"
       LOAD-DEFAULT-BUTTON: "&eLoad Default Kit"
 DUEL:
   SIZE: 27
   KIT-SELECTOR:
     TITLE: "&7Select a Kit"
-    KIT-NAME: "&c<kit>"
+    KIT-NAME: "&b<kit>"
   ARENA-SELECTOR:
     TITLE: "&7Select a Arena"
-    ARENA-NAME: "&c<arena>"
+    ARENA-NAME: "&b<arena>"
 SETTINGS:
   TITLE: "&7Settings"
+  SETTING-NAME: "&b<settings>"
   SIZE: 27

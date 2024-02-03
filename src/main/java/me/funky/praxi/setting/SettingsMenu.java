@@ -1,5 +1,6 @@
 package me.funky.praxi.setting;
 
+import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
@@ -102,6 +103,7 @@ public class SettingsMenu extends Menu {
                     lore.add(" &7&l* &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
+                    break;
                 }
                 case SHOW_PLAYERS: {
                     if (profile.getOptions().showPlayers()) {
@@ -115,6 +117,7 @@ public class SettingsMenu extends Menu {
                     lore.add(" &7&l* &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
+                    break;
                 }
             }
             return new ItemBuilder(this.settings.getMaterial()).name(Praxi.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
@@ -126,18 +129,40 @@ public class SettingsMenu extends Menu {
             switch (this.settings) {
                 case SHOW_SCOREBOARD: {
                     showScoreboard(profile, !profile.getOptions().showScoreboard());
+                    if (profile.getOptions().showScoreboard()) {
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format());
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format());
+                    }
                     break;
                 }
                 case ALLOW_DUELS: {
                     profile.getOptions().receiveDuelRequests(!profile.getOptions().receiveDuelRequests());
+                    if (profile.getOptions().receiveDuelRequests()) {
+                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_ENABLED.format());
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_DISABLED.format());
+                    }
                     break;
                 }
                 case ALLOW_SPECTATORS: {
                     profile.getOptions().allowSpectators(!profile.getOptions().allowSpectators());
+                    if (profile.getOptions().allowSpectators()) {
+                        player.sendMessage(Locale.OPTIONS_SPECTATORS_ENABLED.format());
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_SPECTATORS_DISABLED.format());
+                    }
+                    break;
                 }
                 case SHOW_PLAYERS: {
                     profile.getOptions().showPlayers(!profile.getOptions().showPlayers());
+                    if (profile.getOptions().showPlayers()) {
+                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_ENABLED.format());
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_DISABLED.format());
+                    }
                     VisibilityLogic.handle(player);
+                    break;
                 }
             }
             new SettingsMenu().openMenu(player);

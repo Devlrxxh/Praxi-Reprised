@@ -1,13 +1,13 @@
 kits:
   Classic:
     enabled: true
-    description: "&7Kit with no enchantments"
+    description: '&7Kit with no enchantments'
     icon:
-      material: IRON_SWORD
+      material: DIAMOND_SWORD
       durability: 0
     loadout:
       armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
-      contents: t@276:e@16@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8259;t@373:d@8226;t@373:d@16388;t@373:d@16426;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16388;t@373:d@16426;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;
+      contents: t@276:e@16@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8259:pd@3-1=12-9600-0;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16388:pd@4-1=19-676-0;t@373:d@16426:pd@10-2=2-1351-0;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16388:pd@4-1=19-676-0;t@373:d@16426:pd@10-2=2-1351-0;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;
     game-rules:
       build: false
       sumo: false
@@ -15,42 +15,44 @@ kits:
       parkour: false
       health-regeneration: true
       hit-delay: 20
+      allow-build: false
+      show-health: false
     edit-rules:
-      allow-potion-fill: true
+      allow-potion-fill: false
       items:
-        1:
+        '1':
           material: COOKED_BEEF
           amount: 64
           durability: 0
-        2:
+        '2':
           material: GOLDEN_CARROT
           amount: 64
           durability: 0
-        3:
+        '3':
           material: POTION
           amount: 1
           durability: 16388
-        4:
+        '4':
           material: POTION
           amount: 1
           durability: 16426
-        5:
+        '5':
           material: POTION
           amount: 1
           durability: 16421
-        6:
+        '6':
           material: POTION
           amount: 1
           durability: 8226
   NoDebuff:
     enabled: true
-    description: "&7The PotPvP"
+    description: '&7The PotPvP'
     icon:
-      material: DIAMOND_SWORD
-      durability: 0
+      material: POTION
+      durability: 16421
     loadout:
       armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
-      contents: t@276:e@16@3:e@34@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8259;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@16421;t@373:d@8226;
+      contents: t@276:e@16@3:e@20@2:e@34@3;t@368:a@16;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@3:pd@3-1=12-3600-0;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;
     game-rules:
       enabled: true
       build: false
@@ -59,28 +61,31 @@ kits:
       parkour: false
       health-regeneration: true
       hit-delay: 20
+      allow-build: false
+      show-health: false
     edit-rules:
-      allow-potion-fill: true
+      allow-potion-fill: false
       items:
-        1:
+        '1':
           material: COOKED_BEEF
           durability: 0
           amount: 64
-        2:
+        '2':
           material: GOLDEN_CARROT
           durability: 0
           amount: 64
-        3:
+        '3':
           material: POTION
           durability: 16421
           amount: 1
-        4:
+        '4':
           material: POTION
           durability: 8226
           amount: 1
+    knockback-profile: default
   BuildUHC:
     enabled: true
-    description: "&7Ultra Hardcore"
+    description: '&7Ultra Hardcore'
     icon:
       material: LAVA_BUCKET
       durability: 0
@@ -107,12 +112,13 @@ kits:
           amount: 64
   Sumo:
     enabled: true
-    description: "&7First to fall loses"
+    description: '&7First to fall loses'
     icon:
-      material: FEATHER
+      material: LEASH
       durability: 0
     loadout:
-      armor: null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+      armor: t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
+      contents: null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
     game-rules:
       build: false
       sumo: true
@@ -120,6 +126,7 @@ kits:
       parkour: false
       health-regeneration: true
       hit-delay: 20
+      allow-build: false
+      show-health: false
     edit-rules:
       allow-potion-fill: false
-      items:

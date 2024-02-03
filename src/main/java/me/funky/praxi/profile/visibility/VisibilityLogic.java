@@ -39,7 +39,7 @@ public class VisibilityLogic {
                 viewer.hidePlayer(target);
                 NameTags.reset(viewer, target);
             }
-            if(viewerProfile.getOptions().showPlayers()){
+            if (viewerProfile.getOptions().showPlayers()) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     viewer.showPlayer(players);
                     NameTags.color(viewer, target, ChatColor.GREEN, false);

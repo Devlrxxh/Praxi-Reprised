@@ -35,7 +35,8 @@ import java.util.*;
 @Setter
 public class Profile {
 
-    @Getter private static final Map<UUID, Profile> profiles = new HashMap<>();
+    @Getter
+    private static final Map<UUID, Profile> profiles = new HashMap<>();
     private static MongoCollection<Document> collection;
     private final ProfileOptions options;
     private final ProfileKitEditorData kitEditorData;
