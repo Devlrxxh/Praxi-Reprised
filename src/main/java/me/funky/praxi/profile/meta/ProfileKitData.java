@@ -12,21 +12,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 public class ProfileKitData {
 
-    @Getter
-    @Setter
     private int elo = 1000;
-    @Getter
-    @Setter
     private int won;
-    @Getter
-    @Setter
     private int lost;
-    @Getter
-    @Setter
     private KitLoadout[] loadouts = new KitLoadout[4];
 
+
+    //TODO: MAKE THIS WORK
     public void incrementWon() {
         this.won++;
     }

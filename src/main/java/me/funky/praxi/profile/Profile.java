@@ -124,6 +124,15 @@ public class Profile {
         return profile;
     }
 
+    public int getWins() {
+        int wins = 0;
+        for (Map.Entry<Kit, ProfileKitData> entry : this.getKitData().entrySet()) {
+            ProfileKitData profileKitData = entry.getValue();
+            wins += profileKitData.getWon();
+        }
+        return wins;
+    }
+
     public Player getPlayer() {
         return Bukkit.getPlayer(uuid);
     }

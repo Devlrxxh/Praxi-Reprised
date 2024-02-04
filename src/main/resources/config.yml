@@ -1,6 +1,9 @@
 MONGO:
   URI: mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority
   DATABASE: praxi
+RANKED:
+  REQUIRED-WINS: 10
+  ERROR-MESSAGE: '&cYou can't join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
   - '&fWelcome to the &bLunar Network!'
@@ -213,7 +216,7 @@ HOTBAR_ITEMS:
     PARTY_EVENTS:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
-      NAME: '&9» &aKParty Events &9«'
+      NAME: '&9» &aParty Events &9«'
       LORE: []
       SLOT: 1
     OTHER_PARTIES:

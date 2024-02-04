@@ -1,15 +1,21 @@
 package me.funky.praxi.queue;
 
+import me.funky.praxi.Locale;
+import me.funky.praxi.Praxi;
+import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
 import me.funky.praxi.profile.hotbar.HotbarItem;
+import me.funky.praxi.profile.meta.ProfileKitData;
 import me.funky.praxi.queue.menu.QueueSelectKitMenu;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import java.util.Map;
 
 public class QueueListener implements Listener {
 
@@ -25,6 +31,10 @@ public class QueueListener implements Listener {
                 boolean cancelled = true;
 
                 if (hotbarItem == HotbarItem.QUEUE_JOIN_RANKED) {
+                    if(profile.getWins() < Praxi.getInstance().getMainConfig().getInteger("RANKED.REQUIRED-WINS")){
+                        event.getPlayer().sendMessage(Locale.RANKED_ERROR.format(Praxi.getInstance().getMainConfig().getInteger("RANKED.REQUIRED-WINS") - profile.getWins()));
+                        return;
+                    }
                     if (!profile.isBusy()) {
                         new QueueSelectKitMenu(true).openMenu(event.getPlayer());
                     }
