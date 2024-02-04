@@ -91,13 +91,13 @@ public class ArenaCommand extends BaseCommand {
             Selection selection = Selection.createOrGetSelection(player);
 
             if (selection.isFullObject()) {
+                Arena arena;
                 if(arenaType.equals(ArenaType.SHARED)){
-                    Arena arena = new SharedArena(arenaName, selection.getPoint1(), selection.getPoint2());
-                    Arena.getArenas().add(arena);
+                    arena = new SharedArena(arenaName, selection.getPoint1(), selection.getPoint2());
                 }else{
-                    Arena arena = new StandaloneArena(arenaName, selection.getPoint1(), selection.getPoint2());
-                    Arena.getArenas().add(arena);
+                    arena = new StandaloneArena(arenaName, selection.getPoint1(), selection.getPoint2());
                 }
+                Arena.getArenas().add(arena);
 
                 player.sendMessage(CC.GOLD + "Created new arena \"" + arenaName + "\"");
             } else {
