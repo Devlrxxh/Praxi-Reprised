@@ -75,3 +75,4 @@ EVENTS:
   TITLE: "&7Select an event"
   FILTER: FILL
   SIZE: 27
+  EVENT-NAME: "&a<event>"

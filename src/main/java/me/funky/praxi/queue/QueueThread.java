@@ -8,7 +8,6 @@ import me.funky.praxi.match.impl.BasicTeamMatch;
 import me.funky.praxi.match.participant.MatchGamePlayer;
 import me.funky.praxi.participant.GameParticipant;
 import me.funky.praxi.util.BukkitReflection;
-import me.funky.praxi.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

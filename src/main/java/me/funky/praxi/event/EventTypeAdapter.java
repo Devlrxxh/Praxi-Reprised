@@ -3,7 +3,10 @@ package me.funky.praxi.event;
 import me.funky.praxi.event.impl.sumo.SumoEvent;
 import me.funky.praxi.util.command.command.adapter.CommandTypeAdapter;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EventTypeAdapter implements CommandTypeAdapter {
 

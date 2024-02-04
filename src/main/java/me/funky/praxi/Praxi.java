@@ -12,9 +12,8 @@ import me.funky.praxi.arena.*;
 import me.funky.praxi.arena.command.ArenaCommand;
 import me.funky.praxi.commands.admin.general.MainCommand;
 import me.funky.praxi.commands.donater.FlyCommand;
-import me.funky.praxi.commands.event.admin.*;
 import me.funky.praxi.commands.event.map.*;
-import me.funky.praxi.commands.event.user.*;
+import me.funky.praxi.commands.event.user.HostCommand;
 import me.funky.praxi.commands.event.vote.EventMapVoteCommand;
 import me.funky.praxi.commands.user.duels.DuelAcceptCommand;
 import me.funky.praxi.commands.user.duels.DuelCommand;
@@ -135,25 +134,12 @@ public class Praxi extends JavaPlugin {
         Arrays.asList(
                 new DuelCommand(),
                 new DuelAcceptCommand(),
-                new EventAdminCommand(),
-                new EventHelpCommand(),
-                new EventCancelCommand(),
-                new EventClearCooldownCommand(),
-                new EventForceStartCommand(),
-                new EventHostCommand(),
-                new EventInfoCommand(),
-                new EventJoinCommand(),
-                new EventLeaveCommand(),
-                new EventSetLobbyCommand(),
                 new EventMapCreateCommand(),
                 new EventMapDeleteCommand(),
                 new EventMapsCommand(),
                 new EventMapSetSpawnCommand(),
                 new EventMapStatusCommand(),
                 new EventMapVoteCommand(),
-                new EventAddMapCommand(),
-                new EventRemoveMapCommand(),
-                new EventsCommand(),
                 new RematchCommand(),
                 new SpectateCommand(),
                 new StopSpectatingCommand(),
@@ -226,6 +212,8 @@ public class Praxi extends JavaPlugin {
         commandCompletions.registerCompletion("names", c -> Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("arenas", c -> Arena.getArenas().stream().map(Arena::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("kits", c -> Kit.getKits().stream().map(Kit::getName).collect(Collectors.toList()));
+        commandCompletions.registerCompletion("events", c -> Event.events.stream().map(Event::getDisplayName).collect(Collectors.toList()));
+        commandCompletions.registerCompletion("maps", c -> EventGameMap.getMaps().stream().map(EventGameMap::getMapName).collect(Collectors.toList()));
     }
 
     @Override

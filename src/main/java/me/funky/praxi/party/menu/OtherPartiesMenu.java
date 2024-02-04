@@ -9,7 +9,6 @@ import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.filters.Filters;
-import me.funky.praxi.util.menu.pagination.PaginatedMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,6 +26,7 @@ public class OtherPartiesMenu extends Menu {
     public String getTitle(Player player) {
         return Praxi.getInstance().getMenusConfig().getString("PARTY.OTHER-PARTIES.TITLE");
     }
+
     @Override
     public int getSize() {
         return Praxi.getInstance().getMenusConfig().getInteger("PARTY.OTHER-PARTIES.SIZE");

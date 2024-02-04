@@ -30,6 +30,16 @@ public interface Event {
         }
     }
 
+    static Event getByName(String mapName) {
+        for (Event event : events) {
+            if (event.getDisplayName().equalsIgnoreCase(mapName)) {
+                return event;
+            }
+        }
+
+        return null;
+    }
+
     static <T extends Event> T getEvent(Class<? extends Event> clazz) {
         for (Event event : events) {
             if (event.getClass() == clazz) {

@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.util.CC;
-import me.funky.praxi.util.ItemBuilder;
-import me.funky.praxi.util.menu.button.DisplayButton;
 import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -35,12 +33,13 @@ public abstract class Menu {
     //private boolean border = false;
     //private boolean fill = false;
     private Filters filter;
+
     {
-        setFillerType(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15));
-        ItemMeta fillerMeta = getFillerType().getItemMeta();
+        fillerType = (new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15));
+        ItemMeta fillerMeta = fillerType.getItemMeta();
         if (fillerMeta != null) {
             fillerMeta.setDisplayName(" ");
-            getFillerType().setItemMeta(fillerMeta);
+            fillerType.setItemMeta(fillerMeta);
         }
     }
 
@@ -52,14 +51,14 @@ public abstract class Menu {
         ItemStack fillerItem = this.fillerType;
 
         for (int i = 1; i <= 7 && size >= 18; i++) {
-            if(inventory.getItem(i) == null){
+            if (inventory.getItem(i) == null) {
                 inventory.setItem(i, fillerItem);
                 inventory.setItem(size - i - 1, fillerItem);
             }
         }
 
         for (int i = 1; i <= 2 && size >= 18; i++) {
-            if(inventory.getItem(i) == null){
+            if (inventory.getItem(i) == null) {
                 inventory.setItem(i * 9, fillerItem);
                 inventory.setItem(i * 9 + 8, fillerItem);
             }
@@ -74,11 +73,10 @@ public abstract class Menu {
         int size = inventory.getSize();
 
         for (int pos = 0; pos < size; pos++) {
-            if(inventory.getItem(pos) == null)
+            if (inventory.getItem(pos) == null)
                 inventory.setItem(pos, fillerType);
         }
     }
-
 
 
     private ItemStack createItemStack(Player player, Button button) {
@@ -138,7 +136,7 @@ public abstract class Menu {
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
             inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
         }
-        switch (filter){
+        switch (filter) {
             case BORDER:
                 fillBorder(inventory);
                 break;

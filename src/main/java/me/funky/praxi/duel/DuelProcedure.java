@@ -9,7 +9,6 @@ import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.BukkitReflection;
 import me.funky.praxi.util.ChatComponentBuilder;
 import me.funky.praxi.util.ChatHelper;
-import me.funky.praxi.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
