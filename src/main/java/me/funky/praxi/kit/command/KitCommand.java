@@ -46,6 +46,19 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/kit seticon &7<kit> - &fSet kit icon"));
         player.sendMessage(CC.translate("&7* &c/kit enable &7<kit> - &fEnable/Disable kit"));
         player.sendMessage(CC.translate("&7* &c/kit setdescription &7<kit> &7<value> &7- &fSet kit description"));
+        player.sendMessage(CC.translate("&7* &c/kit build &7<kit> &7- &fAdd Build rule"));
+        player.sendMessage(CC.translate("&7* &c/kit spleef &7<kit> &7- &fAdd Spleef rule"));
+        player.sendMessage(CC.translate("&7&m-----------------------------------------"));
+    }
+
+    @Subcommand("help 3")
+    public void help3(Player player) {
+        player.sendMessage(CC.translate("&7&m-----------------------------------------"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/kit help <page>"));
+        player.sendMessage(" ");
+        player.sendMessage(CC.translate("&7* &c/kit sumo &7<kit> - &fAdd Sumo rule"));
+        player.sendMessage(CC.translate("&7* &c/kit hpregen &7<kit> - &fSet HPRegen rule"));
+        player.sendMessage(CC.translate("&7* &c/kit hitdelay &7<kit> <value> - &fSet hit delay"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -177,5 +190,90 @@ public class KitCommand extends BaseCommand {
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's description.");
+    }
+
+    @Subcommand("build")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void build(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setBuild(!kit.getGameRules().isBuild());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's build status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+    @Subcommand("spleef")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void spleef(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setSpleef(!kit.getGameRules().isSpleef());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's spleef status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+    @Subcommand("sumo")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void sumo(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setSumo(!kit.getGameRules().isSumo());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's sumo status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+    @Subcommand("hpregen")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void hpregen(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setHealthRegeneration(!kit.getGameRules().isHealthRegeneration());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's health regeneration status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+    @Subcommand("hitdelay")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void showhp(Player player, String kitName, int delay) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setHitDelay(delay);
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's hit delay to &f" + delay + "!");
     }
 }

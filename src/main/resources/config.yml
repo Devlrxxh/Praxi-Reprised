@@ -3,7 +3,7 @@ MONGO:
   DATABASE: praxi
 RANKED:
   REQUIRED-WINS: 10
-  ERROR-MESSAGE: '&cYou can't join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
+  ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
   - '&fWelcome to the &bLunar Network!'
@@ -152,8 +152,8 @@ REMATCH:
     - '&7{0} &ehas sent you a rematch on arena &7{1}&e.'
     - '&aClick here or type &b/rematch &cto accept the request.'
   RECEIVED_REQUEST_HOVER: '&cClick to accept.'
-ARROW_DAMAGE_INDICATOR: '&7[&9Arrow Range &e({0})&7] &e{1} &9is now at &c{2}&4{3}&e.'
-VIEWING_INVENTORY: '&eYou are viewing &b{0}&e''''s inventory...'
+ARROW_DAMAGE_INDICATOR: '&6{1}''''s Health'':'' &c{2}&4{3}'
+VIEWING_INVENTORY: '&6You are viewing &b{0}&e''''s inventory...'
 HOTBAR_ITEMS:
   LOBBY:
     QUEUE_JOIN_UNRANKED:

@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
+import me.funky.praxi.arena.SpawnType;
 import me.funky.praxi.arena.generator.ArenaGenerator;
 import me.funky.praxi.arena.generator.Schematic;
 import me.funky.praxi.arena.impl.SharedArena;
@@ -40,7 +41,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
         player.sendMessage(CC.translate("&cArena Management &7[&f1/3&7] - &f/arena help <page>"));
         player.sendMessage(" ");
-        player.sendMessage(CC.translate("&7* &c/arena create &7<value> - &fCreate arena"));
+        player.sendMessage(CC.translate("&7* &c/arena create &7<value> &7</STANDALONE/SHARED> - &fCreate arena"));
         player.sendMessage(CC.translate("&7* &c/arena remove &7<arena> - &fRemove arena"));
         player.sendMessage(CC.translate("&7* &c/arena save &7- &fSave arenas to file"));
         player.sendMessage(CC.translate("&7* &c/arena selection &7- &fGet Selection wand"));
@@ -85,13 +86,18 @@ public class ArenaCommand extends BaseCommand {
 
     @Subcommand("create")
     @Syntax("<arena>")
-    public void create(Player player, String arenaName) {
+    public void create(Player player, String arenaName, ArenaType arenaType) {
         if (Arena.getByName(arenaName) == null) {
             Selection selection = Selection.createOrGetSelection(player);
 
             if (selection.isFullObject()) {
-                Arena arena = new SharedArena(arenaName, selection.getPoint1(), selection.getPoint2());
-                Arena.getArenas().add(arena);
+                if(arenaType.equals(ArenaType.SHARED)){
+                    Arena arena = new SharedArena(arenaName, selection.getPoint1(), selection.getPoint2());
+                    Arena.getArenas().add(arena);
+                }else{
+                    Arena arena = new StandaloneArena(arenaName, selection.getPoint1(), selection.getPoint2());
+                    Arena.getArenas().add(arena);
+                }
 
                 player.sendMessage(CC.GOLD + "Created new arena \"" + arenaName + "\"");
             } else {
@@ -101,6 +107,7 @@ public class ArenaCommand extends BaseCommand {
             player.sendMessage(CC.RED + "An arena with that name already exists.");
         }
     }
+
 
     @Subcommand("remove")
     @CommandCompletion("@arenas")
@@ -321,20 +328,17 @@ public class ArenaCommand extends BaseCommand {
     @Subcommand("setspawn")
     @CommandCompletion("@arenas")
     @Syntax("<arena> <pos>")
-    public void setspawn(Player player, String arenaName, String pos) {
+    public void setspawn(Player player, String arenaName, SpawnType pos) {
         if (checkArena(arenaName)) {
             player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
             return;
         }
         Arena arena = Arena.getByName(arenaName);
         if (arena != null) {
-            if (pos.equalsIgnoreCase("a")) {
+            if (pos.equals(SpawnType.A)) {
                 arena.setSpawnA(player.getLocation());
-            } else if (pos.equalsIgnoreCase("b")) {
+            } else  {
                 arena.setSpawnB(player.getLocation());
-            } else {
-                player.sendMessage(CC.RED + "Invalid spawn point. Try \"a\" or \"b\".");
-                return;
             }
 
             arena.save();

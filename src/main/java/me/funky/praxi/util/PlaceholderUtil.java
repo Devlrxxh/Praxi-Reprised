@@ -29,7 +29,7 @@ public final class PlaceholderUtil {
 
             if (profile.getState() == ProfileState.QUEUEING) {
                 line = line.replaceAll("<kit>", queueProfile.getQueue().getKit().getName());
-                line = line.replaceAll("<type>", queueProfile.getQueue().isRanked() ? "Unranked" : "Ranked");
+                line = line.replaceAll("<type>", queueProfile.getQueue().isRanked() ? "Ranked" : "Unranked");
                 line = line.replaceAll("<time>", TimeUtil.millisToTimer(queueProfile.getPassed()));
                 line = line.replaceAll("<minElo>", String.valueOf(queueProfile.getMinRange()));
                 line = line.replaceAll("<maxElo>", String.valueOf(queueProfile.getMaxRange()));

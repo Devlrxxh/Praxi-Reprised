@@ -111,7 +111,7 @@ public class MatchDetailsMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.MELON)
-                    .name("&6Health: &a" + health + "/10 &4" + StringEscapeUtils.unescapeJava("\u2764"))
+                    .name("&dHealth: &e" + health + "/10 &4" + StringEscapeUtils.unescapeJava("❤"))
                     .amount((int) (health == 0 ? 1 : health))
                     .clearFlags()
                     .build();
@@ -127,7 +127,7 @@ public class MatchDetailsMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.COOKED_BEEF)
-                    .name("&6Hunger: &a" + hunger + "/20")
+                    .name("&dHunger: &e" + hunger + "/20")
                     .amount(hunger == 0 ? 1 : hunger)
                     .clearFlags()
                     .build();
@@ -142,17 +142,17 @@ public class MatchDetailsMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            ItemBuilder builder = new ItemBuilder(Material.POTION).name("&6Potion Effects");
+            ItemBuilder builder = new ItemBuilder(Material.POTION).name("&aPotion Effects");
 
             if (effects.isEmpty()) {
-                builder.lore("&eNo potion effects");
+                builder.lore("&dNo potion effects");
             } else {
                 List<String> lore = new ArrayList<>();
 
                 effects.forEach(effect -> {
                     String name = PotionUtil.getName(effect.getType()) + " " + (effect.getAmplifier() + 1);
                     String duration = " (" + TimeUtil.millisToTimer((effect.getDuration() / 20) * 1000L) + ")";
-                    lore.add("&a" + name + "&e" + duration);
+                    lore.add("&d" + name + "&e" + duration);
                 });
 
                 builder.lore(lore);
@@ -174,8 +174,8 @@ public class MatchDetailsMenu extends Menu {
             return new ItemBuilder(Material.POTION)
                     .durability(16421)
                     .amount(potions == 0 ? 1 : potions)
-                    .name("&6Potions")
-                    .lore("&a" + name + " &ehad &a" + potions + " &epotion" + (potions == 1 ? "" : "s") + " left.")
+                    .name("&aPotions")
+                    .lore("&d" + name + " &ehad &a" + potions + " &epotion" + (potions == 1 ? "" : "s") + " left.")
                     .clearFlags()
                     .build();
         }
@@ -190,13 +190,13 @@ public class MatchDetailsMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.PAPER)
-                    .name("&6Statistics")
+                    .name("&aMatch Stats")
                     .lore(Arrays.asList(
-                            "&aTotal Hits: &e" + snapshot.getTotalHits(),
-                            "&aLongest Combo: &e" + snapshot.getLongestCombo(),
-                            "&aPotions Thrown: &e" + snapshot.getPotionsThrown(),
-                            "&aPotions Missed: &e" + snapshot.getPotionsMissed(),
-                            "&aPotion Accuracy: &e" + snapshot.getPotionAccuracy()
+                            "&dHits: &e" + snapshot.getTotalHits(),
+                            "&dLongest Combo: &e" + snapshot.getLongestCombo(),
+                            "&dPotions Thrown: &e" + snapshot.getPotionsThrown(),
+                            "&dPotions Missed: &e" + snapshot.getPotionsMissed(),
+                            "&dPotion Accuracy: &e" + snapshot.getPotionAccuracy()
                     ))
                     .clearFlags()
                     .build();

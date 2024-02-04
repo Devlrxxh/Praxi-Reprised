@@ -130,12 +130,9 @@ public class Kit {
         configFile.getConfiguration().set(path + ".loadout.contents", InventoryUtil.serializeInventory(kitLoadout.getContents()));
         configFile.getConfiguration().set(path + ".game-rules.allow-build", gameRules.isBuild());
         configFile.getConfiguration().set(path + ".game-rules.spleef", gameRules.isSpleef());
-        configFile.getConfiguration().set(path + ".game-rules.parkour", gameRules.isParkour());
         configFile.getConfiguration().set(path + ".game-rules.sumo", gameRules.isSumo());
         configFile.getConfiguration().set(path + ".game-rules.health-regeneration", gameRules.isHealthRegeneration());
-        configFile.getConfiguration().set(path + ".game-rules.show-health", gameRules.isShowHealth());
         configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
-        configFile.getConfiguration().set(path + ".edit-rules.allow-potion-fill", editRules.isAllowPotionFill());
 
         if (knockbackProfile != null) {
             configFile.getConfiguration().set(path + ".knockback-profile", knockbackProfile);
