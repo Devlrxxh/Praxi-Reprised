@@ -1,6 +1,9 @@
 # Praxi
 The most configurable, efficient, and extensive practice plugin.
 
+> [!IMPORTANT]
+> To use **Praxi** your server must be running on a 1.8/1.7 server!
+
 # Credits
 [Thanks to funkyranveer for giving me access to his fixed version of praxi](https://github.com/funkyranveer/praxi-nodependents)
 
