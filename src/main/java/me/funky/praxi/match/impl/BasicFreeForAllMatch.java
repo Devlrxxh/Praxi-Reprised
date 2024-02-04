@@ -172,6 +172,7 @@ public class BasicFreeForAllMatch extends Match {
                 List<GameParticipant<MatchGamePlayer>> participants = new ArrayList<>(this.participants);
                 participants.remove(winningParticipant);
 
+
                 BaseComponent[] winners = generateInventoriesComponents(
                         Locale.MATCH_END_WINNER_INVENTORY.format(""), winningParticipant);
 

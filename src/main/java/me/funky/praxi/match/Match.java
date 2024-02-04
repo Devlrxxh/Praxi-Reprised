@@ -234,7 +234,6 @@ public abstract class Match {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 if (!gamePlayer.isDisconnected()) {
                     Player player = gamePlayer.getPlayer();
-
                     if (player != null) {
                         player.setFireTicks(0);
                         player.updateInventory();
@@ -401,7 +400,8 @@ public abstract class Match {
         snapshot.setPotionsThrown(deadGamePlayer.getPotionsThrown());
         snapshot.setLongestCombo(deadGamePlayer.getLongestCombo());
         snapshot.setTotalHits(deadGamePlayer.getHits());
-
+        Profile loserProfile = Profile.getByUuid(deadGamePlayer.getUuid());
+        loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
         // Add snapshot to list
         snapshots.add(snapshot);
 
@@ -418,6 +418,8 @@ public abstract class Match {
                     if (player != null) {
                         VisibilityLogic.handle(player, dead);
                         sendDeathMessage(player, dead, killer);
+                        Profile winnerProfile = Profile.getByUuid(player.getUniqueId());
+                        winnerProfile.getKitData().get(winnerProfile.getMatch().getKit()).incrementWon();
                     }
                 }
             }
@@ -448,6 +450,7 @@ public abstract class Match {
 
             Hotbar.giveHotbarItems(dead);
         }
+
     }
 
     public abstract boolean isOnSameTeam(Player first, Player second);

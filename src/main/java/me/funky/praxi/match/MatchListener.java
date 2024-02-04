@@ -243,6 +243,7 @@ public class MatchListener implements Listener {
             event.getDrops().clear();
 
             profile.getMatch().getDroppedItems().addAll(entities);
+            profile.getKitData().get(profile.getMatch().getKit()).incrementLost();
             profile.getMatch().onDeath(event.getEntity());
         }
     }

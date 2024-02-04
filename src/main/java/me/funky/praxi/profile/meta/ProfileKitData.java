@@ -22,7 +22,6 @@ public class ProfileKitData {
     private KitLoadout[] loadouts = new KitLoadout[4];
 
 
-    //TODO: MAKE THIS WORK
     public void incrementWon() {
         this.won++;
     }

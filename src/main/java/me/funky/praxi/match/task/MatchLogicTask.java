@@ -34,8 +34,6 @@ public class MatchLogicTask extends BukkitRunnable {
     public void run() {
         totalTicked++;
         nextAction--;
-        // Deny movement if the kit is sumo
-
 
         if (match.getState() == MatchState.STARTING_ROUND) {
             if (match.getKit().getGameRules().isSumo()) {
