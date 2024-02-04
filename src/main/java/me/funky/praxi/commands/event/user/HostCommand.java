@@ -1,18 +1,17 @@
-package me.funky.praxi.setting;
-
+package me.funky.praxi.commands.event.user;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
+import me.funky.praxi.event.game.menu.EventHostMenu;
 import org.bukkit.entity.Player;
 
-@CommandAlias("settings")
-@Description("Settings Command.")
-public class SettingsCommand extends BaseCommand {
+@CommandAlias("hosts")
+@Description("Host Events.")
+public class HostCommand extends BaseCommand {
     @Default
     public void open(Player player) {
-        new SettingsMenu().openMenu(player);
+        new EventHostMenu().openMenu(player);
     }
 }
- 

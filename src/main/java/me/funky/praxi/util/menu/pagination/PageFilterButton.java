@@ -35,10 +35,10 @@ public class PageFilterButton<T> extends Button {
 
             if (filter.isEnabled()) {
                 color = ChatColor.GREEN.toString();
-                icon = StringEscapeUtils.unescapeJava("\u2713");
+                icon = StringEscapeUtils.unescapeJava("✓");
             } else {
                 color = ChatColor.RED.toString();
-                icon = StringEscapeUtils.unescapeJava("\u2717");
+                icon = StringEscapeUtils.unescapeJava("✗");
             }
 
             if (menu.getFilters().get(menu.getScrollIndex()).equals(filter)) {

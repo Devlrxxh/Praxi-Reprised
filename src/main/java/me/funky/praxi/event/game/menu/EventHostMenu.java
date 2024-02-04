@@ -1,6 +1,7 @@
 package me.funky.praxi.event.game.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.event.Event;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
@@ -8,6 +9,7 @@ import me.funky.praxi.util.TextSplitter;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.button.DisplayButton;
+import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Filter;
 
 public class EventHostMenu extends Menu {
 
@@ -27,26 +30,26 @@ public class EventHostMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&6Select an Event";
+        return Praxi.getInstance().getMenusConfig().getString("EVENTS.TITLE");
+    }
+
+    @Override
+    public int getSize() {
+        return Praxi.getInstance().getMenusConfig().getInteger("EVENTS.SIZE");
+    }
+
+    @Override
+    public Filters getFilter() {
+        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("EVENTS.FILTER"));
     }
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
 
-        int pos = 10;
-
         for (Event event : Event.events) {
-            buttons.put(pos++, new SelectEventButton(event));
+            buttons.put(13, new SelectEventButton(event));
         }
-
-        if (pos <= 16) {
-            for (int i = pos; i < 16; i++) {
-                buttons.put(i, new DisplayButton(new ItemBuilder(Material.STAINED_GLASS_PANE)
-                        .durability(7).name(" ").build(), true));
-            }
-        }
-
         return buttons;
     }
 

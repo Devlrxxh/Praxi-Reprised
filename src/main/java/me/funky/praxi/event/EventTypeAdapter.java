@@ -3,10 +3,7 @@ package me.funky.praxi.event;
 import me.funky.praxi.event.impl.sumo.SumoEvent;
 import me.funky.praxi.util.command.command.adapter.CommandTypeAdapter;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EventTypeAdapter implements CommandTypeAdapter {
 
@@ -24,7 +21,7 @@ public class EventTypeAdapter implements CommandTypeAdapter {
 
     @Override
     public <T> List<String> tabComplete(String string, Class<T> type) {
-        return Arrays.asList("Sumo", "Corners");
+        return Collections.singletonList("Sumo");
     }
 
 }

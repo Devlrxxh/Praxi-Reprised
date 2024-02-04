@@ -8,6 +8,7 @@ import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
+import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -29,8 +30,8 @@ public class PartyEventSelectEventMenu extends Menu {
     }
 
     @Override
-    public boolean getFill() {
-        return true;
+    public Filters getFilter() {
+        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("PARTY.EVENTS.FILTER"));
     }
 
     @Override

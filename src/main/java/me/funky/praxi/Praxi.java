@@ -216,7 +216,8 @@ public class Praxi extends JavaPlugin {
                 new MainCommand(),
                 new KitCommand(),
                 new FlyCommand(),
-                new SettingsCommand()
+                new SettingsCommand(),
+                new HostCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

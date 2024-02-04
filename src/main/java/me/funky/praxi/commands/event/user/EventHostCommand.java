@@ -46,7 +46,7 @@ public class EventHostCommand {
 
         if (event == null) {
             player.sendMessage(CC.RED + "That type of event does not exist.");
-            player.sendMessage(CC.RED + "Types: sumo, corners");
+            player.sendMessage(CC.RED + "Types: sumo");
             return;
         }
 
@@ -103,7 +103,7 @@ public class EventHostCommand {
 
         if (event == null) {
             player.sendMessage(CC.RED + "That type of event does not exist.");
-            player.sendMessage(CC.RED + "Types: sumo, corners");
+            player.sendMessage(CC.RED + "Types: sumo");
             return;
         }
 

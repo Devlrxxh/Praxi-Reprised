@@ -1,4 +1,6 @@
 QUEUES-MENUS:
+  FILTER: FILL
+  SIZE: 27
   UNRANKED:
     TITLE: "&7Join Unranked Queue"
     KIT-NAME: "&a<kit>"
@@ -20,16 +22,20 @@ QUEUES-MENUS:
       - ""
       - " &aClick to here play."
 PARTY:
+  FILTER: FILL
   EVENTS:
     TITLE: "&7Select an Event"
     SIZE: 27
+    FILTER: FILL
     EVENT-COLOR: "&b<event>"
     SELECT-KIT:
       TITLE: "&6Select a Kit"
   OTHER-PARTIES:
     TITLE: "&9Other Parties"
+    SIZE: 27
 KIT-EDITOR:
   TITLE: "&7Select a Kit"
+  FILTER: FILL
   KIT-NAME: "&b<kit>"
   SIZE: 27
   LORE:
@@ -53,6 +59,7 @@ KIT-EDITOR:
       LOAD-DEFAULT-BUTTON: "&eLoad Default Kit"
 DUEL:
   SIZE: 27
+  FILTER: FILL
   KIT-SELECTOR:
     TITLE: "&7Select a Kit"
     KIT-NAME: "&b<kit>"
@@ -61,5 +68,10 @@ DUEL:
     ARENA-NAME: "&b<arena>"
 SETTINGS:
   TITLE: "&7Settings"
+  FILTER: FILL
   SETTING-NAME: "&b<settings>"
+  SIZE: 27
+EVENTS:
+  TITLE: "&7Select an event"
+  FILTER: FILL
   SIZE: 27

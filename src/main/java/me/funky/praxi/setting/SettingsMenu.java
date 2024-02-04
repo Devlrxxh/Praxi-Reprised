@@ -10,6 +10,7 @@ import me.funky.praxi.util.assemble.events.AssembleBoardCreateEvent;
 import me.funky.praxi.util.assemble.events.AssembleBoardDestroyEvent;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
+import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -35,9 +36,10 @@ public class SettingsMenu extends Menu {
     }
 
     @Override
-    public boolean getFill() {
-        return true;
+    public Filters getFilter() {
+        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("SETTINGS.FILTER"));
     }
+
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {

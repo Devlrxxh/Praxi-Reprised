@@ -13,7 +13,7 @@ public class EventRemoveMapCommand {
     public void execute(Player player, @CPL("event") Event event, @CPL("map") EventGameMap gameMap) {
         if (event == null) {
             player.sendMessage(CC.RED + "An event type by that name does not exist.");
-            player.sendMessage(CC.RED + "Types: sumo, corners");
+            player.sendMessage(CC.RED + "Types: sumo");
             return;
         }
 

@@ -7,6 +7,8 @@ import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
+import me.funky.praxi.util.menu.Menu;
+import me.funky.praxi.util.menu.filters.Filters;
 import me.funky.praxi.util.menu.pagination.PaginatedMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,15 +21,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OtherPartiesMenu extends PaginatedMenu {
+public class OtherPartiesMenu extends Menu {
 
     @Override
-    public String getPrePaginatedTitle(Player player) {
+    public String getTitle(Player player) {
         return Praxi.getInstance().getMenusConfig().getString("PARTY.OTHER-PARTIES.TITLE");
+    }
+    @Override
+    public int getSize() {
+        return Praxi.getInstance().getMenusConfig().getInteger("PARTY.OTHER-PARTIES.SIZE");
     }
 
     @Override
-    public Map<Integer, Button> getAllPagesButtons(Player player) {
+    public Filters getFilter() {
+        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("PARTY.FILTER"));
+    }
+
+
+    @Override
+    public Map<Integer, Button> getButtons(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         Map<Integer, Button> buttons = new HashMap<>();

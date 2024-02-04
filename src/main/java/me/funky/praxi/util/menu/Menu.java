@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.util.CC;
+import me.funky.praxi.util.ItemBuilder;
+import me.funky.praxi.util.menu.button.DisplayButton;
+import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -29,8 +32,9 @@ public abstract class Menu {
     private Button placeholderButton = Button.placeholder(Material.STAINED_GLASS_PANE, (byte) 15, " ");
     private ItemStack fillerType;
     private int size = 9;
-    private boolean fill = false;
-
+    //private boolean border = false;
+    //private boolean fill = false;
+    private Filters filter;
     {
         setFillerType(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15));
         ItemMeta fillerMeta = getFillerType().getItemMeta();
@@ -48,20 +52,33 @@ public abstract class Menu {
         ItemStack fillerItem = this.fillerType;
 
         for (int i = 1; i <= 7 && size >= 18; i++) {
-            inventory.setItem(i, fillerItem);
-            inventory.setItem(size - i - 1, fillerItem);
+            if(inventory.getItem(i) == null){
+                inventory.setItem(i, fillerItem);
+                inventory.setItem(size - i - 1, fillerItem);
+            }
         }
 
         for (int i = 1; i <= 2 && size >= 18; i++) {
-            inventory.setItem(i * 9, fillerItem);
-            inventory.setItem(i * 9 + 8, fillerItem);
+            if(inventory.getItem(i) == null){
+                inventory.setItem(i * 9, fillerItem);
+                inventory.setItem(i * 9 + 8, fillerItem);
+            }
         }
-
         inventory.setItem(0, fillerItem);
         inventory.setItem(8, fillerItem);
         inventory.setItem(size - 9, fillerItem);
         inventory.setItem(size - 1, fillerItem);
     }
+
+    private void fill(Inventory inventory) {
+        int size = inventory.getSize();
+
+        for (int pos = 0; pos < size; pos++) {
+            if(inventory.getItem(pos) == null)
+                inventory.setItem(pos, fillerType);
+        }
+    }
+
 
 
     private ItemStack createItemStack(Player player, Button button) {
@@ -86,7 +103,7 @@ public abstract class Menu {
         Menu previousMenu = Menu.currentlyOpenedMenus.get(player.getName());
         Inventory inventory = null;
         int size = this.getSize() == -1 ? this.size(this.buttons) : this.getSize();
-        this.fill = getFill();
+        this.filter = getFilter();
         boolean update = false;
         String title = CC.translate(this.getTitle(player));
 
@@ -121,9 +138,15 @@ public abstract class Menu {
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
             inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
         }
-        if (fill) {
-            fillBorder(inventory);
+        switch (filter){
+            case BORDER:
+                fillBorder(inventory);
+                break;
+            case FILL:
+                fill(inventory);
+                break;
         }
+
 
         if (this.isPlaceholder()) {
             for (int index = 0; index < size; index++) {
@@ -160,9 +183,10 @@ public abstract class Menu {
         return -1;
     }
 
-    public boolean getFill() {
-        return false;
+    public Filters getFilter() {
+        return null;
     }
+
 
     public int getSlot(int x, int y) {
         return ((9 * y) + x);
