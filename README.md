@@ -2,4 +2,4 @@
 The most configurable, efficient, and extensive practice plugin.
 
 # Credits
-[Thanks to funkyranveer for giving me access to his fixed version of praxi](https://github.com/funkyranveer/praxi-nodependents) Click here to open repo!
+[Thanks to funkyranveer for giving me access to his fixed version of praxi](https://github.com/funkyranveer/praxi-nodependents)
