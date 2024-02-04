@@ -78,7 +78,7 @@ public class BukkitReflection {
         try {
             int ping = ENTITY_PLAYER_PING_FIELD.getInt(CRAFT_PLAYER_GET_HANDLE_METHOD.invoke(player));
 
-            return ping > 0 ? ping : 0;
+            return Math.max(ping, 0);
         } catch (Exception e) {
             return 1;
         }

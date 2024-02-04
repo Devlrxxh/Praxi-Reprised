@@ -5,16 +5,26 @@ import org.bukkit.potion.PotionEffectType;
 public class PotionUtil {
 
     public static String getName(PotionEffectType potionEffectType) {
-        if (potionEffectType.getName().equalsIgnoreCase("fire_resistance")) {
-            return "Fire Resistance";
-        } else if (potionEffectType.getName().equalsIgnoreCase("speed")) {
-            return "Speed";
-        } else if (potionEffectType.getName().equalsIgnoreCase("weakness")) {
-            return "Weakness";
-        } else if (potionEffectType.getName().equalsIgnoreCase("slowness")) {
-            return "Slowness";
-        } else {
-            return "Unknown";
+        switch (potionEffectType.getName()) {
+            case "fire_resistance": {
+                return "Fire Resistance";
+            }
+
+            case "speed": {
+                return "Fire Speed";
+            }
+
+            case "weakness": {
+                return "Weakness";
+            }
+
+            case "slowness": {
+                return "Slowness";
+            }
+
+            default: {
+                return "Unknown";
+            }
         }
     }
 

@@ -92,9 +92,9 @@ public class ArenaCommand extends BaseCommand {
 
             if (selection.isFullObject()) {
                 Arena arena;
-                if(arenaType.equals(ArenaType.SHARED)){
+                if (arenaType.equals(ArenaType.SHARED)) {
                     arena = new SharedArena(arenaName, selection.getPoint1(), selection.getPoint2());
-                }else{
+                } else {
                     arena = new StandaloneArena(arenaName, selection.getPoint1(), selection.getPoint2());
                 }
                 Arena.getArenas().add(arena);
@@ -337,7 +337,7 @@ public class ArenaCommand extends BaseCommand {
         if (arena != null) {
             if (pos.equals(SpawnType.A)) {
                 arena.setSpawnA(player.getLocation());
-            } else  {
+            } else {
                 arena.setSpawnB(player.getLocation());
             }
 

@@ -3,7 +3,6 @@ package me.funky.praxi.util;
 import me.funky.praxi.Praxi;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -65,10 +64,6 @@ public class PlayerUtil {
         player.setFoodLevel(20);
         player.setSprinting(true);
         player.removePotionEffect(PotionEffectType.JUMP);
-    }
-
-    public static int getPing(Player player) {
-        return (((CraftPlayer) player).getHandle()).ping;
     }
 
 }

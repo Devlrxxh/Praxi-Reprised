@@ -6,6 +6,7 @@ import me.funky.praxi.Locale;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
+import me.funky.praxi.util.BukkitReflection;
 import me.funky.praxi.util.ChatComponentBuilder;
 import me.funky.praxi.util.ChatHelper;
 import me.funky.praxi.util.PlayerUtil;
@@ -73,7 +74,7 @@ public class DuelProcedure {
         } else {
             sender.sendMessage(Locale.DUEL_SENT.format(kit.getName(), target.getName(), arena.getName()));
 
-            for (String msg : Locale.DUEL_RECEIVED.formatLines(kit.getName(), sender.getName(), arena.getName(), PlayerUtil.getPing(sender))) {
+            for (String msg : Locale.DUEL_RECEIVED.formatLines(kit.getName(), sender.getName(), arena.getName(), BukkitReflection.getPing(sender))) {
                 if (msg.contains("%CLICKABLE%")) {
                     ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(
                             sender.getName()

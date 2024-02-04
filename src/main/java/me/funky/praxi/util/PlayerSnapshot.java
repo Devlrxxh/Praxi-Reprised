@@ -6,11 +6,10 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@Getter
 public class PlayerSnapshot {
 
-    @Getter
     private final UUID uuid;
-    @Getter
     private final String username;
 
     public PlayerSnapshot(UUID uuid, String username) {

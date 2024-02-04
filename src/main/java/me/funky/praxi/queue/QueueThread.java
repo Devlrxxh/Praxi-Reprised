@@ -7,6 +7,7 @@ import me.funky.praxi.match.Match;
 import me.funky.praxi.match.impl.BasicTeamMatch;
 import me.funky.praxi.match.participant.MatchGamePlayer;
 import me.funky.praxi.participant.GameParticipant;
+import me.funky.praxi.util.BukkitReflection;
 import me.funky.praxi.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -93,10 +94,10 @@ public class QueueThread extends Thread {
                                     participantA, participantB);
 
 
-                            for (String line : Locale.MATCH_START.formatLines(secondPlayer.getName(), queueProfile.getQueue().getKit().getName(), PlayerUtil.getPing(secondPlayer))) {
+                            for (String line : Locale.MATCH_START.formatLines(secondPlayer.getName(), queueProfile.getQueue().getKit().getName(), BukkitReflection.getPing(secondPlayer))) {
                                 firstPlayer.sendMessage(line);
                             }
-                            for (String line : Locale.MATCH_START.formatLines(firstPlayer.getName(), queueProfile.getQueue().getKit().getName(), PlayerUtil.getPing(firstPlayer))) {
+                            for (String line : Locale.MATCH_START.formatLines(firstPlayer.getName(), queueProfile.getQueue().getKit().getName(), BukkitReflection.getPing(firstPlayer))) {
                                 secondPlayer.sendMessage(line);
                             }
                             match.getKit().removeQueue((byte) 2);

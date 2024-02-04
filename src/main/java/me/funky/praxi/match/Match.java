@@ -418,7 +418,7 @@ public abstract class Match {
                     if (player != null) {
                         VisibilityLogic.handle(player, dead);
                         sendDeathMessage(player, dead, killer);
-                        if(player != dead){
+                        if (player != dead) {
                             Profile winnerProfile = Profile.getByUuid(player.getUniqueId());
                             winnerProfile.getKitData().get(winnerProfile.getMatch().getKit()).incrementWon();
                         }

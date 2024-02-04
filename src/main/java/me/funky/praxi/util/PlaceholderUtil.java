@@ -7,7 +7,6 @@ import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.queue.QueueProfile;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public final class PlaceholderUtil {
             line = line.replaceAll("<queued>", String.valueOf(Praxi.getInstance().getCache().getPlayers().size()));
             line = line.replaceAll("<in-match>", String.valueOf(Praxi.getInstance().getCache().getMatches().size()));
             line = line.replaceAll("<player>", player.getName());
-            line = line.replaceAll("<ping>", String.valueOf((((CraftPlayer) player).getHandle()).ping));
+            line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
 
             if (profile.getState() == ProfileState.QUEUEING) {
                 line = line.replaceAll("<kit>", queueProfile.getQueue().getKit().getName());
@@ -44,7 +43,7 @@ public final class PlaceholderUtil {
                 Match match = profile.getMatch();
                 line = line.replaceAll("<opponent>", match.getOpponent(player).getName());
                 line = line.replaceAll("<duration>", match.getDuration());
-                line = line.replaceAll("<opponent-ping>", String.valueOf((((CraftPlayer) match.getOpponent(player)).getHandle()).ping));
+                line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player))));
             }
             formattedLines.add(line);
         }
