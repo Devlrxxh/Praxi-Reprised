@@ -17,5 +17,5 @@ The most configurable, efficient, and extensive practice plugin.
 ### Joeleoli - Made praxi
 
 # TODO
- - Add Stats Menu
+ - ~~Add Stats Menu~~
  - Add Boxing
