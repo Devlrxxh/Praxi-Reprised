@@ -50,7 +50,7 @@ public class StatsMenu extends Menu {
 
         for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
             if (!queue.isRanked()) {
-                buttons.put(i++, new SelectKitButton(queue));
+                buttons.put(i++, new KitStatsButton(queue));
             }
         }
         buttons.put(4, new GlobalStatsButton());
@@ -91,7 +91,7 @@ public class StatsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SelectKitButton extends Button {
+    private class KitStatsButton extends Button {
 
         private Queue queue;
 
