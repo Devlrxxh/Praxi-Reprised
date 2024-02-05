@@ -1,5 +1,9 @@
+FILTER:
+  NAME: " "
+  MATERIAL: "STAINED_GLASS_PANE"
+  DURABILITY: 15
 QUEUES-MENUS:
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   SIZE: 27
   UNRANKED:
     TITLE: "&7Join Unranked Queue"
@@ -22,7 +26,7 @@ QUEUES-MENUS:
       - ""
       - " &aClick to here play."
 PARTY:
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   EVENTS:
     TITLE: "&7Select an Event"
     SIZE: 27
@@ -35,7 +39,7 @@ PARTY:
     SIZE: 27
 KIT-EDITOR:
   TITLE: "&7Select a Kit"
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   KIT-NAME: "&b<kit>"
   SIZE: 27
   LORE:
@@ -59,7 +63,7 @@ KIT-EDITOR:
       LOAD-DEFAULT-BUTTON: "&eLoad Default Kit"
 DUEL:
   SIZE: 27
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   KIT-SELECTOR:
     TITLE: "&7Select a Kit"
     KIT-NAME: "&b<kit>"
@@ -68,11 +72,11 @@ DUEL:
     ARENA-NAME: "&b<arena>"
 SETTINGS:
   TITLE: "&7Settings"
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   SETTING-NAME: "&b<settings>"
   SIZE: 27
 EVENTS:
   TITLE: "&7Select an event"
-  FILTER: FILL
+  FILTER: FILL # THERE IS FILL AND BRODER
   SIZE: 27
   EVENT-NAME: "&a<event>"

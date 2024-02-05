@@ -26,8 +26,6 @@ public abstract class Menu {
     private boolean autoUpdate = false;
     private boolean updateAfterClick = true;
     private boolean closedByMenu = false;
-    private boolean placeholder = false;
-    private Button placeholderButton = Button.placeholder(Material.STAINED_GLASS_PANE, (byte) 15, " ");
     private ItemStack fillerType;
     private int size = 9;
     //private boolean border = false;
@@ -35,10 +33,12 @@ public abstract class Menu {
     private Filters filter;
 
     {
-        fillerType = (new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15));
+        fillerType = (new ItemStack(Material.valueOf(Praxi.getInstance().getMenusConfig().getString("FILTER.MATERIAL")), 1
+                , (short) Praxi.getInstance().getMenusConfig().getInteger("FILTER.DURABILITY")));
         ItemMeta fillerMeta = fillerType.getItemMeta();
+
         if (fillerMeta != null) {
-            fillerMeta.setDisplayName(" ");
+            fillerMeta.setDisplayName(Praxi.getInstance().getMenusConfig().getString("FILTER.NAME"));
             fillerType.setItemMeta(fillerMeta);
         }
     }
@@ -145,15 +145,6 @@ public abstract class Menu {
                 break;
         }
 
-
-        if (this.isPlaceholder()) {
-            for (int index = 0; index < size; index++) {
-                if (this.buttons.get(index) == null) {
-                    this.buttons.put(index, this.placeholderButton);
-                    inventory.setItem(index, this.placeholderButton.getButtonItem(player));
-                }
-            }
-        }
 
         if (update) {
             player.updateInventory();

@@ -25,10 +25,6 @@ import java.util.Map;
 
 public class EventHostMenu extends Menu {
 
-    {
-        setPlaceholder(true);
-    }
-
     @Override
     public String getTitle(Player player) {
         return Praxi.getInstance().getMenusConfig().getString("EVENTS.TITLE");
