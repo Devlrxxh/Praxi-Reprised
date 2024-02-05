@@ -15,3 +15,7 @@ The most configurable, efficient, and extensive practice plugin.
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
+
+# TODO
+ - Add Stats Menu
+ - Add Boxing
