@@ -192,6 +192,23 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.GREEN + "You updated the kit's description.");
     }
 
+    @Subcommand("setdescription")
+    @CommandCompletion("@kits")
+    @Syntax("<kit> <description>")
+    public void setdescription2(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.setDescription("none");
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's description.");
+    }
+
     @Subcommand("build")
     @CommandCompletion("@kits")
     @Syntax("<kit>")
@@ -206,7 +223,7 @@ public class KitCommand extends BaseCommand {
         kit.getGameRules().setBuild(!kit.getGameRules().isBuild());
         kit.save();
 
-        player.sendMessage(CC.GREEN + "You updated the kit's build status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+        player.sendMessage(CC.GREEN + "You updated the kit's build status to " + (kit.getGameRules().isBuild() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
     @Subcommand("spleef")
@@ -223,7 +240,7 @@ public class KitCommand extends BaseCommand {
         kit.getGameRules().setSpleef(!kit.getGameRules().isSpleef());
         kit.save();
 
-        player.sendMessage(CC.GREEN + "You updated the kit's spleef status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+        player.sendMessage(CC.GREEN + "You updated the kit's spleef status to " + (kit.getGameRules().isSpleef() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
     @Subcommand("sumo")
@@ -240,7 +257,7 @@ public class KitCommand extends BaseCommand {
         kit.getGameRules().setSumo(!kit.getGameRules().isSumo());
         kit.save();
 
-        player.sendMessage(CC.GREEN + "You updated the kit's sumo status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+        player.sendMessage(CC.GREEN + "You updated the kit's sumo status to " + (kit.getGameRules().isSumo() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
     @Subcommand("hpregen")
@@ -257,7 +274,7 @@ public class KitCommand extends BaseCommand {
         kit.getGameRules().setHealthRegeneration(!kit.getGameRules().isHealthRegeneration());
         kit.save();
 
-        player.sendMessage(CC.GREEN + "You updated the kit's health regeneration status to " + (kit.isEnabled() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+        player.sendMessage(CC.GREEN + "You updated the kit's health regeneration status to " + (kit.getGameRules().isShowHealth() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
     @Subcommand("hitdelay")
