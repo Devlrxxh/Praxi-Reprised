@@ -389,21 +389,18 @@ public abstract class Match {
         Player killer = PlayerUtil.getLastAttacker(dead);
         if (killer != null) {
             Profile killerProfile = Profile.getByUuid(killer.getUniqueId());
-
+            Location location = dead.getLocation();
+            World world = location.getWorld();
             switch (killerProfile.getOptions().killEffect()) {
                 case LIGHTNING:
-                    Location location = dead.getLocation();
                     double x = location.getX();
                     double y = location.getY() + 2.0;
                     double z = location.getZ();
-                    World world = location.getWorld();
                     Location lightningLocation = new Location(world, x, y, z);
                     world.strikeLightning(lightningLocation);
                     break;
                 case FIREWORKS:
-                    Location location2 = dead.getLocation();
-                    World world2 = location2.getWorld();
-                    Firework firework = world2.spawn(location2, Firework.class);
+                    Firework firework = world.spawn(location, Firework.class);
                     FireworkMeta meta = firework.getFireworkMeta();
                     FireworkEffect.Builder builder = FireworkEffect.builder()
                             .withColor(Color.RED)
