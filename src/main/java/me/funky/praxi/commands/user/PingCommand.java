@@ -15,13 +15,13 @@ import org.bukkit.entity.Player;
 public class PingCommand extends BaseCommand {
 
     @Default
-    public void ping(Player player){
+    public void ping(Player player) {
         player.sendMessage(Locale.PING_YOUR.format(BukkitReflection.getPing(player)));
     }
 
     @Default
     @CommandCompletion("@names")
-    public void pingOthers(Player player, String otherPlayer){
+    public void pingOthers(Player player, String otherPlayer) {
         player.sendMessage(Locale.PING_OTHERS.format(BukkitReflection.getPing(Bukkit.getPlayer(otherPlayer)), Bukkit.getPlayer(otherPlayer).getName()));
     }
 }

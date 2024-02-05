@@ -2,6 +2,7 @@ package me.funky.praxi.setting;
 
 import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
+import me.funky.praxi.profile.KillEffects;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.ItemBuilder;
@@ -121,6 +122,49 @@ public class SettingsMenu extends Menu {
                     lore.add("&aClick to enable");
                     break;
                 }
+                case KILL_EFFECTS: {
+                    switch (profile.getOptions().killEffect()) {
+                        case NONE:
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.NONE.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
+                            lore.add("&7&l* &a" + KillEffects.NONE.getDisplayName());
+                            for (KillEffects killEffects : KillEffects.values()) {
+                                if (killEffects != KillEffects.NONE) {
+                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                }
+                            }
+                            break;
+                        case LIGHTNING:
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.LIGHTNING.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
+                            lore.add("&7&l* &a" + KillEffects.LIGHTNING.getDisplayName());
+                            for (KillEffects killEffects : KillEffects.values()) {
+                                if (killEffects != KillEffects.LIGHTNING) {
+                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                }
+                            }
+                            break;
+                        case FIREWORKS: {
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.FIREWORKS.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
+                            lore.add("&7&l* &a" + KillEffects.FIREWORKS.getDisplayName());
+                            for (KillEffects killEffects : KillEffects.values()) {
+                                if (killEffects != KillEffects.FIREWORKS) {
+                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    lore.add("");
+                    lore.add("&aClick to select");
+                }
             }
             return new ItemBuilder(this.settings.getMaterial()).name(Praxi.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
         }
@@ -165,6 +209,22 @@ public class SettingsMenu extends Menu {
                     }
                     VisibilityLogic.handle(player);
                     break;
+                }
+                case KILL_EFFECTS: {
+                    switch (profile.getOptions().killEffect()) {
+                        case NONE:
+                            profile.getOptions().killEffect(KillEffects.LIGHTNING);
+                            break;
+                        case LIGHTNING:
+                            profile.getOptions().killEffect(KillEffects.FIREWORKS);
+
+                            break;
+                        case FIREWORKS: {
+                            profile.getOptions().killEffect(KillEffects.NONE);
+                            break;
+                        }
+                    }
+                    player.sendMessage(Locale.OPTIONS_KILLEFFECT_SELECT.format(profile.getOptions().killEffect().getDisplayName()));
                 }
             }
             new SettingsMenu().openMenu(player);

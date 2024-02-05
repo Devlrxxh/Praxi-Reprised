@@ -176,6 +176,7 @@ public class Profile {
         this.options.showScoreboard(options.getBoolean("showScoreboard"));
         this.options.allowSpectators(options.getBoolean("allowSpectators"));
         this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
+        this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -225,6 +226,7 @@ public class Profile {
         optionsDocument.put("showScoreboard", options.showScoreboard());
         optionsDocument.put("allowSpectators", options.allowSpectators());
         optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
+        optionsDocument.put("killeffect", options.killEffect().toString());
         document.put("options", optionsDocument);
 
         Document kitStatisticsDocument = new Document();

@@ -50,6 +50,7 @@ import me.funky.praxi.util.assemble.Assemble;
 import me.funky.praxi.util.command.Honcho;
 import me.funky.praxi.util.config.BasicConfigurationFile;
 import me.funky.praxi.util.menu.MenuListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
@@ -121,6 +122,7 @@ public class Praxi extends JavaPlugin {
         loadCommandManager();
         assemble = new Assemble(this, new ScoreboardAdapter());
         new QueueThread().start();
+        new Metrics(this, 20915);
 
         getHoncho().registerTypeAdapter(Arena.class, new ArenaTypeAdapter());
         getHoncho().registerTypeAdapter(ArenaType.class, new ArenaTypeTypeAdapter());
@@ -129,7 +131,7 @@ public class Praxi extends JavaPlugin {
         getHoncho().registerTypeAdapter(Event.class, new EventTypeAdapter());
 
         Arrays.asList(
-                new DuelCommand (),
+                new DuelCommand(),
                 new DuelAcceptCommand(),
                 new EventMapCreateCommand(),
                 new EventMapDeleteCommand(),

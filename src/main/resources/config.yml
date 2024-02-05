@@ -30,6 +30,7 @@ OPTIONS:
   SPECTATORS_DISABLED: '&cDisabled Spectators!'
   SHOWPLAYERS_ENABLED: '&aShowen players!'
   SHOWPLAYERS_DISABLED: '&cHidden all players!'
+  KILL_EFFECTS_SELECT: '&aYou have selected {0}!'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'

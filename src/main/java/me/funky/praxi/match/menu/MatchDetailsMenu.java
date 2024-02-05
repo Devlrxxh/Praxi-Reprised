@@ -75,35 +75,6 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SwitchInventoryButton extends Button {
-
-        private UUID opponent;
-
-        @Override
-        public ItemStack getButtonItem(Player player) {
-            MatchSnapshot snapshot = MatchSnapshot.getByUuid(opponent);
-
-            if (snapshot != null) {
-                return new ItemBuilder(Material.LEVER)
-                        .name("&6Opponent's Inventory")
-                        .lore("&eSwitch to &a" + snapshot.getUsername() + "&e's inventory")
-                        .clearFlags()
-                        .build();
-            } else {
-                return new ItemStack(Material.AIR);
-            }
-        }
-
-        @Override
-        public void clicked(Player player, ClickType clickType) {
-            if (snapshot.getOpponent() != null) {
-                player.chat("/viewinv " + snapshot.getOpponent());
-            }
-        }
-
-    }
-
-    @AllArgsConstructor
     private static class HealthButton extends Button {
 
         private double health;
@@ -113,22 +84,6 @@ public class MatchDetailsMenu extends Menu {
             return new ItemBuilder(Material.MELON)
                     .name("&dHealth: &e" + health + "/10 &4" + StringEscapeUtils.unescapeJava("❤"))
                     .amount((int) (health == 0 ? 1 : health))
-                    .clearFlags()
-                    .build();
-        }
-
-    }
-
-    @AllArgsConstructor
-    private class HungerButton extends Button {
-
-        private int hunger;
-
-        @Override
-        public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.COOKED_BEEF)
-                    .name("&dHunger: &e" + hunger + "/20")
-                    .amount(hunger == 0 ? 1 : hunger)
                     .clearFlags()
                     .build();
         }
@@ -198,6 +153,51 @@ public class MatchDetailsMenu extends Menu {
                             "&dPotions Missed: &e" + snapshot.getPotionsMissed(),
                             "&dPotion Accuracy: &e" + snapshot.getPotionAccuracy()
                     ))
+                    .clearFlags()
+                    .build();
+        }
+
+    }
+
+    @AllArgsConstructor
+    private class SwitchInventoryButton extends Button {
+
+        private UUID opponent;
+
+        @Override
+        public ItemStack getButtonItem(Player player) {
+            MatchSnapshot snapshot = MatchSnapshot.getByUuid(opponent);
+
+            if (snapshot != null) {
+                return new ItemBuilder(Material.LEVER)
+                        .name("&6Opponent's Inventory")
+                        .lore("&eSwitch to &a" + snapshot.getUsername() + "&e's inventory")
+                        .clearFlags()
+                        .build();
+            } else {
+                return new ItemStack(Material.AIR);
+            }
+        }
+
+        @Override
+        public void clicked(Player player, ClickType clickType) {
+            if (snapshot.getOpponent() != null) {
+                player.chat("/viewinv " + snapshot.getOpponent());
+            }
+        }
+
+    }
+
+    @AllArgsConstructor
+    private class HungerButton extends Button {
+
+        private int hunger;
+
+        @Override
+        public ItemStack getButtonItem(Player player) {
+            return new ItemBuilder(Material.COOKED_BEEF)
+                    .name("&dHunger: &e" + hunger + "/20")
+                    .amount(hunger == 0 ? 1 : hunger)
                     .clearFlags()
                     .build();
         }

@@ -34,7 +34,6 @@ public class MatchLogicTask extends BukkitRunnable {
     public void run() {
         totalTicked++;
         nextAction--;
-
         if (match.getState() == MatchState.STARTING_ROUND) {
             if (match.getKit().getGameRules().isSumo()) {
                 for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
