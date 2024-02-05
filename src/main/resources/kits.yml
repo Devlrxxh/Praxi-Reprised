@@ -1,21 +1,20 @@
 kits:
-  Classic:
+  BuildUHC:
     enabled: true
-    description: '&7Kit with no enchantments'
+    description: '&7Ultra Hardcore'
     icon:
-      material: DIAMOND_SWORD
+      material: LAVA_BUCKET
       durability: 0
     loadout:
-      armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
-      contents: t@276:e@16@3:e@20@2;t@368:a@16;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8259:pd@3-1=12-9600-0;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16388:pd@4-1=19-676-0;t@373:d@16426:pd@10-2=2-1351-0;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16388:pd@4-1=19-676-0;t@373:d@16426:pd@10-2=2-1351-0;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@8226:pd@2-2=1-1800-1;
+      armor: t@313:e@4@2:e@34@3;t@312:e@0@1:e@34@3;t@311:e@0@1:e@34@3;t@310:e@4@2:e@34@3;
+      contents: t@276:e@16@1:e@34@3;t@346:e@34@3;t@261:e@48@2:e@34@3;t@322:a@6;t@322:a@3:dn@ยง6Golden Head;t@327;t@326;t@4:a@64;t@278;t@262:a@64;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;t@327;t@326;t@4:a@64;t@279;
     game-rules:
-      build: false
       sumo: false
       spleef: false
       parkour: false
       health-regeneration: true
       hit-delay: 20
-      allow-build: false
+      allow-build: true
       show-health: false
     edit-rules:
       allow-potion-fill: false
@@ -44,6 +43,25 @@ kits:
           material: POTION
           amount: 1
           durability: 8226
+  Classic:
+    enabled: true
+    description: '&7Kit with no enchantments'
+    icon:
+      material: DIAMOND_SWORD
+      durability: 0
+    loadout:
+      armor: t@309;t@308;t@307;t@306;
+      contents: t@276;t@346;t@261;t@322:a@8;null;null;null;null;null;null;null;null;null;null;null;null;null;t@262:a@12;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+    game-rules:
+      sumo: false
+      spleef: false
+      parkour: false
+      health-regeneration: true
+      hit-delay: 20
+      allow-build: false
+      show-health: false
+    edit-rules:
+      allow-potion-fill: false
   NoDebuff:
     enabled: true
     description: '&7The PotPvP'
@@ -103,3 +121,18 @@ kits:
       show-health: false
     edit-rules:
       allow-potion-fill: false
+  Skywars:
+    enabled: true
+    description: 'none'
+    icon:
+      material: EYE_OF_ENDER
+      durability: 0
+    loadout:
+      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
+      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      health-regeneration: false
+      hit-delay: 20

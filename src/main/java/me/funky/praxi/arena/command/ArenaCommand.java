@@ -85,7 +85,7 @@ public class ArenaCommand extends BaseCommand {
 
 
     @Subcommand("create")
-    @Syntax("<arena>")
+    @Syntax("<arena> <arenaType>")
     public void create(Player player, String arenaName, ArenaType arenaType) {
         if (Arena.getByName(arenaName) == null) {
             Selection selection = Selection.createOrGetSelection(player);

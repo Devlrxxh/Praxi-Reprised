@@ -125,10 +125,6 @@ public class SettingsMenu extends Menu {
                 case KILL_EFFECTS: {
                     switch (profile.getOptions().killEffect()) {
                         case NONE:
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.NONE.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             lore.add("&7&l* &a" + KillEffects.NONE.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.NONE) {
@@ -137,10 +133,6 @@ public class SettingsMenu extends Menu {
                             }
                             break;
                         case LIGHTNING:
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.LIGHTNING.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             lore.add("&7&l* &a" + KillEffects.LIGHTNING.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.LIGHTNING) {
@@ -149,10 +141,6 @@ public class SettingsMenu extends Menu {
                             }
                             break;
                         case FIREWORKS: {
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.FIREWORKS.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             lore.add("&7&l* &a" + KillEffects.FIREWORKS.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.FIREWORKS) {
@@ -213,13 +201,25 @@ public class SettingsMenu extends Menu {
                 case KILL_EFFECTS: {
                     switch (profile.getOptions().killEffect()) {
                         case NONE:
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.NONE.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
                             profile.getOptions().killEffect(KillEffects.LIGHTNING);
                             break;
                         case LIGHTNING:
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.LIGHTNING.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
                             profile.getOptions().killEffect(KillEffects.FIREWORKS);
 
                             break;
                         case FIREWORKS: {
+                            if (!player.hasPermission("praxi.killeffect." + KillEffects.FIREWORKS.getDisplayName())) {
+                                player.sendMessage("&cYou don't have permission to use this kill effect");
+                                break;
+                            }
                             profile.getOptions().killEffect(KillEffects.NONE);
                             break;
                         }
