@@ -101,7 +101,7 @@ public abstract class Menu {
         Menu previousMenu = Menu.currentlyOpenedMenus.get(player.getName());
         Inventory inventory = null;
         int size = this.getSize() == -1 ? this.size(this.buttons) : this.getSize();
-        if(getFilter() != null){
+        if (getFilter() != null) {
             this.filter = getFilter();
         }
         boolean update = false;

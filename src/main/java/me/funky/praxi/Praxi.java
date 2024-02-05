@@ -16,6 +16,7 @@ import me.funky.praxi.commands.event.map.*;
 import me.funky.praxi.commands.event.user.HostCommand;
 import me.funky.praxi.commands.event.vote.EventMapVoteCommand;
 import me.funky.praxi.commands.user.PingCommand;
+import me.funky.praxi.commands.user.StatsCommand;
 import me.funky.praxi.commands.user.duels.DuelAcceptCommand;
 import me.funky.praxi.commands.user.duels.DuelCommand;
 import me.funky.praxi.commands.user.duels.RematchCommand;
@@ -199,7 +200,8 @@ public class Praxi extends JavaPlugin {
                 new FlyCommand(),
                 new SettingsCommand(),
                 new HostCommand(),
-                new PingCommand()
+                new PingCommand(),
+                new StatsCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

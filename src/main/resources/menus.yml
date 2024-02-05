@@ -80,3 +80,20 @@ EVENTS:
   FILTER: FILL # THERE IS FILL AND BRODER
   SIZE: 27
   EVENT-NAME: "&a<event>"
+STATS:
+  TITLE: "&7Your Stats"
+  SIZE: 27
+  KIT-NAME: "&a<kit>"
+  FILTER: FILL # THERE IS FILL AND BRODER
+  LORE:
+    - "<description>"
+    - " "
+    - " &7* &fWins: &b<wins>"
+    - " &7* &fLoses: &b<loses>"
+    - " &7* &fElo: &b<elo>"
+  GLOBAL-STATS:
+    GLOBAL-STATS-NAME: "&aGlobal Stats"
+    LORE:
+      - " &7* &fWins: &b<wins>"
+      - " &7* &fLoses: &b<loses>"
+      - " &7* &fElo: &b<elo>"

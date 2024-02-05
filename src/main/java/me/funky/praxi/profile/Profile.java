@@ -133,6 +133,31 @@ public class Profile {
         return wins;
     }
 
+    public int getLoses() {
+        int loses = 0;
+        for (Map.Entry<Kit, ProfileKitData> entry : this.getKitData().entrySet()) {
+            ProfileKitData profileKitData = entry.getValue();
+            loses += profileKitData.getLost();
+        }
+        return loses;
+    }
+
+    public int getElo() {
+        int elo = 0;
+        int totalQueue = 0;
+
+        for (Map.Entry<Kit, ProfileKitData> entry : this.getKitData().entrySet()) {
+            ProfileKitData profileKitData = entry.getValue();
+            elo += profileKitData.getElo();
+            totalQueue++;
+        }
+        if (totalQueue == 0) {
+            return 0;
+        }
+        return elo / totalQueue;
+    }
+
+
     public Player getPlayer() {
         return Bukkit.getPlayer(uuid);
     }
