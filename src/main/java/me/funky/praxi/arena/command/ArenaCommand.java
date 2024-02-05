@@ -80,6 +80,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena generate &7- &fArena Generator"));
         player.sendMessage(CC.translate("&7* &c/arena list &7- &fList all arenas"));
         player.sendMessage(CC.translate("&7* &c/arena setspawn &7<arena> &7<a/b> &7- &fSet arena spawns"));
+        player.sendMessage(CC.translate("&7* &c/arena tp &7<arena> &7- &fTeleport arena"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -250,6 +251,22 @@ public class ArenaCommand extends BaseCommand {
 
         player.sendMessage(ChatColor.GOLD + "Removed kit \"" + kit.getName() +
                 "\" from arena \"" + arena.getName() + "\"");
+    }
+
+    @Subcommand("tp")
+    @CommandCompletion("@arenas")
+    @Syntax("<arena>")
+    public void tp(Player player, String arenaName) {
+        if (checkArena(arenaName)) {
+            player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
+            return;
+        }
+
+        Arena arena = Arena.getByName(arenaName);
+        if (arena == null) return;
+
+        player.teleport(arena.getSpawnA());
+        player.sendMessage(ChatColor.GREEN + "Teleported to arena " + arena.getName());
     }
 
     @Subcommand("generate")
