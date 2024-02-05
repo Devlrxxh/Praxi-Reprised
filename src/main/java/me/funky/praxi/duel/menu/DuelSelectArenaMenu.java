@@ -79,7 +79,7 @@ public class DuelSelectArenaMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SelectArenaButton extends Button {
+    private static class SelectArenaButton extends Button {
 
         private Arena arena;
 

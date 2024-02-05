@@ -104,7 +104,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class HealthButton extends Button {
+    private static class HealthButton extends Button {
 
         private double health;
 
@@ -136,7 +136,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class EffectsButton extends Button {
+    private static class EffectsButton extends Button {
 
         private Collection<PotionEffect> effects;
 
@@ -164,7 +164,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class PotionsButton extends Button {
+    private static class PotionsButton extends Button {
 
         private String name;
         private int potions;
@@ -183,7 +183,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class StatisticsButton extends Button {
+    private static class StatisticsButton extends Button {
 
         private MatchSnapshot snapshot;
 

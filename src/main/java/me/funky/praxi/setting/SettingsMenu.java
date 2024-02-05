@@ -51,7 +51,7 @@ public class SettingsMenu extends Menu {
         return buttons;
     }
 
-    private class SettingsButton extends Button {
+    private static class SettingsButton extends Button {
         private final Settings settings;
 
         public SettingsButton(Settings settings) {

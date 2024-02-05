@@ -11,11 +11,11 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 @RequiredArgsConstructor
 public class ViewAllPagesMenu extends Menu {
 
     @NonNull
-    @Getter
     PaginatedMenu menu;
 
     @Override

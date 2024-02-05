@@ -114,7 +114,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class ArmorDisplayButton extends Button {
+    private static class ArmorDisplayButton extends Button {
 
         private ItemStack itemStack;
 
@@ -134,7 +134,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class CurrentKitButton extends Button {
+    private static class CurrentKitButton extends Button {
 
         @Override
         public ItemStack getButtonItem(Player player) {
@@ -150,7 +150,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class ClearInventoryButton extends Button {
+    private static class ClearInventoryButton extends Button {
 
         @Override
         public ItemStack getButtonItem(Player player) {
@@ -177,7 +177,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class LoadDefaultKitButton extends Button {
+    private static class LoadDefaultKitButton extends Button {
 
         @Override
         public ItemStack getButtonItem(Player player) {
@@ -207,7 +207,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SaveButton extends Button {
+    private static class SaveButton extends Button {
 
         @Override
         public ItemStack getButtonItem(Player player) {
@@ -237,7 +237,7 @@ public class KitEditorMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class CancelButton extends Button {
+    private static class CancelButton extends Button {
 
         private int index;
 
@@ -266,7 +266,7 @@ public class KitEditorMenu extends Menu {
 
     }
 
-    private class InfiniteItemButton extends DisplayButton {
+    private static class InfiniteItemButton extends DisplayButton {
 
         InfiniteItemButton(ItemStack itemStack) {
             super(itemStack, false);

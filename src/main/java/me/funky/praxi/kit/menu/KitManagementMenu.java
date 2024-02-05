@@ -70,7 +70,7 @@ public class KitManagementMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class DeleteKitButton extends Button {
+    private static class DeleteKitButton extends Button {
 
         private Kit kit;
         private KitLoadout kitLoadout;
@@ -94,7 +94,7 @@ public class KitManagementMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class CreateKitButton extends Button {
+    private static class CreateKitButton extends Button {
 
         private int index;
 
@@ -138,7 +138,7 @@ public class KitManagementMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class RenameKitButton extends Button {
+    private static class RenameKitButton extends Button {
 
         private Kit kit;
         private KitLoadout kitLoadout;
@@ -168,7 +168,7 @@ public class KitManagementMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class LoadKitButton extends Button {
+    private static class LoadKitButton extends Button {
 
         private int index;
 
@@ -207,7 +207,7 @@ public class KitManagementMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class KitDisplayButton extends Button {
+    private static class KitDisplayButton extends Button {
 
         private KitLoadout kitLoadout;
 

@@ -48,7 +48,7 @@ public class PartyEventSelectKitMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SelectKitButton extends Button {
+    private static class SelectKitButton extends Button {
 
         private PartyEvent partyEvent;
         private Kit kit;

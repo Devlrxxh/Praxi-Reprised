@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public abstract class PaginatedMenu extends Menu {
 
-    @Getter
     private int page = 1;
 
     {
@@ -44,13 +44,13 @@ public abstract class PaginatedMenu extends Menu {
             return 1;
         }
 
-        return (int) Math.ceil(buttonAmount / (double) getMaxItemsPerPage(player));
+        return (int) Math.ceil(buttonAmount / (double) getMaxItemsPerPage());
     }
 
     @Override
     public final Map<Integer, Button> getButtons(Player player) {
-        int minIndex = (int) ((double) (page - 1) * getMaxItemsPerPage(player));
-        int maxIndex = (int) ((double) (page) * getMaxItemsPerPage(player));
+        int minIndex = (int) ((double) (page - 1) * getMaxItemsPerPage());
+        int maxIndex = (int) ((double) (page) * getMaxItemsPerPage());
         int topIndex = 0;
 
         HashMap<Integer, Button> buttons = new HashMap<>();
@@ -59,7 +59,7 @@ public abstract class PaginatedMenu extends Menu {
             int ind = entry.getKey();
 
             if (ind >= minIndex && ind < maxIndex) {
-                ind -= (int) ((double) (getMaxItemsPerPage(player)) * (page - 1)) - 9;
+                ind -= (int) ((double) (getMaxItemsPerPage()) * (page - 1)) - 9;
                 buttons.put(ind, entry.getValue());
 
                 if (ind > topIndex) {
@@ -71,22 +71,17 @@ public abstract class PaginatedMenu extends Menu {
         buttons.put(0, new PageButton(-1, this));
         buttons.put(8, new PageButton(1, this));
 
-        for (int i = 1; i < 8; i++) {
-            buttons.put(i, getPlaceholderButton());
-        }
 
         Map<Integer, Button> global = getGlobalButtons(player);
 
         if (global != null) {
-            for (Map.Entry<Integer, Button> gent : global.entrySet()) {
-                buttons.put(gent.getKey(), gent.getValue());
-            }
+            buttons.putAll(global);
         }
 
         return buttons;
     }
 
-    public int getMaxItemsPerPage(Player player) {
+    public int getMaxItemsPerPage() {
         return 18;
     }
 

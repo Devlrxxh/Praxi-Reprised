@@ -13,6 +13,9 @@ JOIN_MESSAGE:
   - ' &f✦ &bStore: &fstore.lunar.gg'
   - ' '
   - '&7&m--------------------------------'
+PING:
+  YOUR: "&bYour ping is &f{0}"
+  OTHERS: "&b{1}''s ping is &f{0}"
 KIT_EDITOR:
   START_RENAMING: '&eNow renaming &7{0}&e... Enter the new name now. &7&o(Chat colors
     work)'

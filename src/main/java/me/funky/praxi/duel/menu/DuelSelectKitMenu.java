@@ -57,7 +57,7 @@ public class DuelSelectKitMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SelectKitButton extends Button {
+    private static class SelectKitButton extends Button {
 
         private Kit kit;
 

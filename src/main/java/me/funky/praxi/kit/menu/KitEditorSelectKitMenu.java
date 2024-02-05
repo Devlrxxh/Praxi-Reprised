@@ -49,7 +49,7 @@ public class KitEditorSelectKitMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class KitDisplayButton extends Button {
+    private static class KitDisplayButton extends Button {
 
         private Kit kit;
 

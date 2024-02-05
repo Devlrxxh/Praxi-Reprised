@@ -70,7 +70,7 @@ public class DuelCommand {
             return;
         }
 
-        if (senderProfile.getParty() != null && targetProfile.getParty() != null) {
+        if (senderProfile.getParty() != null) {
             if (senderProfile.getParty().equals(targetProfile.getParty())) {
                 sender.sendMessage(CC.RED + "You cannot duel your own party.");
                 return;

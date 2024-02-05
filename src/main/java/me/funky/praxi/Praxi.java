@@ -15,17 +15,14 @@ import me.funky.praxi.commands.donater.FlyCommand;
 import me.funky.praxi.commands.event.map.*;
 import me.funky.praxi.commands.event.user.HostCommand;
 import me.funky.praxi.commands.event.vote.EventMapVoteCommand;
+import me.funky.praxi.commands.user.PingCommand;
 import me.funky.praxi.commands.user.duels.DuelAcceptCommand;
 import me.funky.praxi.commands.user.duels.DuelCommand;
 import me.funky.praxi.commands.user.duels.RematchCommand;
-import me.funky.praxi.commands.user.gamer.SuicideCommand;
 import me.funky.praxi.commands.user.match.SpectateCommand;
 import me.funky.praxi.commands.user.match.StopSpectatingCommand;
 import me.funky.praxi.commands.user.match.ViewInventoryCommand;
 import me.funky.praxi.commands.user.party.*;
-import me.funky.praxi.commands.user.settings.ToggleDuelRequestsCommand;
-import me.funky.praxi.commands.user.settings.ToggleScoreboardCommand;
-import me.funky.praxi.commands.user.settings.ToggleSpectatorsCommand;
 import me.funky.praxi.essentials.Essentials;
 import me.funky.praxi.event.Event;
 import me.funky.praxi.event.EventTypeAdapter;
@@ -132,7 +129,7 @@ public class Praxi extends JavaPlugin {
         getHoncho().registerTypeAdapter(Event.class, new EventTypeAdapter());
 
         Arrays.asList(
-                new DuelCommand(),
+                new DuelCommand (),
                 new DuelAcceptCommand(),
                 new EventMapCreateCommand(),
                 new EventMapDeleteCommand(),
@@ -154,11 +151,7 @@ public class Praxi extends JavaPlugin {
                 new PartyKickCommand(),
                 new PartyLeaveCommand(),
                 new PartyOpenCommand(),
-                new ViewInventoryCommand(),
-                new ToggleScoreboardCommand(),
-                new ToggleSpectatorsCommand(),
-                new ToggleDuelRequestsCommand(),
-                new SuicideCommand()
+                new ViewInventoryCommand()
         ).forEach(command -> getHoncho().registerCommand(command));
 
         Arrays.asList(
@@ -203,7 +196,8 @@ public class Praxi extends JavaPlugin {
                 new KitCommand(),
                 new FlyCommand(),
                 new SettingsCommand(),
-                new HostCommand()
+                new HostCommand(),
+                new PingCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

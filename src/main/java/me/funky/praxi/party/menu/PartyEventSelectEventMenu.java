@@ -43,7 +43,7 @@ public class PartyEventSelectEventMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private class SelectEventButton extends Button {
+    private static class SelectEventButton extends Button {
 
         private PartyEvent partyEvent;
 
