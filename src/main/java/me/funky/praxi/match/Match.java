@@ -30,6 +30,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.lang.reflect.InvocationTargetException;
@@ -81,6 +82,15 @@ public abstract class Match {
             match.getPlacedBlocks().forEach(location -> location.getBlock().setType(Material.AIR));
             match.getChangedBlocks().forEach((blockState) -> blockState.getLocation().getBlock().setType(blockState.getType()));
             match.getDroppedItems().forEach(Entity::remove);
+        }
+        for(Player player : Bukkit.getOnlinePlayers()){
+            Profile profile = Profile.getByUuid(player.getUniqueId());
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    profile.save();
+                }
+            }.runTaskAsynchronously(Praxi.getInstance());
         }
     }
 

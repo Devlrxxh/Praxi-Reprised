@@ -111,7 +111,6 @@ public class KitManagementMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             Kit kit = profile.getKitEditorData().getSelectedKit();
 
-            // TODO: this shouldn't be null but sometimes it is?
             if (kit == null) {
                 player.closeInventory();
                 return;
