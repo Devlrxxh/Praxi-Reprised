@@ -83,7 +83,7 @@ public abstract class Match {
             match.getChangedBlocks().forEach((blockState) -> blockState.getLocation().getBlock().setType(blockState.getType()));
             match.getDroppedItems().forEach(Entity::remove);
         }
-        for(Player player : Bukkit.getOnlinePlayers()){
+        for (Player player : Bukkit.getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             new BukkitRunnable() {
                 @Override

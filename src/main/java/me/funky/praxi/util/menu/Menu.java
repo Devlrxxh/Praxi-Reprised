@@ -135,15 +135,19 @@ public abstract class Menu {
 
         currentlyOpenedMenus.put(player.getName(), this);
 
+        Map<Integer, Button> modifiedButtons = new HashMap<>();
+
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
             int slot = buttonEntry.getKey();
-            if (filter != Filters.NONE) {
-                if (slot % 9 == 0 || slot % 9 == 8) {
-                    slot += 2;
-                }
+            if (filter != Filters.NONE && (slot % 9 == 0 || slot % 9 == 8)) {
+                slot += 2;
             }
+            modifiedButtons.put(slot, buttonEntry.getValue());
             inventory.setItem(slot, createItemStack(player, buttonEntry.getValue()));
         }
+
+        this.buttons = modifiedButtons;
+
         switch (filter) {
             case BORDER:
                 fillBorder(inventory);
