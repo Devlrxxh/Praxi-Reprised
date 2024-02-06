@@ -12,6 +12,11 @@ The most configurable, efficient, and extensive practice plugin.
 ### 3. And then click on here which will download the latest versions.
 ![image](https://github.com/Devlrxxh/praxi/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
 
+# Placeholders
+ - ``%praxi_top_1%`` | Returns Highest player for elo
+ - ``%praxi_top_2%`` | Returns Second Highest player for elo
+ - ``%praxi_top_3%`` | Returns Third Highest player for elo
+
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
