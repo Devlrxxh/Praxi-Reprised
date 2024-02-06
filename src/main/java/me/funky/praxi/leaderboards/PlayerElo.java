@@ -8,6 +8,8 @@ import lombok.Getter;
 public class PlayerElo implements Comparable<PlayerElo> {
     private final String playerName;
     private final int elo;
+    private final int kills;
+    private final int loses;
 
 
     @Override

@@ -1,6 +1,5 @@
 package me.funky.praxi.leaderboards;
 
-import com.mongodb.client.FindIterable;
 import lombok.Getter;
 import me.funky.praxi.profile.Profile;
 import org.bson.Document;
@@ -13,11 +12,9 @@ import java.util.stream.IntStream;
 
 public class Leaderboard {
     @Getter
-    private static final List<Positions> topPositions = init();
-
+    private static final List<Positions> eloPositions = init();
     public static List<Positions> init() {
-        FindIterable<Document> profileDocuments = Profile.collection.find();
-        List<PlayerElo> topPlayers = profileDocuments.into(new ArrayList<>()).stream()
+        List<PlayerElo> topPlayers = Profile.collection.find().into(new ArrayList<>()).stream()
                 .map(Leaderboard::mapToPlayerElo)
                 .sorted(Comparator.reverseOrder())
                 .limit(3)
@@ -28,16 +25,14 @@ public class Leaderboard {
                     if (i < topPlayers.size()) {
                         return new Positions(i + 1, topPlayers.get(i));
                     } else {
-                        return new Positions(i + 1, new PlayerElo("none", 0));
+                        return new Positions(i + 1, new PlayerElo("none", 0, 0, 0));
                     }
                 })
                 .collect(Collectors.toList());
     }
 
     private static PlayerElo mapToPlayerElo(Document profileDocument) {
-        String playerName = profileDocument.getString("username");
-        int elo = getElo(profileDocument);
-        return new PlayerElo(playerName, elo);
+        return new PlayerElo(profileDocument.getString("username"), getElo(profileDocument), getKills(profileDocument), getLoses(profileDocument));
     }
 
     private static int getElo(Document profileDocument) {
@@ -50,5 +45,26 @@ public class Leaderboard {
         return kitStatistics.values().stream()
                 .mapToInt(kit -> ((Document) kit).getInteger("elo"))
                 .sum() / totalQueue;
+    }
+    private static int getKills(Document profileDocument) {
+        int kills = 0;
+        Document kitStatistics = (Document) profileDocument.get("kitStatistics");
+
+        for (String key : kitStatistics.keySet()) {
+            Document kitDocument = (Document) kitStatistics.get(key);
+            kills += kitDocument.getInteger("won");
+        }
+        return kills;
+    }
+
+    private static int getLoses(Document profileDocument) {
+        int loses = 0;
+        Document kitStatistics = (Document) profileDocument.get("kitStatistics");
+
+        for (String key : kitStatistics.keySet()) {
+            Document kitDocument = (Document) kitStatistics.get(key);
+            loses += kitDocument.getInteger("lost");
+        }
+        return loses;
     }
 }

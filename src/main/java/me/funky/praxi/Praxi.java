@@ -35,6 +35,7 @@ import me.funky.praxi.kit.KitEditorListener;
 import me.funky.praxi.kit.KitTypeAdapter;
 import me.funky.praxi.kit.command.KitCommand;
 import me.funky.praxi.leaderboards.Leaderboard;
+import me.funky.praxi.leaderboards.LeaderboardThread;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.match.MatchListener;
 import me.funky.praxi.party.Party;
@@ -125,6 +126,7 @@ public class Praxi extends JavaPlugin {
         loadCommandManager();
         assemble = new Assemble(this, new ScoreboardAdapter());
         new QueueThread().start();
+        new LeaderboardThread().start();
         new Metrics(this, 20915);
 
         getHoncho().registerTypeAdapter(Arena.class, new ArenaTypeAdapter());
