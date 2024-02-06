@@ -1,7 +1,6 @@
 package me.funky.praxi.leaderboards;
 
 import com.mongodb.client.FindIterable;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.funky.praxi.profile.Profile;
 import org.bson.Document;
@@ -24,8 +23,14 @@ public class Leaderboard {
                 .limit(3)
                 .collect(Collectors.toList());
 
-        return IntStream.range(0, topPlayers.size())
-                .mapToObj(i -> new Positions(i + 1, topPlayers.get(i)))
+        return IntStream.range(0, 3)
+                .mapToObj(i -> {
+                    if (i < topPlayers.size()) {
+                        return new Positions(i + 1, topPlayers.get(i));
+                    } else {
+                        return new Positions(i + 1, new PlayerElo("none", 0));
+                    }
+                })
                 .collect(Collectors.toList());
     }
 

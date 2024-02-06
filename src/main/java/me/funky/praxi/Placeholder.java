@@ -37,10 +37,16 @@ public class Placeholder extends PlaceholderExpansion {
         switch (identifier) {
             case "top_1":
                 return Leaderboard.getTopPositions().get(0).getPlayerElo().getPlayerName();
+            case "top_1_elo":
+                return String.valueOf(Leaderboard.getTopPositions().get(0).getPlayerElo().getElo());
             case "top_2":
                 return Leaderboard.getTopPositions().get(1).getPlayerElo().getPlayerName();
+            case "top_2_elo":
+                return String.valueOf(Leaderboard.getTopPositions().get(1).getPlayerElo().getElo());
             case "top_3":
                 return Leaderboard.getTopPositions().get(2).getPlayerElo().getPlayerName();
+            case "top_3_elo":
+                return String.valueOf(Leaderboard.getTopPositions().get(2).getPlayerElo().getElo());
         }
         return null;
     }
