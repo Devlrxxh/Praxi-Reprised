@@ -13,13 +13,9 @@ The most configurable, efficient, and extensive practice plugin.
 ![image](https://github.com/Devlrxxh/praxi/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
 
 # Placeholders
- - ``%praxi_top_1%`` | Returns Highest player for elo
- - ``%praxi_top_2%`` | Returns Second Highest player for elo
- - ``%praxi_top_3%`` | Returns Third Highest player for elo
+ - ``%praxi_top_<up-to-50>%`` | Returns Player's Name in position
  - 
- - ``%praxi_top_1_elo%`` | Returns Highest elo
- - ``%praxi_top_2_elo%`` | Returns Second Highest elo
- - ``%praxi_top_3_elo%`` | Returns Third Highest elo
+ - ``%praxi_top_<up-to-50>_elo%`` |  Returns Player's ELO in position
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
