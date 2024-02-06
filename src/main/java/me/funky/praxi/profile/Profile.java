@@ -37,12 +37,13 @@ public class Profile {
 
     @Getter
     private static final Map<UUID, Profile> profiles = new HashMap<>();
-    private static MongoCollection<Document> collection;
+    public static MongoCollection<Document> collection;
     private final ProfileOptions options;
     private final ProfileKitEditorData kitEditorData;
     private final Map<Kit, ProfileKitData> kitData;
     private final List<DuelRequest> duelRequests;
     private final UUID uuid;
+    private final String username;
     private ProfileState state;
     private DuelProcedure duelProcedure;
     private ProfileRematchData rematchData;
@@ -54,6 +55,7 @@ public class Profile {
 
     public Profile(UUID uuid) {
         this.uuid = uuid;
+        this.username = Bukkit.getPlayer(uuid).getName();
         this.state = ProfileState.LOBBY;
         this.options = new ProfileOptions();
         this.kitEditorData = new ProfileKitEditorData();
@@ -188,13 +190,15 @@ public class Profile {
         return state != ProfileState.LOBBY;
     }
 
-    void load() {
+    public void load() {
         Document document = collection.find(Filters.eq("uuid", uuid.toString())).first();
 
         if (document == null) {
             this.save();
             return;
         }
+
+        document.getString("username");
 
         Document options = (Document) document.get("options");
 
@@ -246,6 +250,7 @@ public class Profile {
     public void save() {
         Document document = new Document();
         document.put("uuid", uuid.toString());
+        document.put("username", username);
 
         Document optionsDocument = new Document();
         optionsDocument.put("showScoreboard", options.showScoreboard());

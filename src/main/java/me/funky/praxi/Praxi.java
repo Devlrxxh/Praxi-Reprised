@@ -34,6 +34,7 @@ import me.funky.praxi.kit.Kit;
 import me.funky.praxi.kit.KitEditorListener;
 import me.funky.praxi.kit.KitTypeAdapter;
 import me.funky.praxi.kit.command.KitCommand;
+import me.funky.praxi.leaderboards.Leaderboard;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.match.MatchListener;
 import me.funky.praxi.party.Party;
@@ -56,6 +57,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.refinedev.api.spigot.SpigotHandler;
 
@@ -184,6 +186,11 @@ public class Praxi extends JavaPlugin {
 
         });
         System.gc();
+        Leaderboard.init();
+        Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
+        if (placeholderAPI != null && placeholderAPI.isEnabled()) {
+            new Placeholder().register();
+        }
     }
 
     private void loadCommandManager() {

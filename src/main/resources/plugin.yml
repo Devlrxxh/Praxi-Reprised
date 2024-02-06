@@ -2,3 +2,7 @@ main: me.funky.praxi.Praxi
 name: Praxi
 version: '1.0.0'
 author: funkyranveer, joeleoli, lugami, lrxh
+depend:
+  - ProtocolLib
+softdepend:
+  - PlaceholderAPI
