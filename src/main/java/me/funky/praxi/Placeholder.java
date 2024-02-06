@@ -1,6 +1,5 @@
 package me.funky.praxi;
 
-
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.funky.praxi.leaderboards.Leaderboard;
 import org.bukkit.Bukkit;
@@ -34,21 +33,26 @@ public class Placeholder extends PlaceholderExpansion {
         if (player == null) return "";
         if (!player.isOnline()) return "Offline Player";
 
-        switch (identifier) {
-            case "top_1":
-                return Leaderboard.getTopPositions().get(0).getPlayerElo().getPlayerName();
-            case "top_1_elo":
-                return String.valueOf(Leaderboard.getTopPositions().get(0).getPlayerElo().getElo());
-            case "top_2":
-                return Leaderboard.getTopPositions().get(1).getPlayerElo().getPlayerName();
-            case "top_2_elo":
-                return String.valueOf(Leaderboard.getTopPositions().get(1).getPlayerElo().getElo());
-            case "top_3":
-                return Leaderboard.getTopPositions().get(2).getPlayerElo().getPlayerName();
-            case "top_3_elo":
-                return String.valueOf(Leaderboard.getTopPositions().get(2).getPlayerElo().getElo());
+        if (identifier.startsWith("top_")) {
+            String[] parts = identifier.split("_");
+            if (parts.length == 2 || (parts.length == 3 && parts[2].equalsIgnoreCase("elo"))) {
+                int topNumber;
+                try {
+                    topNumber = Integer.parseInt(parts[1]);
+                } catch (NumberFormatException e) {
+                    return "Invalid placeholder";
+                }
+
+                if (topNumber <= Leaderboard.getTopPositions().size()) {
+                    if (parts.length == 3 && parts[2].equalsIgnoreCase("elo")) {
+                        return String.valueOf(Leaderboard.getTopPositions().get(topNumber - 1).getPlayerElo().getElo());
+                    } else {
+                        return Leaderboard.getTopPositions().get(topNumber - 1).getPlayerElo().getPlayerName();
+                    }
+                }
+            }
         }
+
         return null;
     }
-
 }

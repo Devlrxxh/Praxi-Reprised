@@ -23,7 +23,7 @@ public class Leaderboard {
                 .limit(3)
                 .collect(Collectors.toList());
 
-        return IntStream.range(0, 3)
+        return IntStream.range(0, 50)
                 .mapToObj(i -> {
                     if (i < topPlayers.size()) {
                         return new Positions(i + 1, topPlayers.get(i));
