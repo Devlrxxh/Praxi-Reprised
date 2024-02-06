@@ -136,7 +136,13 @@ public abstract class Menu {
         currentlyOpenedMenus.put(player.getName(), this);
 
         for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
-            inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
+            int slot = buttonEntry.getKey();
+            if (filter != Filters.NONE) {
+                if (slot % 9 == 0 || slot % 9 == 8) {
+                    slot += 2;
+                }
+            }
+            inventory.setItem(slot, createItemStack(player, buttonEntry.getValue()));
         }
         switch (filter) {
             case BORDER:

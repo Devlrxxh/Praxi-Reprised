@@ -136,3 +136,63 @@ kits:
       sumo: false
       health-regeneration: false
       hit-delay: 20
+  1Skywars:
+    enabled: true
+    description: 'none'
+    icon:
+      material: EYE_OF_ENDER
+      durability: 0
+    loadout:
+      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
+      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      health-regeneration: false
+      hit-delay: 20
+  2Skywars:
+    enabled: true
+    description: 'none'
+    icon:
+      material: EYE_OF_ENDER
+      durability: 0
+    loadout:
+      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
+      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      health-regeneration: false
+      hit-delay: 20
+  3Skywars:
+    enabled: true
+    description: 'none'
+    icon:
+      material: EYE_OF_ENDER
+      durability: 0
+    loadout:
+      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
+      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      health-regeneration: false
+      hit-delay: 20\
+  4Skywars:
+    enabled: true
+    description: 'none'
+    icon:
+      material: EYE_OF_ENDER
+      durability: 0
+    loadout:
+      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
+      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      health-regeneration: false
+      hit-delay: 20
