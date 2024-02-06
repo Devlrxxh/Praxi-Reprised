@@ -14,7 +14,7 @@ The most configurable, efficient, and extensive practice plugin.
 
 # Placeholders
  - ``%praxi_top_<up-to-50>%`` | Returns Player's Name in position
- - 
+
  - ``%praxi_top_<up-to-50>_elo%`` |  Returns Player's ELO in position
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
