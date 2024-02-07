@@ -2,6 +2,7 @@ package me.funky.praxi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.funky.praxi.leaderboards.Leaderboard;
+import me.funky.praxi.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +32,10 @@ public class Placeholder extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer player, @NotNull String identifier) {
         if (player == null) return "";
         if (!player.isOnline()) return "Offline Player";
-
+        switch (identifier) {
+            case "leaderboard_update":
+                return TimeUtil.millisToTimer(Leaderboard.getRefreshTime());
+        }
         if (identifier.startsWith("top_")) {
             String[] parts = identifier.split("_");
             if (parts.length == 2 || (parts.length == 3 && (parts[2].equalsIgnoreCase("elo") || parts[2].equalsIgnoreCase("kills") || parts[2].equalsIgnoreCase("loses")))) {

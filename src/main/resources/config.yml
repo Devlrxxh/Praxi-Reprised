@@ -4,6 +4,8 @@ MONGO:
 RANKED:
   REQUIRED-WINS: 10
   ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
+LEADERBOARD:
+  UPDATE-TIME: 15 # MINUTES
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
   - '&fWelcome to the &bLunar Network!'

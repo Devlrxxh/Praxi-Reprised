@@ -1,6 +1,7 @@
 package me.funky.praxi.leaderboards;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.funky.praxi.profile.Profile;
 import org.bson.Document;
 
@@ -12,7 +13,11 @@ import java.util.stream.IntStream;
 
 public class Leaderboard {
     @Getter
-    private static final List<Positions> eloPositions = init();
+    @Setter
+    private static List<Positions> eloPositions = init();
+    @Getter
+    @Setter
+    private static long refreshTime;
     public static List<Positions> init() {
         List<PlayerElo> topPlayers = Profile.collection.find().into(new ArrayList<>()).stream()
                 .map(Leaderboard::mapToPlayerElo)
