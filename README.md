@@ -16,6 +16,9 @@ The most configurable, efficient, and extensive practice plugin.
  - ``%praxi_top_<up-to-50>%`` | Returns Player's Name in position
 
  - ``%praxi_top_<up-to-50>_elo%`` |  Returns Player's ELO in position
+
+ -  ``%praxi_leaderboard_update%`` |  Returns time left till leaderboard reload
+
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
