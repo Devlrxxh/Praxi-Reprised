@@ -35,7 +35,6 @@ public class QueueSelectKitMenu extends Menu {
 
     @Override
     public Filters getFilter() {
-        System.out.println(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.FILTER"));
         return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.FILTER"));
     }
 

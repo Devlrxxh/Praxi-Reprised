@@ -4,6 +4,7 @@ import co.aikar.commands.BukkitCommandCompletionContext;
 import co.aikar.commands.CommandCompletions;
 import co.aikar.commands.PaperCommandManager;
 import com.mongodb.ConnectionString;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
@@ -47,6 +48,7 @@ import me.funky.praxi.queue.QueueThread;
 import me.funky.praxi.scoreboard.ScoreboardAdapter;
 import me.funky.praxi.setting.SettingsCommand;
 import me.funky.praxi.util.CC;
+import me.funky.praxi.util.Console;
 import me.funky.praxi.util.InventoryUtil;
 import me.funky.praxi.util.assemble.Assemble;
 import me.funky.praxi.util.command.Honcho;
@@ -62,6 +64,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xyz.refinedev.api.spigot.SpigotHandler;
 
 import java.util.Arrays;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Getter
@@ -110,9 +116,7 @@ public class Praxi extends JavaPlugin {
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
         spigotHandler.init(true);
-        if (spigotHandler != null) {
-            Bukkit.getServer().getConsoleSender().sendMessage(CC.translate("&cHooked into: &7" + spigotHandler.getType()));
-        }
+
         new CoreManager();
         cache = new Cache();
         Hotbar.init();
@@ -122,7 +126,6 @@ public class Praxi extends JavaPlugin {
         Match.init();
         Party.init();
         Event.init();
-
 
         EventGameMap.init();
         loadCommandManager();
@@ -193,8 +196,22 @@ public class Praxi extends JavaPlugin {
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();
-
         }
+        Console.sendMessage(CC.translate("&7&m-----------------------------------------"));
+        Console.sendMessage(CC.translate(" "));
+        Console.sendMessage(CC.translate("&7| &cPraxi Practice Core"));
+        Console.sendMessage(CC.translate(" "));
+        Console.sendMessage(CC.translate("&7| &fAutor(s): &c" + getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
+        Console.sendMessage(CC.translate("&7| &fVersion: &c" + getInstance().getDescription().getVersion()));
+        Console.sendMessage(CC.translate("&7| &fSpigot: &c" + getInstance().getServer().getName()));
+        Console.sendMessage(CC.translate(" "));
+        Console.sendMessage(CC.translate("&7| &fKits: &c" + Kit.getKits().size()));
+        Console.sendMessage(CC.translate("&7| &fArenas: &c" + Arena.getArenas().size()));
+        if (spigotHandler != null) {
+            Console.sendMessage(CC.translate("&7| &fKB Controller: &c" + spigotHandler.getType()));
+        }
+        Console.sendMessage(CC.translate(" "));
+        Console.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
     private void loadCommandManager() {
@@ -233,12 +250,23 @@ public class Praxi extends JavaPlugin {
     private void loadMongo() {
         String mongoUri = mainConfig.getString("MONGO.URI");
 
+        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.WARNING);
+
+        for (Handler handler : mongoLogger.getParent().getHandlers()) {
+            if (handler instanceof ConsoleHandler) {
+                mongoLogger.getParent().removeHandler(handler);
+            }
+        }
         if (mongoUri != null && !mongoUri.isEmpty()) {
-            mongoDatabase = MongoClients.create(new ConnectionString(mongoUri))
-                    .getDatabase(mainConfig.getString("MONGO.DATABASE"));
+            try {
+                MongoClient mongoClient = MongoClients.create(new ConnectionString(mongoUri));
+                mongoDatabase = mongoClient.getDatabase(mainConfig.getString("MONGO.DATABASE"));
+            } catch (Exception e) {
+                getLogger().warning("Error connecting to MongoDB:" + e.getMessage());
+            }
         } else {
-            getLogger().warning("MongoDB URI is not in the config.yml.");
+            Console.sendError("MongoDB URI is missing or empty in the config.yml");
         }
     }
-
 }
