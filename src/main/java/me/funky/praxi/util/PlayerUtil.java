@@ -26,6 +26,7 @@ public class PlayerUtil {
     }
 
     public static void reset(Player player) {
+
         if (!player.hasMetadata("frozen")) {
             player.setWalkSpeed(0.2F);
             player.setFlySpeed(0.1F);

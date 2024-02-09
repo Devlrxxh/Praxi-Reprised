@@ -44,7 +44,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena create &7<value> &7</STANDALONE/SHARED> - &fCreate arena"));
         player.sendMessage(CC.translate("&7* &c/arena remove &7<arena> - &fRemove arena"));
         player.sendMessage(CC.translate("&7* &c/arena save &7- &fSave arenas to file"));
-        player.sendMessage(CC.translate("&7* &c/arena selection &7- &fGet Selection wand"));
+        player.sendMessage(CC.translate("&7* &c/arena wand &7- &fGet Selection wand"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -56,7 +56,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena create &7<value> - &fCreate arena"));
         player.sendMessage(CC.translate("&7* &c/arena remove &7<arena> - &fRemove arena"));
         player.sendMessage(CC.translate("&7* &c/arena save &7- &fSave arenas to file"));
-        player.sendMessage(CC.translate("&7* &c/arena selection &7- &fGet Selection wand"));
+        player.sendMessage(CC.translate("&7* &c/arena wand &7- &fGet Selection wand"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -128,8 +128,8 @@ public class ArenaCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("selection")
-    public void selection(Player player) {
+    @Subcommand("wand")
+    public void wand(Player player) {
         if (player.getInventory().first(Selection.SELECTION_WAND) != -1) {
             player.getInventory().remove(Selection.SELECTION_WAND);
         } else {

@@ -102,6 +102,7 @@ public class Praxi extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         praxi = this;
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         honcho = new Honcho(this);
@@ -121,6 +122,8 @@ public class Praxi extends JavaPlugin {
         Match.init();
         Party.init();
         Event.init();
+
+
         EventGameMap.init();
         loadCommandManager();
         assemble = new Assemble(this, new ScoreboardAdapter());
@@ -159,7 +162,6 @@ public class Praxi extends JavaPlugin {
                 new PartyOpenCommand(),
                 new ViewInventoryCommand()
         ).forEach(command -> getHoncho().registerCommand(command));
-
         Arrays.asList(
                 new KitEditorListener(),
                 new PartyListener(),
@@ -170,6 +172,7 @@ public class Praxi extends JavaPlugin {
                 new ArenaListener(),
                 new EventGameListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
+
 
         Arrays.asList(
                 Material.WORKBENCH,
@@ -190,6 +193,7 @@ public class Praxi extends JavaPlugin {
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();
+
         }
     }
 

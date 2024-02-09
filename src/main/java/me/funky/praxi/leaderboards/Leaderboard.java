@@ -18,6 +18,7 @@ public class Leaderboard {
     @Getter
     @Setter
     private static long refreshTime;
+
     public static List<Positions> init() {
         List<PlayerElo> topPlayers = Profile.collection.find().into(new ArrayList<>()).stream()
                 .map(Leaderboard::mapToPlayerElo)
@@ -51,6 +52,7 @@ public class Leaderboard {
                 .mapToInt(kit -> ((Document) kit).getInteger("elo"))
                 .sum() / totalQueue;
     }
+
     private static int getKills(Document profileDocument) {
         int kills = 0;
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");

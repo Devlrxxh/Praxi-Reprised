@@ -36,7 +36,6 @@ public class LeaderboardThread extends Thread {
                     Leaderboard.getEloPositions().clear();
                     Leaderboard.setEloPositions(Leaderboard.init());
                 }
-
                 sleep(SECOND_IN_MILLIS);
             } catch (InterruptedException ignored) {
                 Thread.currentThread().interrupt();

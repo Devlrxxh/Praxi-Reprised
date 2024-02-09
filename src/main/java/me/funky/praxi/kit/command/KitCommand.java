@@ -67,7 +67,7 @@ public class KitCommand extends BaseCommand {
     @Syntax("<kit>")
     public void create(Player player, String kitName) {
         if (Kit.getByName(kitName) != null) {
-            player.sendMessage(CC.RED + "A kit with that name already exists.");
+            player.sendMessage(CC.translate("&4ERROR - &cKit already exists!"));
             return;
         }
 
@@ -77,6 +77,24 @@ public class KitCommand extends BaseCommand {
         Kit.getKits().add(kit);
 
         player.sendMessage(CC.GREEN + "You created a new kit.");
+    }
+
+    @Subcommand("remove")
+    @CommandCompletion("@arenas")
+    @Syntax("<arena>")
+    public void remove(Player player, String kitName) {
+        if (Kit.getByName(kitName) != null) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit already exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit != null) {
+            kit.delete();
+
+            player.sendMessage(CC.GOLD + "Deleted kit \"" + kit.getName() + "\"");
+        } else {
+            player.sendMessage(CC.RED + "&4ERROR - &cKit already exists!");
+        }
     }
 
     @Subcommand("getinv")

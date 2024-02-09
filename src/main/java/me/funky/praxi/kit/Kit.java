@@ -145,4 +145,8 @@ public class Kit {
         }
     }
 
+    public void delete() {
+        kits.remove(this);
+    }
+
 }

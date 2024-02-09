@@ -166,6 +166,7 @@ public abstract class Menu {
 
         this.onOpen(player);
         this.setClosedByMenu(false);
+
     }
 
     public int size(Map<Integer, Button> buttons) {
