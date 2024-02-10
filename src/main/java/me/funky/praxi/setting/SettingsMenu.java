@@ -80,6 +80,20 @@ public class SettingsMenu extends Menu {
                     lore.add("&aClick to enable");
                     break;
                 }
+                case SHOW_LINES: {
+                    if (profile.getOptions().scoreboradLines()) {
+                        lore.add(" &7&l* &aYes");
+                        lore.add(" &7&l* &7No");
+                        lore.add(" ");
+                        lore.add("&aClick to disable");
+                        break;
+                    }
+                    lore.add(" &7&l* &7Yes");
+                    lore.add(" &7&l* &cNo");
+                    lore.add(" ");
+                    lore.add("&aClick to enable");
+                    break;
+                }
                 case ALLOW_DUELS: {
                     if (profile.getOptions().receiveDuelRequests()) {
                         lore.add(" &7&l* &aYes");
@@ -167,6 +181,15 @@ public class SettingsMenu extends Menu {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format());
                     } else {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format());
+                    }
+                    break;
+                }
+                case SHOW_LINES: {
+                    profile.getOptions().scoreboradLines(!profile.getOptions().scoreboradLines());
+                    if (profile.getOptions().scoreboradLines()) {
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_ENABLED.format());
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_DISABLED.format());
                     }
                     break;
                 }

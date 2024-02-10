@@ -108,7 +108,7 @@ public class Praxi extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        long oldTime = System.currentTimeMillis();
         praxi = this;
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         honcho = new Honcho(this);
@@ -192,7 +192,6 @@ public class Praxi extends JavaPlugin {
             getEssentials().clearEntities(world);
 
         });
-        System.gc();
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();
@@ -211,7 +210,10 @@ public class Praxi extends JavaPlugin {
             Console.sendMessage(CC.translate("&7| &fKB Controller: &c" + spigotHandler.getType()));
         }
         Console.sendMessage(CC.translate(" "));
+        Console.sendMessage(CC.translate("&7| &fPlugin Loaded in : &c" + (System.currentTimeMillis() - oldTime) + "ms"));
+        Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7&m-----------------------------------------"));
+        System.gc();
     }
 
     private void loadCommandManager() {

@@ -14,4 +14,5 @@ public class ProfileOptions {
     private boolean allowSpectators = true;
     private boolean showPlayers = false;
     private KillEffects killEffect = KillEffects.NONE;
+    private boolean scoreboradLines = true;
 }

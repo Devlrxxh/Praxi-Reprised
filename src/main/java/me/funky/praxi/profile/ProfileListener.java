@@ -139,10 +139,9 @@ public class ProfileListener implements Listener {
         event.setQuitMessage(null);
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
 
-        if (profile.getQueueProfile() == null) return;
-        profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
-
-
+        if (profile.getQueueProfile() != null){
+            profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
+        }
         new BukkitRunnable() {
             @Override
             public void run() {
