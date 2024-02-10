@@ -9,9 +9,7 @@ import me.funky.praxi.event.game.map.EventGameMap;
 import me.funky.praxi.event.game.map.vote.EventGameMapVoteData;
 import me.funky.praxi.participant.GameParticipant;
 import me.funky.praxi.participant.GamePlayer;
-import me.funky.praxi.util.ChatComponentBuilder;
-import me.funky.praxi.util.ChatHelper;
-import me.funky.praxi.util.Cooldown;
+import me.funky.praxi.util.*;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -119,7 +117,9 @@ public class EventGame {
                     Player player = gamePlayer.getPlayer();
 
                     if (player != null) {
-                        player.sendMessage(message);
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(CC.translate(message));
+                        player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
                     }
                 }
             }

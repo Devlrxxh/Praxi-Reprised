@@ -11,6 +11,7 @@ import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ChatComponentBuilder;
 import me.funky.praxi.util.ChatHelper;
+import me.funky.praxi.util.PlaceholderUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -92,7 +93,7 @@ public class Party {
                 target.spigot().sendMessage(new ChatComponentBuilder("")
                         .parse(msg)
                         .attachToEachPart(ChatHelper.click("/party join " + leader.getName()))
-                        .attachToEachPart(ChatHelper.hover(Locale.PARTY_INVITE_HOVER.format()))
+                        .attachToEachPart(ChatHelper.hover(Locale.PARTY_INVITE_HOVER.format(target)))
                         .create());
             } else {
                 target.sendMessage(msg);
@@ -106,7 +107,7 @@ public class Party {
         invites.removeIf(invite -> invite.getUuid().equals(player.getUniqueId()));
         players.add(player.getUniqueId());
 
-        sendMessage(Locale.PARTY_JOIN.format(player.getName()));
+        sendMessage(Locale.PARTY_JOIN.format(player, player.getName()));
 
         Profile profile = Profile.getByUuid(player.getUniqueId());
         profile.setParty(this);
@@ -127,7 +128,7 @@ public class Party {
     }
 
     public void leave(Player player, boolean kick) {
-        sendMessage(Locale.PARTY_LEAVE.format((player.getName()), (kick ? "been kicked from" : "left")));
+        sendMessage(Locale.PARTY_LEAVE.format(player, (player.getName()), (kick ? "been kicked from" : "left")));
 
         players.removeIf(uuid -> uuid.equals(player.getUniqueId()));
 
@@ -187,13 +188,15 @@ public class Party {
     }
 
     public void sendChat(Player player, String message) {
-        sendMessage(Locale.PARTY_CHAT_PREFIX.format() +
+        sendMessage(Locale.PARTY_CHAT_PREFIX.format(player) +
                 player.getDisplayName() + ChatColor.RESET + ": " + message);
     }
 
     public void sendMessage(String message) {
         for (Player player : getListOfPlayers()) {
-            player.sendMessage(message);
+            ArrayList<String> list = new ArrayList<>();
+            list.add(CC.translate(message));
+            player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
         }
     }
 

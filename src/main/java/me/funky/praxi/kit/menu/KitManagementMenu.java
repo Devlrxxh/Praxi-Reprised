@@ -155,7 +155,7 @@ public class KitManagementMenu extends Menu {
             Menu.currentlyOpenedMenus.get(player.getName()).setClosedByMenu(true);
 
             player.closeInventory();
-            player.sendMessage(Locale.KIT_EDITOR_START_RENAMING.format(kitLoadout.getCustomName()));
+            player.sendMessage(Locale.KIT_EDITOR_START_RENAMING.format(player, kitLoadout.getCustomName()));
 
             Profile profile = Profile.getByUuid(player.getUniqueId());
             profile.getKitEditorData().setSelectedKit(kit);

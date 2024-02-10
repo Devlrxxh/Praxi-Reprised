@@ -53,17 +53,17 @@ public class DuelProcedure {
         targetProfile.getDuelRequests().add(duelRequest);
 
         if (party) {
-            sender.sendMessage(Locale.DUEL_SENT_PARTY.format(kit.getName(), target.getName(),
+            sender.sendMessage(Locale.DUEL_SENT_PARTY.format(target, kit.getName(), target.getName(),
                     targetProfile.getParty().getPlayers().size(), arena.getName()));
 
-            for (String msg : Locale.DUEL_RECEIVED_PARTY.formatLines(kit.getName(), sender.getName(),
+            for (String msg : Locale.DUEL_RECEIVED_PARTY.formatLines(sender, kit.getName(), sender.getName(),
                     senderProfile.getParty().getPlayers().size(), arena.getName())) {
                 if (msg.contains("%CLICKABLE%")) {
-                    ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(
+                    ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(target,
                             sender.getName()
                     ));
                     builder.attachToEachPart(ChatHelper.click("/duel accept " + sender.getName()));
-                    builder.attachToEachPart(ChatHelper.hover(Locale.DUEL_RECEIVED_HOVER.format()));
+                    builder.attachToEachPart(ChatHelper.hover(Locale.DUEL_RECEIVED_HOVER.format(target)));
 
                     target.spigot().sendMessage(builder.create());
                 } else {
@@ -71,15 +71,15 @@ public class DuelProcedure {
                 }
             }
         } else {
-            sender.sendMessage(Locale.DUEL_SENT.format(kit.getName(), target.getName(), arena.getName()));
+            sender.sendMessage(Locale.DUEL_SENT.format(sender, kit.getName(), target.getName(), arena.getName()));
 
-            for (String msg : Locale.DUEL_RECEIVED.formatLines(kit.getName(), sender.getName(), arena.getName(), BukkitReflection.getPing(sender))) {
+            for (String msg : Locale.DUEL_RECEIVED.formatLines(sender, kit.getName(), sender.getName(), arena.getName(), BukkitReflection.getPing(sender))) {
                 if (msg.contains("%CLICKABLE%")) {
-                    ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(
+                    ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(target,
                             sender.getName()
                     ));
                     builder.attachToEachPart(ChatHelper.click("/duel accept " + sender.getName()));
-                    builder.attachToEachPart(ChatHelper.hover(Locale.DUEL_RECEIVED_HOVER.format()));
+                    builder.attachToEachPart(ChatHelper.hover(Locale.DUEL_RECEIVED_HOVER.format(target)));
 
                     target.spigot().sendMessage(builder.create());
                 } else {

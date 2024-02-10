@@ -1,7 +1,9 @@
 package me.funky.praxi;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.util.PlaceholderUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public enum Locale {
     EVENT_FINISH("EVENT.FINISHED"),
     OPTIONS_SCOREBOARD_ENABLED("OPTIONS.SCOREBOARD_ENABLED"),
     OPTIONS_KILLEFFECT_SELECT("OPTIONS.KILL_EFFECTS_SELECT"),
+    OPTIONS_THEME_SELECT("OPTIONS.THEME_SELECT"),
     OPTIONS_SCOREBOARD_DISABLED("OPTIONS.SCOREBOARD_DISABLED"),
     OPTIONS_SCOREBOARD_LINES_ENABLED("OPTIONS.SCOREBOARD_LINES_ENABLED"),
     OPTIONS_SCOREBOARD_LINES_DISABLED("OPTIONS.SCOREBOARD_LINES_DISABLED"),
@@ -92,6 +95,29 @@ public enum Locale {
     public String format(Object... objects) {
         return new MessageFormat(ChatColor.translateAlternateColorCodes('&',
                 Praxi.getInstance().getMainConfig().getString(path))).format(objects);
+    }
+
+    public String format(Player player, Object... objects) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&',
+                Praxi.getInstance().getMainConfig().getString(path))).format(objects));
+        return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
+    }
+
+    public List<String> formatLines(Player player, Object... objects) {
+        List<String> lines = new ArrayList<>();
+
+        if (Praxi.getInstance().getMainConfig().get(path) instanceof String) {
+            lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&',
+                    Praxi.getInstance().getMainConfig().getString(path))).format(objects));
+        } else {
+            for (String string : Praxi.getInstance().getMainConfig().getStringList(path)) {
+                lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&', string))
+                        .format(objects));
+            }
+        }
+
+        return PlaceholderUtil.format(lines, player);
     }
 
     public List<String> formatLines(Object... objects) {

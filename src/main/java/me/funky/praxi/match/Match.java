@@ -34,10 +34,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public abstract class Match {
@@ -130,8 +127,8 @@ public abstract class Match {
                 processedPlayers++;
 
                 ChatComponentBuilder current = new ChatComponentBuilder(
-                        Locale.MATCH_CLICK_TO_VIEW_NAME.format(gamePlayer.getUsername()))
-                        .attachToEachPart(ChatHelper.hover(Locale.MATCH_CLICK_TO_VIEW_HOVER.format(gamePlayer.getUsername())))
+                        Locale.MATCH_CLICK_TO_VIEW_NAME.format(gamePlayer, gamePlayer.getUsername()))
+                        .attachToEachPart(ChatHelper.hover(Locale.MATCH_CLICK_TO_VIEW_HOVER.format(gamePlayer, gamePlayer.getUsername())))
                         .attachToEachPart(ChatHelper.click("/viewinv " + gamePlayer.getUuid().toString()));
 
                 builder.append(current.create());
@@ -176,7 +173,7 @@ public abstract class Match {
             //TODO: MAKE THIS WORK WITH NEW HOTBAR SYSTEM
             player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
             player.getInventory().setContents(getKit().getKitLoadout().getContents());
-            player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
+            player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
             //}
         }
     }
@@ -343,7 +340,9 @@ public abstract class Match {
 
                     if (player != null) {
                         for (BaseComponent[] components : endingMessages) {
-                            player.spigot().sendMessage(components);
+                            ArrayList<String> list = new ArrayList<>();
+                            list.add(CC.translate(Arrays.toString(components)));
+                            player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
                         }
                     }
                 }
@@ -548,7 +547,7 @@ public abstract class Match {
 
                     if (bukkitPlayer != null) {
                         VisibilityLogic.handle(bukkitPlayer);
-                        bukkitPlayer.sendMessage(Locale.MATCH_NOW_SPECTATING.format(spectator.getName()));
+                        bukkitPlayer.sendMessage(Locale.MATCH_NOW_SPECTATING.format(bukkitPlayer, spectator.getName()));
                     }
                 }
             }
@@ -577,7 +576,7 @@ public abstract class Match {
                         VisibilityLogic.handle(bukkitPlayer);
 
                         if (state != MatchState.ENDING_MATCH) {
-                            bukkitPlayer.sendMessage(Locale.MATCH_NO_LONGER_SPECTATING.format(spectator.getName()));
+                            bukkitPlayer.sendMessage(Locale.MATCH_NO_LONGER_SPECTATING.format(bukkitPlayer, spectator.getName()));
                         }
                     }
                 }
@@ -602,7 +601,9 @@ public abstract class Match {
         }
 
         for (Player player : getSpectatorsAsPlayers()) {
-            player.sendMessage(message);
+            ArrayList<String> list = new ArrayList<>();
+            list.add(CC.translate(message));
+            player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
         }
     }
 
@@ -683,11 +684,11 @@ public abstract class Match {
         String deathMessage;
 
         if (killer == null) {
-            deathMessage = Locale.MATCH_PLAYER_DIED.format(
+            deathMessage = Locale.MATCH_PLAYER_DIED.format(player,
                     getRelationColor(player, dead) + dead.getName()
             );
         } else {
-            deathMessage = Locale.MATCH_PLAYER_KILLED.format(
+            deathMessage = Locale.MATCH_PLAYER_KILLED.format(player,
                     getRelationColor(player, dead) + dead.getName(),
                     getRelationColor(player, killer) + killer.getName()
             );

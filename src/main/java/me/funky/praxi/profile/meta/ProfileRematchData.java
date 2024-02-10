@@ -71,16 +71,16 @@ public class ProfileRematchData {
             return;
         }
 
-        for (String line : Locale.REMATCH_SENT_REQUEST.formatLines(target.getName(), arena.getName())) {
+        for (String line : Locale.REMATCH_SENT_REQUEST.formatLines(sender, target.getName(), arena.getName())) {
             sender.sendMessage(line);
         }
 
         List<BaseComponent[]> components = new ArrayList<>();
 
-        for (String line : Locale.REMATCH_RECEIVED_REQUEST.formatLines(sender.getName(), arena.getName())) {
+        for (String line : Locale.REMATCH_RECEIVED_REQUEST.formatLines(sender, sender.getName(), arena.getName())) {
             BaseComponent[] lineComponents = new ChatComponentBuilder("")
                     .parse(line)
-                    .attachToEachPart(ChatHelper.hover(Locale.REMATCH_RECEIVED_REQUEST_HOVER.format()))
+                    .attachToEachPart(ChatHelper.hover(Locale.REMATCH_RECEIVED_REQUEST_HOVER.format(target)))
                     .attachToEachPart(ChatHelper.click("/rematch"))
                     .create();
 

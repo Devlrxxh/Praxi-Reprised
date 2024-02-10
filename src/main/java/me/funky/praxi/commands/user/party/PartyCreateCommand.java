@@ -34,7 +34,7 @@ public class PartyCreateCommand {
 
         Hotbar.giveHotbarItems(player);
 
-        player.sendMessage(Locale.PARTY_CREATE.format());
+        player.sendMessage(Locale.PARTY_CREATE.format(player));
     }
 
 }

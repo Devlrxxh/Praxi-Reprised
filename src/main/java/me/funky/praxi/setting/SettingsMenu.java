@@ -5,6 +5,7 @@ import me.funky.praxi.Praxi;
 import me.funky.praxi.profile.KillEffects;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
+import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.assemble.AssembleBoard;
 import me.funky.praxi.util.assemble.events.AssembleBoardCreateEvent;
@@ -166,6 +167,54 @@ public class SettingsMenu extends Menu {
                     }
                     lore.add("");
                     lore.add("&aClick to select");
+                    break;
+                }
+                case THEME: {
+                    switch (profile.getOptions().theme()) {
+                        case AQUA:
+                            lore.add("&7&l* &a" + Colors.AQUA.getName());
+                            for (Colors colors : Colors.values()) {
+                                if (colors != Colors.AQUA) {
+                                    lore.add("&7&l* &r&7" + colors.getName());
+                                }
+                            }
+                            break;
+                        case ORANGE:
+                            lore.add("&7&l* &a" + Colors.ORANGE.getName());
+                            for (Colors colors : Colors.values()) {
+                                if (colors != Colors.ORANGE) {
+                                    lore.add("&7&l* &r&7" + colors.getName());
+                                }
+                            }
+                            break;
+                        case PINK:
+                            lore.add("&7&l* &a" + Colors.PINK.getName());
+                            for (Colors colors : Colors.values()) {
+                                if (colors != Colors.PINK) {
+                                    lore.add("&7&l* &r&7" + colors.getName());
+                                }
+                            }
+                            break;
+                        case RED:
+                            lore.add("&7&l* &a" + Colors.RED.getName());
+                            for (Colors colors : Colors.values()) {
+                                if (colors != Colors.RED) {
+                                    lore.add("&7&l* &r&7" + colors.getName());
+                                }
+                            }
+                            break;
+                        case YELLOW:
+                            lore.add("&7&l* &a" + Colors.YELLOW.getName());
+                            for (Colors colors : Colors.values()) {
+                                if (colors != Colors.YELLOW) {
+                                    lore.add("&7&l* &r&7" + colors.getName());
+                                }
+                            }
+                            break;
+                    }
+                    lore.add("");
+                    lore.add("&aClick to select");
+                    break;
                 }
             }
             return new ItemBuilder(this.settings.getMaterial()).name(Praxi.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
@@ -178,76 +227,93 @@ public class SettingsMenu extends Menu {
                 case SHOW_SCOREBOARD: {
                     showScoreboard(profile, !profile.getOptions().showScoreboard());
                     if (profile.getOptions().showScoreboard()) {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format(player));
                     } else {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format(player));
                     }
                     break;
                 }
                 case SHOW_LINES: {
                     profile.getOptions().scoreboradLines(!profile.getOptions().scoreboradLines());
                     if (profile.getOptions().scoreboradLines()) {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_ENABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_ENABLED.format(player));
                     } else {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_DISABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_DISABLED.format(player));
                     }
                     break;
                 }
                 case ALLOW_DUELS: {
                     profile.getOptions().receiveDuelRequests(!profile.getOptions().receiveDuelRequests());
                     if (profile.getOptions().receiveDuelRequests()) {
-                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_ENABLED.format());
+                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_ENABLED.format(player));
                     } else {
-                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_DISABLED.format());
+                        player.sendMessage(Locale.OPTIONS_RECEIVE_DUEL_REQUESTS_DISABLED.format(player));
                     }
                     break;
                 }
                 case ALLOW_SPECTATORS: {
                     profile.getOptions().allowSpectators(!profile.getOptions().allowSpectators());
                     if (profile.getOptions().allowSpectators()) {
-                        player.sendMessage(Locale.OPTIONS_SPECTATORS_ENABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SPECTATORS_ENABLED.format(player));
                     } else {
-                        player.sendMessage(Locale.OPTIONS_SPECTATORS_DISABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SPECTATORS_DISABLED.format(player));
                     }
                     break;
                 }
                 case SHOW_PLAYERS: {
                     profile.getOptions().showPlayers(!profile.getOptions().showPlayers());
                     if (profile.getOptions().showPlayers()) {
-                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_ENABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_ENABLED.format(player));
                     } else {
-                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_DISABLED.format());
+                        player.sendMessage(Locale.OPTIONS_SHOW_PLAYERS_DISABLED.format(player));
                     }
                     VisibilityLogic.handle(player);
                     break;
                 }
                 case KILL_EFFECTS: {
+                    if (!player.hasPermission("praxi.killeffect." + profile.getOptions().killEffect().getDisplayName())) {
+                        player.sendMessage(CC.translate("&cYou don't have permission to use this kill effect"));
+                        break;
+                    }
                     switch (profile.getOptions().killEffect()) {
+
                         case NONE:
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.NONE.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             profile.getOptions().killEffect(KillEffects.LIGHTNING);
                             break;
                         case LIGHTNING:
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.LIGHTNING.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             profile.getOptions().killEffect(KillEffects.FIREWORKS);
 
                             break;
                         case FIREWORKS: {
-                            if (!player.hasPermission("praxi.killeffect." + KillEffects.FIREWORKS.getDisplayName())) {
-                                player.sendMessage("&cYou don't have permission to use this kill effect");
-                                break;
-                            }
                             profile.getOptions().killEffect(KillEffects.NONE);
                             break;
                         }
                     }
-                    player.sendMessage(Locale.OPTIONS_KILLEFFECT_SELECT.format(profile.getOptions().killEffect().getDisplayName()));
+                    player.sendMessage(Locale.OPTIONS_KILLEFFECT_SELECT.format(player, profile.getOptions().killEffect().getDisplayName()));
+                }
+                case THEME: {
+                    if (!player.hasPermission("praxi.options.theme.selector")) {
+                        player.sendMessage(CC.translate("&cYou don't have permission to use the theme selector"));
+                        break;
+                    }
+                    switch (profile.getOptions().theme()) {
+                        case ORANGE:
+                            profile.getOptions().theme(Colors.AQUA);
+                            break;
+                        case AQUA:
+                            profile.getOptions().theme(Colors.RED);
+                            break;
+                        case RED:
+                            profile.getOptions().theme(Colors.YELLOW);
+                            break;
+                        case YELLOW:
+                            profile.getOptions().theme(Colors.PINK);
+                            break;
+                        case PINK:
+                            profile.getOptions().theme(Colors.ORANGE);
+                            break;
+                    }
+                    player.sendMessage(Locale.OPTIONS_THEME_SELECT.format(player, profile.getOptions().theme().getName()));
                 }
             }
             new SettingsMenu().openMenu(player);

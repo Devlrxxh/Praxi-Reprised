@@ -411,7 +411,7 @@ public class MatchListener implements Listener {
                     int range = (int) Math.ceil(event.getEntity().getLocation().distance(attacker.getLocation()));
                     double health = Math.ceil(damaged.getHealth() - event.getFinalDamage()) / 2.0D;
 
-                    attacker.sendMessage(Locale.ARROW_DAMAGE_INDICATOR.format(
+                    attacker.sendMessage(Locale.ARROW_DAMAGE_INDICATOR.format(attacker,
                             range,
                             damaged.getName(),
                             health,
@@ -545,7 +545,7 @@ public class MatchListener implements Listener {
                             }
 
                             if (kitLoadout != null) {
-                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(kitLoadout.getCustomName()));
+                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName()));
                                 player.getInventory().setArmorContents(kitLoadout.getArmor());
                                 player.getInventory().setContents(kitLoadout.getContents());
                                 player.updateInventory();
@@ -565,7 +565,7 @@ public class MatchListener implements Listener {
 
                     if (!profile.getEnderpearlCooldown().hasExpired()) {
                         String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
-                        player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(time,
+                        player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(player, time,
                                 (time.equalsIgnoreCase("1.0") ? "" : "s")));
                         event.setCancelled(true);
                     } else {

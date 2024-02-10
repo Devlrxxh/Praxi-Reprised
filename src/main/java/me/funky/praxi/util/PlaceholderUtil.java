@@ -29,8 +29,8 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<bar>", "&7&m--------------------");
             } else {
                 line = line.replaceAll("<bar>", "                              ");
-
             }
+            line = line.replaceAll("<theme>", CC.translate("&" + profile.getOptions().theme().getColor().getChar()));
 
             if (profile.getState() == ProfileState.QUEUEING) {
                 line = line.replaceAll("<kit>", queueProfile.getQueue().getKit().getName());

@@ -18,7 +18,7 @@ public class MatchPearlCooldownTask extends BukkitRunnable {
                 if (profile.getEnderpearlCooldown().hasExpired()) {
                     if (!profile.getEnderpearlCooldown().isNotified()) {
                         profile.getEnderpearlCooldown().setNotified(true);
-                        player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN_EXPIRED.format());
+                        player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN_EXPIRED.format(player));
                     }
                 } else {
                     int seconds = Math.round(profile.getEnderpearlCooldown().getRemaining()) / 1_000;

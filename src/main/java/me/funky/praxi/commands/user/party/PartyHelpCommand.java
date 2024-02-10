@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class PartyHelpCommand {
 
     public void execute(Player player) {
-        Locale.PARTY_HELP.formatLines().forEach(player::sendMessage);
+        Locale.PARTY_HELP.formatLines(player).forEach(player::sendMessage);
     }
 
 }

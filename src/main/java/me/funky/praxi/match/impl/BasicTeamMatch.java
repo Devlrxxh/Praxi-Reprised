@@ -300,7 +300,7 @@ public class BasicTeamMatch extends Match {
         }
 
         if (ranked) {
-            spectator.sendMessage(Locale.MATCH_START_SPECTATING_RANKED.format(
+            spectator.sendMessage(Locale.MATCH_START_SPECTATING_RANKED.format(spectator,
                     firstColor.toString(),
                     participantA.getConjoinedNames(),
                     participantA.getLeader().getElo(),
@@ -309,7 +309,7 @@ public class BasicTeamMatch extends Match {
                     participantB.getLeader().getElo()
             ));
         } else {
-            spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(
+            spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(spectator,
                     firstColor.toString(),
                     participantA.getConjoinedNames(),
                     secondColor.toString(),

@@ -54,9 +54,9 @@ public class Queue {
         Hotbar.giveHotbarItems(player);
 
         if (ranked) {
-            player.sendMessage(Locale.QUEUE_JOIN_RANKED.format(kit.getName(), elo));
+            player.sendMessage(Locale.QUEUE_JOIN_RANKED.format(player, kit.getName(), elo));
         } else {
-            player.sendMessage(Locale.QUEUE_JOIN_UNRANKED.format(kit.getName()));
+            player.sendMessage(Locale.QUEUE_JOIN_UNRANKED.format(player, kit.getName()));
         }
     }
 
@@ -73,10 +73,10 @@ public class Queue {
             Hotbar.giveHotbarItems(player);
 
             if (ranked) {
-                player.sendMessage(Locale.QUEUE_LEAVE_RANKED.format(kit.getName()));
+                player.sendMessage(Locale.QUEUE_LEAVE_RANKED.format(player, kit.getName()));
                 kit.removeQueue((byte) 1);
             } else {
-                player.sendMessage(Locale.QUEUE_LEAVE_UNRANKED.format(kit.getName()));
+                player.sendMessage(Locale.QUEUE_LEAVE_UNRANKED.format(player, kit.getName()));
                 kit.removeQueue((byte) 1);
             }
         }

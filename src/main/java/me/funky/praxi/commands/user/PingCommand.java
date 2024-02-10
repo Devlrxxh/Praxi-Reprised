@@ -16,12 +16,12 @@ public class PingCommand extends BaseCommand {
 
     @Default
     public void ping(Player player) {
-        player.sendMessage(Locale.PING_YOUR.format(BukkitReflection.getPing(player)));
+        player.sendMessage(Locale.PING_YOUR.format(player, BukkitReflection.getPing(player)));
     }
 
     @Default
     @CommandCompletion("@names")
     public void pingOthers(Player player, String otherPlayer) {
-        player.sendMessage(Locale.PING_OTHERS.format(BukkitReflection.getPing(Bukkit.getPlayer(otherPlayer)), Bukkit.getPlayer(otherPlayer).getName()));
+        player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(Bukkit.getPlayer(otherPlayer)), Bukkit.getPlayer(otherPlayer).getName()));
     }
 }

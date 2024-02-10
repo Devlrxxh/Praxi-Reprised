@@ -10,6 +10,7 @@ import me.funky.praxi.profile.meta.option.button.ShowScoreboardOptionButton;
 import me.funky.praxi.profile.option.OptionsOpenedEvent;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.util.CC;
+import me.funky.praxi.util.PlaceholderUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -21,6 +22,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
 
 public class ProfileListener implements Listener {
 
@@ -123,7 +126,9 @@ public class ProfileListener implements Listener {
             VisibilityLogic.handle(otherPlayer, event.getPlayer());
         }
         for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
-            event.getPlayer().sendMessage(CC.translate(line).replace("<player>", event.getPlayer().getName()));
+            ArrayList<String> list = new ArrayList<>();
+            list.add(CC.translate(line));
+            event.getPlayer().sendMessage(PlaceholderUtil.format(list, event.getPlayer()).toString().replace("[", "").replace("]", ""));
         }
 
         new BukkitRunnable() {
@@ -141,7 +146,7 @@ public class ProfileListener implements Listener {
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
         profile.save();
 
-        if (profile.getQueueProfile() != null){
+        if (profile.getQueueProfile() != null) {
             profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
             Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         }

@@ -10,7 +10,8 @@ public enum Settings {
     ALLOW_SPECTATORS("Toggle Spectators", Material.EGG, "Show or Hide Players."),
     ALLOW_DUELS("Toggle Duels", Material.DIAMOND_SWORD, "Allow Duel Requests."),
     KILL_EFFECTS("Kill Effects", Material.DIAMOND_AXE, "Select Kill Effect."),
-    SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines.");
+    SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines."),
+    THEME("Select Theme", Material.BOOK, "Select Color Theme.");
 
 
     private final String name;
@@ -23,4 +24,3 @@ public enum Settings {
         this.description = description;
     }
 }
- 

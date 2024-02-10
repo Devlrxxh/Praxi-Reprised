@@ -71,7 +71,7 @@ public class MatchDetailsMenu extends Menu {
 
     @Override
     public void onOpen(Player player) {
-        player.sendMessage(Locale.VIEWING_INVENTORY.format(snapshot.getUsername()));
+        player.sendMessage(Locale.VIEWING_INVENTORY.format(player, snapshot.getUsername()));
     }
 
     @AllArgsConstructor

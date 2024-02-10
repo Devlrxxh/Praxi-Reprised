@@ -4,6 +4,7 @@ MONGO:
 RANKED:
   REQUIRED-WINS: 10
   ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
+DEFAULT-THEME-COLOR: ORANGE
 LEADERBOARD:
   UPDATE-TIME: 15 # MINUTES
 JOIN_MESSAGE:
@@ -33,6 +34,7 @@ OPTIONS:
   SHOWPLAYERS_ENABLED: '&aShowen players!'
   SHOWPLAYERS_DISABLED: '&cHidden all players!'
   KILL_EFFECTS_SELECT: '&aYou have selected {0}!'
+  THEME_SELECT: '&aYou have selected {0}!'
   SCOREBOARD_LINES_ENABLED: '&aEnabled Scoreboard Lines!'
   SCOREBOARD_LINES_DISABLED: '&cDisabled Scoreboard Lines!'
 PARTY:

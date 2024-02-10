@@ -28,7 +28,7 @@ public class QueueListener implements Listener {
 
                 if (hotbarItem == HotbarItem.QUEUE_JOIN_RANKED) {
                     if (profile.getWins() < Praxi.getInstance().getMainConfig().getInteger("RANKED.REQUIRED-WINS")) {
-                        event.getPlayer().sendMessage(Locale.RANKED_ERROR.format(Praxi.getInstance().getMainConfig().getInteger("RANKED.REQUIRED-WINS") - profile.getWins()));
+                        event.getPlayer().sendMessage(Locale.RANKED_ERROR.format(event.getPlayer(), Praxi.getInstance().getMainConfig().getInteger("RANKED.REQUIRED-WINS") - profile.getWins()));
                         return;
                     }
                     if (!profile.isBusy()) {

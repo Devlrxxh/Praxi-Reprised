@@ -21,6 +21,7 @@ import me.funky.praxi.profile.meta.ProfileKitEditorData;
 import me.funky.praxi.profile.meta.ProfileRematchData;
 import me.funky.praxi.profile.meta.option.ProfileOptions;
 import me.funky.praxi.queue.QueueProfile;
+import me.funky.praxi.setting.Colors;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.Cooldown;
 import me.funky.praxi.util.InventoryUtil;
@@ -208,6 +209,7 @@ public class Profile {
         this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
         this.options.scoreboradLines(options.getBoolean("scoreboradLines"));
         this.options.showPlayers(options.getBoolean("showPlayers"));
+        this.options.theme(Colors.valueOf(options.getString("theme")));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -260,7 +262,8 @@ public class Profile {
         optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
         optionsDocument.put("killeffect", options.killEffect().toString());
         optionsDocument.put("scoreboradLines", options.scoreboradLines());
-        optionsDocument.put("showplayers", options.showPlayers());
+        optionsDocument.put("showPlayers", options.showPlayers());
+        optionsDocument.put("theme", options.theme().toString());
 
         document.put("options", optionsDocument);
 

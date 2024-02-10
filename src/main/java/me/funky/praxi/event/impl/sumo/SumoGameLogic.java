@@ -185,7 +185,7 @@ public class SumoGameLogic implements EventGameLogic {
                 Player player = gamePlayer.getPlayer();
 
                 if (player != null) {
-                    player.sendMessage(Locale.EVENT_ROUND_OPPONENT.format(
+                    player.sendMessage(Locale.EVENT_ROUND_OPPONENT.format(player,
                             (participantB.getPlayers().size() == 1 ? "" : "s"),
                             participantB.getConjoinedNames()));
 
@@ -199,7 +199,7 @@ public class SumoGameLogic implements EventGameLogic {
                 Player player = gamePlayer.getPlayer();
 
                 if (player != null) {
-                    player.sendMessage(Locale.EVENT_ROUND_OPPONENT.format(
+                    player.sendMessage(Locale.EVENT_ROUND_OPPONENT.format(player,
                             (participantA.getPlayers().size() == 1 ? "" : "s"),
                             participantA.getConjoinedNames()));
 
@@ -280,7 +280,7 @@ public class SumoGameLogic implements EventGameLogic {
 
                     voteData.addVote(player.getUniqueId());
 
-                    game.sendMessage(Locale.EVENT_PLAYER_VOTE.format(
+                    game.sendMessage(Locale.EVENT_PLAYER_VOTE.format(player,
                             getColor(player) + player.getName(),
                             gameMap.getMapName(),
                             voteData.getPlayers().size()
@@ -298,7 +298,7 @@ public class SumoGameLogic implements EventGameLogic {
     public void onJoin(Player player) {
         game.getParticipants().add(new GameParticipant<>(new GamePlayer(player.getUniqueId(), player.getName())));
 
-        game.sendMessage(Locale.EVENT_PLAYER_JOIN.format(getColor(player) + player.getName(),
+        game.sendMessage(Locale.EVENT_PLAYER_JOIN.format(player, getColor(player) + player.getName(),
                 game.getParticipants().size(),
                 game.getMaximumPlayers()));
 
@@ -356,7 +356,7 @@ public class SumoGameLogic implements EventGameLogic {
                         if (bukkitPlayer != null) {
                             if (game.getGameState() == EventGameState.WAITING_FOR_PLAYERS ||
                                     game.getGameState() == EventGameState.STARTING_EVENT) {
-                                game.sendMessage(Locale.EVENT_PLAYER_LEAVE.format(
+                                game.sendMessage(Locale.EVENT_PLAYER_LEAVE.format(player,
                                         getColor(bukkitPlayer) + bukkitPlayer.getName(),
                                         game.getRemainingPlayers(),
                                         game.getMaximumPlayers()

@@ -66,7 +66,7 @@ public class BasicFreeForAllMatch extends Match {
             //TODO: MAKE THIS WORK WITH NEW HOTBAR SYSTEM
             player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
             player.getInventory().setContents(getKit().getKitLoadout().getContents());
-            player.sendMessage(Locale.MATCH_GIVE_KIT.format("Default"));
+            player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
             //}
         }
 
@@ -160,7 +160,7 @@ public class BasicFreeForAllMatch extends Match {
     public void addSpectator(Player spectator, Player target) {
         super.addSpectator(spectator, target);
 
-        spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(CC.GREEN, target.getUniqueId()));
+        spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(spectator, CC.GREEN, target.getUniqueId()));
     }
 
     @Override

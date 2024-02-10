@@ -15,7 +15,9 @@ import java.util.List;
 
 public class ScoreboardAdapter implements AssembleAdapter {
     public String getTitle(Player player) {
-        return Praxi.getInstance().getScoreboardConfig().getString("TITLE");
+        ArrayList<String> list = new ArrayList<>();
+        list.add(Praxi.getInstance().getScoreboardConfig().getString("TITLE"));
+        return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
     }
 
     public List<String> getLines(Player player) {
