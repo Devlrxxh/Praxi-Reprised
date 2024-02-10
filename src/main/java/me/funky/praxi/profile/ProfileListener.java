@@ -137,23 +137,18 @@ public class ProfileListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         event.setQuitMessage(null);
+
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
+        profile.save();
 
         if (profile.getQueueProfile() != null){
             profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
+            Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         }
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                profile.save();
-            }
-        }.runTaskAsynchronously(Praxi.getInstance());
 
         if (profile.getRematchData() != null) {
             profile.getRematchData().validate();
         }
-        Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
-        Profile.getProfiles().remove(event.getPlayer().getUniqueId());
     }
 
     @EventHandler

@@ -207,6 +207,7 @@ public class Profile {
         this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
         this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
         this.options.scoreboradLines(options.getBoolean("scoreboradLines"));
+        this.options.showPlayers(options.getBoolean("showPlayers"));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -259,6 +260,8 @@ public class Profile {
         optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
         optionsDocument.put("killeffect", options.killEffect().toString());
         optionsDocument.put("scoreboradLines", options.scoreboradLines());
+        optionsDocument.put("showplayers", options.showPlayers());
+
         document.put("options", optionsDocument);
 
         Document kitStatisticsDocument = new Document();
@@ -297,6 +300,7 @@ public class Profile {
         document.put("loadouts", kitsDocument);
 
         collection.replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
+        profiles.remove(getPlayer().getUniqueId());
     }
 
 }

@@ -115,7 +115,7 @@ public class Praxi extends JavaPlugin {
         loadConfigs();
         loadMongo();
         spigotHandler = new SpigotHandler(praxi);
-        spigotHandler.init(true);
+        spigotHandler.init(false);
 
         new CoreManager();
         cache = new Cache();
