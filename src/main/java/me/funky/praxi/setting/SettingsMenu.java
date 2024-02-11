@@ -311,6 +311,7 @@ public class SettingsMenu extends Menu {
                         }
                     }
                     player.sendMessage(Locale.OPTIONS_KILLEFFECT_SELECT.format(player, profile.getOptions().killEffect().getDisplayName()));
+                    break;
                 }
                 case THEME: {
                     if (!player.hasPermission("praxi.options.theme.selector")) {

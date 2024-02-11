@@ -3,7 +3,6 @@ package me.funky.praxi.event.impl.sumo;
 import lombok.Getter;
 import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
-import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.event.game.EventGame;
 import me.funky.praxi.event.game.EventGameLogic;
 import me.funky.praxi.event.game.EventGameLogicTask;
@@ -50,10 +49,7 @@ public class SumoGameLogic implements EventGameLogic {
         this.logicTask = new EventGameLogicTask(game);
         this.logicTask.runTaskTimer(Praxi.getInstance(), 0, 20L);
     }
-
-    private static ChatColor getColor(Player player) {
-        return CoreManager.getInstance().getCore().getColor(player.getUniqueId());
-    }
+    
 
     @Override
     public EventGameLogicTask getGameLogicTask() {
@@ -281,7 +277,7 @@ public class SumoGameLogic implements EventGameLogic {
                     voteData.addVote(player.getUniqueId());
 
                     game.sendMessage(Locale.EVENT_PLAYER_VOTE.format(player,
-                            getColor(player) + player.getName(),
+                            (player) + player.getName(),
                             gameMap.getMapName(),
                             voteData.getPlayers().size()
                     ));
@@ -298,7 +294,7 @@ public class SumoGameLogic implements EventGameLogic {
     public void onJoin(Player player) {
         game.getParticipants().add(new GameParticipant<>(new GamePlayer(player.getUniqueId(), player.getName())));
 
-        game.sendMessage(Locale.EVENT_PLAYER_JOIN.format(player, getColor(player) + player.getName(),
+        game.sendMessage(Locale.EVENT_PLAYER_JOIN.format(player, (player) + player.getName(),
                 game.getParticipants().size(),
                 game.getMaximumPlayers()));
 
@@ -357,7 +353,7 @@ public class SumoGameLogic implements EventGameLogic {
                             if (game.getGameState() == EventGameState.WAITING_FOR_PLAYERS ||
                                     game.getGameState() == EventGameState.STARTING_EVENT) {
                                 game.sendMessage(Locale.EVENT_PLAYER_LEAVE.format(player,
-                                        getColor(bukkitPlayer) + bukkitPlayer.getName(),
+                                        (bukkitPlayer) + bukkitPlayer.getName(),
                                         game.getRemainingPlayers(),
                                         game.getMaximumPlayers()
                                 ));

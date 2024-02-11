@@ -253,6 +253,7 @@ public class Profile {
     }
 
     public void save() {
+
         Document document = new Document();
         document.put("uuid", uuid.toString());
         document.put("username", username);
@@ -305,7 +306,6 @@ public class Profile {
         document.put("loadouts", kitsDocument);
 
         collection.replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
-        profiles.remove(getPlayer().getUniqueId());
     }
 
 }

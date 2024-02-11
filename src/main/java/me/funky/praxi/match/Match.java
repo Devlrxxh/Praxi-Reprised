@@ -197,6 +197,24 @@ public abstract class Match {
         return null;
     }
 
+    public ArrayList<Player> getOpponent(Player player, boolean yes) {
+        yes = false;
+        ArrayList<Player> players = new ArrayList<>();
+        GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(player);
+        if (playerParticipant != null) {
+            for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+                if (!gameParticipant.equals(playerParticipant)) {
+                    for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                        if (!gamePlayer.isDisconnected()) {
+                            players.add(player);
+                        }
+                    }
+                }
+                return players;
+            }
+        }
+        return null;
+    }
 
     public void start() {
         arena.loadArena();
@@ -294,11 +312,7 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            if (Praxi.getInstance().getSpigotHandler() == null) return;
-            if (kit.getKnockbackProfile() == null) return;
-            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
-            }
+            //TODO ADD KB THINGY
         }
 
     }

@@ -52,8 +52,8 @@ public class QueueThread extends Thread {
                             int firstPlayerPing = BukkitReflection.getPing(firstPlayer);
                             int secondPlayerPing = BukkitReflection.getPing(secondPlayer);
 
-                            if (Math.abs(firstPlayerPing - secondPlayerPing) <= firstProfile.getOptions().pingRange() &&
-                                    Math.abs(firstPlayerPing - secondPlayerPing) <= secondProfile.getOptions().pingRange()) {
+                            if (secondPlayerPing <= firstProfile.getOptions().pingRange() &&
+                                    firstPlayerPing <= secondProfile.getOptions().pingRange()) {
                                 continue;
                             }
 

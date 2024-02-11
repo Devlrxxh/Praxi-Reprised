@@ -8,7 +8,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
-import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.arena.*;
 import me.funky.praxi.arena.command.ArenaCommand;
 import me.funky.praxi.commands.admin.general.MainCommand;
@@ -61,7 +60,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.refinedev.api.spigot.SpigotHandler;
 
 import java.util.Arrays;
 import java.util.logging.ConsoleHandler;
@@ -87,7 +85,6 @@ public class Praxi extends JavaPlugin {
     private Cache cache;
     private PaperCommandManager paperCommandManager;
     private Assemble assemble;
-    private SpigotHandler spigotHandler;
 
     public static Praxi getInstance() {
         if (praxi == null) {
@@ -114,10 +111,7 @@ public class Praxi extends JavaPlugin {
         honcho = new Honcho(this);
         loadConfigs();
         loadMongo();
-        spigotHandler = new SpigotHandler(praxi);
-        spigotHandler.init(false);
 
-        new CoreManager();
         cache = new Cache();
         Hotbar.init();
         Kit.init();
@@ -206,9 +200,6 @@ public class Praxi extends JavaPlugin {
         Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7| &fKits: &c" + Kit.getKits().size()));
         Console.sendMessage(CC.translate("&7| &fArenas: &c" + Arena.getArenas().size()));
-        if (spigotHandler != null) {
-            Console.sendMessage(CC.translate("&7| &fKB Controller: &c" + spigotHandler.getType()));
-        }
         Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7| &fPlugin Loaded in : &c" + (System.currentTimeMillis() - oldTime) + "ms"));
         Console.sendMessage(CC.translate(" "));

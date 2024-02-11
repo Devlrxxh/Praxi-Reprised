@@ -15,9 +15,16 @@ import java.util.List;
 
 public class ScoreboardAdapter implements AssembleAdapter {
     public String getTitle(Player player) {
+        Profile profile = Profile.getByUuid(player.getUniqueId());
         ArrayList<String> list = new ArrayList<>();
-        list.add(Praxi.getInstance().getScoreboardConfig().getString("TITLE"));
-        return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
+
+        if (!profile.getOptions().scoreboradLines()) {
+            list.add("   " + Praxi.getInstance().getScoreboardConfig().getString("TITLE") + "   ");
+            return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
+        } else {
+            list.add(Praxi.getInstance().getScoreboardConfig().getString("TITLE"));
+            return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
+        }
     }
 
     public List<String> getLines(Player player) {
@@ -29,6 +36,10 @@ public class ScoreboardAdapter implements AssembleAdapter {
                 return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("IN-PARTY")), player);
             }
             return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("LOBBY")), player);
+        }
+
+        if (profile.getState() == ProfileState.SPECTATING) {
+            return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("SPECTATING")), player);
         }
 
         if (profile.getState() == ProfileState.QUEUEING) {

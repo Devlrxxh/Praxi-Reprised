@@ -20,11 +20,9 @@ public class Leaderboard {
 
     public static Map<String, QueueLeaderboard> init() {
         Map<String, QueueLeaderboard> leaderboards = new HashMap<>();
-        for(Kit kit : Kit.getKits()){
+        for (Kit kit : Kit.getKits()) {
             leaderboards.put(kit.getName(), initQueueLeaderboard(kit.getName()));
-            System.out.println(kit.getName());
         }
-
 
         return leaderboards;
     }

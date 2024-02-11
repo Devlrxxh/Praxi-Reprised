@@ -144,7 +144,13 @@ public class ProfileListener implements Listener {
         event.setQuitMessage(null);
 
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
-        profile.save();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                profile.save();
+                Profile.getProfiles().remove(event.getPlayer().getUniqueId());
+            }
+        }.runTaskAsynchronously(Praxi.getInstance());
 
         if (profile.getQueueProfile() != null) {
             profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);

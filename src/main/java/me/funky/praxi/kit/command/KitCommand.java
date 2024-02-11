@@ -80,11 +80,11 @@ public class KitCommand extends BaseCommand {
     }
 
     @Subcommand("remove")
-    @CommandCompletion("@arenas")
+    @CommandCompletion("@kits")
     @Syntax("<arena>")
     public void remove(Player player, String kitName) {
-        if (Kit.getByName(kitName) != null) {
-            player.sendMessage(CC.translate("&4ERROR - &cKit already exists!"));
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
             return;
         }
         Kit kit = Kit.getByName(kitName);
@@ -92,8 +92,6 @@ public class KitCommand extends BaseCommand {
             kit.delete();
 
             player.sendMessage(CC.GOLD + "Deleted kit \"" + kit.getName() + "\"");
-        } else {
-            player.sendMessage(CC.RED + "&4ERROR - &cKit already exists!");
         }
     }
 

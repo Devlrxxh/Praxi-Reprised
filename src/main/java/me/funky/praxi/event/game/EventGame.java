@@ -3,7 +3,6 @@ package me.funky.praxi.event.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.adapter.CoreManager;
 import me.funky.praxi.event.Event;
 import me.funky.praxi.event.game.map.EventGameMap;
 import me.funky.praxi.event.game.map.vote.EventGameMapVoteData;
@@ -58,9 +57,6 @@ public class EventGame {
         activeGame = this;
     }
 
-    private static ChatColor getColor(Player player) {
-        return CoreManager.getInstance().getCore().getColor(player.getUniqueId());
-    }
 
     public int getRemainingParticipants() {
         if (gameState == EventGameState.WAITING_FOR_PLAYERS) {
@@ -144,7 +140,7 @@ public class EventGame {
         Player hostPlayer = gameHost.getPlayer();
         List<BaseComponent[]> compiledComponents = new ArrayList<>();
         List<String> lines = Locale.EVENT_JOIN_BROADCAST.formatLines(event.getDisplayName(),
-                (hostPlayer == null ? "" : getColor(hostPlayer)) + gameHost.getUsername());
+                (hostPlayer == null ? "" : (hostPlayer)) + gameHost.getUsername());
 
         for (String line : lines) {
             compiledComponents.add(new ChatComponentBuilder("")

@@ -6,7 +6,7 @@ import me.funky.praxi.util.CC;
 import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "stopspectating")
+@CommandMeta(label = "spec leave")
 public class StopSpectatingCommand {
 
     public void execute(Player player) {

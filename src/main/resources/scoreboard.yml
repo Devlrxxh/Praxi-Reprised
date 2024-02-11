@@ -67,3 +67,10 @@ MATCH:
     - " "
     - "&blunar.gg"
     - "<bar>"
+SPECTATING:
+  - "&7&m--------------------"
+  - "<theme>Spectating match"
+  - "<theme>Duration: &f<duration>"
+  - " "
+  - "<theme>wtap.gg"
+  - "&7&m--------------------"

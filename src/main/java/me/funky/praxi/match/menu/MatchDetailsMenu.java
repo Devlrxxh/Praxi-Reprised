@@ -62,8 +62,10 @@ public class MatchDetailsMenu extends Menu {
 
         buttons.put(pos, new StatisticsButton(snapshot));
 
-        if (this.snapshot.getOpponent() != null) {
-            buttons.put(53, new SwitchInventoryButton(this.snapshot.getOpponent()));
+        if (snapshot.getUuid().equals(player.getUniqueId())) {
+            buttons.put(53, new SwitchInventoryButton(snapshot.getOpponent()));
+        } else {
+            buttons.put(53, new SwitchInventoryButton(player.getUniqueId()));
         }
 
         return buttons;
@@ -182,10 +184,13 @@ public class MatchDetailsMenu extends Menu {
         @Override
         public void clicked(Player player, ClickType clickType) {
             if (snapshot.getOpponent() != null) {
-                player.chat("/viewinv " + snapshot.getOpponent());
+                if (snapshot.getUuid().equals(player.getUniqueId())) {
+                    player.chat("/viewinv " + snapshot.getOpponent());
+                } else {
+                    player.chat("/viewinv " + player.getUniqueId());
+                }
             }
         }
-
     }
 
     @AllArgsConstructor
