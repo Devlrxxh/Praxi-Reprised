@@ -15,7 +15,7 @@ public class KitCommand extends BaseCommand {
     @Subcommand("help")
     public void help(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
-        player.sendMessage(CC.translate("&cKit Management &7[&f1/2&7] - &f/kit help <page>"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/kit help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit create &7<value> - &fCreate kit"));
         player.sendMessage(CC.translate("&7* &c/kit getinv &7<kit> - &fGet kit loadout"));
@@ -28,7 +28,7 @@ public class KitCommand extends BaseCommand {
     @Subcommand("help 1")
     public void help1(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
-        player.sendMessage(CC.translate("&cKit Management &7[&f1/2&7] - &f/kit help <page>"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/kit help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit create &7<value> - &fCreate kit"));
         player.sendMessage(CC.translate("&7* &c/kit getinv &7<kit> - &fGet kit loadout"));
@@ -41,7 +41,7 @@ public class KitCommand extends BaseCommand {
     @Subcommand("help 2")
     public void help2(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
-        player.sendMessage(CC.translate("&cKit Management &7[&f1/2&7] - &f/kit help <page>"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f2/3&7] - &f/kit help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit seticon &7<kit> - &fSet kit icon"));
         player.sendMessage(CC.translate("&7* &c/kit enable &7<kit> - &fEnable/Disable kit"));
@@ -54,7 +54,7 @@ public class KitCommand extends BaseCommand {
     @Subcommand("help 3")
     public void help3(Player player) {
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
-        player.sendMessage(CC.translate("&cKit Management &7[&f1/3&7] - &f/kit help <page>"));
+        player.sendMessage(CC.translate("&cKit Management &7[&f3/3&7] - &f/kit help <page>"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/kit sumo &7<kit> - &fAdd Sumo rule"));
         player.sendMessage(CC.translate("&7* &c/kit hpregen &7<kit> - &fSet HPRegen rule"));
