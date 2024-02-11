@@ -13,11 +13,11 @@ The most configurable, efficient, and extensive practice plugin.
 ![image](https://github.com/Devlrxxh/praxi/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
 
 # Placeholders
- - ``%praxi_top_<up-to-50>%`` | Returns Player's Name in position
+ - ``%praxi_lb_<kit-name>_<up-to-10>_name%`` | Returns Player's Name in position
 
- - ``%praxi_top_<up-to-50>_elo%`` |  Returns Player's ELO in position
+ - ``%praxi_lb_<kit-name>_<up-to-10>_elo%`` | Returns Player's ELO in position
 
- -  ``%praxi_leaderboard_update%`` |  Returns time left till leaderboard reload
+ -  ``%praxi_leaderboards_update%`` |  Returns time left till leaderboard reload
 
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
