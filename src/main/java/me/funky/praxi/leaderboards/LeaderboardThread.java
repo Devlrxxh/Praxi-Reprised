@@ -33,8 +33,8 @@ public class LeaderboardThread extends Thread {
 
                 if (Leaderboard.getRefreshTime() <= 0) {
                     rested = false;
-                    Leaderboard.getEloPositions().clear();
-                    Leaderboard.setEloPositions(Leaderboard.init());
+                    Leaderboard.getEloLeaderboards().clear();
+                    Leaderboard.setEloLeaderboards(Leaderboard.init());
                 }
                 sleep(SECOND_IN_MILLIS);
             } catch (InterruptedException ignored) {

@@ -2,6 +2,7 @@ package me.funky.praxi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.funky.praxi.leaderboards.Leaderboard;
+import me.funky.praxi.leaderboards.PlayerElo;
 import me.funky.praxi.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -32,32 +33,21 @@ public class Placeholder extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer player, @NotNull String identifier) {
         if (player == null) return "";
         if (!player.isOnline()) return "Offline Player";
-        switch (identifier) {
-            case "leaderboard_update":
-                return TimeUtil.millisToTimer(Leaderboard.getRefreshTime());
-        }
-        if (identifier.startsWith("top_")) {
-            String[] parts = identifier.split("_");
-            if (parts.length == 2 || (parts.length == 3 && (parts[2].equalsIgnoreCase("elo") || parts[2].equalsIgnoreCase("kills") || parts[2].equalsIgnoreCase("loses")))) {
-                int topNumber;
-                try {
-                    topNumber = Integer.parseInt(parts[1]);
-                } catch (NumberFormatException e) {
-                    return "Invalid placeholder";
-                }
+        String[] parts = identifier.split("_");
+        if (parts.length == 4 && parts[0].equalsIgnoreCase("lb")) {
+            String queue = parts[1];
+            int position = Integer.parseInt(parts[2]);
+            PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue).getTopPlayers().get(position - 1);
 
-                if (topNumber <= Leaderboard.getEloPositions().size()) {
-                    if (parts.length == 3) {
-                        if (parts[2].equalsIgnoreCase("elo")) {
-                            return String.valueOf(Leaderboard.getEloPositions().get(topNumber - 1).getPlayerElo().getElo());
-                        }
-                    } else {
-                        return Leaderboard.getEloPositions().get(topNumber - 1).getPlayerElo().getPlayerName();
-                    }
-                }
+            switch (parts[3]) {
+                case "name":
+                    return playerElo.getPlayerName();
+                case "elo":
+                    return String.valueOf(playerElo.getElo());
             }
+        } else if (identifier.equalsIgnoreCase("leaderboards_update")) {
+            return TimeUtil.millisToTimer(Leaderboard.getRefreshTime());
         }
-
         return null;
     }
 }

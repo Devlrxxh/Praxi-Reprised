@@ -1,0 +1,15 @@
+package me.funky.praxi.leaderboards;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class QueueLeaderboard {
+    private String queue;
+    private List<PlayerElo> topPlayers;
+}

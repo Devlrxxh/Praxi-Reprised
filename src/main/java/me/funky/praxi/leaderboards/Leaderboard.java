@@ -2,76 +2,64 @@ package me.funky.praxi.leaderboards;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Leaderboard {
     @Getter
     @Setter
-    private static List<Positions> eloPositions = init();
+    private static Map<String, QueueLeaderboard> eloLeaderboards = init();
+
     @Getter
     @Setter
     private static long refreshTime;
 
-    public static List<Positions> init() {
+    public static Map<String, QueueLeaderboard> init() {
+        Map<String, QueueLeaderboard> leaderboards = new HashMap<>();
+        for(Kit kit : Kit.getKits()){
+            leaderboards.put(kit.getName(), initQueueLeaderboard(kit.getName()));
+        }
+
+
+        return leaderboards;
+    }
+
+    private static QueueLeaderboard initQueueLeaderboard(String queue) {
         List<PlayerElo> topPlayers = Profile.collection.find().into(new ArrayList<>()).stream()
-                .map(Leaderboard::mapToPlayerElo)
+                .map(profileDocument -> mapToPlayerElo(profileDocument, queue))
                 .sorted(Comparator.reverseOrder())
-                .limit(3)
+                .limit(10)
                 .collect(Collectors.toList());
 
-        return IntStream.range(0, 50)
-                .mapToObj(i -> {
-                    if (i < topPlayers.size()) {
-                        return new Positions(i + 1, topPlayers.get(i));
-                    } else {
-                        return new Positions(i + 1, new PlayerElo("none", 0, 0, 0));
-                    }
-                })
-                .collect(Collectors.toList());
+        return new QueueLeaderboard(queue, topPlayers);
     }
 
-    private static PlayerElo mapToPlayerElo(Document profileDocument) {
-        return new PlayerElo(profileDocument.getString("username"), getElo(profileDocument), getKills(profileDocument), getLoses(profileDocument));
+    private static PlayerElo mapToPlayerElo(Document profileDocument, String queue) {
+        return new PlayerElo(profileDocument.getString("username"),
+                getElo(profileDocument, queue),
+                getKills(profileDocument, queue),
+                getLoses(profileDocument, queue));
     }
 
-    private static int getElo(Document profileDocument) {
+    private static int getElo(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
-        int totalQueue = kitStatistics.keySet().size();
-        if (totalQueue == 0) {
-            return 0;
-        }
-
-        return kitStatistics.values().stream()
-                .mapToInt(kit -> ((Document) kit).getInteger("elo"))
-                .sum() / totalQueue;
+        Document queueStats = (Document) kitStatistics.get(queue);
+        return queueStats.getInteger("elo");
     }
 
-    private static int getKills(Document profileDocument) {
-        int kills = 0;
+    private static int getKills(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
-
-        for (String key : kitStatistics.keySet()) {
-            Document kitDocument = (Document) kitStatistics.get(key);
-            kills += kitDocument.getInteger("won");
-        }
-        return kills;
+        Document queueStats = (Document) kitStatistics.get(queue);
+        return queueStats.getInteger("won");
     }
 
-    private static int getLoses(Document profileDocument) {
-        int loses = 0;
+    private static int getLoses(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
-
-        for (String key : kitStatistics.keySet()) {
-            Document kitDocument = (Document) kitStatistics.get(key);
-            loses += kitDocument.getInteger("lost");
-        }
-        return loses;
+        Document queueStats = (Document) kitStatistics.get(queue);
+        return queueStats.getInteger("lost");
     }
 }
