@@ -9,16 +9,16 @@ LEADERBOARD:
   UPDATE-TIME: 15 # MINUTES
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
-  - '&fWelcome to the &bLunar Network!'
+  - '&fWelcome to the <theme>Lunar Network!'
   - ' '
-  - ' &f✦ &bDiscord: &fdiscord.gg/lunarNetwork'
-  - ' &f✦ &bTwitter: &ftwitter.com/@lunarNetwork'
-  - ' &f✦ &bStore: &fstore.lunar.gg'
+  - ' &f✦ <theme>Discord: &fdiscord.gg/lunarNetwork'
+  - ' &f✦ <theme>Twitter: &ftwitter.com/@lunarNetwork'
+  - ' &f✦ <theme>Store: &fstore.lunar.gg'
   - ' '
   - '&7&m--------------------------------'
 PING:
-  YOUR: "&bYour ping is &f{0}"
-  OTHERS: "&b{1}''s ping is &f{0}"
+  YOUR: "<theme>Your ping is &f{0}"
+  OTHERS: "<theme>{1}''s ping is &f{0}"
 KIT_EDITOR:
   START_RENAMING: '&eNow renaming &7{0}&e... Enter the new name now. &7&o(Chat colors
     work)'
@@ -52,19 +52,19 @@ PARTY:
     - '&7&m------------------------------------------------'
   INFORMATION:
     - '&7&m------------------------------------------------'
-    - '&fPrivacy: &b{0}'
-    - '&fLeader: &b{1}'
-    - '&fMember: &b({2}) {3}'
+    - '&fPrivacy: <theme>{0}'
+    - '&fLeader: <theme>{1}'
+    - '&fMember: <theme>({2}) {3}'
     - '&7&m------------------------------------------------'
   CREATE: '&eCreated a new party.'
   DISBAND: '&cYour party has been disbanded.'
   INVITE:
-    - '&b{1} &einvited your to their party'
-    - '%CLICKABLE%&aClick here or type &b/party join {0} &ato accept.'
+    - '<theme>{1} &einvited your to their party'
+    - '%CLICKABLE%&aClick here or type <theme>/party join {0} &ato accept.'
   INVITE_HOVER: '&aClick here to accept.'
-  INVITE_BROADCAST: '&b{0} &ehas been invited to your party.'
-  JOIN: '&b{0} &ehas joined your party.'
-  LEAVE: '&b{0} &ehas {1} your party.'
+  INVITE_BROADCAST: '<theme>{0} &ehas been invited to your party.'
+  JOIN: '<theme>{0} &ehas joined your party.'
+  LEAVE: '<theme>{0} &ehas {1} your party.'
   PRIVACY_CHANGE: '&eYour party privacy has been set to &7{0}&e.'
   CHAT_PREFIX: '&c[Party] &r'
 EVENT:
@@ -104,18 +104,18 @@ EVENT:
     - '&7██&4███&7██'
     - '&7███████'
 DUEL:
-  SENT: '&eYou sent &b{1} &ea duel request to &a{0} &eon arena &d{2}&e.'
+  SENT: '&eYou sent <theme>{1} &ea duel request to &a{0} &eon arena &d{2}&e.'
   SENT_PARTY: '&aYour party sent a &7{0} &cduel request to &7{1}''''s party &c(&7{2}&c)
     &con arena &7{3}&c.'
   RECEIVED:
-    - '&b{1} &7(&e{3}ms&7) &ehas sent you a &a{0} &eduel on &d{2}&e.'
+    - '<theme>{1} &7(&e{3}ms&7) &ehas sent you a &a{0} &eduel on &d{2}&e.'
     - '%CLICKABLE%'
   RECEIVED_PARTY:
     - '&7{1}''''s party &c(&7{2}&c) &csent your party a &7{0} &cduel request on arena
     &7{3}&c.'
     - '%CLICKABLE%'
   RECEIVED_HOVER: '&aClick to accept this duel request.'
-  RECEIVED_CLICKABLE: '&6Click here or type &b/duel accept {0} &6to accept the invite.'
+  RECEIVED_CLICKABLE: '&6Click here or type <theme>/duel accept {0} &6to accept the invite.'
 QUEUE:
   JOIN_UNRANKED: '&aYou are now queued for Unranked {0}.'
   LEAVE_UNRANKED: '&cYou have been removed from queue.'
@@ -129,16 +129,16 @@ MATCH:
     - ' '
     - '&fKit: &a{1}'
     - '&fOpponent: &a{0}'
-    - '&fPing: &b{2}'
+    - '&fPing: <theme>{2}'
   GIVE_KIT: '&eYou have equipped "{0}" kit.'
   ENDERPEARL_COOLDOWN: '&cYou cannot use this for another &l&c{0}&r&c second{1}.'
   ENDERPEARL_COOLDOWN_EXPIRED: '&aYour enderpearl cooldown expired.'
   START_SPECTATING: '&eYou are spectating {0}{1} &evs {2}{3}'
   START_SPECTATING_RANKED: '&eYou are spectating {0}{1} &7({2}) &evs {3}{4} &7({5})'
-  NOW_SPECTATING: '&b{0} &eis now spectating.'
-  NO_LONGER_SPECTATING: '&b{0} &eis no longer spectating.'
+  NOW_SPECTATING: '<theme>{0} &eis now spectating.'
+  NO_LONGER_SPECTATING: '<theme>{0} &eis no longer spectating.'
   PLAYING_ARENA: ' '
-  START_TIMER: '&fMatching starting in &b{0}...'
+  START_TIMER: '&fMatch starting &a{0}...'
   STARTED: '&fMatch started!'
   END_DETAILS:
     - '&7&m------------------------------------------------'
@@ -149,7 +149,7 @@ MATCH:
   END_WINNER_INVENTORY: '&aWinner{0}: '
   END_LOSER_INVENTORY: '&cLoser{0}: '
   CLICK_TO_VIEW_NAME: '&e{0}'
-  CLICK_TO_VIEW_HOVER: '&eClick to view &b{0}&e''''s inventory.'
+  CLICK_TO_VIEW_HOVER: '&eClick to view <theme>{0}&e''''s inventory.'
   ELO_CHANGES:
     - '&a{0} +{1} ({2}) &7| &c{3} +{4} ({5})'
   PLAYER_KILLED: '&a{1} &7killed &c{0}&7.'
@@ -160,22 +160,22 @@ REMATCH:
     - '&eYou have sent &7{0} &ea rematch on arena &7{1}&e.'
   RECEIVED_REQUEST:
     - '&7{0} &ehas sent you a rematch on arena &7{1}&e.'
-    - '&aClick here or type &b/rematch &cto accept the request.'
+    - '&aClick here or type <theme>/rematch &cto accept the request.'
   RECEIVED_REQUEST_HOVER: '&cClick to accept.'
 ARROW_DAMAGE_INDICATOR: '&6{1}''''s Health'':'' &c{2}&4{3}'
-VIEWING_INVENTORY: '&6You are viewing &b{0}&e''''s inventory...'
+VIEWING_INVENTORY: '&6You are viewing <theme>{0}&e''''s inventory...'
 HOTBAR_ITEMS:
   LOBBY:
     QUEUE_JOIN_UNRANKED:
       MATERIAL: IRON_SWORD
       DURABILITY: 0
-      NAME: '&9» &aJoin &bUnranked &aQueue &9«'
+      NAME: '&9» &aJoin Unranked &aQueue &9«'
       LORE: []
       SLOT: 0
     QUEUE_JOIN_RANKED:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
-      NAME: '&9» &aJoin &bRanked &aQueue &9«'
+      NAME: '&9» &aJoin Ranked &aQueue &9«'
       LORE: []
       SLOT: 1
     PARTY_CREATE:

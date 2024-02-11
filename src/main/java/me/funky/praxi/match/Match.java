@@ -127,8 +127,8 @@ public abstract class Match {
                 processedPlayers++;
 
                 ChatComponentBuilder current = new ChatComponentBuilder(
-                        Locale.MATCH_CLICK_TO_VIEW_NAME.format(gamePlayer, gamePlayer.getUsername()))
-                        .attachToEachPart(ChatHelper.hover(Locale.MATCH_CLICK_TO_VIEW_HOVER.format(gamePlayer, gamePlayer.getUsername())))
+                        Locale.MATCH_CLICK_TO_VIEW_NAME.format(gamePlayer.getUsername()))
+                        .attachToEachPart(ChatHelper.hover(Locale.MATCH_CLICK_TO_VIEW_HOVER.format(gamePlayer.getUsername())))
                         .attachToEachPart(ChatHelper.click("/viewinv " + gamePlayer.getUuid().toString()));
 
                 builder.append(current.create());
@@ -340,9 +340,7 @@ public abstract class Match {
 
                     if (player != null) {
                         for (BaseComponent[] components : endingMessages) {
-                            ArrayList<String> list = new ArrayList<>();
-                            list.add(CC.translate(Arrays.toString(components)));
-                            player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
+                            player.sendMessage(components);
                         }
                     }
                 }
