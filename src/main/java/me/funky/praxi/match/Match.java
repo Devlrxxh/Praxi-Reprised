@@ -312,9 +312,12 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            //TODO ADD KB THINGY
+            if (Praxi.getInstance().getSpigotHandler() == null) return;
+            if (kit.getKnockbackProfile() == null) return;
+            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
+            }
         }
-
     }
 
     public abstract boolean canStartRound();
