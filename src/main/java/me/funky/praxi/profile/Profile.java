@@ -210,6 +210,7 @@ public class Profile {
         this.options.scoreboradLines(options.getBoolean("scoreboradLines"));
         this.options.showPlayers(options.getBoolean("showPlayers"));
         this.options.theme(Colors.valueOf(options.getString("theme")));
+        this.options.pingRange(options.getInteger("pingRange"));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -264,6 +265,7 @@ public class Profile {
         optionsDocument.put("scoreboradLines", options.scoreboradLines());
         optionsDocument.put("showPlayers", options.showPlayers());
         optionsDocument.put("theme", options.theme().toString());
+        optionsDocument.put("pingRange", options.pingRange());
 
         document.put("options", optionsDocument);
 

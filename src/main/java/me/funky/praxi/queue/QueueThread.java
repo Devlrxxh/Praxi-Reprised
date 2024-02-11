@@ -7,6 +7,7 @@ import me.funky.praxi.match.Match;
 import me.funky.praxi.match.impl.BasicTeamMatch;
 import me.funky.praxi.match.participant.MatchGamePlayer;
 import me.funky.praxi.participant.GameParticipant;
+import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.BukkitReflection;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -45,18 +46,16 @@ public class QueueThread extends Thread {
                                 continue;
                             }
 
-//							if (firstProfile.getOptions().isUsingPingFactor() ||
-//							    secondProfile.getOptions().isUsingPingFactor()) {
-//								if (firstPlayer.getPing() >= secondPlayer.getPing()) {
-//									if (firstPlayer.getPing() - secondPlayer.getPing() >= 50) {
-//										continue;
-//									}
-//								} else {
-//									if (secondPlayer.getPing() - firstPlayer.getPing() >= 50) {
-//										continue;
-//									}
-//								}
-//							}
+                            Profile firstProfile = Profile.getByUuid(firstPlayer.getUniqueId());
+                            Profile secondProfile = Profile.getByUuid(secondPlayer.getUniqueId());
+
+                            int firstPlayerPing = BukkitReflection.getPing(firstPlayer);
+                            int secondPlayerPing = BukkitReflection.getPing(secondPlayer);
+
+                            if (Math.abs(firstPlayerPing - secondPlayerPing) <= firstProfile.getOptions().pingRange() &&
+                                    Math.abs(firstPlayerPing - secondPlayerPing) <= secondProfile.getOptions().pingRange()) {
+                                continue;
+                            }
 
                             if (queueProfile.isRanked()) {
                                 if (firstQueueProfile.isInRange(secondQueueProfile.getElo()) ||

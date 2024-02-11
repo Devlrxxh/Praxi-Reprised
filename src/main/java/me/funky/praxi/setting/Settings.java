@@ -11,7 +11,8 @@ public enum Settings {
     ALLOW_DUELS("Toggle Duels", Material.DIAMOND_SWORD, "Allow Duel Requests."),
     KILL_EFFECTS("Kill Effects", Material.DIAMOND_AXE, "Select Kill Effect."),
     SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines."),
-    THEME("Select Theme", Material.BOOK, "Select Color Theme.");
+    THEME("Select Theme", Material.BOOK, "Select Color Theme."),
+    PING_RANGE("Ping Range", Material.STICK, "Change Ping Range.");
 
 
     private final String name;

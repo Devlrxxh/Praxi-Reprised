@@ -25,10 +25,8 @@ public final class PlaceholderUtil {
             line = line.replaceAll("<in-match>", String.valueOf(Praxi.getInstance().getCache().getMatches().size()));
             line = line.replaceAll("<player>", player.getName());
             line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
-            if (profile.getOptions().scoreboradLines()) {
-                line = line.replaceAll("<bar>", "&7&m--------------------");
-            } else {
-                line = line.replaceAll("<bar>", "                              ");
+            if (!profile.getOptions().scoreboradLines()) {
+                line = line.replaceAll("&7&m--------------------", "                              ");
             }
             line = line.replaceAll("<theme>", CC.translate("&" + profile.getOptions().theme().getColor().getChar()));
 

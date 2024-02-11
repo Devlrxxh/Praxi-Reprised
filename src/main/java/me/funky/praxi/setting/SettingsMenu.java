@@ -81,6 +81,18 @@ public class SettingsMenu extends Menu {
                     lore.add("&aClick to enable");
                     break;
                 }
+                case PING_RANGE: {
+                    if (profile.getOptions().pingRange() == 250) {
+                        lore.add(" &7&l* &r&a" + profile.getOptions().pingRange());
+                        lore.add(" ");
+                        lore.add("&aClick to decrease");
+                        break;
+                    }
+                    lore.add(" &7&l* &r&a" + profile.getOptions().pingRange());
+                    lore.add(" ");
+                    lore.add("&aClick to increase");
+                    break;
+                }
                 case SHOW_LINES: {
                     if (profile.getOptions().scoreboradLines()) {
                         lore.add(" &7&l* &aYes");
@@ -230,6 +242,15 @@ public class SettingsMenu extends Menu {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format(player));
                     } else {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format(player));
+                    }
+                    break;
+                }
+                case PING_RANGE: {
+                    int ping = profile.getOptions().pingRange();
+                    if(ping == 250){
+                        profile.getOptions().pingRange(10);
+                    }else{
+                        profile.getOptions().pingRange(profile.getOptions().pingRange() + 10);
                     }
                     break;
                 }
