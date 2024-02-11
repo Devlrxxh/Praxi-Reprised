@@ -22,6 +22,7 @@ public class Leaderboard {
         Map<String, QueueLeaderboard> leaderboards = new HashMap<>();
         for(Kit kit : Kit.getKits()){
             leaderboards.put(kit.getName(), initQueueLeaderboard(kit.getName()));
+            System.out.println(kit.getName());
         }
 
 
@@ -35,8 +36,13 @@ public class Leaderboard {
                 .limit(10)
                 .collect(Collectors.toList());
 
+        for (int i = topPlayers.size(); i < 10; i++) {
+            topPlayers.add(new PlayerElo("none", 0, 0, 0));
+        }
+
         return new QueueLeaderboard(queue, topPlayers);
     }
+
 
     private static PlayerElo mapToPlayerElo(Document profileDocument, String queue) {
         return new PlayerElo(profileDocument.getString("username"),
