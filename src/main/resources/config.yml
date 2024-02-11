@@ -3,22 +3,23 @@ MONGO:
   DATABASE: praxi
 RANKED:
   REQUIRED-WINS: 10
-  ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
+  ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins.
+    You need {0} more wins!'
 DEFAULT-THEME-COLOR: ORANGE
 LEADERBOARD:
-  UPDATE-TIME: 15 # MINUTES
+  UPDATE-TIME: 15
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
-  - '&fWelcome to the <theme>Lunar Network!'
+  - '&fWelcome to the <theme>wTap Network!'
   - ' '
-  - ' &f✦ <theme>Discord: &fdiscord.gg/lunarNetwork'
-  - ' &f✦ <theme>Twitter: &ftwitter.com/@lunarNetwork'
-  - ' &f✦ <theme>Store: &fstore.lunar.gg'
+  - ' &f✦ <theme>Discord: &fdiscord.gg/wTapNetwork'
+  - ' &f✦ <theme>Twitter: &ftwitter.com/@wTapNetwork'
+  - ' &f✦ <theme>Store: &fstore.wtap.gg'
   - ' '
   - '&7&m--------------------------------'
 PING:
-  YOUR: "<theme>Your ping is &f{0}"
-  OTHERS: "<theme>{1}''s ping is &f{0}"
+  YOUR: <theme>Your ping is &f{0}
+  OTHERS: <theme>{1}''s ping is &f{0}
 KIT_EDITOR:
   START_RENAMING: '&eNow renaming &7{0}&e... Enter the new name now. &7&o(Chat colors
     work)'
@@ -59,12 +60,12 @@ PARTY:
   CREATE: '&eCreated a new party.'
   DISBAND: '&cYour party has been disbanded.'
   INVITE:
-    - '<theme>{1} &einvited your to their party'
+    - <theme>{1} &einvited your to their party
     - '%CLICKABLE%&aClick here or type <theme>/party join {0} &ato accept.'
   INVITE_HOVER: '&aClick here to accept.'
-  INVITE_BROADCAST: '<theme>{0} &ehas been invited to your party.'
-  JOIN: '<theme>{0} &ehas joined your party.'
-  LEAVE: '<theme>{0} &ehas {1} your party.'
+  INVITE_BROADCAST: <theme>{0} &ehas been invited to your party.
+  JOIN: <theme>{0} &ehas joined your party.
+  LEAVE: <theme>{0} &ehas {1} your party.
   PRIVACY_CHANGE: '&eYour party privacy has been set to &7{0}&e.'
   CHAT_PREFIX: '&c[Party] &r'
 EVENT:
@@ -108,14 +109,15 @@ DUEL:
   SENT_PARTY: '&aYour party sent a &7{0} &cduel request to &7{1}''''s party &c(&7{2}&c)
     &con arena &7{3}&c.'
   RECEIVED:
-    - '<theme>{1} &7(&e{3}ms&7) &ehas sent you a &a{0} &eduel on &d{2}&e.'
+    - <theme>{1} &7(&e{3}ms&7) &ehas sent you a &a{0} &eduel on &d{2}&e.
     - '%CLICKABLE%'
   RECEIVED_PARTY:
     - '&7{1}''''s party &c(&7{2}&c) &csent your party a &7{0} &cduel request on arena
     &7{3}&c.'
     - '%CLICKABLE%'
   RECEIVED_HOVER: '&aClick to accept this duel request.'
-  RECEIVED_CLICKABLE: '&6Click here or type <theme>/duel accept {0} &6to accept the invite.'
+  RECEIVED_CLICKABLE: '&6Click here or type <theme>/duel accept {0} &6to accept the
+    invite.'
 QUEUE:
   JOIN_UNRANKED: '&aYou are now queued for Unranked {0}.'
   LEAVE_UNRANKED: '&cYou have been removed from queue.'
@@ -135,8 +137,8 @@ MATCH:
   ENDERPEARL_COOLDOWN_EXPIRED: '&aYour enderpearl cooldown expired.'
   START_SPECTATING: '&eYou are spectating {0}{1} &evs {2}{3}'
   START_SPECTATING_RANKED: '&eYou are spectating {0}{1} &7({2}) &evs {3}{4} &7({5})'
-  NOW_SPECTATING: '<theme>{0} &eis now spectating.'
-  NO_LONGER_SPECTATING: '<theme>{0} &eis no longer spectating.'
+  NOW_SPECTATING: <theme>{0} &eis now spectating.
+  NO_LONGER_SPECTATING: <theme>{0} &eis no longer spectating.
   PLAYING_ARENA: ' '
   START_TIMER: '&fMatch starting &a{0}...'
   STARTED: '&fMatch started!'
@@ -149,7 +151,7 @@ MATCH:
   END_WINNER_INVENTORY: '&aWinner{0}: '
   END_LOSER_INVENTORY: '&cLoser{0}: '
   CLICK_TO_VIEW_NAME: '&e{0}'
-  CLICK_TO_VIEW_HOVER: '&eClick to view <theme>{0}&e''''s inventory.'
+  CLICK_TO_VIEW_HOVER: '&eClick to view {0}&e''''s inventory.'
   ELO_CHANGES:
     - '&a{0} +{1} ({2}) &7| &c{3} +{4} ({5})'
   PLAYER_KILLED: '&a{1} &7killed &c{0}&7.'
@@ -169,38 +171,38 @@ HOTBAR_ITEMS:
     QUEUE_JOIN_UNRANKED:
       MATERIAL: IRON_SWORD
       DURABILITY: 0
-      NAME: '&9» &aJoin Unranked &aQueue &9«'
+      NAME: '&6Unranked Queue &7(Right Click)'
       LORE: []
       SLOT: 0
     QUEUE_JOIN_RANKED:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
-      NAME: '&9» &aJoin Ranked &aQueue &9«'
+      NAME: '&6Ranked Queue &7(Right Click)'
       LORE: []
       SLOT: 1
     PARTY_CREATE:
       MATERIAL: NAME_TAG
       DURABILITY: 0
-      NAME: '&9» &aCreate a Party &9«'
+      NAME: '&6Create a Party &7(Right Click)'
       LORE: []
       SLOT: 4
     SETTINGS:
       MATERIAL: PAPER
       DURABILITY: 0
-      NAME: '&9» &aSettings &9«'
+      NAME: '&6Settings &7(Right Click)'
       LORE: []
       SLOT: 8
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
-      NAME: '&9» &aKit Editor &9«'
+      NAME: '&6Kit Editor &7(Right Click)'
       LORE: []
       SLOT: 8
   QUEUEING:
     QUEUE_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
-      NAME: '&9» &aLeave Queue &9«'
+      NAME: '&cLeave Queue'
       LORE: []
       SLOT: 8
   EVENT:
@@ -238,7 +240,7 @@ HOTBAR_ITEMS:
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
-      NAME: '&9» &aKit Editor &9«'
+      NAME: '&6Kit Editor &7(Right Click)'
       LORE: []
       SLOT: 7
     PARTY_DISBAND:

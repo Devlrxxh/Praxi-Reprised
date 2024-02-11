@@ -74,7 +74,7 @@ SETTINGS:
   TITLE: "&7Settings"
   FILTER: FILL # THERE IS FILL AND BRODER
   SETTING-NAME: "&b<settings>"
-  SIZE: 27
+  SIZE: 36
 EVENTS:
   TITLE: "&7Select an event"
   FILTER: FILL # THERE IS FILL AND BRODER
@@ -86,8 +86,6 @@ STATS:
   KIT-NAME: "&a<kit>"
   FILTER: FILL # THERE IS FILL AND BRODER
   LORE:
-    - "<description>"
-    - " "
     - " &7* &fWins: &b<wins>"
     - " &7* &fLoses: &b<loses>"
     - " &7* &fElo: &b<elo>"
