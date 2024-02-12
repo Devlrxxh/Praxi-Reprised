@@ -45,6 +45,7 @@ import me.funky.praxi.profile.hotbar.Hotbar;
 import me.funky.praxi.queue.QueueListener;
 import me.funky.praxi.queue.QueueThread;
 import me.funky.praxi.scoreboard.ScoreboardAdapter;
+import me.funky.praxi.setting.ProfileSettingsCommand;
 import me.funky.praxi.setting.SettingsCommand;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.Console;
@@ -228,7 +229,8 @@ public class Praxi extends JavaPlugin {
                 new SettingsCommand(),
                 new HostCommand(),
                 new PingCommand(),
-                new StatsCommand()
+                new StatsCommand(),
+                new ProfileSettingsCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 
@@ -249,14 +251,14 @@ public class Praxi extends JavaPlugin {
     private void loadMongo() {
         String mongoUri = mainConfig.getString("MONGO.URI");
 
-        //Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-        //mongoLogger.setLevel(Level.WARNING);
+        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.WARNING);
 
-       // for (Handler handler : mongoLogger.getParent().getHandlers()) {
-       //     if (handler instanceof ConsoleHandler) {
-       //         mongoLogger.getParent().removeHandler(handler);
-       //     }
-       // }
+        for (Handler handler : mongoLogger.getParent().getHandlers()) {
+            if (handler instanceof ConsoleHandler) {
+                mongoLogger.getParent().removeHandler(handler);
+            }
+        }
         if (mongoUri != null && !mongoUri.isEmpty()) {
             try {
                 MongoClient mongoClient = MongoClients.create(new ConnectionString(mongoUri));

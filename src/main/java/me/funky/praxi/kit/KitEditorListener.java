@@ -10,6 +10,7 @@ import me.funky.praxi.profile.hotbar.HotbarItem;
 import me.funky.praxi.util.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -49,6 +50,7 @@ public class KitEditorListener implements Listener {
 
             if (profile.getState() != ProfileState.FIGHTING) {
                 new KitManagementMenu(selectedKit).openMenu(event.getPlayer());
+                event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.AMBIENCE_THUNDER, 1.0F, 1.0F);
             }
         }
     }

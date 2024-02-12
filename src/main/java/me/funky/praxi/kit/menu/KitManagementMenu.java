@@ -11,6 +11,7 @@ import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.button.BackButton;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -132,6 +133,7 @@ public class KitManagementMenu extends Menu {
             profile.getKitEditorData().setSelectedKitLoadout(kitLoadout);
 
             new KitEditorMenu(index).openMenu(player);
+
         }
 
     }

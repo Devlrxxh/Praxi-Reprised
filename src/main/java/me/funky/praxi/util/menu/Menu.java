@@ -7,6 +7,7 @@ import me.funky.praxi.util.CC;
 import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -96,6 +97,7 @@ public abstract class Menu {
     }
 
     public void openMenu(final Player player) {
+        player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 1.0F);
         this.buttons = this.getButtons(player);
 
         Menu previousMenu = Menu.currentlyOpenedMenus.get(player.getName());

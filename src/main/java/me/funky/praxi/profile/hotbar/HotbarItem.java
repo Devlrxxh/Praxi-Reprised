@@ -6,6 +6,7 @@ import me.funky.praxi.profile.ProfileState;
 
 import java.util.regex.Pattern;
 
+@Getter
 public enum HotbarItem {
 
     QUEUE_JOIN_RANKED(null),
@@ -13,6 +14,7 @@ public enum HotbarItem {
     QUEUE_LEAVE(null),
     PARTY_EVENTS(null),
     SETTINGS("settings"),
+    PROFILE_SETTINGS("profilesettings"),
     PARTY_CREATE("party create"),
     PARTY_DISBAND("party disband"),
     PARTY_LEAVE("party leave"),
@@ -28,18 +30,13 @@ public enum HotbarItem {
     REMATCH_ACCEPT("rematch"),
     KIT_SELECTION(null);
 
-    @Getter
     private final String command;
-    @Getter
     @Setter
     private Pattern pattern;
-    @Getter
     @Setter
     private ProfileState state;
-    @Getter
     @Setter
     private int slot;
-    @Getter
     @Setter
     private boolean party;
 

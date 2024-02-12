@@ -105,3 +105,7 @@ STATS:
       - " &7* &fWins: &b<wins>"
       - " &7* &fLoses: &b<loses>"
       - " &7* &fElo: &b<elo>"
+PROFILE-SETTINGS:
+  TITLE: "&7Profile Settings"
+  SIZE: 27
+  FILTER: FILL # THERE IS FILL AND BRODER
