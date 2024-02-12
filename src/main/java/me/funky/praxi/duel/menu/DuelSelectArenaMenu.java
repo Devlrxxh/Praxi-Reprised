@@ -26,7 +26,7 @@ public class DuelSelectArenaMenu extends Menu {
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("DUEL.SIZE");
+        return Praxi.getInstance().getMenusConfig().getInteger("DUEL.ARENA-SELECTOR.SIZE");
     }
 
     @Override

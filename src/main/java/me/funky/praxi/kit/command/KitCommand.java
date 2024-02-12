@@ -81,7 +81,7 @@ public class KitCommand extends BaseCommand {
 
     @Subcommand("remove")
     @CommandCompletion("@kits")
-    @Syntax("<arena>")
+    @Syntax("<kit>")
     public void remove(Player player, String kitName) {
         if (!Kit.getKits().contains(Kit.getByName(kitName))) {
             player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));

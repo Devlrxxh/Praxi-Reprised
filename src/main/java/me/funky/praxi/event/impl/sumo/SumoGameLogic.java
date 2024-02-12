@@ -49,7 +49,7 @@ public class SumoGameLogic implements EventGameLogic {
         this.logicTask = new EventGameLogicTask(game);
         this.logicTask.runTaskTimer(Praxi.getInstance(), 0, 20L);
     }
-    
+
 
     @Override
     public EventGameLogicTask getGameLogicTask() {
