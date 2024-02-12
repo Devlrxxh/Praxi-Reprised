@@ -14,6 +14,11 @@ QUEUES-MENUS:
       - " &fIn Fights: &b<playing>"
       - " &fQueued: &b<queueing>"
       - ""
+      - "&bTop ELO"
+      - " &e1. &f<lb_1_name_> &7- <lb_1_elo_>"
+      - " &f2. &f<lb_2_name_> &7- <lb_2_elo_>"
+      - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
+      - " "
       - " &aClick to here play."
   RANKED:
     TITLE: "&7Join Ranked Queue"
@@ -24,6 +29,11 @@ QUEUES-MENUS:
       - " &fIn Fights: &b<playing>"
       - " &fQueued: &b<queueing>"
       - ""
+      - "&bTop ELO"
+      - " &e1. &f<lb_1_name_> &7- <lb_1_elo_>"
+      - " &f2. &f<lb_2_name_> &7- <lb_2_elo_>"
+      - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
+      - " "
       - " &aClick to here play."
 PARTY:
   FILTER: FILL # THERE IS FILL AND BRODER

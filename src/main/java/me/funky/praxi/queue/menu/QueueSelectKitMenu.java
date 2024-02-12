@@ -1,23 +1,20 @@
 package me.funky.praxi.queue.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
-import me.funky.praxi.match.Match;
-import me.funky.praxi.profile.Profile;
+import me.funky.praxi.*;
+import me.funky.praxi.leaderboards.*;
+import me.funky.praxi.match.*;
+import me.funky.praxi.profile.*;
 import me.funky.praxi.queue.Queue;
-import me.funky.praxi.util.CC;
-import me.funky.praxi.util.ItemBuilder;
-import me.funky.praxi.util.menu.Button;
-import me.funky.praxi.util.menu.Menu;
-import me.funky.praxi.util.menu.filters.Filters;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import me.funky.praxi.util.*;
+import me.funky.praxi.util.menu.*;
+import me.funky.praxi.util.menu.filters.*;
+import org.bukkit.entity.*;
+import org.bukkit.event.inventory.*;
+import org.bukkit.inventory.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @AllArgsConstructor
 public class QueueSelectKitMenu extends Menu {
@@ -40,17 +37,14 @@ public class QueueSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        if (!ranked) {
-            return Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.TITLE");
-        } else {
-            return Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.TITLE");
-        }
+        return ranked ?
+                Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.TITLE") :
+                Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.TITLE");
     }
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
-
         int i = 10;
 
         for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
@@ -58,70 +52,64 @@ public class QueueSelectKitMenu extends Menu {
                 buttons.put(i++, new SelectKitButton(queue));
             }
         }
-
         return buttons;
     }
 
     @AllArgsConstructor
     private class SelectKitButton extends Button {
-
         private Queue queue;
 
         @Override
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
+            List<String> configLore = ranked ?
+                    Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE") :
+                    Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE");
 
-            if (!ranked) {
-                for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE")) {
-                    line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
-                    line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
-                    if (line.contains("<description>")) {
-                        if (!queue.getKit().getDescription().equalsIgnoreCase("none")) {
-                            line = line.replaceAll("<description>", queue.getKit().getDescription());
-                            lore.add(line);
-                        }
-                    } else {
-                        lore.add(line);
-                    }
-
+            configLore.forEach(line -> {
+                line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
+                line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                line = replaceLeaderboardPlaceholders(line, queue);
+                if (!line.contains("<description>") || !queue.getKit().getDescription().equalsIgnoreCase("none")) {
+                    line = line.replaceAll("<description>", queue.getKit().getDescription());
+                    lore.add(line);
                 }
-            } else {
-                for (String line : Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE")) {
-                    line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
-                    line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
-                    if (line.contains("<description>")) {
-                        if (!queue.getKit().getDescription().equalsIgnoreCase("none")) {
-                            line = line.replaceAll("<description>", queue.getKit().getDescription());
-                            lore.add(line);
-                        }
-                    } else {
-                        lore.add(line);
+            });
+
+            String kitName = Praxi.getInstance().getMenusConfig().getString(ranked ?
+                            "QUEUES-MENUS.RANKED.KIT-NAME" :
+                            "QUEUES-MENUS.UNRANKED.KIT-NAME")
+                    .replace("<kit>", queue.getKit().getName())
+                    .replace("<type>", ranked ? "Unranked" : "Ranked");
+
+            return new ItemBuilder(queue.getKit().getDisplayIcon())
+                    .name(kitName)
+                    .lore(lore)
+                    .clearEnchantments()
+                    .clearFlags()
+                    .build();
+        }
+
+        private String replaceLeaderboardPlaceholders(String line, Queue queue) {
+            if (line.contains("<lb_")) {
+                Matcher matcher = Pattern.compile("<lb_(\\d+)_(\\w+)_>").matcher(line);
+                while (matcher.find()) {
+                    int position = Integer.parseInt(matcher.group(1));
+                    String placeholder = matcher.group(2);
+                    PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue.getKit().getName()).getTopPlayers().get(position - 1);
+                    switch (placeholder) {
+                        case "name":
+                            line = line.replace("<lb_" + position + "_name_>", playerElo.getPlayerName());
+                            break;
+                        case "elo":
+                            line = line.replace("<lb_" + position + "_elo_>", String.valueOf(playerElo.getElo()));
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
-
-            if (!ranked) {
-                return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.KIT-NAME")
-                                .replace("<kit>", queue.getKit().getName())
-                                .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
-                        .lore(lore)
-                        .clearEnchantments()
-                        .clearFlags()
-                        .clearFlags()
-                        .build();
-            } else {
-                return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.KIT-NAME")
-                                .replace("<kit>", queue.getKit().getName())
-                                .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
-                        .lore(lore)
-                        .clearEnchantments()
-                        .clearFlags()
-                        .clearFlags()
-                        .build();
-            }
-
+            return line;
         }
 
         @Override
@@ -142,6 +130,5 @@ public class QueueSelectKitMenu extends Menu {
             queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0, ranked);
             queue.getKit().addQueue((byte) 1);
         }
-
     }
 }

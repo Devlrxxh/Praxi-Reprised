@@ -255,3 +255,10 @@ HOTBAR_ITEMS:
       NAME: '&9» &aLeave Party &9«'
       LORE: []
       SLOT: 8
+  SPECTATING:
+    SPECTATE_STOP:
+      MATERIAL: INK_SACK
+      DURABILITY: 1
+      NAME: '&cLeave Match &7(Right click)'
+      LORE: [ ]
+      SLOT: 8

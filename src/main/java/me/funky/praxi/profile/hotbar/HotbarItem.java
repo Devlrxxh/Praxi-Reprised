@@ -19,7 +19,7 @@ public enum HotbarItem {
     PARTY_INFORMATION("party info"),
     OTHER_PARTIES(null),
     KIT_EDITOR(null),
-    SPECTATE_STOP("stopspectating"),
+    SPECTATE_STOP("spec leave"),
     VIEW_INVENTORY(null),
     EVENT_JOIN("event join"),
     EVENT_LEAVE("event leave"),
