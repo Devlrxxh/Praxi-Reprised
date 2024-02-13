@@ -35,7 +35,7 @@ public class Leaderboard {
                 .collect(Collectors.toList());
 
         for (int i = topPlayers.size(); i < 10; i++) {
-            topPlayers.add(new PlayerElo("none", 0, 0, 0));
+            topPlayers.add(new PlayerElo("???", 0, 0, 0));
         }
 
         return new QueueLeaderboard(queue, topPlayers);

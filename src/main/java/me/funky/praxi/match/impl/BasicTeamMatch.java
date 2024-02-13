@@ -2,6 +2,7 @@ package me.funky.praxi.match.impl;
 
 import lombok.Getter;
 import me.funky.praxi.Locale;
+import me.funky.praxi.Praxi;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.match.Match;
@@ -21,6 +22,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,13 +136,19 @@ public class BasicTeamMatch extends Match {
         } else {
             // Set opponents in snapshots if solo
             if (participantA.getPlayers().size() == 1 && participantB.getPlayers().size() == 1) {
-                for (MatchSnapshot snapshot : snapshots) {
-                    if (snapshot.getUuid().equals(participantA.getLeader().getUuid())) {
-                        snapshot.setOpponent(participantB.getLeader().getUuid());
-                    } else if (snapshot.getUuid().equals(participantB.getLeader().getUuid())) {
-                        snapshot.setOpponent(participantA.getLeader().getUuid());
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        for (MatchSnapshot snapshot : snapshots) {
+                            if (snapshot.getUuid().equals(participantA.getLeader().getUuid())) {
+                                snapshot.setOpponent(participantB.getLeader().getUuid());
+                            } else if (snapshot.getUuid().equals(participantB.getLeader().getUuid())) {
+                                snapshot.setOpponent(participantA.getLeader().getUuid());
+                            }
+                        }
                     }
-                }
+                }.runTaskLater(Praxi.getInstance(), 10L);
+
 
                 if (ranked) {
                     int oldWinnerElo = winningParticipant.getLeader().getElo();

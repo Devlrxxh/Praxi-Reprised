@@ -125,7 +125,6 @@ public class Praxi extends JavaPlugin {
         Match.init();
         Party.init();
         Event.init();
-
         EventGameMap.init();
         loadCommandManager();
         assemble = new Assemble(this, new ScoreboardAdapter());

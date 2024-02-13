@@ -81,6 +81,20 @@ public class SettingsMenu extends Menu {
                     lore.add("&aClick to enable");
                     break;
                 }
+                case SELECT_REGION: {
+                    if (profile.getOptions().eu()) {
+                        lore.add(" &7&l▶ &aEU");
+                        lore.add(" &7&l▶ &7NA");
+                        lore.add(" ");
+                        lore.add("&aClick to switch");
+                        break;
+                    }
+                    lore.add(" &7&l▶ &7EU");
+                    lore.add(" &7&l▶ &ANA");
+                    lore.add(" ");
+                    lore.add("&aClick to switch");
+                    break;
+                }
                 case MENU_SOUNDS: {
                     if (profile.getOptions().menuSounds()) {
                         lore.add(" &7&l▶ &aYes");
@@ -266,6 +280,11 @@ public class SettingsMenu extends Menu {
                     } else {
                         player.sendMessage(Locale.OPTIONS_MENU_SOUNDS_DISABLED.format(player));
                     }
+                    break;
+                }
+                case SELECT_REGION: {
+                    profile.getOptions().eu(!profile.getOptions().eu());
+                    player.sendMessage(Locale.OPTIONS_REGION_CHANGE.format((profile.getOptions().eu() ? "EU" : "NA")));
                     break;
                 }
                 case PING_RANGE: {

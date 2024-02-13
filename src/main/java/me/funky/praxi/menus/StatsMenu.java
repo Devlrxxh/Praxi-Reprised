@@ -84,7 +84,6 @@ public class StatsMenu extends Menu {
                     .lore(lore)
                     .clearEnchantments()
                     .clearFlags()
-                    .clearFlags()
                     .build();
         }
 
@@ -123,7 +122,6 @@ public class StatsMenu extends Menu {
                             .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
                     .lore(lore)
                     .clearEnchantments()
-                    .clearFlags()
                     .clearFlags()
                     .build();
 

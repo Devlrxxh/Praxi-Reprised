@@ -118,7 +118,8 @@ public class ItemBuilder implements Listener {
 
     public ItemBuilder clearFlags() {
         ItemMeta itemMeta = is.getItemMeta();
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_PLACED_ON);
+        itemMeta.addItemFlags(ItemFlag.values());
+
         is.setItemMeta(itemMeta);
 
         return this;

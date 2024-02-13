@@ -1,7 +1,9 @@
 package me.funky.praxi.util.menu;
 
 import me.funky.praxi.Praxi;
+import me.funky.praxi.profile.Profile;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,7 +44,11 @@ public class MenuListener implements Listener {
 
                 button.clicked(player, event.getClick());
                 button.clicked(player, event.getSlot(), event.getClick(), event.getHotbarButton());
+                Profile profile = Profile.getByUuid(player.getUniqueId());
 
+                if (profile.getOptions().menuSounds()) {
+                    player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                }
                 if (Menu.currentlyOpenedMenus.containsKey(player.getName())) {
                     Menu newMenu = Menu.currentlyOpenedMenus.get(player.getName());
 

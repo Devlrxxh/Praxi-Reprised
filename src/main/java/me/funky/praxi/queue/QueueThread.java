@@ -65,6 +65,10 @@ public class QueueThread extends Thread {
                             }
 
 
+                            if (firstProfile.getOptions().eu() != secondProfile.getOptions().eu()) {
+                                break;
+                            }
+
                             // Find arena
                             final Arena arena = Arena.getRandomArena(queueProfile.getQueue().getKit());
 
@@ -113,7 +117,7 @@ public class QueueThread extends Thread {
                 }
             } catch (Exception e) {
                 try {
-                    Thread.sleep(1000L);
+                    Thread.sleep(100L);
                 } catch (InterruptedException ignored) {
                 }
 
@@ -121,7 +125,7 @@ public class QueueThread extends Thread {
             }
 
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(100L);
             } catch (InterruptedException ignored) {
             }
         }

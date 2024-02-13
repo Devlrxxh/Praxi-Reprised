@@ -6,6 +6,7 @@ import me.funky.praxi.profile.Profile;
 import me.funky.praxi.queue.Queue;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
+import me.funky.praxi.util.TimeUtil;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.filters.Filters;
@@ -84,7 +85,6 @@ public class LeaderboardsMenu extends Menu {
                     .lore(lore)
                     .clearEnchantments()
                     .clearFlags()
-                    .clearFlags()
                     .build();
         }
 
@@ -99,19 +99,24 @@ public class LeaderboardsMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
             lore.add("");
+            lore.add(Praxi.getInstance().getMenusConfig().getString("LEADERBOARD.PLAYER-ELO")
+                    .replace("<player_elo>", String.valueOf(Profile.getByUuid(player.getUniqueId()).getKitData().get(queue.getKit()).getElo())));
 
             for (int i = 1; i <= 10; i++) {
                 PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue.getKit().getName()).getTopPlayers().get(i - 1);
 
-                lore.add(CC.translate("&b" + i + ". &f" + playerElo.getPlayerName() + "&7- &b" + playerElo.getElo()));
+                lore.add(Praxi.getInstance().getMenusConfig().getString("LEADERBOARD.POSITION")
+                        .replace("<position>", String.valueOf(i))
+                        .replace("<player_elo>", String.valueOf(playerElo.getElo()))
+                        .replace("<player>", playerElo.getPlayerName()));
             }
-
+            lore.add("");
+            lore.add(CC.translate("&aUpdating in " + TimeUtil.millisToTimer(Leaderboard.getRefreshTime())) + " minutes");
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name(Praxi.getInstance().getMenusConfig().getString("LEADERBOARD.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName()))
                     .lore(lore)
                     .clearEnchantments()
-                    .clearFlags()
                     .clearFlags()
                     .build();
 

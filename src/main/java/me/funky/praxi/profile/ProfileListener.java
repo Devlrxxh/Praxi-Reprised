@@ -58,6 +58,16 @@ public class ProfileListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onRightClick(PlayerInteractEntityEvent event) {
+        Player player = event.getPlayer();
+        if (player.isSneaking() && event.getRightClicked() instanceof Player
+                && Profile.getByUuid(player.getUniqueId()).getState().equals(ProfileState.LOBBY)) {
+            Player clickedPlayer = (Player) event.getRightClicked();
+            player.chat("/duel " + clickedPlayer.getName());
+        }
+    }
+
     @EventHandler(ignoreCancelled = true)
     public void onPlayerItemDamageEvent(PlayerItemDamageEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
@@ -108,8 +118,8 @@ public class ProfileListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
-
-        Profile profile = new Profile(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        Profile profile = new Profile(player.getUniqueId());
 
         try {
             profile.load();
@@ -117,20 +127,25 @@ public class ProfileListener implements Listener {
             event.getPlayer().kickPlayer(ChatColor.RED + "Failed to load your profile. Try again later.");
             return;
         }
-        Profile.getProfiles().put(event.getPlayer().getUniqueId(), profile);
+        Profile.getProfiles().put(player.getUniqueId(), profile);
 
-        Praxi.getInstance().getEssentials().teleportToSpawn(event.getPlayer());
+        Praxi.getInstance().getEssentials().teleportToSpawn(player);
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
-            VisibilityLogic.handle(event.getPlayer(), otherPlayer);
-            VisibilityLogic.handle(otherPlayer, event.getPlayer());
+            VisibilityLogic.handle(player, otherPlayer);
+            VisibilityLogic.handle(otherPlayer, player);
         }
         for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
             ArrayList<String> list = new ArrayList<>();
             list.add(CC.translate(line));
-            event.getPlayer().sendMessage(PlaceholderUtil.format(list, event.getPlayer()).toString().replace("[", "").replace("]", ""));
+            player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
         }
 
+        if (player.hasPermission("praxi.donor.fly")) {
+            player.setAllowFlight(true);
+            player.setFlying(true);
+            player.updateInventory();
+        }
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -156,9 +171,10 @@ public class ProfileListener implements Listener {
             profile.getMatch().end();
 
         }
-
-        if (profile.getQueueProfile() != null) {
+        if (profile.getState().equals(ProfileState.QUEUEING)) {
             profile.getQueueProfile().getQueue().getKit().removeQueue();
+        }
+        if (profile.getQueueProfile() != null) {
             Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         }
 

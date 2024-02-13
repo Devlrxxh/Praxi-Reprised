@@ -25,6 +25,7 @@ import me.funky.praxi.setting.Colors;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.Cooldown;
 import me.funky.praxi.util.InventoryUtil;
+import me.funky.praxi.util.RegionUtil;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -53,11 +54,13 @@ public class Profile {
     private QueueProfile queueProfile;
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
+    private boolean eu;
 
     public Profile(UUID uuid) {
         this.uuid = uuid;
         this.username = Bukkit.getPlayer(uuid).getName();
         this.state = ProfileState.LOBBY;
+        this.eu = RegionUtil.isFromEU(Bukkit.getPlayer(uuid).getAddress().getAddress().getHostAddress());
         this.options = new ProfileOptions();
         this.kitEditorData = new ProfileKitEditorData();
         this.kitData = new HashMap<>();
@@ -203,8 +206,6 @@ public class Profile {
             return;
         }
 
-        document.getString("username");
-
         Document options = (Document) document.get("options");
 
         this.options.showScoreboard(options.getBoolean("showScoreboard"));
@@ -216,6 +217,7 @@ public class Profile {
         this.options.theme(Colors.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
         this.options.menuSounds(options.getBoolean("menuSounds"));
+        this.options.eu(options.getBoolean("region"));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -273,6 +275,7 @@ public class Profile {
         optionsDocument.put("theme", options.theme().toString());
         optionsDocument.put("pingRange", options.pingRange());
         optionsDocument.put("menuSounds", options.menuSounds());
+        optionsDocument.put("region", options.eu());
 
         document.put("options", optionsDocument);
 

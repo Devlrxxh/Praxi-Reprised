@@ -13,8 +13,8 @@ public enum Settings {
     SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines."),
     THEME("Select Theme", Material.BOOK, "Select Color Theme."),
     PING_RANGE("Ping Range", Material.STICK, "Change Ping Range."),
-    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds.");
-
+    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds."),
+    SELECT_REGION("Select Region", Material.REDSTONE, "Select Queue Region");
 
     private final String name;
     private final Material material;

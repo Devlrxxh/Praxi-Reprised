@@ -143,7 +143,6 @@ public class KitEditorMenu extends Menu {
             return new ItemBuilder(Material.NAME_TAG)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName()))
                     .clearFlags()
-                    .clearFlags()
                     .build();
         }
 
@@ -157,7 +156,6 @@ public class KitEditorMenu extends Menu {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(7)
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
-                    .clearFlags()
                     .clearFlags()
                     .build();
         }

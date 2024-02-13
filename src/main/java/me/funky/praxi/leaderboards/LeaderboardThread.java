@@ -38,7 +38,7 @@ public class LeaderboardThread extends Thread {
                     rested = false;
                     Leaderboard.getEloLeaderboards().clear();
                     Leaderboard.setEloLeaderboards(Leaderboard.init());
-                    for(Player player : Bukkit.getOnlinePlayers()){
+                    for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendMessage(CC.translate("&aLeaderboards Refreshed!"));
                     }
                 }

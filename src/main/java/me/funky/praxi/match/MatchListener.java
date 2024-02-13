@@ -505,7 +505,7 @@ public class MatchListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
@@ -568,6 +568,7 @@ public class MatchListener implements Listener {
                         String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
                         player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(player, time,
                                 (time.equalsIgnoreCase("1.0") ? "" : "s")));
+                        player.updateInventory();
                         return;
                     }
 

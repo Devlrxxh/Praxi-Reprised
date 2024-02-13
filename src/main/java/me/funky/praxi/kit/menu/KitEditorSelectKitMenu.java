@@ -60,7 +60,6 @@ public class KitEditorSelectKitMenu extends Menu {
                     .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.KIT-NAME").replace("<kit>", kit.getName()))
                     .lore(lore)
                     .clearFlags()
-                    .clearFlags()
                     .build();
         }
 

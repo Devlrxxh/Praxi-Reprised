@@ -10,22 +10,19 @@ import me.funky.praxi.util.BukkitReflection;
 import me.funky.praxi.util.ChatComponentBuilder;
 import me.funky.praxi.util.ChatHelper;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@Getter
 public class DuelProcedure {
 
-    @Getter
     private final boolean party;
-    @Getter
     private final Player sender;
-    @Getter
     private final UUID target;
-    @Getter
     @Setter
     private Kit kit;
-    @Getter
     @Setter
     private Arena arena;
 
@@ -82,6 +79,7 @@ public class DuelProcedure {
                     builder.attachToEachPart(ChatHelper.hover(Locale.DUEL_RECEIVED_HOVER.format(target)));
 
                     target.spigot().sendMessage(builder.create());
+                    target.playSound(target.getLocation(), Sound.CHICKEN_EGG_POP, 1.0f, 1.0f);
                 } else {
                     target.sendMessage(msg);
                 }

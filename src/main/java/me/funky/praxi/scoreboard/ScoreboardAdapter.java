@@ -17,7 +17,6 @@ public class ScoreboardAdapter implements AssembleAdapter {
     public String getTitle(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         ArrayList<String> list = new ArrayList<>();
-
         if (!profile.getOptions().scoreboradLines()) {
             list.add("   " + Praxi.getInstance().getScoreboardConfig().getString("TITLE") + "   ");
             return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
@@ -62,7 +61,6 @@ public class ScoreboardAdapter implements AssembleAdapter {
             }
             return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
         }
-
 
         return null;
     }
