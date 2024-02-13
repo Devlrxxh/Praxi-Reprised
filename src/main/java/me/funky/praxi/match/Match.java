@@ -89,6 +89,7 @@ public abstract class Match {
                 @Override
                 public void run() {
                     profile.save();
+                    System.out.println("Saved Profile: " + profile);
                 }
             }.runTaskAsynchronously(Praxi.getInstance());
         }
@@ -270,6 +271,18 @@ public abstract class Match {
                         profile.setState(ProfileState.LOBBY);
                         profile.setMatch(null);
                         profile.setEnderpearlCooldown(new Cooldown(0));
+                    }
+                } else {
+                    Player player = gamePlayer.getPlayer();
+                    if (player != null) {
+                        player.setFireTicks(0);
+                        player.updateInventory();
+
+                        Profile profile = Profile.getByUuid(player.getUniqueId());
+                        profile.setState(ProfileState.LOBBY);
+                        profile.setMatch(null);
+                        profile.setEnderpearlCooldown(new Cooldown(0));
+                        player.sendMessage(CC.translate("&cEnemy &7committed suicide."));
                     }
                 }
             }

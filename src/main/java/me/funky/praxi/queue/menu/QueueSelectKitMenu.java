@@ -1,18 +1,25 @@
 package me.funky.praxi.queue.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.*;
-import me.funky.praxi.leaderboards.*;
-import me.funky.praxi.match.*;
-import me.funky.praxi.profile.*;
+import me.funky.praxi.Praxi;
+import me.funky.praxi.leaderboards.Leaderboard;
+import me.funky.praxi.leaderboards.PlayerElo;
+import me.funky.praxi.match.Match;
+import me.funky.praxi.profile.Profile;
 import me.funky.praxi.queue.Queue;
-import me.funky.praxi.util.*;
-import me.funky.praxi.util.menu.*;
-import me.funky.praxi.util.menu.filters.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.inventory.*;
-import org.bukkit.inventory.*;
-import java.util.*;
+import me.funky.praxi.util.CC;
+import me.funky.praxi.util.ItemBuilder;
+import me.funky.praxi.util.menu.Button;
+import me.funky.praxi.util.menu.Menu;
+import me.funky.praxi.util.menu.filters.Filters;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -104,6 +111,9 @@ public class QueueSelectKitMenu extends Menu {
                         case "elo":
                             line = line.replace("<lb_" + position + "_elo_>", String.valueOf(playerElo.getElo()));
                             break;
+                        case "kills":
+                            line = line.replace("<lb_" + position + "_kills_>", String.valueOf(playerElo.getKills()));
+                            break;
                         default:
                             break;
                     }
@@ -128,7 +138,7 @@ public class QueueSelectKitMenu extends Menu {
 
             player.closeInventory();
             queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0, ranked);
-            queue.getKit().addQueue((byte) 1);
+            queue.getKit().addQueue();
         }
     }
 }

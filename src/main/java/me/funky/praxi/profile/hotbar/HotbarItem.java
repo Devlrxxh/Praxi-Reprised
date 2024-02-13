@@ -28,6 +28,7 @@ public enum HotbarItem {
     MAP_SELECTION(null),
     REMATCH_REQUEST("rematch"),
     REMATCH_ACCEPT("rematch"),
+    LEADERBOARDS("lb"),
     KIT_SELECTION(null);
 
     private final String command;

@@ -3,6 +3,7 @@ package me.funky.praxi.util.menu;
 import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Praxi;
+import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
@@ -29,8 +30,6 @@ public abstract class Menu {
     private boolean closedByMenu = false;
     private ItemStack fillerType;
     private int size = 9;
-    //private boolean border = false;
-    //private boolean fill = false;
     private Filters filter;
 
     {
@@ -97,7 +96,9 @@ public abstract class Menu {
     }
 
     public void openMenu(final Player player) {
-        player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+        if (Profile.getByUuid(player.getUniqueId()).getOptions().menuSounds()) {
+            player.playSound(player.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+        }
         this.buttons = this.getButtons(player);
 
         Menu previousMenu = Menu.currentlyOpenedMenus.get(player.getName());

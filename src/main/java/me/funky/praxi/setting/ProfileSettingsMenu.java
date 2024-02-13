@@ -2,21 +2,14 @@ package me.funky.praxi.setting;
 
 import lombok.AllArgsConstructor;
 import me.funky.praxi.Praxi;
-import me.funky.praxi.event.Event;
-import me.funky.praxi.event.game.EventGame;
-import me.funky.praxi.event.game.map.EventGameMap;
-import me.funky.praxi.event.game.map.vote.EventGameMapVoteData;
 import me.funky.praxi.event.game.menu.EventHostMenu;
 import me.funky.praxi.menus.StatsMenu;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.ItemBuilder;
-import me.funky.praxi.util.TextSplitter;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.filters.Filters;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -66,7 +59,7 @@ public class ProfileSettingsMenu extends Menu {
             lore.add(CC.translate("&aClick to open"));
 
             return new ItemBuilder(Material.REDSTONE_COMPARATOR)
-                    .name("&bSettings Menu")
+                    .name("&bSettings")
                     .lore(lore)
                     .clearFlags()
                     .build();
@@ -89,7 +82,7 @@ public class ProfileSettingsMenu extends Menu {
             lore.add(CC.translate("&aClick to open"));
 
             return new ItemBuilder(Material.PAPER)
-                    .name("&bEvents Menu")
+                    .name("&bEvents")
                     .lore(lore)
                     .clearFlags()
                     .build();

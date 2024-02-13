@@ -106,12 +106,12 @@ public class Kit {
         return null;
     }
 
-    public void addQueue(byte i) {
-        queuing += i;
+    public void addQueue() {
+        queuing += 1;
     }
 
-    public void removeQueue(byte i) {
-        queuing -= i;
+    public void removeQueue() {
+        queuing -= 1;
     }
 
     public ItemStack getDisplayIcon() {

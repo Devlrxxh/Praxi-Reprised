@@ -127,6 +127,10 @@ public class Profile {
         return profile;
     }
 
+    public boolean isEnderpearlOnCooldown() {
+        return enderpearlCooldown != null && !enderpearlCooldown.hasExpired();
+    }
+
     public int getWins() {
         int wins = 0;
         for (Map.Entry<Kit, ProfileKitData> entry : this.getKitData().entrySet()) {
@@ -211,6 +215,7 @@ public class Profile {
         this.options.showPlayers(options.getBoolean("showPlayers"));
         this.options.theme(Colors.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
+        this.options.menuSounds(options.getBoolean("menuSounds"));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -267,6 +272,7 @@ public class Profile {
         optionsDocument.put("showPlayers", options.showPlayers());
         optionsDocument.put("theme", options.theme().toString());
         optionsDocument.put("pingRange", options.pingRange());
+        optionsDocument.put("menuSounds", options.menuSounds());
 
         document.put("options", optionsDocument);
 

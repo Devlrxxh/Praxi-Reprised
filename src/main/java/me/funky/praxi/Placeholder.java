@@ -3,6 +3,7 @@ package me.funky.praxi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.funky.praxi.leaderboards.Leaderboard;
 import me.funky.praxi.leaderboards.PlayerElo;
+import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -26,13 +27,14 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public boolean canRegister() {
-        return Bukkit.getPluginManager().isPluginEnabled("Praxi");
+        return Bukkit.getPluginManager().isPluginEnabled(Praxi.getInstance());
     }
 
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String identifier) {
         if (player == null) return "";
         if (!player.isOnline()) return "Offline Player";
+
         String[] parts = identifier.split("_");
         if (parts.length == 4 && parts[0].equalsIgnoreCase("lb")) {
             String queue = parts[1];
@@ -47,7 +49,9 @@ public class Placeholder extends PlaceholderExpansion {
             }
         } else if (identifier.equalsIgnoreCase("leaderboards_update")) {
             return TimeUtil.millisToTimer(Leaderboard.getRefreshTime());
+        } else if (identifier.equalsIgnoreCase("player_theme")) {
+            return String.valueOf(Profile.getByUuid(player.getUniqueId()).getOptions().theme().getColor().getChar());
         }
-        return null;
+        return "test";
     }
 }

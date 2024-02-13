@@ -69,82 +69,96 @@ public class SettingsMenu extends Menu {
             switch (this.settings) {
                 case SHOW_SCOREBOARD: {
                     if (profile.getOptions().showScoreboard()) {
-                        lore.add(" &7&l* &aYes");
-                        lore.add(" &7&l* &7No");
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
                         lore.add(" ");
                         lore.add("&aClick to disable");
                         break;
                     }
-                    lore.add(" &7&l* &7Yes");
-                    lore.add(" &7&l* &cNo");
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
+                    lore.add(" ");
+                    lore.add("&aClick to enable");
+                    break;
+                }
+                case MENU_SOUNDS: {
+                    if (profile.getOptions().menuSounds()) {
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
+                        lore.add(" ");
+                        lore.add("&aClick to disable");
+                        break;
+                    }
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
                     break;
                 }
                 case PING_RANGE: {
                     if (profile.getOptions().pingRange() == 250) {
-                        lore.add(" &7&l* &r&aUnrestricted");
+                        lore.add(" &7&l▶ &r&aUnrestricted");
                         lore.add(" ");
                         lore.add("&aClick to decrease");
                         break;
                     }
-                    lore.add(" &7&l* &r&a" + profile.getOptions().pingRange());
+                    lore.add(" &7&l▶ &r&a" + profile.getOptions().pingRange());
                     lore.add(" ");
                     lore.add("&aClick to increase");
                     break;
                 }
                 case SHOW_LINES: {
                     if (profile.getOptions().scoreboradLines()) {
-                        lore.add(" &7&l* &aYes");
-                        lore.add(" &7&l* &7No");
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
                         lore.add(" ");
                         lore.add("&aClick to disable");
                         break;
                     }
-                    lore.add(" &7&l* &7Yes");
-                    lore.add(" &7&l* &cNo");
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
                     break;
                 }
                 case ALLOW_DUELS: {
                     if (profile.getOptions().receiveDuelRequests()) {
-                        lore.add(" &7&l* &aYes");
-                        lore.add(" &7&l* &7No");
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
                         lore.add(" ");
                         lore.add("&aClick to disable");
                         break;
                     }
-                    lore.add(" &7&l* &7Yes");
-                    lore.add(" &7&l* &cNo");
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
                     break;
                 }
                 case ALLOW_SPECTATORS: {
                     if (profile.getOptions().allowSpectators()) {
-                        lore.add(" &7&l* &aYes");
-                        lore.add(" &7&l* &7No");
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
                         lore.add(" ");
                         lore.add("&aClick to disable");
                         break;
                     }
-                    lore.add(" &7&l* &7Yes");
-                    lore.add(" &7&l* &cNo");
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
                     break;
                 }
                 case SHOW_PLAYERS: {
                     if (profile.getOptions().showPlayers()) {
-                        lore.add(" &7&l* &aYes");
-                        lore.add(" &7&l* &7No");
+                        lore.add(" &7&l▶ &aYes");
+                        lore.add(" &7&l▶ &7No");
                         lore.add(" ");
                         lore.add("&aClick to disable");
                         break;
                     }
-                    lore.add(" &7&l* &7Yes");
-                    lore.add(" &7&l* &cNo");
+                    lore.add(" &7&l▶ &7Yes");
+                    lore.add(" &7&l▶ &cNo");
                     lore.add(" ");
                     lore.add("&aClick to enable");
                     break;
@@ -152,26 +166,26 @@ public class SettingsMenu extends Menu {
                 case KILL_EFFECTS: {
                     switch (profile.getOptions().killEffect()) {
                         case NONE:
-                            lore.add("&7&l* &a" + KillEffects.NONE.getDisplayName());
+                            lore.add("&7&l▶ &a" + KillEffects.NONE.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.NONE) {
-                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
                                 }
                             }
                             break;
                         case LIGHTNING:
-                            lore.add("&7&l* &a" + KillEffects.LIGHTNING.getDisplayName());
+                            lore.add("&7&l▶ &a" + KillEffects.LIGHTNING.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.LIGHTNING) {
-                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
                                 }
                             }
                             break;
                         case FIREWORKS: {
-                            lore.add("&7&l* &a" + KillEffects.FIREWORKS.getDisplayName());
+                            lore.add("&7&l▶ &a" + KillEffects.FIREWORKS.getDisplayName());
                             for (KillEffects killEffects : KillEffects.values()) {
                                 if (killEffects != KillEffects.FIREWORKS) {
-                                    lore.add("&7&l* &r&7" + killEffects.getDisplayName());
+                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
                                 }
                             }
                             break;
@@ -184,42 +198,42 @@ public class SettingsMenu extends Menu {
                 case THEME: {
                     switch (profile.getOptions().theme()) {
                         case AQUA:
-                            lore.add("&7&l* &a" + Colors.AQUA.getName());
+                            lore.add("&7&l▶ &a" + Colors.AQUA.getName());
                             for (Colors colors : Colors.values()) {
                                 if (colors != Colors.AQUA) {
-                                    lore.add("&7&l* &r&7" + colors.getName());
+                                    lore.add("&7&l▶ &r&7" + colors.getName());
                                 }
                             }
                             break;
                         case ORANGE:
-                            lore.add("&7&l* &a" + Colors.ORANGE.getName());
+                            lore.add("&7&l▶ &a" + Colors.ORANGE.getName());
                             for (Colors colors : Colors.values()) {
                                 if (colors != Colors.ORANGE) {
-                                    lore.add("&7&l* &r&7" + colors.getName());
+                                    lore.add("&7&l▶ &r&7" + colors.getName());
                                 }
                             }
                             break;
                         case PINK:
-                            lore.add("&7&l* &a" + Colors.PINK.getName());
+                            lore.add("&7&l▶ &a" + Colors.PINK.getName());
                             for (Colors colors : Colors.values()) {
                                 if (colors != Colors.PINK) {
-                                    lore.add("&7&l* &r&7" + colors.getName());
+                                    lore.add("&7&l▶ &r&7" + colors.getName());
                                 }
                             }
                             break;
                         case RED:
-                            lore.add("&7&l* &a" + Colors.RED.getName());
+                            lore.add("&7&l▶ &a" + Colors.RED.getName());
                             for (Colors colors : Colors.values()) {
                                 if (colors != Colors.RED) {
-                                    lore.add("&7&l* &r&7" + colors.getName());
+                                    lore.add("&7&l▶ &r&7" + colors.getName());
                                 }
                             }
                             break;
                         case YELLOW:
-                            lore.add("&7&l* &a" + Colors.YELLOW.getName());
+                            lore.add("&7&l▶ &a" + Colors.YELLOW.getName());
                             for (Colors colors : Colors.values()) {
                                 if (colors != Colors.YELLOW) {
-                                    lore.add("&7&l* &r&7" + colors.getName());
+                                    lore.add("&7&l▶ &r&7" + colors.getName());
                                 }
                             }
                             break;
@@ -242,6 +256,15 @@ public class SettingsMenu extends Menu {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_ENABLED.format(player));
                     } else {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format(player));
+                    }
+                    break;
+                }
+                case MENU_SOUNDS: {
+                    profile.getOptions().menuSounds(!profile.getOptions().menuSounds());
+                    if (profile.getOptions().menuSounds()) {
+                        player.sendMessage(Locale.OPTIONS_MENU_SOUNDS_ENABLED.format(player));
+                    } else {
+                        player.sendMessage(Locale.OPTIONS_MENU_SOUNDS_DISABLED.format(player));
                     }
                     break;
                 }

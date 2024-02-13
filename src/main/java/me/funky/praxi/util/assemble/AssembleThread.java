@@ -1,7 +1,6 @@
 package me.funky.praxi.util.assemble;
 
 import me.funky.praxi.profile.Profile;
-import me.funky.praxi.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -127,7 +126,7 @@ public class AssembleThread extends Thread {
                     }
 
                 } catch (Exception e) {
-                    Bukkit.getServer().getScheduler().runTask(assemble.getPlugin(), () -> player.kickPlayer(CC.translate("&cPlease rejoin.")));
+                    //Bukkit.getServer().getScheduler().runTask(assemble.getPlugin(), () -> player.kickPlayer(CC.translate("&cPlease rejoin.")));
                     Bukkit.getLogger().warning("Error updating scoreboard for player " + player.getName() + ": " + e.getMessage());
                 }
             }

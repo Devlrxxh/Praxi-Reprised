@@ -35,6 +35,7 @@ import me.funky.praxi.kit.KitEditorListener;
 import me.funky.praxi.kit.KitTypeAdapter;
 import me.funky.praxi.kit.command.KitCommand;
 import me.funky.praxi.leaderboards.LeaderboardThread;
+import me.funky.praxi.leaderboards.LeaderboardsCommand;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.match.MatchListener;
 import me.funky.praxi.party.Party;
@@ -193,6 +194,8 @@ public class Praxi extends JavaPlugin {
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();
+            Console.sendMessage(CC.translate("&aPlaceholderAPI found!"));
+            Console.sendMessage(CC.translate("&aRegistering placeholders"));
         }
         Console.sendMessage(CC.translate("&7&m-----------------------------------------"));
         Console.sendMessage(CC.translate(" "));
@@ -230,7 +233,8 @@ public class Praxi extends JavaPlugin {
                 new HostCommand(),
                 new PingCommand(),
                 new StatsCommand(),
-                new ProfileSettingsCommand()
+                new ProfileSettingsCommand(),
+                new LeaderboardsCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

@@ -109,3 +109,18 @@ PROFILE-SETTINGS:
   TITLE: "&7Profile Settings"
   SIZE: 27
   FILTER: FILL # THERE IS FILL AND BRODER
+LEADERBOARD:
+  TITLE: "&7Leaderboards"
+  SIZE: 27
+  FILTER: FILL # THERE IS FILL AND BRODER
+  KIT-NAME: "&a<kit> &7| &fTop 10"
+  GLOBAL-STATS:
+    GLOBAL-STATS-NAME: "&aGlobal Stats"
+    LORE:
+      - " &7* &fWins: &b<wins>"
+      - " &7* &fLoses: &b<loses>"
+      - " &7* &fElo: &b<elo>"
+MATCHES:
+  TITLE: "&7Leaderboards"
+  SIZE: 27
+  FILTER: FILL # THERE IS FILL AND BRODER

@@ -38,6 +38,8 @@ OPTIONS:
   THEME_SELECT: '&aYou have selected {0}!'
   SCOREBOARD_LINES_ENABLED: '&aEnabled Scoreboard Lines!'
   SCOREBOARD_LINES_DISABLED: '&cDisabled Scoreboard Lines!'
+  MENU_SOUNDS_ENABLED: '&aEnabled Menu sounds!'
+  MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'

@@ -19,7 +19,6 @@ public class StatsCommand extends BaseCommand {
 
     }
 
-    @Default
     @CommandCompletion("@names")
     public void statsOthers(Player player, String otherPlayer) {
         new StatsMenu().openMenu(Bukkit.getPlayer(otherPlayer));

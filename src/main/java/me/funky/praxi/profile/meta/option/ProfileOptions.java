@@ -17,6 +17,7 @@ public class ProfileOptions {
     private boolean showPlayers = false;
     private KillEffects killEffect = KillEffects.NONE;
     private boolean scoreboradLines = false;
+    private boolean menuSounds = false;
     private Colors theme = Colors.valueOf(Praxi.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
     private int pingRange = 250;
 }

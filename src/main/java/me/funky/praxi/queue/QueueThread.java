@@ -64,6 +64,7 @@ public class QueueThread extends Thread {
                                 }
                             }
 
+
                             // Find arena
                             final Arena arena = Arena.getRandomArena(queueProfile.getQueue().getKit());
 
@@ -77,6 +78,8 @@ public class QueueThread extends Thread {
                             // Remove players from queue
                             Praxi.getInstance().getCache().getPlayers().remove(firstQueueProfile);
                             Praxi.getInstance().getCache().getPlayers().remove(secondQueueProfile);
+                            secondQueueProfile.getQueue().getKit().removeQueue();
+                            firstQueueProfile.getQueue().getKit().removeQueue();
 
                             MatchGamePlayer playerA = new MatchGamePlayer(firstPlayer.getUniqueId(),
                                     firstPlayer.getName(), firstQueueProfile.getElo());
@@ -98,7 +101,6 @@ public class QueueThread extends Thread {
                             for (String line : Locale.MATCH_START.formatLines(secondPlayer, firstPlayer.getName(), queueProfile.getQueue().getKit().getName(), BukkitReflection.getPing(firstPlayer))) {
                                 secondPlayer.sendMessage(line);
                             }
-                            match.getKit().removeQueue((byte) 2);
 
                             new BukkitRunnable() {
                                 @Override

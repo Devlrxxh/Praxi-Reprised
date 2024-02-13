@@ -556,21 +556,22 @@ public class MatchListener implements Listener {
                     }
                 }
 
-                if (itemStack.getType() == Material.ENDER_PEARL && event.getClickedBlock() == null) {
-                    // Deny pearl if match hasn't started
+                if (itemStack.getType() == Material.ENDER_PEARL &&
+                        (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
                     if (match.getState() != MatchState.PLAYING_ROUND) {
                         event.setCancelled(true);
                         return;
                     }
 
-                    if (!profile.getEnderpearlCooldown().hasExpired()) {
+                    if (profile.isEnderpearlOnCooldown()) {
+                        event.setCancelled(true);
                         String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
                         player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(player, time,
                                 (time.equalsIgnoreCase("1.0") ? "" : "s")));
-                        event.setCancelled(true);
-                    } else {
-                        profile.setEnderpearlCooldown(new Cooldown(16_000));
+                        return;
                     }
+
+                    profile.setEnderpearlCooldown(new Cooldown(16_000));
                 }
             }
         }

@@ -74,11 +74,10 @@ public class Queue {
 
             if (ranked) {
                 player.sendMessage(Locale.QUEUE_LEAVE_RANKED.format(player, kit.getName()));
-                kit.removeQueue((byte) 1);
             } else {
                 player.sendMessage(Locale.QUEUE_LEAVE_UNRANKED.format(player, kit.getName()));
-                kit.removeQueue((byte) 1);
             }
+            kit.removeQueue();
         }
 
     }

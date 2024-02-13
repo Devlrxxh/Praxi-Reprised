@@ -1,6 +1,9 @@
 package me.funky.praxi.leaderboards;
 
 import me.funky.praxi.Praxi;
+import me.funky.praxi.util.CC;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class LeaderboardThread extends Thread {
     private static final long SECOND_IN_MILLIS = 1000L;
@@ -35,6 +38,9 @@ public class LeaderboardThread extends Thread {
                     rested = false;
                     Leaderboard.getEloLeaderboards().clear();
                     Leaderboard.setEloLeaderboards(Leaderboard.init());
+                    for(Player player : Bukkit.getOnlinePlayers()){
+                        player.sendMessage(CC.translate("&aLeaderboards Refreshed!"));
+                    }
                 }
                 sleep(SECOND_IN_MILLIS);
             } catch (InterruptedException ignored) {

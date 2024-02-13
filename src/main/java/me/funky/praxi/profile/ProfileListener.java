@@ -152,8 +152,13 @@ public class ProfileListener implements Listener {
             }
         }.runTaskAsynchronously(Praxi.getInstance());
 
+        if (profile.getState().equals(ProfileState.FIGHTING)) {
+            profile.getMatch().end();
+
+        }
+
         if (profile.getQueueProfile() != null) {
-            profile.getQueueProfile().getQueue().getKit().removeQueue((byte) 1);
+            profile.getQueueProfile().getQueue().getKit().removeQueue();
             Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         }
 
