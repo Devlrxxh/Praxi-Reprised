@@ -48,6 +48,8 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<opponent>", match.getOpponent(player).getName());
                 line = line.replaceAll("<duration>", match.getDuration());
                 line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player))));
+                line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
+                line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player)).getHits()));
             }
 
             if (profile.getState() == ProfileState.SPECTATING) {

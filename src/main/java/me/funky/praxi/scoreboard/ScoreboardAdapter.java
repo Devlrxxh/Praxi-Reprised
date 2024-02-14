@@ -59,7 +59,12 @@ public class ScoreboardAdapter implements AssembleAdapter {
             if (match.getState().equals(MatchState.ENDING_MATCH)) {
                 return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.ENDING")), player);
             }
-            return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
+            if (match.getState().equals(MatchState.PLAYING_ROUND)) {
+                if(match.getKit().getGameRules().isBoxing()){
+                    return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH-BOXING")), player);
+                }
+                return PlaceholderUtil.format(new ArrayList<>(Praxi.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
+            }
         }
 
         return null;

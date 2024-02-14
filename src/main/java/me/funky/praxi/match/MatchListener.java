@@ -344,7 +344,7 @@ public class MatchListener implements Listener {
                     return;
                 }
 
-                if (profile.getMatch().getKit().getGameRules().isSumo() || profile.getMatch().getKit().getGameRules().isSpleef()) {
+                if (profile.getMatch().getKit().getGameRules().isSumo() || profile.getMatch().getKit().getGameRules().isSpleef() || profile.getMatch().getKit().getGameRules().isBoxing()) {
                     event.setDamage(0);
                     player.setHealth(20.0);
                     player.updateInventory();
@@ -406,6 +406,12 @@ public class MatchListener implements Listener {
 
                 attackerProfile.getMatch().getGamePlayer(attacker).handleHit();
                 damagedProfile.getMatch().getGamePlayer(damaged).resetCombo();
+
+                if(match.getKit().getGameRules().isBoxing() && match.getState() != MatchState.STARTING_ROUND
+                        && match.getState() != MatchState.ENDING_MATCH
+                        && attackerProfile.getMatch().getGamePlayer(attacker).getHits() == 100){
+                match.onDeath(damaged);
+                }
 
                 if (event.getDamager() instanceof Arrow) {
                     int range = (int) Math.ceil(event.getEntity().getLocation().distance(attacker.getLocation()));

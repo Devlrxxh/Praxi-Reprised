@@ -59,6 +59,7 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/kit sumo &7<kit> - &fAdd Sumo rule"));
         player.sendMessage(CC.translate("&7* &c/kit hpregen &7<kit> - &fSet HPRegen rule"));
         player.sendMessage(CC.translate("&7* &c/kit hitdelay &7<kit> <value> - &fSet hit delay"));
+        player.sendMessage(CC.translate("&7* &c/kit boxing &7<kit> - &fAdd Boxing rule"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -274,6 +275,23 @@ public class KitCommand extends BaseCommand {
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's sumo status to " + (kit.getGameRules().isSumo() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+    @Subcommand("boxing")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void boxing(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setBoxing(!kit.getGameRules().isBoxing());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's boxing status to " + (kit.getGameRules().isBoxing() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
     @Subcommand("hpregen")

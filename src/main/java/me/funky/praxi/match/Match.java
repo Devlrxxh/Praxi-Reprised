@@ -198,6 +198,7 @@ public abstract class Match {
         return null;
     }
 
+
     public ArrayList<Player> getOpponent(Player player, boolean yes) {
         yes = false;
         ArrayList<Player> players = new ArrayList<>();

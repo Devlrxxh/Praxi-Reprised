@@ -69,6 +69,7 @@ public class Kit {
             kit.getGameRules().setSpleef(config.getBoolean(path + ".game-rules.spleef"));
             kit.getGameRules().setParkour(config.getBoolean(path + ".game-rules.parkour"));
             kit.getGameRules().setSumo(config.getBoolean(path + ".game-rules.sumo"));
+            kit.getGameRules().setBoxing(config.getBoolean(".edit-rules.boxing"));
             kit.getGameRules().setHealthRegeneration(config.getBoolean(path + ".game-rules.health-regeneration"));
             kit.getGameRules().setShowHealth(config.getBoolean(path + ".game-rules.show-health"));
             kit.getGameRules().setHitDelay(config.getInt(path + ".game-rules.hit-delay"));
@@ -133,6 +134,8 @@ public class Kit {
         configFile.getConfiguration().set(path + ".game-rules.sumo", gameRules.isSumo());
         configFile.getConfiguration().set(path + ".game-rules.health-regeneration", gameRules.isHealthRegeneration());
         configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
+        configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
+        configFile.getConfiguration().set(path + ".game-rules.boxing", gameRules.isBoxing());
 
         if (knockbackProfile != null) {
             configFile.getConfiguration().set(path + ".knockback-profile", knockbackProfile);

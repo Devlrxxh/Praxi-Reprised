@@ -254,14 +254,14 @@ public class Praxi extends JavaPlugin {
     private void loadMongo() {
         String mongoUri = mainConfig.getString("MONGO.URI");
 
-        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-        mongoLogger.setLevel(Level.WARNING);
+        //Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        //mongoLogger.setLevel(Level.WARNING);
 
-        for (Handler handler : mongoLogger.getParent().getHandlers()) {
-            if (handler instanceof ConsoleHandler) {
-                mongoLogger.getParent().removeHandler(handler);
-            }
-        }
+        //for (Handler handler : mongoLogger.getParent().getHandlers()) {
+        //    if (handler instanceof ConsoleHandler) {
+        //        mongoLogger.getParent().removeHandler(handler);
+        //    }
+        //}
         if (mongoUri != null && !mongoUri.isEmpty()) {
             try {
                 MongoClient mongoClient = MongoClients.create(new ConnectionString(mongoUri));

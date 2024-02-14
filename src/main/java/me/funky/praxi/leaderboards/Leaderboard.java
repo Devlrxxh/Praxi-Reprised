@@ -52,18 +52,18 @@ public class Leaderboard {
     private static int getElo(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
         Document queueStats = (Document) kitStatistics.get(queue);
-        return queueStats.getInteger("elo");
+        return queueStats != null ? queueStats.getInteger("elo") : 0;
     }
 
     private static int getKills(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
         Document queueStats = (Document) kitStatistics.get(queue);
-        return queueStats.getInteger("won");
+        return queueStats != null ? queueStats.getInteger("won") : 0;
     }
 
     private static int getLoses(Document profileDocument, String queue) {
         Document kitStatistics = (Document) profileDocument.get("kitStatistics");
         Document queueStats = (Document) kitStatistics.get(queue);
-        return queueStats.getInteger("lost");
+        return queueStats != null ? queueStats.getInteger("lost") : 0;
     }
 }
