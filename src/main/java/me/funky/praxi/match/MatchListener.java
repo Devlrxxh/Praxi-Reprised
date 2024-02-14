@@ -359,7 +359,10 @@ public class MatchListener implements Listener {
     public void onHungerChange(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        if (profile.getMatch().getKit().getGameRules().isSumo() || profile.getMatch().getKit().getGameRules().isSpleef() || profile.getMatch().getKit().getGameRules().isBoxing()) {
+        if(!profile.getState().equals(ProfileState.FIGHTING)) return;
+        if (profile.getMatch().getKit().getGameRules().isSumo()
+                || profile.getMatch().getKit().getGameRules().isSpleef()
+                || profile.getMatch().getKit().getGameRules().isBoxing()) {
             event.setCancelled(true);
         }
     }

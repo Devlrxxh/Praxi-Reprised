@@ -69,7 +69,7 @@ public class Kit {
             kit.getGameRules().setSpleef(config.getBoolean(path + ".game-rules.spleef"));
             kit.getGameRules().setParkour(config.getBoolean(path + ".game-rules.parkour"));
             kit.getGameRules().setSumo(config.getBoolean(path + ".game-rules.sumo"));
-            kit.getGameRules().setBoxing(config.getBoolean(".game-rules.boxing"));
+            kit.getGameRules().setBoxing(config.getBoolean(path + ".game-rules.boxing"));
             kit.getGameRules().setHealthRegeneration(config.getBoolean(path + ".game-rules.health-regeneration"));
             kit.getGameRules().setShowHealth(config.getBoolean(path + ".game-rules.show-health"));
             kit.getGameRules().setHitDelay(config.getInt(path + ".game-rules.hit-delay"));

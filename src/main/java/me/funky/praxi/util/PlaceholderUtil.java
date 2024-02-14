@@ -50,6 +50,7 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player))));
                 line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
                 line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player)).getHits()));
+                line = line.replaceAll("<diffrence>", getDifference(player));
             }
 
             if (profile.getState() == ProfileState.SPECTATING) {
@@ -60,5 +61,17 @@ public final class PlaceholderUtil {
             formattedLines.add(line);
         }
         return formattedLines;
+    }
+
+    public String getDifference(Player player){
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+        Match match = profile.getMatch();
+        if(match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() > 0){
+            return CC.translate("&a(+" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
+        } else if(match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() < 0){
+            return CC.translate("&c(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
+        }else{
+            return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
+        }
     }
 }
