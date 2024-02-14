@@ -58,6 +58,11 @@ public class MatchLogicTask extends BukkitRunnable {
             } else {
                 match.sendMessage(Locale.MATCH_START_TIMER.format(nextAction, nextAction == 1 ? "" : "s"));
                 match.sendSound(Sound.ORB_PICKUP, 1.0F, 15F);
+                if (match.getKit().getGameRules().isBoxing()) {
+                    for (GameParticipant<MatchGamePlayer> players : match.getParticipants()) {
+                        players.addSpeed();
+                    }
+                }
             }
         } else if (match.getState() == MatchState.ENDING_ROUND) {
             if (nextAction == 0) {

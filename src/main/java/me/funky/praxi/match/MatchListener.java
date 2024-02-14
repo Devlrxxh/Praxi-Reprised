@@ -351,6 +351,17 @@ public class MatchListener implements Listener {
                 }
             }
         }
+
+
+    }
+
+    @EventHandler
+    public void onHungerChange(FoodLevelChangeEvent event) {
+        Player player = (Player) event.getEntity();
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+        if (profile.getMatch().getKit().getGameRules().isSumo() || profile.getMatch().getKit().getGameRules().isSpleef() || profile.getMatch().getKit().getGameRules().isBoxing()) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
@@ -407,10 +418,10 @@ public class MatchListener implements Listener {
                 attackerProfile.getMatch().getGamePlayer(attacker).handleHit();
                 damagedProfile.getMatch().getGamePlayer(damaged).resetCombo();
 
-                if(match.getKit().getGameRules().isBoxing() && match.getState() != MatchState.STARTING_ROUND
+                if (match.getKit().getGameRules().isBoxing() && match.getState() != MatchState.STARTING_ROUND
                         && match.getState() != MatchState.ENDING_MATCH
-                        && attackerProfile.getMatch().getGamePlayer(attacker).getHits() == 100){
-                match.onDeath(damaged);
+                        && attackerProfile.getMatch().getGamePlayer(attacker).getHits() == 100) {
+                    match.onDeath(damaged);
                 }
 
                 if (event.getDamager() instanceof Arrow) {

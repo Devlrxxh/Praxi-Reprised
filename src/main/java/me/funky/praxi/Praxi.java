@@ -65,10 +65,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xyz.refinedev.api.spigot.SpigotHandler;
 
 import java.util.Arrays;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Getter

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
 import java.util.List;
@@ -85,5 +87,19 @@ public class GameParticipant<T extends GamePlayer> {
             }
         }
     }
+
+    public void addSpeed() {
+        for (GamePlayer gamePlayer : getPlayers()) {
+            if (!gamePlayer.isDisconnected()) {
+                Player player = gamePlayer.getPlayer();
+
+                if (player != null) {
+                    PotionEffect speedEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false);
+                    player.addPotionEffect(speedEffect);
+                }
+            }
+        }
+    }
+
 
 }
