@@ -69,6 +69,8 @@ public class ProfileKitData {
         }
 
         ItemStack defaultKitItemStack = Hotbar.getItems().get(HotbarItem.KIT_SELECTION).clone();
+
+
         ItemMeta defaultKitItemMeta = defaultKitItemStack.getItemMeta();
         defaultKitItemMeta.setDisplayName(defaultKitItemMeta.getDisplayName()
                 .replace("%KIT%", "Default"));

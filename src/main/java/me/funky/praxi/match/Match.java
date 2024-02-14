@@ -19,6 +19,7 @@ import me.funky.praxi.participant.GamePlayer;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.profile.hotbar.Hotbar;
+import me.funky.praxi.profile.meta.ProfileKitData;
 import me.funky.praxi.profile.visibility.VisibilityLogic;
 import me.funky.praxi.queue.Queue;
 import me.funky.praxi.util.*;
@@ -168,17 +169,16 @@ public abstract class Match {
         // If the player has no kits, apply the default kit, otherwise
         // give the player a list of kit books to choose from
         if (!getKit().getGameRules().isSumo()) {
-            //Profile profile = Profile.getByUuid(player.getUniqueId());
-            //ProfileKitData kitData = profile.getKitData().get(getKit());
+            Profile profile = Profile.getByUuid(player.getUniqueId());
+            ProfileKitData kitData = profile.getKitData().get(getKit());
 
-            // if (kitData.getKitCount() > 0) {
-            //     profile.getKitData().get(getKit()).giveBooks(player);
-            //} else {
-            //TODO: MAKE THIS WORK WITH NEW HOTBAR SYSTEM
-            player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
-            player.getInventory().setContents(getKit().getKitLoadout().getContents());
-            player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
-            //}
+            if (kitData.getKitCount() > 0) {
+                profile.getKitData().get(getKit()).giveBooks(player);
+            } else {
+                player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
+                player.getInventory().setContents(getKit().getKitLoadout().getContents());
+                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
+            }
         }
     }
 

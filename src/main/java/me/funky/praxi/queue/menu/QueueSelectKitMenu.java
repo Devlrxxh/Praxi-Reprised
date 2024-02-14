@@ -1,6 +1,7 @@
 package me.funky.praxi.queue.menu;
 
 import lombok.AllArgsConstructor;
+import me.funky.praxi.Locale;
 import me.funky.praxi.Praxi;
 import me.funky.praxi.leaderboards.Leaderboard;
 import me.funky.praxi.leaderboards.PlayerElo;
@@ -12,6 +13,7 @@ import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.filters.Filters;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -27,10 +29,6 @@ import java.util.regex.Pattern;
 public class QueueSelectKitMenu extends Menu {
 
     private boolean ranked;
-
-    {
-        setAutoUpdate(true);
-    }
 
     @Override
     public int getSize() {
@@ -59,7 +57,44 @@ public class QueueSelectKitMenu extends Menu {
                 buttons.put(i++, new SelectKitButton(queue));
             }
         }
+        buttons.put(4, new SelectQueueButton(ranked));
         return buttons;
+    }
+
+    private static class SelectQueueButton extends Button {
+        private final boolean ranked;
+
+        public SelectQueueButton(boolean ranked) {
+            this.ranked = ranked;
+        }
+
+        @Override
+        public ItemStack getButtonItem(Player player) {
+            ArrayList<String> lore = new ArrayList<>();
+            Profile profile = Profile.getByUuid(player.getUniqueId());
+
+            if (profile.getOptions().eu()) {
+                lore.add(" &7&l▶ &aEU");
+                lore.add(" &7&l▶ &7NA");
+                lore.add(" ");
+                lore.add("&aClick to switch");
+            } else {
+                lore.add(" &7&l▶ &7EU");
+                lore.add(" &7&l▶ &ANA");
+                lore.add(" ");
+                lore.add("&aClick to switch");
+            }
+            return new ItemBuilder(Material.REDSTONE_COMPARATOR).name("&aSelect Region").lore(lore).clearEnchantments().clearFlags().clearFlags().build();
+        }
+
+        @Override
+        public void clicked(Player player, ClickType clickType) {
+            Profile profile = Profile.getByUuid(player.getUniqueId());
+            profile.getOptions().eu(!profile.getOptions().eu());
+            player.sendMessage(Locale.OPTIONS_REGION_CHANGE.format((profile.getOptions().eu() ? "EU" : "NA")));
+            new QueueSelectKitMenu(ranked).openMenu(player);
+            player.updateInventory();
+        }
     }
 
     @AllArgsConstructor

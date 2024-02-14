@@ -46,8 +46,13 @@ public class Hotbar {
                 items.put(hotbarItem, builder.build());
             }
         }
-
-
+        HotbarItem hotbarItem = HotbarItem.KIT_SELECTION;
+        ItemBuilder builder = new ItemBuilder(Material.ENCHANTED_BOOK);
+        builder.durability(0);
+        builder.name("&7» &6&l%KIT% &7«");
+        builder.lore("");
+        builder.clearFlags();
+        items.put(hotbarItem, builder.build());
     }
 
     public static void giveHotbarItems(Player player) {

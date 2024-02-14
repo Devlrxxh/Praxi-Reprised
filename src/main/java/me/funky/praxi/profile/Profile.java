@@ -22,10 +22,7 @@ import me.funky.praxi.profile.meta.ProfileRematchData;
 import me.funky.praxi.profile.meta.option.ProfileOptions;
 import me.funky.praxi.queue.QueueProfile;
 import me.funky.praxi.setting.Colors;
-import me.funky.praxi.util.CC;
-import me.funky.praxi.util.Cooldown;
-import me.funky.praxi.util.InventoryUtil;
-import me.funky.praxi.util.RegionUtil;
+import me.funky.praxi.util.*;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -54,13 +51,11 @@ public class Profile {
     private QueueProfile queueProfile;
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
-    private boolean eu;
 
     public Profile(UUID uuid) {
         this.uuid = uuid;
         this.username = Bukkit.getPlayer(uuid).getName();
         this.state = ProfileState.LOBBY;
-        this.eu = RegionUtil.isFromEU(Bukkit.getPlayer(uuid).getAddress().getAddress().getHostAddress());
         this.options = new ProfileOptions();
         this.kitEditorData = new ProfileKitEditorData();
         this.kitData = new HashMap<>();
@@ -115,6 +110,7 @@ public class Profile {
             public void run() {
                 for (Profile profile : Profile.getProfiles().values()) {
                     profile.save();
+                    Console.sendMessage(CC.translate("&aSaved Player Data!"));
                 }
             }
         }.runTaskTimerAsynchronously(Praxi.getInstance(), 6000L, 6000L);
