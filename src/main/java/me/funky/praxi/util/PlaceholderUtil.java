@@ -63,14 +63,14 @@ public final class PlaceholderUtil {
         return formattedLines;
     }
 
-    public String getDifference(Player player){
+    public String getDifference(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
-        if(match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() > 0){
+        if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() > 0) {
             return CC.translate("&a(+" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
-        } else if(match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() < 0){
+        } else if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() < 0) {
             return CC.translate("&c(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
-        }else{
+        } else {
             return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
         }
     }

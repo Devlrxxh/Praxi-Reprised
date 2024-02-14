@@ -29,6 +29,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -359,7 +360,7 @@ public class MatchListener implements Listener {
     public void onHungerChange(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        if(!profile.getState().equals(ProfileState.FIGHTING)) return;
+        if (!profile.getState().equals(ProfileState.FIGHTING)) return;
         if (profile.getMatch().getKit().getGameRules().isSumo()
                 || profile.getMatch().getKit().getGameRules().isSpleef()
                 || profile.getMatch().getKit().getGameRules().isBoxing()) {
@@ -525,6 +526,36 @@ public class MatchListener implements Listener {
         }
     }
 
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onProjectileLaunch(final ProjectileLaunchEvent event) {
+        Projectile projectile = event.getEntity();
+        ProjectileSource source = projectile.getShooter();
+
+        if (!(source instanceof Player)) return;
+        Player shooter = (Player) source;
+        Profile profile = Profile.getByUuid(shooter.getUniqueId());
+        Match match = profile.getMatch();
+
+        if (projectile instanceof EnderPearl) {
+            if (match.getState() != MatchState.PLAYING_ROUND) {
+                event.setCancelled(true);
+                return;
+            }
+
+            if (profile.isEnderpearlOnCooldown()) {
+                event.setCancelled(true);
+                String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
+                shooter.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(shooter, time,
+                        (time.equalsIgnoreCase("1.0") ? "" : "s")));
+                shooter.updateInventory();
+                return;
+            }
+
+            profile.setEnderpearlCooldown(new Cooldown(16_000));
+
+        }
+    }
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -570,32 +601,11 @@ public class MatchListener implements Listener {
                                 player.getInventory().setContents(kitLoadout.getContents());
                                 player.updateInventory();
                                 event.setCancelled(true);
-                                return;
                             }
                         }
                     }
                 }
-
-                if (itemStack.getType() == Material.ENDER_PEARL &&
-                        (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-                    if (match.getState() != MatchState.PLAYING_ROUND) {
-                        event.setCancelled(true);
-                        return;
-                    }
-
-                    if (profile.isEnderpearlOnCooldown()) {
-                        event.setCancelled(true);
-                        String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
-                        player.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(player, time,
-                                (time.equalsIgnoreCase("1.0") ? "" : "s")));
-                        player.updateInventory();
-                        return;
-                    }
-
-                    profile.setEnderpearlCooldown(new Cooldown(16_000));
-                }
             }
         }
     }
-
 }
