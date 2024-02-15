@@ -31,6 +31,7 @@ public abstract class Menu {
     private ItemStack fillerType;
     private int size = 9;
     private Filters filter;
+    private boolean fixedPositions = true;
 
     {
         fillerType = (new ItemStack(Material.valueOf(Praxi.getInstance().getMenusConfig().getString("FILTER.MATERIAL")), 1
@@ -107,6 +108,7 @@ public abstract class Menu {
         if (getFilter() != null) {
             this.filter = getFilter();
         }
+        this.fixedPositions = getFixedPositions();
         boolean update = false;
         String title = CC.translate(this.getTitle(player));
 
@@ -140,14 +142,21 @@ public abstract class Menu {
 
         Map<Integer, Button> modifiedButtons = new HashMap<>();
 
-        for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
-            int slot = buttonEntry.getKey();
-            if (filter != Filters.NONE && (slot % 9 == 0 || slot % 9 == 8)) {
-                slot += 2;
+        if (fixedPositions) {
+            for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
+                int slot = buttonEntry.getKey();
+                if (filter != Filters.NONE && (slot % 9 == 0 || slot % 9 == 8)) {
+                    slot += 2;
+                }
+                modifiedButtons.put(slot, buttonEntry.getValue());
+                inventory.setItem(slot, createItemStack(player, buttonEntry.getValue()));
             }
-            modifiedButtons.put(slot, buttonEntry.getValue());
-            inventory.setItem(slot, createItemStack(player, buttonEntry.getValue()));
+        } else {
+            for (Map.Entry<Integer, Button> buttonEntry : this.buttons.entrySet()) {
+                inventory.setItem(buttonEntry.getKey(), createItemStack(player, buttonEntry.getValue()));
+            }
         }
+
 
         this.buttons = modifiedButtons;
 
@@ -192,6 +201,9 @@ public abstract class Menu {
         return Filters.NONE;
     }
 
+    public boolean getFixedPositions() {
+        return true;
+    }
 
     public int getSlot(int x, int y) {
         return ((9 * y) + x);

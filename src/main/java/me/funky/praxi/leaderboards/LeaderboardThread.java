@@ -1,7 +1,9 @@
 package me.funky.praxi.leaderboards;
 
 import me.funky.praxi.Praxi;
+import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
+import me.funky.praxi.util.Console;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -36,6 +38,10 @@ public class LeaderboardThread extends Thread {
 
                 if (Leaderboard.getRefreshTime() <= 0) {
                     rested = false;
+                    for (Profile profile : Profile.getProfiles().values()) {
+                        profile.save();
+                    }
+                    Console.sendMessage(CC.translate("&aSaved Player Data!"));
                     Leaderboard.getEloLeaderboards().clear();
                     Leaderboard.setEloLeaderboards(Leaderboard.init());
                     for (Player player : Bukkit.getOnlinePlayers()) {

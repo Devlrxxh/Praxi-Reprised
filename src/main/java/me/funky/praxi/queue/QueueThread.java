@@ -65,9 +65,9 @@ public class QueueThread extends Thread {
                             }
 
 
-                            if (firstProfile.getOptions().eu() != secondProfile.getOptions().eu()) {
-                                break;
-                            }
+                            //if (firstProfile.getOptions().eu() != secondProfile.getOptions().eu()) {
+                            //    break;
+                            //}
 
                             // Find arena
                             final Arena arena = Arena.getRandomArena(queueProfile.getQueue().getKit());

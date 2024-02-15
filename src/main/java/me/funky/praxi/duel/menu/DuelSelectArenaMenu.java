@@ -107,5 +107,4 @@ public class DuelSelectArenaMenu extends Menu {
         }
 
     }
-
 }

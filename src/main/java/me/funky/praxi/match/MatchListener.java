@@ -225,7 +225,6 @@ public class MatchListener implements Listener {
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
-        event.getEntity().spigot().respawn();
         event.setDeathMessage(null);
         event.getDrops().clear();
 
@@ -240,8 +239,6 @@ public class MatchListener implements Listener {
                             .dropItemNaturally(event.getEntity().getLocation(), itemStack));
                 }
             });
-
-            event.getDrops().clear();
 
             profile.getMatch().getDroppedItems().addAll(entities);
             profile.getMatch().onDeath(event.getEntity());
@@ -526,8 +523,8 @@ public class MatchListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onProjectileLaunch(final ProjectileLaunchEvent event) {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onProjectileLaunch(ProjectileLaunchEvent event) {
         Projectile projectile = event.getEntity();
         ProjectileSource source = projectile.getShooter();
 
@@ -542,16 +539,15 @@ public class MatchListener implements Listener {
                 return;
             }
 
-            if (profile.isEnderpearlOnCooldown()) {
+            if (!profile.isEnderpearlOnCooldown()) {
+                profile.setEnderpearlCooldown(new Cooldown(16_000));
+            } else {
                 event.setCancelled(true);
                 String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
                 shooter.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(shooter, time,
                         (time.equalsIgnoreCase("1.0") ? "" : "s")));
                 shooter.updateInventory();
-                return;
             }
-
-            profile.setEnderpearlCooldown(new Cooldown(16_000));
 
         }
     }

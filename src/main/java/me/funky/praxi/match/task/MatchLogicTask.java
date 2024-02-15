@@ -1,6 +1,5 @@
 package me.funky.praxi.match.task;
 
-import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Locale;
 import me.funky.praxi.match.Match;
@@ -15,8 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class MatchLogicTask extends BukkitRunnable {
 
     private final Match match;
-    private int totalTicked;
-    @Getter
     @Setter
     private int nextAction;
 
@@ -32,7 +29,6 @@ public class MatchLogicTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        totalTicked++;
         nextAction--;
         if (match.getState() == MatchState.STARTING_ROUND) {
             if (match.getKit().getGameRules().isSumo()) {
@@ -46,6 +42,7 @@ public class MatchLogicTask extends BukkitRunnable {
                 match.onRoundStart();
                 match.setState(MatchState.PLAYING_ROUND);
                 match.sendMessage(Locale.MATCH_STARTED.format());
+                match.sendMessage(" ");
                 match.sendMessage(Locale.MATCH_WARNING.format());
                 match.sendSound(Sound.ORB_PICKUP, 1.0F, 1.0F);
                 if (match.getKit().getGameRules().isSumo()) {

@@ -23,7 +23,6 @@ import me.funky.praxi.profile.meta.option.ProfileOptions;
 import me.funky.praxi.queue.QueueProfile;
 import me.funky.praxi.setting.Colors;
 import me.funky.praxi.util.CC;
-import me.funky.praxi.util.Console;
 import me.funky.praxi.util.Cooldown;
 import me.funky.praxi.util.InventoryUtil;
 import org.bson.Document;
@@ -107,16 +106,6 @@ public class Profile {
             }
         }.runTaskTimerAsynchronously(Praxi.getInstance(), 60L, 60L);
 
-        // Save every 5 minutes to prevent data loss
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Profile profile : Profile.getProfiles().values()) {
-                    profile.save();
-                    Console.sendMessage(CC.translate("&aSaved Player Data!"));
-                }
-            }
-        }.runTaskTimerAsynchronously(Praxi.getInstance(), 6000L, 6000L);
     }
 
     public static Profile getByUuid(UUID uuid) {

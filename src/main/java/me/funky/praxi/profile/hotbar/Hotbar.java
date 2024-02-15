@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Hotbar {
 
@@ -49,10 +50,18 @@ public class Hotbar {
         HotbarItem hotbarItem = HotbarItem.KIT_SELECTION;
         ItemBuilder builder = new ItemBuilder(Material.ENCHANTED_BOOK);
         builder.durability(0);
-        builder.name("&7» &6&l%KIT% &7«");
+        builder.name("&7» &a&l%KIT% &7«");
         builder.lore("");
         builder.clearFlags();
         items.put(hotbarItem, builder.build());
+        for (HotbarItem kitEditorItem : items.keySet()) {
+            if (kitEditorItem.equals(HotbarItem.KIT_SELECTION)) {
+                String voteName = Hotbar.getItems().get(HotbarItem.KIT_SELECTION).getItemMeta().getDisplayName();
+                String[] nameSplit = voteName.split("%KIT%");
+                kitEditorItem.setPattern(
+                        Pattern.compile("(" + nameSplit[0] + ")(.*)(" + (nameSplit.length > 1 ? nameSplit[1] : "") + ")"));
+            }
+        }
     }
 
     public static void giveHotbarItems(Player player) {

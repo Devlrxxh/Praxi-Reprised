@@ -409,6 +409,7 @@ public abstract class Match {
     }
 
     public void onDeath(Player dead) {
+        PlayerUtil.animateDeath(dead);
         // Don't continue if the match is already ending
         if (!(state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND)) {
             return;
@@ -453,12 +454,6 @@ public abstract class Match {
                     break;
             }
         }
-
-        // Respawn player if needed
-        if (dead.isDead()) {
-            dead.spigot().respawn();
-        }
-
         // Prevent further movement
         dead.setVelocity(new Vector());
 
