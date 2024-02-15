@@ -110,7 +110,7 @@ public class QueueSelectKitMenu extends Menu {
 
             configLore.forEach(line -> {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
-                line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
                 line = replaceLeaderboardPlaceholders(line, queue);
                 if (!line.contains("<description>") || !queue.getKit().getDescription().equalsIgnoreCase("none")) {
                     line = line.replaceAll("<description>", queue.getKit().getDescription());
@@ -173,7 +173,7 @@ public class QueueSelectKitMenu extends Menu {
 
             player.closeInventory();
             queue.addPlayer(player, queue.isRanked() ? profile.getKitData().get(queue.getKit()).getElo() : 0, ranked);
-            queue.getKit().addQueue();
+            queue.addQueue();
         }
     }
 }

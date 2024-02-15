@@ -30,14 +30,12 @@ public class Kit {
     private boolean enabled;
     private String knockbackProfile;
     private ItemStack displayIcon;
-    private int queuing;
     private String description;
 
     public Kit(String name) {
         this.name = name;
         this.displayIcon = new ItemStack(Material.DIAMOND_SWORD);
         this.description = "&7" + name + "description";
-        this.queuing = 0;
     }
 
     public static void init() {
@@ -107,13 +105,6 @@ public class Kit {
         return null;
     }
 
-    public void addQueue() {
-        queuing += 1;
-    }
-
-    public void removeQueue() {
-        queuing -= 1;
-    }
 
     public ItemStack getDisplayIcon() {
         return this.displayIcon.clone();

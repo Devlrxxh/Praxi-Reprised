@@ -70,8 +70,6 @@ public class MatchDetailsMenu extends Menu {
             buttons.put(53, new SwitchInventoryButton(this.snapshot.getOpponent()));
         }
 
-        buttons.put(46, new SwitchInventoryButton(this.snapshot.getUuid()));
-
         return buttons;
     }
 

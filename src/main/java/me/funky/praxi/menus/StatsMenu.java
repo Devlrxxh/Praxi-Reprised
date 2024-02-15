@@ -100,7 +100,9 @@ public class StatsMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             for (String line : Praxi.getInstance().getMenusConfig().getStringList("STATS.LORE")) {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
-                line = line.replaceAll("<queueing>", String.valueOf(queue.getKit().getQueuing()));
+                line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
+                line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
+
                 line = line.replaceAll("<wins>", String.valueOf(profile.getKitData().get(queue.getKit()).getWon()));
                 line = line.replaceAll("<loses>", String.valueOf(profile.getKitData().get(queue.getKit()).getLost()));
                 line = line.replaceAll("<elo>", String.valueOf(profile.getKitData().get(queue.getKit()).getElo()));

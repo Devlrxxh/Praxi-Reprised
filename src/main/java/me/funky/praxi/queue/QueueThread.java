@@ -82,8 +82,8 @@ public class QueueThread extends Thread {
                             // Remove players from queue
                             Praxi.getInstance().getCache().getPlayers().remove(firstQueueProfile);
                             Praxi.getInstance().getCache().getPlayers().remove(secondQueueProfile);
-                            secondQueueProfile.getQueue().getKit().removeQueue();
-                            firstQueueProfile.getQueue().getKit().removeQueue();
+                            secondQueueProfile.getQueue().removeQueue();
+                            firstQueueProfile.getQueue().removeQueue();
 
                             MatchGamePlayer playerA = new MatchGamePlayer(firstPlayer.getUniqueId(),
                                     firstPlayer.getName(), firstQueueProfile.getElo());

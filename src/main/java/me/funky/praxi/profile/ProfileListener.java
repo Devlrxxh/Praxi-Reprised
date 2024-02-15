@@ -172,7 +172,7 @@ public class ProfileListener implements Listener {
 
         }
         if (profile.getState().equals(ProfileState.QUEUEING)) {
-            profile.getQueueProfile().getQueue().getKit().removeQueue();
+            profile.getQueueProfile().getQueue().removeQueue();
         }
         if (profile.getQueueProfile() != null) {
             Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());

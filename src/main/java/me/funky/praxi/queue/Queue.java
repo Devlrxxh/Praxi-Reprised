@@ -19,11 +19,12 @@ public class Queue {
     private final UUID uuid = UUID.randomUUID();
     private final Kit kit;
     private final boolean ranked;
+    private int queuing;
 
     public Queue(Kit kit, boolean ranked) {
         this.kit = kit;
         this.ranked = ranked;
-
+        this.queuing = 0;
         Praxi.getInstance().getCache().getQueues().add(this);
     }
 
@@ -60,6 +61,7 @@ public class Queue {
         }
     }
 
+
     public void removePlayer(QueueProfile queueProfile) {
         Praxi.getInstance().getCache().getPlayers().remove(queueProfile);
 
@@ -77,9 +79,16 @@ public class Queue {
             } else {
                 player.sendMessage(Locale.QUEUE_LEAVE_UNRANKED.format(player, kit.getName()));
             }
-            kit.removeQueue();
+            removeQueue();
         }
 
     }
 
+    public void addQueue() {
+        queuing += 1;
+    }
+
+    public void removeQueue() {
+        queuing -= 1;
+    }
 }
