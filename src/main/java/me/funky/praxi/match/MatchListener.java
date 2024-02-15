@@ -541,6 +541,8 @@ public class MatchListener implements Listener {
 
             if (!profile.isEnderpearlOnCooldown()) {
                 profile.setEnderpearlCooldown(new Cooldown(16_000));
+
+
             } else {
                 event.setCancelled(true);
                 String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());

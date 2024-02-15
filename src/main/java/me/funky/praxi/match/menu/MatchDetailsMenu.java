@@ -54,7 +54,7 @@ public class MatchDetailsMenu extends Menu {
         }
 
 
-        int pos = 46;
+        int pos = 47;
 
         buttons.put(pos++, new HealthButton(snapshot.getHealth()));
         buttons.put(pos++, new HungerButton(snapshot.getHunger()));
@@ -69,6 +69,7 @@ public class MatchDetailsMenu extends Menu {
         if (this.snapshot.getOpponent() != null) {
             buttons.put(53, new SwitchInventoryButton(this.snapshot.getOpponent()));
         }
+        buttons.put(45, new SwitchInventoryButton(this.snapshot.getUuid()));
 
         return buttons;
     }
@@ -174,8 +175,8 @@ public class MatchDetailsMenu extends Menu {
 
             if (snapshot != null) {
                 return new ItemBuilder(Material.ARROW)
-                        .name("&7Opponent's Inventory")
-                        .lore("&fSwitch to &b" + snapshot.getUsername() + "&f's inventory")
+                        .name("&7Press to switch to other inventory.")
+                        .lore("&aClick to Switch")
                         .clearFlags()
                         .build();
             } else {
