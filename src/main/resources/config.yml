@@ -40,7 +40,6 @@ OPTIONS:
   SCOREBOARD_LINES_DISABLED: '&cDisabled Scoreboard Lines!'
   MENU_SOUNDS_ENABLED: '&aEnabled Menu sounds!'
   MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
-  REGION_CHANGE: '&aYou have selected {0}!'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'
