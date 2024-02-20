@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.funky</groupId>
+    <groupId>me.lrxh</groupId>
     <artifactId>practice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -121,11 +121,11 @@
                     <relocations>
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
-                            <shadedPattern>me.funky.acf</shadedPattern>
+                            <shadedPattern>me.lrxh.acf</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>me.funky.bstats</shadedPattern>
+                            <shadedPattern>me.lrxh.bstats</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

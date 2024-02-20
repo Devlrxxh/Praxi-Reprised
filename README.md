@@ -1,6 +1,6 @@
-# Praxi
+# Practice
 > [!IMPORTANT]
-> To use **Praxi** your server must be running on a 1.8 server!
+> To use **Practice** your server must be running on a 1.8 server!
 
 The most configurable, efficient, and extensive practice plugin.
 
@@ -13,16 +13,17 @@ The most configurable, efficient, and extensive practice plugin.
 ![image](https://github.com/Devlrxxh/practice/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
 
 # Placeholders
- - ``%praxi_lb_<kit-name>_<up-to-10>_name%`` | Returns Player's Name in position
+ - ``%practice_lb_<kit-name>_<up-to-10>_name%`` | Returns Player's Name in position
 
- - ``%praxi_lb_<kit-name>_<up-to-10>_elo%`` | Returns Player's ELO in position
+ - ``%practice_lb_<kit-name>_<up-to-10>_elo%`` | Returns Player's ELO in position
 
- -  ``%praxi_leaderboards_update%`` |  Returns time left till leaderboard reload
+ -  ``%practice_leaderboards_update%`` |  Returns time left till leaderboard reload
 
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/practice-nodependents)
-### Joeleoli - Made practice
+### Joeleoli - Made praxi
 
 # TODO
  - ~~Add Stats Menu~~
- - Add Boxing
+ - ~~Add Boxing~~
+- ~~Add Leaderboards~~

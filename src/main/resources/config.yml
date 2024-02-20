@@ -1,6 +1,6 @@
 MONGO:
   URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
-  DATABASE: "praxi"
+  DATABASE: "practice"
 RANKED:
   REQUIRED-WINS: 3
   ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins.
@@ -10,11 +10,11 @@ LEADERBOARD:
   UPDATE-TIME: 1
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
-  - '&fWelcome to the <theme>PvPHood Network!'
+  - '&fWelcome to the <theme>Practice Network!'
   - ' '
-  - ' &f✦ <theme>Discord: &fdiscord.gg/pvphood'
-  - ' &f✦ <theme>Twitter: &ftwitter.com/@pvphoodmc'
-  - ' &f✦ <theme>Store: &fstore.pvphood.com'
+  - ' &f✦ <theme>Discord: &fdiscord.gg/server'
+  - ' &f✦ <theme>Twitter: &ftwitter.com/@server'
+  - ' &f✦ <theme>Store: &fstore.server.net'
   - ' '
   - '&7&m--------------------------------'
 PING:
