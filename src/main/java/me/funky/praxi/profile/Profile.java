@@ -200,12 +200,11 @@ public class Profile {
         this.options.allowSpectators(options.getBoolean("allowSpectators"));
         this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
         this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
-        this.options.scoreboradLines(options.getBoolean("scoreboradLines"));
+        this.options.scoreboardLines(options.getBoolean("scoreboradLines"));
         this.options.showPlayers(options.getBoolean("showPlayers"));
         this.options.theme(Colors.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
         this.options.menuSounds(options.getBoolean("menuSounds"));
-        this.options.eu(options.getBoolean("region"));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -258,12 +257,11 @@ public class Profile {
         optionsDocument.put("allowSpectators", options.allowSpectators());
         optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
         optionsDocument.put("killeffect", options.killEffect().toString());
-        optionsDocument.put("scoreboradLines", options.scoreboradLines());
+        optionsDocument.put("scoreboradLines", options.scoreboardLines());
         optionsDocument.put("showPlayers", options.showPlayers());
         optionsDocument.put("theme", options.theme().toString());
         optionsDocument.put("pingRange", options.pingRange());
         optionsDocument.put("menuSounds", options.menuSounds());
-        optionsDocument.put("region", options.eu());
 
         document.put("options", optionsDocument);
 

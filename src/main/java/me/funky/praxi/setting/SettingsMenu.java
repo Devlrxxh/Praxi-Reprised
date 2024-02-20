@@ -108,7 +108,7 @@ public class SettingsMenu extends Menu {
                     break;
                 }
                 case SHOW_LINES: {
-                    if (profile.getOptions().scoreboradLines()) {
+                    if (profile.getOptions().scoreboardLines()) {
                         lore.add(" &7&l▶ &aYes");
                         lore.add(" &7&l▶ &7No");
                         lore.add(" ");
@@ -278,8 +278,8 @@ public class SettingsMenu extends Menu {
                     break;
                 }
                 case SHOW_LINES: {
-                    profile.getOptions().scoreboradLines(!profile.getOptions().scoreboradLines());
-                    if (profile.getOptions().scoreboradLines()) {
+                    profile.getOptions().scoreboardLines(!profile.getOptions().scoreboardLines());
+                    if (profile.getOptions().scoreboardLines()) {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_ENABLED.format(player));
                     } else {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_DISABLED.format(player));

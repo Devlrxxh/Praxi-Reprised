@@ -3,6 +3,11 @@ package me.funky.praxi.kit.command;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import me.funky.praxi.kit.Kit;
+import me.funky.praxi.match.Match;
+import me.funky.praxi.match.participant.MatchGamePlayer;
+import me.funky.praxi.participant.GameParticipant;
+import me.funky.praxi.profile.Profile;
+import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.util.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -323,6 +328,18 @@ public class KitCommand extends BaseCommand {
         if (kit == null) return;
 
         kit.getGameRules().setHitDelay(delay);
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+        if (profile.getState() == ProfileState.FIGHTING) {
+            Match match = profile.getMatch();
+            for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
+                for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                    Player gamePlayerPlayer = gamePlayer.getPlayer();
+                    gamePlayerPlayer.setMaximumNoDamageTicks(kit.getGameRules().getHitDelay());
+                }
+
+            }
+        }
+
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's hit delay to &f" + delay + "!");

@@ -17,7 +17,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
     public String getTitle(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         ArrayList<String> list = new ArrayList<>();
-        if (!profile.getOptions().scoreboradLines()) {
+        if (!profile.getOptions().scoreboardLines()) {
             list.add("   " + Praxi.getInstance().getScoreboardConfig().getString("TITLE") + "   ");
             return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
         } else {

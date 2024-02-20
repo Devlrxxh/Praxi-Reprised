@@ -32,6 +32,7 @@ public abstract class Menu {
     private int size = 9;
     private Filters filter;
     private boolean fixedPositions = true;
+    private boolean resetCursor;
 
     {
         fillerType = (new ItemStack(Material.valueOf(Praxi.getInstance().getMenusConfig().getString("FILTER.MATERIAL")), 1
@@ -109,6 +110,8 @@ public abstract class Menu {
             this.filter = getFilter();
         }
         this.fixedPositions = getFixedPositions();
+        this.resetCursor = resetCursor();
+
         boolean update = false;
         String title = CC.translate(this.getTitle(player));
 
@@ -120,14 +123,13 @@ public abstract class Menu {
             if (previousMenu == null) {
                 player.closeInventory();
             } else {
-                int previousSize = player.getOpenInventory().getTopInventory().getSize();
-
-                if (previousSize == size && player.getOpenInventory().getTopInventory().getTitle().equals(title)) {
-                    inventory = player.getOpenInventory().getTopInventory();
-                    update = true;
-                } else {
+                if(resetCursor){
                     previousMenu.setClosedByMenu(true);
                     player.closeInventory();
+                }else{
+                    previousMenu.setClosedByMenu(true);
+                    inventory = player.getOpenInventory().getTopInventory();
+                    update = true;
                 }
             }
         }
@@ -201,7 +203,9 @@ public abstract class Menu {
     public boolean getFixedPositions() {
         return true;
     }
-
+    public boolean resetCursor() {
+        return true;
+    }
     public int getSlot(int x, int y) {
         return ((9 * y) + x);
     }

@@ -1,7 +1,6 @@
 package me.funky.praxi.match.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Locale;
 import me.funky.praxi.match.MatchSnapshot;
 import me.funky.praxi.util.InventoryUtil;
 import me.funky.praxi.util.ItemBuilder;
@@ -27,7 +26,7 @@ public class MatchDetailsMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return "&7Inventory of " + snapshot.getUsername();
+        return "&7Match Inventory";
     }
 
     @Override
@@ -38,7 +37,9 @@ public class MatchDetailsMenu extends Menu {
     public boolean getFixedPositions() {
         return false;
     }
-
+    public boolean resetCursor() {
+        return false;
+    }
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {
@@ -72,11 +73,6 @@ public class MatchDetailsMenu extends Menu {
         buttons.put(45, new SwitchInventoryButton(this.snapshot.getUuid()));
 
         return buttons;
-    }
-
-    @Override
-    public void onOpen(Player player) {
-        player.sendMessage(Locale.VIEWING_INVENTORY.format(player, snapshot.getUsername()));
     }
 
     @AllArgsConstructor

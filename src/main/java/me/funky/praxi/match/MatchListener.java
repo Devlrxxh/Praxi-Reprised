@@ -545,6 +545,7 @@ public class MatchListener implements Listener {
 
             } else {
                 event.setCancelled(true);
+                shooter.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
                 String time = TimeUtil.millisToSeconds(profile.getEnderpearlCooldown().getRemaining());
                 shooter.sendMessage(Locale.MATCH_ENDERPEARL_COOLDOWN.format(shooter, time,
                         (time.equalsIgnoreCase("1.0") ? "" : "s")));

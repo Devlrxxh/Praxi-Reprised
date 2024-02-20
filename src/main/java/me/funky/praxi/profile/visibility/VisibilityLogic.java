@@ -1,12 +1,10 @@
 package me.funky.praxi.profile.visibility;
 
-import me.funky.praxi.Praxi;
 import me.funky.praxi.match.participant.MatchGamePlayer;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class VisibilityLogic {
 
@@ -28,7 +26,6 @@ public class VisibilityLogic {
             if (viewer.equals(target)) {
                 return;
             }
-
 
             if (viewerProfile.getParty() != null && viewerProfile.getParty().containsPlayer(target.getUniqueId())) {
                 viewer.showPlayer(target);
@@ -62,18 +59,6 @@ public class VisibilityLogic {
                 viewer.showPlayer(target);
             } else {
                 viewer.hidePlayer(target);
-            }
-        } else if (viewerProfile.getState().equals(ProfileState.FIGHTING)) {
-            for (Player player : targetProfile.getMatch().getOpponent(target, false)) {
-
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.showPlayer(target);
-                        target.showPlayer(player);
-                    }
-                }.runTaskLater(Praxi.getInstance(), 10L);
-
             }
         } else if (viewerProfile.getState() == ProfileState.SPECTATING) {
             MatchGamePlayer targetGamePlayer = viewerProfile.getMatch().getGamePlayer(target);
