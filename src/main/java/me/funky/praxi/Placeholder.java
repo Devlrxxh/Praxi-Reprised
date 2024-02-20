@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class Placeholder extends PlaceholderExpansion {
     @Override
     public @NotNull String getIdentifier() {
-        return "praxi";
+        return "practice";
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public boolean canRegister() {
-        return Bukkit.getPluginManager().isPluginEnabled(Praxi.getInstance());
+        return Bukkit.getPluginManager().isPluginEnabled(Practice.getInstance());
     }
 
     @Override

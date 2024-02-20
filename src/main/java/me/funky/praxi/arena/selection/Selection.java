@@ -3,7 +3,7 @@ package me.funky.praxi.arena.selection;
 
 import lombok.Data;
 import lombok.NonNull;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.cuboid.Cuboid;
 import me.funky.praxi.util.ItemBuilder;
 import org.bukkit.Location;
@@ -57,7 +57,7 @@ public class Selection {
 
         Selection selection = new Selection();
 
-        player.setMetadata(SELECTION_METADATA_KEY, new FixedMetadataValue(Praxi.getInstance(), selection));
+        player.setMetadata(SELECTION_METADATA_KEY, new FixedMetadataValue(Practice.getInstance(), selection));
 
         return selection;
     }

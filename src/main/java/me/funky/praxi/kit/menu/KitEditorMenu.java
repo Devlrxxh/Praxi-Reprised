@@ -1,7 +1,7 @@
 package me.funky.praxi.kit.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.kit.KitLoadout;
 import me.funky.praxi.profile.Profile;
@@ -45,7 +45,7 @@ public class KitEditorMenu extends Menu {
     @Override
     public String getTitle(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        return Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName());
+        return Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName());
     }
 
     @Override
@@ -109,7 +109,7 @@ public class KitEditorMenu extends Menu {
                 public void run() {
                     Hotbar.giveHotbarItems(player);
                 }
-            }.runTask(Praxi.getInstance());
+            }.runTask(Practice.getInstance());
         }
     }
 
@@ -141,7 +141,7 @@ public class KitEditorMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
             return new ItemBuilder(Material.NAME_TAG)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName()))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.TITLE").replace("<kit>", profile.getKitEditorData().getSelectedKit().getName()))
                     .clearFlags()
                     .build();
         }
@@ -155,7 +155,7 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(7)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -181,7 +181,7 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(7)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.LOAD-DEFAULT-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.LOAD-DEFAULT-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -211,7 +211,7 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(5)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.SAVE-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.SAVE-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -243,7 +243,7 @@ public class KitEditorMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
                     .durability(14)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CANCEL-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CANCEL-BUTTON"))
                     .clearFlags()
                     .build();
         }

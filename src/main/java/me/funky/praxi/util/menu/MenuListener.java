@@ -1,6 +1,6 @@
 package me.funky.praxi.util.menu;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.Profile;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -66,7 +66,7 @@ public class MenuListener implements Listener {
                 }
 
                 if (event.isCancelled()) {
-                    Bukkit.getScheduler().runTaskLater(Praxi.getInstance(), player::updateInventory, 1L);
+                    Bukkit.getScheduler().runTaskLater(Practice.getInstance(), player::updateInventory, 1L);
                 }
             } else {
                 if (event.getCurrentItem() != null) {

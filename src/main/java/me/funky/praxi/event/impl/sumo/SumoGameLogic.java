@@ -2,7 +2,7 @@ package me.funky.praxi.event.impl.sumo;
 
 import lombok.Getter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.event.game.EventGame;
 import me.funky.praxi.event.game.EventGameLogic;
 import me.funky.praxi.event.game.EventGameLogicTask;
@@ -47,7 +47,7 @@ public class SumoGameLogic implements EventGameLogic {
     SumoGameLogic(EventGame game) {
         this.game = game;
         this.logicTask = new EventGameLogicTask(game);
-        this.logicTask.runTaskTimer(Praxi.getInstance(), 0, 20L);
+        this.logicTask.runTaskTimer(Practice.getInstance(), 0, 20L);
     }
 
 
@@ -133,7 +133,7 @@ public class SumoGameLogic implements EventGameLogic {
                     profile.setState(ProfileState.LOBBY);
 
                     Hotbar.giveHotbarItems(player);
-                    Praxi.getInstance().getEssentials().teleportToSpawn(player);
+                    Practice.getInstance().getEssentials().teleportToSpawn(player);
                     VisibilityLogic.handle(player);
                 }
             }
@@ -162,7 +162,7 @@ public class SumoGameLogic implements EventGameLogic {
 
                     Hotbar.giveHotbarItems(player);
 
-                    Praxi.getInstance().getEssentials().teleportToSpawn(player);
+                    Practice.getInstance().getEssentials().teleportToSpawn(player);
                 }
             }
         }
@@ -365,7 +365,7 @@ public class SumoGameLogic implements EventGameLogic {
                             Hotbar.giveHotbarItems(bukkitPlayer);
                             VisibilityLogic.handle(bukkitPlayer, player);
 
-                            Praxi.getInstance().getEssentials().teleportToSpawn(bukkitPlayer);
+                            Practice.getInstance().getEssentials().teleportToSpawn(bukkitPlayer);
                         }
                     }
                 }

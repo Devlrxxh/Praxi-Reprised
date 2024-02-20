@@ -1,6 +1,6 @@
 package me.funky.praxi.util;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
@@ -23,7 +23,7 @@ public class PlayerUtil {
     private static Field SPAWN_PACKET_ID_FIELD;
 
     public static void setLastAttacker(Player victim, Player attacker) {
-        victim.setMetadata("lastAttacker", new FixedMetadataValue(Praxi.getInstance(), attacker.getUniqueId()));
+        victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
     }
 
     public static Player getLastAttacker(Player victim) {

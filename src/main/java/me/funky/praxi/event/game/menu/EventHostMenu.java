@@ -1,7 +1,7 @@
 package me.funky.praxi.event.game.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.event.Event;
 import me.funky.praxi.event.game.EventGame;
 import me.funky.praxi.event.game.map.EventGameMap;
@@ -27,17 +27,17 @@ public class EventHostMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("EVENTS.TITLE");
+        return Practice.getInstance().getMenusConfig().getString("EVENTS.TITLE");
     }
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("EVENTS.SIZE");
+        return Practice.getInstance().getMenusConfig().getInteger("EVENTS.SIZE");
     }
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("EVENTS.FILTER"));
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("EVENTS.FILTER"));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class EventHostMenu extends Menu {
 
     private int getHostSlots(Player host) {
         int slots = 32;
-        FileConfiguration config = Praxi.getInstance().getEventsConfig().getConfiguration();
+        FileConfiguration config = Practice.getInstance().getEventsConfig().getConfiguration();
 
         for (String key : config.getConfigurationSection("HOST_SLOTS").getKeys(false)) {
             if (host.hasPermission(config.getString("HOST_SLOTS." + key + ".PERMISSION"))) {
@@ -91,7 +91,7 @@ public class EventHostMenu extends Menu {
             lore.add(CC.MENU_BAR);
 
             return new ItemBuilder(event.getIcon().clone())
-                    .name(Praxi.getInstance().getMenusConfig().getString("EVENTS.EVENT-NAME").replace("<event>", event.getDisplayName()))
+                    .name(Practice.getInstance().getMenusConfig().getString("EVENTS.EVENT-NAME").replace("<event>", event.getDisplayName()))
                     .lore(lore)
                     .clearFlags()
                     .build();

@@ -2,7 +2,7 @@ package me.funky.praxi.arena.command;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
 import me.funky.praxi.arena.SpawnType;
@@ -32,7 +32,7 @@ import java.io.File;
 import java.util.Objects;
 
 @CommandAlias("arena")
-@CommandPermission("praxi.admin.arena")
+@CommandPermission("practice.admin.arena")
 @Description("Command to manage and create arenas.")
 public class ArenaCommand extends BaseCommand {
     @Default
@@ -271,7 +271,7 @@ public class ArenaCommand extends BaseCommand {
 
     @Subcommand("generate")
     public void generate(Player player) {
-        File schematicsFolder = new File(Praxi.getInstance().getDataFolder().getPath() + File.separator + "schematics");
+        File schematicsFolder = new File(Practice.getInstance().getDataFolder().getPath() + File.separator + "schematics");
 
         if (!schematicsFolder.exists()) {
             player.sendMessage(CC.RED + "The schematics folder does not exist.");
@@ -305,7 +305,7 @@ public class ArenaCommand extends BaseCommand {
                         } catch (Exception ignored) {
                         }
                     }
-                }.runTask(Praxi.getInstance());
+                }.runTask(Practice.getInstance());
             }
         }
 

@@ -1,7 +1,7 @@
 package me.funky.praxi.arena.impl;
 
 import lombok.Getter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
 import me.funky.praxi.util.LocationUtil;
@@ -31,7 +31,7 @@ public class StandaloneArena extends Arena {
         System.out.println("STANDALONE ARENA SAVE");
         String path = "arenas." + getName();
 
-        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+        FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
         configuration.set(path, null);
         configuration.set(path + ".type", getType().name());
         configuration.set(path + ".spawnA", LocationUtil.serialize(spawnA));
@@ -57,7 +57,7 @@ public class StandaloneArena extends Arena {
         }
 
         try {
-            configuration.save(Praxi.getInstance().getArenasConfig().getFile());
+            configuration.save(Practice.getInstance().getArenasConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,11 +67,11 @@ public class StandaloneArena extends Arena {
     public void delete() {
         super.delete();
 
-        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+        FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
         configuration.set("arenas." + getName(), null);
 
         try {
-            configuration.save(Praxi.getInstance().getArenasConfig().getFile());
+            configuration.save(Practice.getInstance().getArenasConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

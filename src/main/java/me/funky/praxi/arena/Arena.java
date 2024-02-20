@@ -2,7 +2,7 @@ package me.funky.praxi.arena;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.cuboid.Cuboid;
 import me.funky.praxi.arena.impl.SharedArena;
 import me.funky.praxi.arena.impl.StandaloneArena;
@@ -35,7 +35,7 @@ public class Arena extends Cuboid {
     }
 
     public static void init() {
-        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+        FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
 
         if (configuration.contains("arenas")) {
             for (String arenaName : configuration.getConfigurationSection("arenas").getKeys(false)) {
@@ -92,7 +92,7 @@ public class Arena extends Cuboid {
             }
         }
 
-        Praxi.getInstance().getLogger().info("Loaded " + Arena.getArenas().size() + " arenas");
+        Practice.getInstance().getLogger().info("Loaded " + Arena.getArenas().size() + " arenas");
     }
 
     public static Arena getByName(String name) {

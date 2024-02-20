@@ -1,7 +1,7 @@
 package me.funky.praxi.match.task;
 
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import org.bukkit.entity.Player;
@@ -11,7 +11,7 @@ public class MatchPearlCooldownTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        for (Player player : Praxi.getInstance().getServer().getOnlinePlayers()) {
+        for (Player player : Practice.getInstance().getServer().getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
             if (profile.getState() == ProfileState.FIGHTING || profile.getState() == ProfileState.EVENT) {

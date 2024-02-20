@@ -1,7 +1,7 @@
 package me.funky.praxi.setting;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.event.game.menu.EventHostMenu;
 import me.funky.praxi.menus.StatsMenu;
 import me.funky.praxi.util.CC;
@@ -23,17 +23,17 @@ public class ProfileSettingsMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("PROFILE-SETTINGS.TITLE");
+        return Practice.getInstance().getMenusConfig().getString("PROFILE-SETTINGS.TITLE");
     }
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("PROFILE-SETTINGS.SIZE");
+        return Practice.getInstance().getMenusConfig().getInteger("PROFILE-SETTINGS.SIZE");
     }
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("PROFILE-SETTINGS.FILTER"));
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("PROFILE-SETTINGS.FILTER"));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package me.funky.praxi.leaderboards;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.Console;
@@ -12,7 +12,7 @@ public class LeaderboardThread extends Thread {
 
     @Override
     public void run() {
-        long refreshTimeInterval = Praxi.getInstance().getMainConfig().getInteger("LEADERBOARD.UPDATE-TIME") * SECOND_IN_MILLIS * 60;
+        long refreshTimeInterval = Practice.getInstance().getMainConfig().getInteger("LEADERBOARD.UPDATE-TIME") * SECOND_IN_MILLIS * 60;
         boolean rested = false;
 
         while (!isInterrupted()) {

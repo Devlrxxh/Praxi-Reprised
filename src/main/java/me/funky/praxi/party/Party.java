@@ -2,7 +2,7 @@ package me.funky.praxi.party;
 
 import lombok.Getter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.duel.DuelRequest;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
@@ -51,7 +51,7 @@ public class Party {
             public void run() {
                 Party.getParties().forEach(party -> party.getInvites().removeIf(PartyInvite::hasExpired));
             }
-        }.runTaskTimerAsynchronously(Praxi.getInstance(), 20L * 2, 20L * 2);
+        }.runTaskTimerAsynchronously(Practice.getInstance(), 20L * 2, 20L * 2);
     }
 
     public void setPrivacy(PartyPrivacy privacy) {

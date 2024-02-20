@@ -2,7 +2,7 @@ package me.funky.praxi.kit.menu;
 
 import lombok.AllArgsConstructor;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.kit.KitLoadout;
 import me.funky.praxi.profile.Profile;
@@ -31,7 +31,7 @@ public class KitManagementMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.TITLE").replace("<kit>", kit.getName());
+        return Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.TITLE").replace("<kit>", kit.getName());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class KitManagementMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.STAINED_CLAY)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.DELETE-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.DELETE-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -101,7 +101,7 @@ public class KitManagementMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.IRON_SWORD)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.CREATE-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.CREATE-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -146,7 +146,7 @@ public class KitManagementMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.SIGN)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.RENAME-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.RENAME-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -175,7 +175,7 @@ public class KitManagementMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.BOOK)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.LOAD-BUTTON"))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.LOAD-BUTTON"))
                     .clearFlags()
                     .build();
         }
@@ -214,7 +214,7 @@ public class KitManagementMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.BOOK)
-                    .name(Praxi.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.KIT-NAME").replace("<kit>", kitLoadout.getCustomName()))
+                    .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.KIT-NAME").replace("<kit>", kitLoadout.getCustomName()))
                     .clearFlags()
                     .build();
         }

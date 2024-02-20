@@ -2,7 +2,7 @@ package me.funky.praxi.arena.generator;
 
 import com.boydti.fawe.util.TaskManager;
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
 import me.funky.praxi.arena.impl.SharedArena;
@@ -141,7 +141,7 @@ public class ArenaGenerator {
                                             up.setType(Material.AIR);
                                             origin.setType(origin.getRelative(BlockFace.NORTH).getType());
                                         }
-                                    }.runTask(Praxi.getInstance());
+                                    }.runTask(Practice.getInstance());
 
                                     if (arena.getSpawnA() == null) {
                                         arena.setSpawnA(loc);
@@ -166,7 +166,7 @@ public class ArenaGenerator {
                                 new ArenaGenerator(name, world, schematic, ArenaType.DUPLICATE)
                                         .generate(file, (StandaloneArena) arena);
                             }
-                        }.runTask(Praxi.getInstance());
+                        }.runTask(Practice.getInstance());
                     }
                 }
             });
@@ -178,7 +178,7 @@ public class ArenaGenerator {
     }
 
     private void log(String message) {
-        Praxi.getInstance().getLogger().info("[ArenaGen] " + message);
+        Practice.getInstance().getLogger().info("[ArenaGen] " + message);
     }
 
 }

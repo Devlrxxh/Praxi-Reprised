@@ -1,7 +1,7 @@
 package me.funky.praxi.queue.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.leaderboards.Leaderboard;
 import me.funky.praxi.leaderboards.PlayerElo;
 import me.funky.praxi.match.Match;
@@ -12,7 +12,6 @@ import me.funky.praxi.util.ItemBuilder;
 import me.funky.praxi.util.menu.Button;
 import me.funky.praxi.util.menu.Menu;
 import me.funky.praxi.util.menu.filters.Filters;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -29,19 +28,19 @@ public class QueueSelectKitMenu extends Menu {
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("QUEUES-MENUS.SIZE");
+        return Practice.getInstance().getMenusConfig().getInteger("QUEUES-MENUS.SIZE");
     }
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.FILTER"));
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("QUEUES-MENUS.FILTER"));
     }
 
     @Override
     public String getTitle(Player player) {
         return ranked ?
-                Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.TITLE") :
-                Praxi.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.TITLE");
+                Practice.getInstance().getMenusConfig().getString("QUEUES-MENUS.RANKED.TITLE") :
+                Practice.getInstance().getMenusConfig().getString("QUEUES-MENUS.UNRANKED.TITLE");
     }
 
     @Override
@@ -49,7 +48,7 @@ public class QueueSelectKitMenu extends Menu {
         Map<Integer, Button> buttons = new HashMap<>();
         int i = 10;
 
-        for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
+        for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked() == ranked) {
                 buttons.put(i++, new SelectKitButton(queue));
             }
@@ -76,13 +75,13 @@ public class QueueSelectKitMenu extends Menu {
         @Override
         public void clicked(Player player, ClickType clickType) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
-            ArrayList<Queue> queues = new ArrayList<>(Praxi.getInstance().getCache().getQueues());
-             Random rand = new Random();
-                Queue randomQueue = queues.get(rand.nextInt(queues.size()));
+            ArrayList<Queue> queues = new ArrayList<>(Practice.getInstance().getCache().getQueues());
+            Random rand = new Random();
+            Queue randomQueue = queues.get(rand.nextInt(queues.size()));
 
-                player.closeInventory();
-                randomQueue.addPlayer(player, randomQueue.isRanked() ? profile.getKitData().get(randomQueue.getKit()).getElo() : 0, ranked);
-                randomQueue.addQueue();
+            player.closeInventory();
+            randomQueue.addPlayer(player, randomQueue.isRanked() ? profile.getKitData().get(randomQueue.getKit()).getElo() : 0, ranked);
+            randomQueue.addQueue();
         }
     }
 
@@ -95,8 +94,8 @@ public class QueueSelectKitMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
             List<String> configLore = ranked ?
-                    Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE") :
-                    Praxi.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE");
+                    Practice.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.RANKED.LORE") :
+                    Practice.getInstance().getMenusConfig().getStringList("QUEUES-MENUS.UNRANKED.LORE");
 
             configLore.forEach(line -> {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
@@ -108,7 +107,7 @@ public class QueueSelectKitMenu extends Menu {
                 }
             });
 
-            String kitName = Praxi.getInstance().getMenusConfig().getString(ranked ?
+            String kitName = Practice.getInstance().getMenusConfig().getString(ranked ?
                             "QUEUES-MENUS.RANKED.KIT-NAME" :
                             "QUEUES-MENUS.UNRANKED.KIT-NAME")
                     .replace("<kit>", queue.getKit().getName())

@@ -2,7 +2,7 @@ package me.funky.praxi.util.menu;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
 import me.funky.praxi.util.menu.filters.Filters;
@@ -23,7 +23,7 @@ public abstract class Menu {
 
     public static Map<String, Menu> currentlyOpenedMenus = new HashMap<>();
 
-    protected Praxi praxi = Praxi.getInstance();
+    protected Practice practice = Practice.getInstance();
     private Map<Integer, Button> buttons = new HashMap<>();
     private boolean autoUpdate = false;
     private boolean updateAfterClick = true;
@@ -35,12 +35,12 @@ public abstract class Menu {
     private boolean resetCursor;
 
     {
-        fillerType = (new ItemStack(Material.valueOf(Praxi.getInstance().getMenusConfig().getString("FILTER.MATERIAL")), 1
-                , (short) Praxi.getInstance().getMenusConfig().getInteger("FILTER.DURABILITY")));
+        fillerType = (new ItemStack(Material.valueOf(Practice.getInstance().getMenusConfig().getString("FILTER.MATERIAL")), 1
+                , (short) Practice.getInstance().getMenusConfig().getInteger("FILTER.DURABILITY")));
         ItemMeta fillerMeta = fillerType.getItemMeta();
 
         if (fillerMeta != null) {
-            fillerMeta.setDisplayName(Praxi.getInstance().getMenusConfig().getString("FILTER.NAME"));
+            fillerMeta.setDisplayName(Practice.getInstance().getMenusConfig().getString("FILTER.NAME"));
             fillerType.setItemMeta(fillerMeta);
         }
     }
@@ -123,10 +123,10 @@ public abstract class Menu {
             if (previousMenu == null) {
                 player.closeInventory();
             } else {
-                if(resetCursor){
+                if (resetCursor) {
                     previousMenu.setClosedByMenu(true);
                     player.closeInventory();
-                }else{
+                } else {
                     previousMenu.setClosedByMenu(true);
                     inventory = player.getOpenInventory().getTopInventory();
                     update = true;
@@ -203,9 +203,11 @@ public abstract class Menu {
     public boolean getFixedPositions() {
         return true;
     }
+
     public boolean resetCursor() {
         return true;
     }
+
     public int getSlot(int x, int y) {
         return ((9 * y) + x);
     }

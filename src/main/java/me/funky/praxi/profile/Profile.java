@@ -9,7 +9,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.duel.DuelProcedure;
 import me.funky.praxi.duel.DuelRequest;
 import me.funky.praxi.kit.Kit;
@@ -71,7 +71,7 @@ public class Profile {
     }
 
     public static void init() {
-        collection = Praxi.getInstance().getMongoDatabase().getCollection("profiles");
+        collection = Practice.getInstance().getMongoDatabase().getCollection("profiles");
 
         // Players might have joined before the plugin finished loading
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -104,7 +104,7 @@ public class Profile {
                     }
                 }
             }
-        }.runTaskTimerAsynchronously(Praxi.getInstance(), 60L, 60L);
+        }.runTaskTimerAsynchronously(Practice.getInstance(), 60L, 60L);
 
     }
 

@@ -1,6 +1,6 @@
 package me.funky.praxi.profile;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.essentials.event.SpawnTeleportEvent;
 import me.funky.praxi.profile.hotbar.Hotbar;
 import me.funky.praxi.profile.hotbar.HotbarItem;
@@ -86,7 +86,7 @@ public class ProfileListener implements Listener {
                 event.setCancelled(true);
 
                 if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                    Praxi.getInstance().getEssentials().teleportToSpawn((Player) event.getEntity());
+                    Practice.getInstance().getEssentials().teleportToSpawn((Player) event.getEntity());
                 }
             }
         }
@@ -129,19 +129,19 @@ public class ProfileListener implements Listener {
         }
         Profile.getProfiles().put(player.getUniqueId(), profile);
 
-        Praxi.getInstance().getEssentials().teleportToSpawn(player);
+        Practice.getInstance().getEssentials().teleportToSpawn(player);
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
             VisibilityLogic.handle(player, otherPlayer);
             VisibilityLogic.handle(otherPlayer, player);
         }
-        for (String line : Praxi.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
+        for (String line : Practice.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
             ArrayList<String> list = new ArrayList<>();
             list.add(CC.translate(line));
             player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
         }
 
-        if (player.hasPermission("praxi.donor.fly")) {
+        if (player.hasPermission("practice.donor.fly")) {
             player.setAllowFlight(true);
             player.setFlying(true);
             player.updateInventory();
@@ -151,7 +151,7 @@ public class ProfileListener implements Listener {
             public void run() {
                 Hotbar.giveHotbarItems(event.getPlayer());
             }
-        }.runTaskLater(Praxi.getInstance(), 10L);
+        }.runTaskLater(Practice.getInstance(), 10L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -165,7 +165,7 @@ public class ProfileListener implements Listener {
                 profile.save();
                 Profile.getProfiles().remove(event.getPlayer().getUniqueId());
             }
-        }.runTaskAsynchronously(Praxi.getInstance());
+        }.runTaskAsynchronously(Practice.getInstance());
 
         if (profile.getState().equals(ProfileState.FIGHTING)) {
             profile.getMatch().end();
@@ -175,7 +175,7 @@ public class ProfileListener implements Listener {
             profile.getQueueProfile().getQueue().removeQueue();
         }
         if (profile.getQueueProfile() != null) {
-            Praxi.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
+            Practice.getInstance().getCache().getPlayers().remove(profile.getQueueProfile());
         }
 
         if (profile.getRematchData() != null) {

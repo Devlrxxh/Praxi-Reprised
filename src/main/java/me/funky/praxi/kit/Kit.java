@@ -2,7 +2,7 @@ package me.funky.praxi.kit;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.kit.meta.KitEditRules;
 import me.funky.praxi.kit.meta.KitGameRules;
 import me.funky.praxi.queue.Queue;
@@ -39,7 +39,7 @@ public class Kit {
     }
 
     public static void init() {
-        FileConfiguration config = Praxi.getInstance().getKitsConfig().getConfiguration();
+        FileConfiguration config = Practice.getInstance().getKitsConfig().getConfiguration();
 
         for (String key : config.getConfigurationSection("kits").getKeys(false)) {
             String path = "kits." + key;
@@ -113,7 +113,7 @@ public class Kit {
     public void save() {
         String path = "kits." + name;
 
-        BasicConfigurationFile configFile = Praxi.getInstance().getKitsConfig();
+        BasicConfigurationFile configFile = Practice.getInstance().getKitsConfig();
         configFile.getConfiguration().set(path + ".enabled", enabled);
         configFile.getConfiguration().set(path + ".description", description);
         configFile.getConfiguration().set(path + ".icon.material", displayIcon.getType().name());

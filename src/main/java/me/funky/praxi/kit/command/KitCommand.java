@@ -13,7 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 @CommandAlias("kit")
-@CommandPermission("praxi.admin.kit")
+@CommandPermission("practice.admin.kit")
 @Description("Command to manage and create kits.")
 public class KitCommand extends BaseCommand {
     @Default

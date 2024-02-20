@@ -3,7 +3,7 @@ package me.funky.praxi.profile.meta.option;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.KillEffects;
 import me.funky.praxi.setting.Colors;
 
@@ -18,6 +18,6 @@ public class ProfileOptions {
     private KillEffects killEffect = KillEffects.NONE;
     private boolean scoreboardLines = true;
     private boolean menuSounds = false;
-    private Colors theme = Colors.valueOf(Praxi.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
+    private Colors theme = Colors.valueOf(Practice.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
     private int pingRange = 250;
 }

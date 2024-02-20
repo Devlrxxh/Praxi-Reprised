@@ -2,7 +2,7 @@ package me.funky.praxi.arena.impl;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.arena.ArenaType;
 import me.funky.praxi.util.LocationUtil;
@@ -28,7 +28,7 @@ public class SharedArena extends Arena {
     public void save() {
         String path = "arenas." + getName();
 
-        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+        FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
         configuration.set(path, null);
         configuration.set(path + ".type", getType().name());
         configuration.set(path + ".spawnA", LocationUtil.serialize(spawnA));
@@ -38,7 +38,7 @@ public class SharedArena extends Arena {
         configuration.set(path + ".kits", getKits());
 
         try {
-            configuration.save(Praxi.getInstance().getArenasConfig().getFile());
+            configuration.save(Practice.getInstance().getArenasConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,11 +48,11 @@ public class SharedArena extends Arena {
     public void delete() {
         super.delete();
 
-        FileConfiguration configuration = Praxi.getInstance().getArenasConfig().getConfiguration();
+        FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
         configuration.set("arenas." + getName(), null);
 
         try {
-            configuration.save(Praxi.getInstance().getArenasConfig().getFile());
+            configuration.save(Practice.getInstance().getArenasConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

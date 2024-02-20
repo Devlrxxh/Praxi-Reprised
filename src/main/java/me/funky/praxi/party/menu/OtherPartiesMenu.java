@@ -1,7 +1,7 @@
 package me.funky.praxi.party.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.party.Party;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.util.CC;
@@ -24,17 +24,17 @@ public class OtherPartiesMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("PARTY.OTHER-PARTIES.TITLE");
+        return Practice.getInstance().getMenusConfig().getString("PARTY.OTHER-PARTIES.TITLE");
     }
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("PARTY.OTHER-PARTIES.SIZE");
+        return Practice.getInstance().getMenusConfig().getInteger("PARTY.OTHER-PARTIES.SIZE");
     }
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("PARTY.FILTER"));
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("PARTY.FILTER"));
     }
 
 

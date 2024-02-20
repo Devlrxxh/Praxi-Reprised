@@ -1,6 +1,6 @@
 package me.funky.praxi.essentials;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.essentials.event.SpawnTeleportEvent;
 import me.funky.praxi.util.LocationUtil;
 import org.bukkit.Location;
@@ -14,32 +14,32 @@ import java.io.IOException;
 
 public class Essentials {
 
-    private final Praxi praxi;
+    private final Practice practice;
     private Location spawn;
 
-    public Essentials(Praxi praxi) {
-        this.praxi = praxi;
-        this.spawn = LocationUtil.deserialize(praxi.getMainConfig().getStringOrDefault("ESSENTIAL.SPAWN_LOCATION", null));
+    public Essentials(Practice practice) {
+        this.practice = practice;
+        this.spawn = LocationUtil.deserialize(practice.getMainConfig().getStringOrDefault("ESSENTIAL.SPAWN_LOCATION", null));
     }
 
     public void setSpawn(Location location) {
         spawn = location;
 
         if (spawn == null) {
-            praxi.getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", null);
+            practice.getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", null);
         } else {
-            praxi.getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", LocationUtil.serialize(this.spawn));
+            practice.getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", LocationUtil.serialize(this.spawn));
         }
 
         try {
-            praxi.getMainConfig().getConfiguration().save(praxi.getMainConfig().getFile());
+            practice.getMainConfig().getConfiguration().save(practice.getMainConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void teleportToSpawn(Player player) {
-        Location location = spawn == null ? praxi.getServer().getWorlds().get(0).getSpawnLocation() : spawn;
+        Location location = spawn == null ? practice.getServer().getWorlds().get(0).getSpawnLocation() : spawn;
 
         SpawnTeleportEvent event = new SpawnTeleportEvent(player, location);
         event.call();

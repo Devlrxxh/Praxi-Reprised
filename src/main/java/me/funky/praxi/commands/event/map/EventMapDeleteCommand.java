@@ -6,7 +6,7 @@ import me.funky.praxi.util.command.command.CPL;
 import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "event map delete", permission = "praxi.admin.event")
+@CommandMeta(label = "event map delete", permission = "practice.admin.event")
 public class EventMapDeleteCommand {
 
     public void execute(Player player, @CPL("map") EventGameMap gameMap) {

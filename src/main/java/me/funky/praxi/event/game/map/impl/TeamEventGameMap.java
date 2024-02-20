@@ -2,7 +2,7 @@ package me.funky.praxi.event.game.map.impl;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.event.game.EventGame;
 import me.funky.praxi.event.game.map.EventGameMap;
 import me.funky.praxi.event.impl.sumo.SumoGameLogic;
@@ -68,13 +68,13 @@ public class TeamEventGameMap extends EventGameMap {
     public void save() {
         super.save();
 
-        FileConfiguration config = Praxi.getInstance().getEventsConfig().getConfiguration();
+        FileConfiguration config = Practice.getInstance().getEventsConfig().getConfiguration();
         config.set("EVENT_MAPS." + getMapName() + ".TYPE", "TEAM");
         config.set("EVENT_MAPS." + getMapName() + ".SPAWN_POINT_A", LocationUtil.serialize(spawnPointA));
         config.set("EVENT_MAPS." + getMapName() + ".SPAWN_POINT_B", LocationUtil.serialize(spawnPointB));
 
         try {
-            config.save(Praxi.getInstance().getEventsConfig().getFile());
+            config.save(Practice.getInstance().getEventsConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

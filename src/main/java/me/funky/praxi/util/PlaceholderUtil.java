@@ -1,7 +1,7 @@
 package me.funky.praxi.util;
 
 import lombok.experimental.UtilityClass;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
@@ -21,8 +21,8 @@ public final class PlaceholderUtil {
         QueueProfile queueProfile = profile.getQueueProfile();
         for (String line : lines) {
             line = line.replaceAll("<online>", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()));
-            line = line.replaceAll("<queued>", String.valueOf(Praxi.getInstance().getCache().getPlayers().size()));
-            line = line.replaceAll("<in-match>", String.valueOf(Praxi.getInstance().getCache().getMatches().size() * 2));
+            line = line.replaceAll("<queued>", String.valueOf(Practice.getInstance().getCache().getPlayers().size()));
+            line = line.replaceAll("<in-match>", String.valueOf(Practice.getInstance().getCache().getMatches().size() * 2));
             line = line.replaceAll("<player>", player.getName());
             line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
             if (!profile.getOptions().scoreboardLines()) {
@@ -74,4 +74,5 @@ public final class PlaceholderUtil {
             return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
         }
     }
+
 }

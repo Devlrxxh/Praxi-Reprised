@@ -8,7 +8,7 @@ import me.funky.praxi.util.command.command.CPL;
 import me.funky.praxi.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "event map create", permission = "praxi.admin.event")
+@CommandMeta(label = "event map create", permission = "practice.admin.event")
 public class EventMapCreateCommand {
 
     public void execute(Player player, @CPL("mapName") String mapName, @CPL("mapType") String mapType) {

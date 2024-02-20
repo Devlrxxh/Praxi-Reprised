@@ -1,5 +1,5 @@
-main: me.funky.praxi.Praxi
-name: Praxi
+main: me.funky.practice.Practice
+name: Practice
 version: '1.0.0'
 author: funkyranveer, joeleoli, lugami, lrxh
 load: POSTWORLD

@@ -1,6 +1,6 @@
 package me.funky.praxi.util;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -17,7 +17,7 @@ public class BaseEvent extends Event {
     }
 
     public void call() {
-        Praxi.getInstance().getServer().getPluginManager().callEvent(this);
+        Practice.getInstance().getServer().getPluginManager().callEvent(this);
     }
 
 }

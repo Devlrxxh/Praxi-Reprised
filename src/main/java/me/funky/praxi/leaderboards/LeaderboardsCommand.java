@@ -15,7 +15,7 @@ public class LeaderboardsCommand extends BaseCommand {
     }
 
     @Subcommand("refresh")
-    @CommandPermission("praxi.leaderboards.refresh")
+    @CommandPermission("practice.leaderboards.refresh")
     public void refresh(Player player) {
         Leaderboard.getEloLeaderboards().clear();
         Leaderboard.setEloLeaderboards(Leaderboard.init());

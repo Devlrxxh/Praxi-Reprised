@@ -68,9 +68,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Getter
-public class Praxi extends JavaPlugin {
+public class Practice extends JavaPlugin {
 
-    private static Praxi praxi;
+    private static Practice practice;
 
     private BasicConfigurationFile mainConfig;
     private BasicConfigurationFile arenasConfig;
@@ -86,11 +86,11 @@ public class Praxi extends JavaPlugin {
     private Assemble assemble;
     private SpigotHandler spigotHandler;
 
-    public static Praxi getInstance() {
-        if (praxi == null) {
-            praxi = new Praxi();
+    public static Practice getInstance() {
+        if (practice == null) {
+            practice = new Practice();
         }
-        return praxi;
+        return practice;
     }
 
     public void loadConfigs() {
@@ -106,12 +106,12 @@ public class Praxi extends JavaPlugin {
     @Override
     public void onEnable() {
         long oldTime = System.currentTimeMillis();
-        praxi = this;
+        practice = this;
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         honcho = new Honcho(this);
         loadConfigs();
         loadMongo();
-        spigotHandler = new SpigotHandler(praxi);
+        spigotHandler = new SpigotHandler(practice);
         spigotHandler.init(false);
         cache = new Cache();
         Hotbar.init();

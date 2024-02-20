@@ -6,7 +6,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import lombok.Getter;
 import lombok.Setter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.match.participant.MatchGamePlayer;
@@ -69,17 +69,17 @@ public abstract class Match {
         this.placedBlocks = new ArrayList<>();
         this.changedBlocks = new ArrayList<>();
 
-        Praxi.getInstance().getCache().getMatches().add(this);
+        Practice.getInstance().getCache().getMatches().add(this);
     }
 
 
     public static void init() {
-        new MatchPearlCooldownTask().runTaskTimerAsynchronously(Praxi.getInstance(), 2L, 2L);
-        new MatchSnapshotCleanupTask().runTaskTimerAsynchronously(Praxi.getInstance(), 20L * 5, 20L * 5);
+        new MatchPearlCooldownTask().runTaskTimerAsynchronously(Practice.getInstance(), 2L, 2L);
+        new MatchSnapshotCleanupTask().runTaskTimerAsynchronously(Practice.getInstance(), 20L * 5, 20L * 5);
     }
 
     public static void cleanup() {
-        for (Match match : Praxi.getInstance().getCache().getMatches()) {
+        for (Match match : Practice.getInstance().getCache().getMatches()) {
             match.getPlacedBlocks().forEach(location -> location.getBlock().setType(Material.AIR));
             match.getChangedBlocks().forEach((blockState) -> blockState.getLocation().getBlock().setType(blockState.getType()));
             match.getDroppedItems().forEach(Entity::remove);
@@ -92,14 +92,14 @@ public abstract class Match {
                     profile.save();
                     System.out.println("Saved Profile: " + profile);
                 }
-            }.runTaskAsynchronously(Praxi.getInstance());
+            }.runTaskAsynchronously(Practice.getInstance());
         }
     }
 
     public static int getInFightsCount(Queue queue) {
         int i = 0;
 
-        for (Match match : Praxi.getInstance().getCache().getMatches()) {
+        for (Match match : Practice.getInstance().getCache().getMatches()) {
             if (match.getQueue() != null &&
                     (match.getState() == MatchState.STARTING_ROUND || match.getState() == MatchState.PLAYING_ROUND)) {
                 if (match.getQueue().equals(queue)) {
@@ -224,7 +224,7 @@ public abstract class Match {
 
         // Start logic task
         logicTask = new MatchLogicTask(this);
-        logicTask.runTaskTimer(Praxi.getInstance(), 0L, 20L);
+        logicTask.runTaskTimer(Practice.getInstance(), 0L, 20L);
 
         // Set arena as active
         arena.setActive(true);
@@ -297,7 +297,7 @@ public abstract class Match {
                     if (player != null) {
                         VisibilityLogic.handle(player);
                         Hotbar.giveHotbarItems(player);
-                        Praxi.getInstance().getEssentials().teleportToSpawn(player);
+                        Practice.getInstance().getEssentials().teleportToSpawn(player);
                     }
                 }
             }
@@ -309,9 +309,9 @@ public abstract class Match {
 
         droppedItems.forEach(Entity::remove);
 
-        new MatchResetTask(this).runTask(Praxi.getInstance());
+        new MatchResetTask(this).runTask(Practice.getInstance());
 
-        Praxi.getInstance().getCache().getMatches().remove(this);
+        Practice.getInstance().getCache().getMatches().remove(this);
     }
 
     public abstract boolean canEndMatch();
@@ -324,10 +324,10 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            if (Praxi.getInstance().getSpigotHandler() == null) return;
+            if (Practice.getInstance().getSpigotHandler() == null) return;
             if (kit.getKnockbackProfile() == null) return;
             for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Praxi.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
+                Practice.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
             }
         }
     }
@@ -450,7 +450,7 @@ public abstract class Match {
                     meta.addEffect(builder.build());
                     meta.setPower(1);
                     firework.setFireworkMeta(meta);
-                    Bukkit.getScheduler().runTaskLater(Praxi.getInstance(), firework::detonate, 5L);
+                    Bukkit.getScheduler().runTaskLater(Practice.getInstance(), firework::detonate, 5L);
                     break;
             }
         }
@@ -588,7 +588,7 @@ public abstract class Match {
 
         PlayerUtil.reset(spectator);
         Hotbar.giveHotbarItems(spectator);
-        Praxi.getInstance().getEssentials().teleportToSpawn(spectator);
+        Practice.getInstance().getEssentials().teleportToSpawn(spectator);
 
         VisibilityLogic.handle(spectator);
 

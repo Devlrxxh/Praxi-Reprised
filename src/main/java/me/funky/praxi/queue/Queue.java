@@ -2,7 +2,7 @@ package me.funky.praxi.queue;
 
 import lombok.Getter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
@@ -25,11 +25,11 @@ public class Queue {
         this.kit = kit;
         this.ranked = ranked;
         this.queuing = 0;
-        Praxi.getInstance().getCache().getQueues().add(this);
+        Practice.getInstance().getCache().getQueues().add(this);
     }
 
     public static Queue getByUuid(UUID uuid) {
-        for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
+        for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.getUuid().equals(uuid)) {
                 return queue;
             }
@@ -50,7 +50,7 @@ public class Queue {
         profile.setQueueProfile(queueProfile);
         profile.setState(ProfileState.QUEUEING);
 
-        Praxi.getInstance().getCache().getPlayers().add(queueProfile);
+        Practice.getInstance().getCache().getPlayers().add(queueProfile);
 
         Hotbar.giveHotbarItems(player);
 
@@ -63,7 +63,7 @@ public class Queue {
 
 
     public void removePlayer(QueueProfile queueProfile) {
-        Praxi.getInstance().getCache().getPlayers().remove(queueProfile);
+        Practice.getInstance().getCache().getPlayers().remove(queueProfile);
 
         Profile profile = Profile.getByUuid(queueProfile.getPlayerUuid());
         profile.setQueueProfile(null);

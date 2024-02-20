@@ -1,6 +1,6 @@
 package me.funky.praxi.arena;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.selection.Selection;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.match.MatchState;
@@ -93,7 +93,7 @@ public class ArenaListener implements Listener {
             return;
         }
 
-        for (Match match : Praxi.getInstance().getCache().getMatches()) {
+        for (Match match : Practice.getInstance().getCache().getMatches()) {
             if (match.getArena().equals(foundArena)) {
                 if (match.getState() == MatchState.PLAYING_ROUND) {
                     match.getPlacedBlocks().add(event.getToBlock().getLocation());

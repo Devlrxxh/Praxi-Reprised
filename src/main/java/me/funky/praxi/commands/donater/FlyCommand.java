@@ -11,7 +11,7 @@ import me.funky.praxi.util.CC;
 import org.bukkit.entity.Player;
 
 @CommandAlias("fly")
-@CommandPermission("praxi.donor.fly")
+@CommandPermission("practice.donor.fly")
 @Description("Fly Command.")
 public class FlyCommand extends BaseCommand {
 

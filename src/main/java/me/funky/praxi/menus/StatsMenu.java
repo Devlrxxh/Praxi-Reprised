@@ -1,7 +1,7 @@
 package me.funky.praxi.menus;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.match.Match;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.queue.Queue;
@@ -29,17 +29,17 @@ public class StatsMenu extends Menu {
 
     @Override
     public int getSize() {
-        return Praxi.getInstance().getMenusConfig().getInteger("STATS.SIZE");
+        return Practice.getInstance().getMenusConfig().getInteger("STATS.SIZE");
     }
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Praxi.getInstance().getMenusConfig().getString("STATS.FILTER"));
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("STATS.FILTER"));
     }
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("STATS.TITLE");
+        return Practice.getInstance().getMenusConfig().getString("STATS.TITLE");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class StatsMenu extends Menu {
 
         int i = 10;
 
-        for (Queue queue : Praxi.getInstance().getCache().getQueues()) {
+        for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (!queue.isRanked()) {
                 buttons.put(i++, new KitStatsButton(queue));
             }
@@ -70,7 +70,7 @@ public class StatsMenu extends Menu {
             List<String> lore = new ArrayList<>();
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            for (String line : Praxi.getInstance().getMenusConfig().getStringList("STATS.GLOBAL-STATS.LORE")) {
+            for (String line : Practice.getInstance().getMenusConfig().getStringList("STATS.GLOBAL-STATS.LORE")) {
                 line = line.replaceAll("<wins>", String.valueOf(profile.getWins()));
                 line = line.replaceAll("<loses>", String.valueOf(profile.getLoses()));
                 line = line.replaceAll("<elo>", String.valueOf(profile.getElo()));
@@ -80,7 +80,7 @@ public class StatsMenu extends Menu {
 
 
             return new ItemBuilder(head)
-                    .name(Praxi.getInstance().getMenusConfig().getString("STATS.GLOBAL-STATS.GLOBAL-STATS-NAME"))
+                    .name(Practice.getInstance().getMenusConfig().getString("STATS.GLOBAL-STATS.GLOBAL-STATS-NAME"))
                     .lore(lore)
                     .clearEnchantments()
                     .clearFlags()
@@ -98,7 +98,7 @@ public class StatsMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
             Profile profile = Profile.getByUuid(player.getUniqueId());
-            for (String line : Praxi.getInstance().getMenusConfig().getStringList("STATS.LORE")) {
+            for (String line : Practice.getInstance().getMenusConfig().getStringList("STATS.LORE")) {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
                 line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
                 line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
@@ -119,7 +119,7 @@ public class StatsMenu extends Menu {
             }
 
             return new ItemBuilder(queue.getKit().getDisplayIcon())
-                    .name(Praxi.getInstance().getMenusConfig().getString("STATS.KIT-NAME")
+                    .name(Practice.getInstance().getMenusConfig().getString("STATS.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName())
                             .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
                     .lore(lore)

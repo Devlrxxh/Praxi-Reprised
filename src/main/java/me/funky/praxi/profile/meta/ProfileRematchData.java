@@ -2,7 +2,7 @@ package me.funky.praxi.profile.meta;
 
 import lombok.Getter;
 import me.funky.praxi.Locale;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.match.Match;
@@ -99,8 +99,8 @@ public class ProfileRematchData {
     public void accept() {
         this.validate();
 
-        Player sender = Praxi.getInstance().getServer().getPlayer(this.sender);
-        Player target = Praxi.getInstance().getServer().getPlayer(this.target);
+        Player sender = Practice.getInstance().getServer().getPlayer(this.sender);
+        Player target = Practice.getInstance().getServer().getPlayer(this.target);
 
         if (sender == null || target == null || !sender.isOnline() || !target.isOnline()) {
             return;

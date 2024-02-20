@@ -37,6 +37,7 @@ public class MatchDetailsMenu extends Menu {
     public boolean getFixedPositions() {
         return false;
     }
+
     public boolean resetCursor() {
         return false;
     }

@@ -1,7 +1,7 @@
 package me.funky.praxi.profile.hotbar;
 
 import lombok.Getter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.profile.Profile;
 import me.funky.praxi.profile.ProfileState;
 import me.funky.praxi.util.ItemBuilder;
@@ -22,7 +22,7 @@ public class Hotbar {
     private static final Map<HotbarItem, ItemStack> items = new HashMap<>();
 
     public static void init() {
-        FileConfiguration config = Praxi.getInstance().getMainConfig().getConfiguration();
+        FileConfiguration config = Practice.getInstance().getMainConfig().getConfiguration();
 
         ConfigurationSection itemsSection = config.getConfigurationSection("HOTBAR_ITEMS");
         if (itemsSection == null) {

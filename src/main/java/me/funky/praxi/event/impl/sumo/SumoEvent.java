@@ -2,7 +2,7 @@ package me.funky.praxi.event.impl.sumo;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.event.Event;
 import me.funky.praxi.event.game.EventGame;
 import me.funky.praxi.event.game.EventGameLogic;
@@ -30,7 +30,7 @@ public class SumoEvent implements Event {
     private Location lobbyLocation;
 
     public SumoEvent() {
-        BasicConfigurationFile config = Praxi.getInstance().getEventsConfig();
+        BasicConfigurationFile config = Practice.getInstance().getEventsConfig();
 
         lobbyLocation = LocationUtil.deserialize(config.getString("EVENTS.SUMO.LOBBY_LOCATION"));
 
@@ -68,7 +68,7 @@ public class SumoEvent implements Event {
 
     @Override
     public boolean canHost(Player player) {
-        return player.hasPermission("praxi.event.host.sumo");
+        return player.hasPermission("practice.event.host.sumo");
     }
 
     @Override
@@ -88,12 +88,12 @@ public class SumoEvent implements Event {
 
     @Override
     public void save() {
-        FileConfiguration config = Praxi.getInstance().getEventsConfig().getConfiguration();
+        FileConfiguration config = Practice.getInstance().getEventsConfig().getConfiguration();
         config.set("EVENTS.SUMO.LOBBY_LOCATION", LocationUtil.serialize(lobbyLocation));
         config.set("EVENTS.SUMO.ALLOWED_MAPS", allowedMaps);
 
         try {
-            config.save(Praxi.getInstance().getEventsConfig().getFile());
+            config.save(Practice.getInstance().getEventsConfig().getFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package me.funky.praxi.util;
 
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -224,7 +224,7 @@ public class InventoryUtil {
     }
 
     public static void removeCrafting(Material material) {
-        Iterator<Recipe> iterator = Praxi.getInstance().getServer().recipeIterator();
+        Iterator<Recipe> iterator = Practice.getInstance().getServer().recipeIterator();
 
         while (iterator.hasNext()) {
             Recipe recipe = iterator.next();

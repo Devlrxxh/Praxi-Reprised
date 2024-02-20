@@ -6,11 +6,11 @@ The most configurable, efficient, and extensive practice plugin.
 
 # Download
 ### 1. Click on **Actions**
-![image](https://github.com/Devlrxxh/praxi/assets/125221056/8ad915ae-8dbd-4a70-9142-9eb2c04799b5)
+![image](https://github.com/Devlrxxh/practice/assets/125221056/8ad915ae-8dbd-4a70-9142-9eb2c04799b5)
 ### 2. Click on the latest build 
-![image](https://github.com/Devlrxxh/praxi/assets/125221056/807e1768-6cfc-4f7f-b780-f093b98ad7c2)
+![image](https://github.com/Devlrxxh/practice/assets/125221056/807e1768-6cfc-4f7f-b780-f093b98ad7c2)
 ### 3. And then click on here which will download the latest versions.
-![image](https://github.com/Devlrxxh/praxi/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
+![image](https://github.com/Devlrxxh/practice/assets/125221056/054966cd-1603-4e9e-9bc2-800e9538849d) 
 
 # Placeholders
  - ``%praxi_lb_<kit-name>_<up-to-10>_name%`` | Returns Player's Name in position
@@ -20,8 +20,8 @@ The most configurable, efficient, and extensive practice plugin.
  -  ``%praxi_leaderboards_update%`` |  Returns time left till leaderboard reload
 
 # Credits
-### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
-### Joeleoli - Made praxi
+### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/practice-nodependents)
+### Joeleoli - Made practice
 
 # TODO
  - ~~Add Stats Menu~~

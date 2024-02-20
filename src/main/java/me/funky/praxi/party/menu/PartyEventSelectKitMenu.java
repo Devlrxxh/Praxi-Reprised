@@ -1,7 +1,7 @@
 package me.funky.praxi.party.menu;
 
 import lombok.AllArgsConstructor;
-import me.funky.praxi.Praxi;
+import me.funky.praxi.Practice;
 import me.funky.praxi.arena.Arena;
 import me.funky.praxi.kit.Kit;
 import me.funky.praxi.match.Match;
@@ -31,7 +31,7 @@ public class PartyEventSelectKitMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return Praxi.getInstance().getMenusConfig().getString("PARTY.EVENTS.SELECT-KIT.TITLE");
+        return Practice.getInstance().getMenusConfig().getString("PARTY.EVENTS.SELECT-KIT.TITLE");
     }
 
     @Override
