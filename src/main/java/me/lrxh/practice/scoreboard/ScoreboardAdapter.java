@@ -20,10 +20,10 @@ public class ScoreboardAdapter implements AssembleAdapter {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         ArrayList<String> list = new ArrayList<>();
         if (!profile.getOptions().scoreboardLines()) {
-            list.add("   " + getAnimation("TITLE") + "   ");
+            list.add("   " + getAnimatedText() + "   ");
             return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
         } else {
-            list.add(getAnimation("TITLE"));
+            list.add(getAnimatedText());
             return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
         }
     }
@@ -72,12 +72,9 @@ public class ScoreboardAdapter implements AssembleAdapter {
         return null;
     }
 
-    private String getAnimation(String configLocation) {
-        List<String> footerList = Practice.getInstance().getScoreboardConfig().getStringList(configLocation);
-
-        if (index >= footerList.size()) {
-            index = 0;
-        }
-        return footerList.get(index++);
+    private String getAnimatedText() {
+        int index = (int) ((System.currentTimeMillis() / Practice.getInstance().getScoreboardConfig().getInteger("UPDATE-INTERVAL"))
+                % Practice.getInstance().getScoreboardConfig().getStringList("TITLE").size());
+        return Practice.getInstance().getScoreboardConfig().getStringList("TITLE").get(index);
     }
 }
