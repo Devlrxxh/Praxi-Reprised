@@ -1,48 +1,4 @@
 kits:
-  BuildUHC:
-    enabled: true
-    description: '&7Ultra Hardcore'
-    icon:
-      material: LAVA_BUCKET
-      durability: 0
-    loadout:
-      armor: t@313:e@4@2:e@34@3;t@312:e@0@1:e@34@3;t@311:e@0@1:e@34@3;t@310:e@4@2:e@34@3;
-      contents: t@276:e@16@1:e@34@3;t@346:e@34@3;t@261:e@48@2:e@34@3;t@322:a@6;t@322:a@3:dn@ยง§6Golden Head;t@327;t@326;t@4:a@64;t@278;t@262:a@64;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;t@327;t@326;t@4:a@64;t@279;
-    game-rules:
-      sumo: false
-      spleef: false
-      parkour: false
-      health-regeneration: true
-      hit-delay: 20
-      allow-build: true
-      show-health: false
-    edit-rules:
-      allow-potion-fill: false
-      items:
-        '1':
-          material: COOKED_BEEF
-          amount: 64
-          durability: 0
-        '2':
-          material: GOLDEN_CARROT
-          amount: 64
-          durability: 0
-        '3':
-          material: POTION
-          amount: 1
-          durability: 16388
-        '4':
-          material: POTION
-          amount: 1
-          durability: 16426
-        '5':
-          material: POTION
-          amount: 1
-          durability: 16421
-        '6':
-          material: POTION
-          amount: 1
-          durability: 8226
   Classic:
     enabled: true
     description: '&7Kit with no enchantments'
@@ -51,7 +7,7 @@ kits:
       durability: 0
     loadout:
       armor: t@309;t@308;t@307;t@306;
-      contents: t@276;t@346;t@261;t@322:a@8;null;null;null;null;null;null;null;null;null;null;null;null;null;t@262:a@12;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+      contents: t@276;t@346;t@261;t@322:a@8;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@262:a@12;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
     game-rules:
       sumo: false
       spleef: false
@@ -60,8 +16,10 @@ kits:
       hit-delay: 20
       allow-build: false
       show-health: false
+      boxing: false
     edit-rules:
       allow-potion-fill: false
+    knockback-profile: builduhc
   NoDebuff:
     enabled: true
     description: '&7The PotPvP'
@@ -70,7 +28,7 @@ kits:
       durability: 16421
     loadout:
       armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
-      contents: t@276:e@16@3:e@20@2:e@34@3;t@368:a@16;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@3:pd@3-1=12-3600-0;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;
+      contents: t@276:e@16@3:e@20@2:e@34@3;t@368:a@16;t@373:d@3:pd@3-1=12-3600-0;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;
     game-rules:
       enabled: true
       build: false
@@ -81,6 +39,7 @@ kits:
       hit-delay: 20
       allow-build: false
       show-health: false
+      boxing: false
     edit-rules:
       allow-potion-fill: false
       items:
@@ -100,7 +59,7 @@ kits:
           material: POTION
           durability: 8226
           amount: 1
-    knockback-profile: default
+    knockback-profile: nodebuff
   Sumo:
     enabled: true
     description: '&7First to fall loses'
@@ -109,7 +68,7 @@ kits:
       durability: 0
     loadout:
       armor: t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
-      contents: null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+      contents: t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
     game-rules:
       build: false
       sumo: true
@@ -119,20 +78,24 @@ kits:
       hit-delay: 20
       allow-build: false
       show-health: false
+      boxing: false
     edit-rules:
       allow-potion-fill: false
-  Skywars:
+    knockback-profile: sumo
+  Boxing:
     enabled: true
-    description: 'none'
+    description: '&7First to reach 100 hits wins'
     icon:
-      material: EYE_OF_ENDER
+      material: DIAMOND_CHESTPLATE
       durability: 0
     loadout:
-      armor: t@313:a@0:e@0@1;t@312:a@0:e@0@1;t@311:a@0:e@0@1;t@310:a@0:e@0@1;
-      contents: t@276:a@0:e@16@1;t@346:a@0;t@261:a@0;t@368:a@0;t@1:a@0;t@344:a@0;t@322:a@0;t@373:d@16386:a@0:pd@2-1=1-2701-0;t@326:a@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@332:a@0;t@0;t@0;t@0;t@0;t@278:a@0;t@262:a@0;t@0;t@0;t@332:a@0;t@327:a@0;t@327:a@0;t@326:a@0;
+      armor: t@0:d@-1:a@0;t@0:d@-1:a@0;t@0:d@-1:a@0;t@0:d@-1:a@0;
+      contents: t@276;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
     game-rules:
-      allow-build: true
+      allow-build: false
       spleef: false
       sumo: false
       health-regeneration: false
       hit-delay: 20
+      boxing: true
+    knockback-profile: boxing

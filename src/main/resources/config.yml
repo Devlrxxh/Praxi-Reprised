@@ -1,25 +1,20 @@
 MONGO:
-  URI: mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority
-  DATABASE: praxi
+  URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
+  DATABASE: "praxi"
 RANKED:
-  REQUIRED-WINS: 10
+  REQUIRED-WINS: 3
   ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins.
     You need {0} more wins!'
-POTIONS:
-  SPEED: 1.0
-  HORIZONTAL-OFFSET: 0.0
-  VERTICAL-OFFSET: 0.0
-  SMOOTH-POTIONS: true
-DEFAULT-THEME-COLOR: ORANGE
+DEFAULT-THEME-COLOR: AQUA
 LEADERBOARD:
-  UPDATE-TIME: 15
+  UPDATE-TIME: 1
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
-  - '&fWelcome to the <theme>wTap Network!'
+  - '&fWelcome to the <theme>PvPHood Network!'
   - ' '
-  - ' &f✦ <theme>Discord: &fdiscord.gg/wTapNetwork'
-  - ' &f✦ <theme>Twitter: &ftwitter.com/@wTapNetwork'
-  - ' &f✦ <theme>Store: &fstore.wtap.gg'
+  - ' &f✦ <theme>Discord: &fdiscord.gg/pvphood'
+  - ' &f✦ <theme>Twitter: &ftwitter.com/@pvphoodmc'
+  - ' &f✦ <theme>Store: &fstore.pvphood.com'
   - ' '
   - '&7&m--------------------------------'
 PING:
@@ -69,7 +64,7 @@ PARTY:
   DISBAND: '&cYour party has been disbanded.'
   INVITE:
     - <theme>{1} &einvited your to their party
-    - '%CLICKABLE%&aClick here or type <theme>/party join {0} &ato accept.'
+    - '%CLICKABLE%&aClick here or type /party join {0} &ato accept.'
   INVITE_HOVER: '&aClick here to accept.'
   INVITE_BROADCAST: <theme>{0} &ehas been invited to your party.
   JOIN: <theme>{0} &ehas joined your party.
@@ -124,8 +119,7 @@ DUEL:
     &7{3}&c.'
     - '%CLICKABLE%'
   RECEIVED_HOVER: '&aClick to accept this duel request.'
-  RECEIVED_CLICKABLE: '&6Click here or type <theme>/duel accept {0} &6to accept the
-    invite.'
+  RECEIVED_CLICKABLE: '&aClick here or type /duel accept {0} to accept the invite.'
 QUEUE:
   JOIN_UNRANKED: '&aYou are now queued for Unranked {0}.'
   LEAVE_UNRANKED: '&cYou have been removed from queue.'
@@ -148,11 +142,14 @@ MATCH:
   NOW_SPECTATING: <theme>{0} &eis now spectating.
   NO_LONGER_SPECTATING: <theme>{0} &eis no longer spectating.
   PLAYING_ARENA: ' '
-  START_TIMER: '&fMatch starting &a{0}...'
-  STARTED: '&fMatch started!'
+  START_TIMER: '&fMatch starting in &b{0}&f...'
+  STARTED: '&aMatch started!'
+  WARNING: '&4&lWARNING: &cIrregular clicking methods such as butterfly clicking,
+    changing your debounce time, and other modifications are strongly discouraged
+    and may result in a ban, Your debounce time should be 10 ms.'
   END_DETAILS:
     - '&7&m------------------------------------------------'
-    - '&6Post-Match Information &7(click name to view)'
+    - '&bPost-Match Inventories &7&o&7(Click to view)'
     - '%INVENTORIES%'
     - '%ELO_CHANGES%'
     - '&7&m------------------------------------------------'
@@ -161,7 +158,7 @@ MATCH:
   CLICK_TO_VIEW_NAME: '&e{0}'
   CLICK_TO_VIEW_HOVER: '&eClick to view {0}&e''''s inventory.'
   ELO_CHANGES:
-    - '&a{0} +{1} ({2}) &7| &c{3} +{4} ({5})'
+    - '&a{0} +{1} ({2}) &7| &c{3} -{4} ({5})'
   PLAYER_KILLED: '&a{1} &7killed &c{0}&7.'
   PLAYER_DIED: '{0} &7committed suicide.'
   ROUNDS_TO_WIN: ''
@@ -173,100 +170,107 @@ REMATCH:
     - '&aClick here or type <theme>/rematch &cto accept the request.'
   RECEIVED_REQUEST_HOVER: '&cClick to accept.'
 ARROW_DAMAGE_INDICATOR: '&6{1}''''s Health'':'' &c{2}&4{3}'
-VIEWING_INVENTORY: '&6You are viewing <theme>{0}&e''''s inventory...'
 HOTBAR_ITEMS:
   LOBBY:
     QUEUE_JOIN_UNRANKED:
       MATERIAL: IRON_SWORD
       DURABILITY: 0
-      NAME: '&6Unranked Queue &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bUnranked Queue &7(Right Click)'
+      LORE: []
       SLOT: 0
     QUEUE_JOIN_RANKED:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
-      NAME: '&6Ranked Queue &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bRanked Queue &7(Right Click)'
+      LORE: []
       SLOT: 1
+    LEADERBOARDS:
+      MATERIAL: EMERALD
+      DURABILITY: 0
+      NAME: '&bLeaderboards &7(Right Click)'
+      LORE: []
+      SLOT: 6
     PARTY_CREATE:
       MATERIAL: NAME_TAG
       DURABILITY: 0
-      NAME: '&6Create a Party &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bCreate a Party &7(Right Click)'
+      LORE: []
       SLOT: 4
-    SETTINGS:
+    PROFILE_SETTINGS:
       MATERIAL: PAPER
       DURABILITY: 0
-      NAME: '&6Settings &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bProfile Menu &7(Right Click)'
+      LORE: []
       SLOT: 8
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
-      NAME: '&6Kit Editor &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bKit Editor &7(Right Click)'
+      LORE: []
       SLOT: 8
   QUEUEING:
     QUEUE_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
-      NAME: '&cLeave Queue'
-      LORE: [ ]
+      NAME: '&cLeave Queue &7(Right Click)'
+      LORE: []
       SLOT: 8
   EVENT:
     EVENT_LEAVE:
       MATERIAL: NETHER_STAR
       DURABILITY: 0
-      NAME: '&9» &aLeave Event &9«'
-      LORE: [ ]
+      NAME: '&cLeave Event &7(Right Click)'
+      LORE: []
       SLOT: 2
     MAP_SELECTION:
       MATERIAL: MAP
       DURABILITY: 0
       NAME: '&7» &c%MAP% &7«'
-      LORE: [ ]
+      LORE: []
       SLOT: 3
   PARTY:
     PARTY_INFORMATION:
       MATERIAL: NETHER_STAR
       DURABILITY: 0
-      NAME: '&9» &aParty Information &9«'
-      LORE: [ ]
+      NAME: '&bParty Information &7(Right Click)'
+      LORE: []
       SLOT: 0
     PARTY_EVENTS:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
-      NAME: '&9» &aParty Events &9«'
-      LORE: [ ]
+      NAME: '&bParty Events &7(Right Click)'
+      LORE: []
       SLOT: 1
     OTHER_PARTIES:
       MATERIAL: CHEST
       DURABILITY: 0
-      NAME: '&9» &aOther Parties &9«'
-      LORE: [ ]
+      NAME: '&bOther Parties &7(Right Click)'
+      LORE: []
       SLOT: 2
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
-      NAME: '&6Kit Editor &7(Right Click)'
-      LORE: [ ]
+      NAME: '&bKit Editor &7(Right Click)'
+      LORE: []
       SLOT: 7
     PARTY_DISBAND:
       MATERIAL: INK_SACK
       DURABILITY: 1
-      NAME: '&9» &aDisaband Party &9«'
-      LORE: [ ]
+      NAME: '&cDisaband Party &7(Right Click)'
+      LORE: []
       SLOT: 8
     PARTY_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
-      NAME: '&9» &aLeave Party &9«'
-      LORE: [ ]
+      NAME: '&cLeave Party &7(Right Click)'
+      LORE: []
       SLOT: 8
   SPECTATING:
     SPECTATE_STOP:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Match &7(Right click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
+ESSENTIAL:
+  SPAWN_LOCATION: world:8558.5:172.0:8983.5:179.93808:-4.879943

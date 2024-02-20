@@ -11,12 +11,12 @@ QUEUES-MENUS:
     LORE:
       - "<description>"
       - " "
-      - " &fIn Fights: &b<playing>"
-      - " &fQueued: &b<queueing>"
+      - " &f• In Fights: &b<playing>"
+      - " &f• Queued: &b<queueing>"
       - ""
       - "&bTop ELO"
-      - " &e1. &f<lb_1_name_> &7- <lb_1_elo_>"
-      - " &f2. &f<lb_2_name_> &7- <lb_2_elo_>"
+      - " &c1. &f<lb_1_name_> &7- <lb_1_elo_>"
+      - " &32. &f<lb_2_name_> &7- <lb_2_elo_>"
       - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
       - " "
       - " &aClick to here play."
@@ -26,12 +26,12 @@ QUEUES-MENUS:
     LORE:
       - "<description>"
       - " "
-      - " &fIn Fights: &b<playing>"
-      - " &fQueued: &b<queueing>"
+      - " &f• In Fights: &b<playing>"
+      - " &f• Queued: &b<queueing>"
       - ""
       - "&bTop ELO"
-      - " &e1. &f<lb_1_name_> &7- <lb_1_elo_>"
-      - " &f2. &f<lb_2_name_> &7- <lb_2_elo_>"
+      - " &c1. &f<lb_1_name_> &7- <lb_1_elo_>"
+      - " &32. &f<lb_2_name_> &7- <lb_2_elo_>"
       - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
       - " "
       - " &aClick to here play."
@@ -80,6 +80,7 @@ DUEL:
   ARENA-SELECTOR:
     TITLE: "&7Select a Arena"
     ARENA-NAME: "&b<arena>"
+    SIZE: 36
 SETTINGS:
   TITLE: "&7Settings"
   FILTER: FILL # THERE IS FILL AND BRODER
@@ -106,7 +107,7 @@ STATS:
       - " &7* &fLoses: &b<loses>"
       - " &7* &fElo: &b<elo>"
 PROFILE-SETTINGS:
-  TITLE: "&7Profile Settings"
+  TITLE: "&7Profile Menu"
   SIZE: 27
   FILTER: FILL # THERE IS FILL AND BRODER
 LEADERBOARD:
@@ -114,6 +115,7 @@ LEADERBOARD:
   SIZE: 27
   FILTER: FILL # THERE IS FILL AND BRODER
   KIT-NAME: "&a<kit> &7| &fTop 10"
+  PLAYER-ELO: "&bYour Elo: &f<player_elo>"
   POSITION: "&b<position>. &f<player> &7- &b <player_elo>"
   GLOBAL-STATS:
     GLOBAL-STATS-NAME: "&aGlobal Stats"
