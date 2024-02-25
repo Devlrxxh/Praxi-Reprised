@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.KillEffects;
-import me.lrxh.practice.setting.Colors;
+import me.lrxh.practice.setting.Themes;
 
 @Setter
 @Getter
@@ -18,6 +18,6 @@ public class ProfileOptions {
     private KillEffects killEffect = KillEffects.NONE;
     private boolean scoreboardLines = true;
     private boolean menuSounds = false;
-    private Colors theme = Colors.valueOf(Practice.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
+    private Themes theme = Themes.valueOf(Practice.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
     private int pingRange = 250;
 }

@@ -45,6 +45,7 @@ public class SettingsMenu extends Menu {
     public boolean resetCursor() {
         return false;
     }
+
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         HashMap<Integer, Button> buttons = new HashMap<>();
@@ -70,176 +71,67 @@ public class SettingsMenu extends Menu {
             lore.add(" ");
             switch (this.settings) {
                 case SHOW_SCOREBOARD: {
-                    if (profile.getOptions().showScoreboard()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().showScoreboard() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().showScoreboard() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().showScoreboard() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case MENU_SOUNDS: {
-                    if (profile.getOptions().menuSounds()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().menuSounds() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().menuSounds() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().menuSounds() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case PING_RANGE: {
-                    if (profile.getOptions().pingRange() == 250) {
-                        lore.add(" &7&l▶ &r&aUnrestricted");
-                        lore.add(" ");
-                        lore.add("&aClick to decrease");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &r&a" + profile.getOptions().pingRange());
+                    lore.add(profile.getOptions().pingRange() == 250 ? " &7&l▶ &r&aUnrestricted" : " &7&l▶ &r&a" + profile.getOptions().pingRange());
                     lore.add(" ");
-                    lore.add("&aClick to increase");
+                    lore.add(profile.getOptions().pingRange() == 250 ? "&aClick to decrease" : "&aClick to increase");
                     break;
                 }
                 case SHOW_LINES: {
-                    if (profile.getOptions().scoreboardLines()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().scoreboardLines() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().scoreboardLines() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().scoreboardLines() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case ALLOW_DUELS: {
-                    if (profile.getOptions().receiveDuelRequests()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().receiveDuelRequests() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().receiveDuelRequests() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().receiveDuelRequests() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case ALLOW_SPECTATORS: {
-                    if (profile.getOptions().allowSpectators()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().allowSpectators() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().allowSpectators() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().allowSpectators() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case SHOW_PLAYERS: {
-                    if (profile.getOptions().showPlayers()) {
-                        lore.add(" &7&l▶ &aYes");
-                        lore.add(" &7&l▶ &7No");
-                        lore.add(" ");
-                        lore.add("&aClick to disable");
-                        break;
-                    }
-                    lore.add(" &7&l▶ &7Yes");
-                    lore.add(" &7&l▶ &cNo");
+                    lore.add(profile.getOptions().showPlayers() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
+                    lore.add(!profile.getOptions().showPlayers() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
-                    lore.add("&aClick to enable");
+                    lore.add(!profile.getOptions().showPlayers() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case KILL_EFFECTS: {
-                    switch (profile.getOptions().killEffect()) {
-                        case NONE:
-                            lore.add("&7&l▶ &a" + KillEffects.NONE.getDisplayName());
-                            for (KillEffects killEffects : KillEffects.values()) {
-                                if (killEffects != KillEffects.NONE) {
-                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
-                                }
-                            }
-                            break;
-                        case LIGHTNING:
-                            lore.add("&7&l▶ &a" + KillEffects.LIGHTNING.getDisplayName());
-                            for (KillEffects killEffects : KillEffects.values()) {
-                                if (killEffects != KillEffects.LIGHTNING) {
-                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
-                                }
-                            }
-                            break;
-                        case FIREWORKS: {
-                            lore.add("&7&l▶ &a" + KillEffects.FIREWORKS.getDisplayName());
-                            for (KillEffects killEffects : KillEffects.values()) {
-                                if (killEffects != KillEffects.FIREWORKS) {
-                                    lore.add("&7&l▶ &r&7" + killEffects.getDisplayName());
-                                }
-                            }
-                            break;
-                        }
-                    }
+                    lore.add(profile.getOptions().killEffect().equals(KillEffects.NONE) ? " &7&l▶ &aNone" : " &7&l▶ &7None");
+                    lore.add(profile.getOptions().killEffect().equals(KillEffects.LIGHTNING) ? " &7&l▶ &aLightning" : " &7&l▶ &7Lightning");
+                    lore.add(profile.getOptions().killEffect().equals(KillEffects.FIREWORKS) ? " &7&l▶ &aFireworks" : " &7&l▶ &7Fireworks");
                     lore.add("");
                     lore.add("&aClick to select");
                     break;
                 }
                 case THEME: {
-                    switch (profile.getOptions().theme()) {
-                        case AQUA:
-                            lore.add("&7&l▶ &a" + Colors.AQUA.getName());
-                            for (Colors colors : Colors.values()) {
-                                if (colors != Colors.AQUA) {
-                                    lore.add("&7&l▶ &r&7" + colors.getName());
-                                }
-                            }
-                            break;
-                        case ORANGE:
-                            lore.add("&7&l▶ &a" + Colors.ORANGE.getName());
-                            for (Colors colors : Colors.values()) {
-                                if (colors != Colors.ORANGE) {
-                                    lore.add("&7&l▶ &r&7" + colors.getName());
-                                }
-                            }
-                            break;
-                        case PINK:
-                            lore.add("&7&l▶ &a" + Colors.PINK.getName());
-                            for (Colors colors : Colors.values()) {
-                                if (colors != Colors.PINK) {
-                                    lore.add("&7&l▶ &r&7" + colors.getName());
-                                }
-                            }
-                            break;
-                        case RED:
-                            lore.add("&7&l▶ &a" + Colors.RED.getName());
-                            for (Colors colors : Colors.values()) {
-                                if (colors != Colors.RED) {
-                                    lore.add("&7&l▶ &r&7" + colors.getName());
-                                }
-                            }
-                            break;
-                        case YELLOW:
-                            lore.add("&7&l▶ &a" + Colors.YELLOW.getName());
-                            for (Colors colors : Colors.values()) {
-                                if (colors != Colors.YELLOW) {
-                                    lore.add("&7&l▶ &r&7" + colors.getName());
-                                }
-                            }
-                            break;
-                    }
+                    lore.add(profile.getOptions().theme().equals(Themes.AQUA) ? " &7&l▶ &aAqua" : " &7&l▶ &7Aqua");
+                    lore.add(profile.getOptions().theme().equals(Themes.RED) ? " &7&l▶ &aRed" : " &7&l▶ &7Red");
+                    lore.add(profile.getOptions().theme().equals(Themes.YELLOW) ? " &7&l▶ &aYellow" : " &7&l▶ &7Yellow");
+                    lore.add(profile.getOptions().theme().equals(Themes.PINK) ? " &7&l▶ &aPink" : " &7&l▶ &7Pink");
+                    lore.add(profile.getOptions().theme().equals(Themes.ORANGE) ? " &7&l▶ &aOrange" : " &7&l▶ &7Orange");
                     lore.add("");
                     lore.add("&aClick to select");
                     break;
@@ -345,19 +237,19 @@ public class SettingsMenu extends Menu {
                     }
                     switch (profile.getOptions().theme()) {
                         case ORANGE:
-                            profile.getOptions().theme(Colors.AQUA);
+                            profile.getOptions().theme(Themes.AQUA);
                             break;
                         case AQUA:
-                            profile.getOptions().theme(Colors.RED);
+                            profile.getOptions().theme(Themes.RED);
                             break;
                         case RED:
-                            profile.getOptions().theme(Colors.YELLOW);
+                            profile.getOptions().theme(Themes.YELLOW);
                             break;
                         case YELLOW:
-                            profile.getOptions().theme(Colors.PINK);
+                            profile.getOptions().theme(Themes.PINK);
                             break;
                         case PINK:
-                            profile.getOptions().theme(Colors.ORANGE);
+                            profile.getOptions().theme(Themes.ORANGE);
                             break;
                     }
                     player.sendMessage(Locale.OPTIONS_THEME_SELECT.format(player, profile.getOptions().theme().getName()));

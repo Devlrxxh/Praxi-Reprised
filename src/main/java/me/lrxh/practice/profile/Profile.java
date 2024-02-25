@@ -21,7 +21,7 @@ import me.lrxh.practice.profile.meta.ProfileKitEditorData;
 import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.profile.meta.option.ProfileOptions;
 import me.lrxh.practice.queue.QueueProfile;
-import me.lrxh.practice.setting.Colors;
+import me.lrxh.practice.setting.Themes;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.Cooldown;
 import me.lrxh.practice.util.InventoryUtil;
@@ -202,7 +202,7 @@ public class Profile {
         this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
         this.options.scoreboardLines(options.getBoolean("scoreboradLines"));
         this.options.showPlayers(options.getBoolean("showPlayers"));
-        this.options.theme(Colors.valueOf(options.getString("theme")));
+        this.options.theme(Themes.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
         this.options.menuSounds(options.getBoolean("menuSounds"));
 
