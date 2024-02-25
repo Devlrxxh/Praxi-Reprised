@@ -42,10 +42,6 @@ public class SettingsMenu extends Menu {
         return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("SETTINGS.FILTER"));
     }
 
-    public boolean resetCursor() {
-        return false;
-    }
-
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         HashMap<Integer, Button> buttons = new HashMap<>();
