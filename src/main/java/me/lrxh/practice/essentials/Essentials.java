@@ -50,17 +50,13 @@ public class Essentials {
     }
 
     public void clearEntities(World world) {
-        int removed = 0;
-
         for (Entity entity : world.getEntities()) {
             if (!(entity.getType() == EntityType.PLAYER)) {
                 continue;
             }
 
-            removed++;
             entity.remove();
         }
-
     }
 
     public int clearEntities(World world, EntityType... excluded) {
