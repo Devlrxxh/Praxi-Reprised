@@ -26,6 +26,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
@@ -271,6 +272,11 @@ public class ArenaCommand extends BaseCommand {
 
     @Subcommand("generate")
     public void generate(Player player) {
+        Plugin fawe = Practice.getInstance().getServer().getPluginManager().getPlugin("FAWE");
+        if (!(fawe != null && fawe.isEnabled())) {
+            player.sendMessage(CC.translate("&4ERROR - &cFAWE isn't installed on the server!"));
+            return;
+        }
         File schematicsFolder = new File(Practice.getInstance().getDataFolder().getPath() + File.separator + "schematics");
 
         if (!schematicsFolder.exists()) {
