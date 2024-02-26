@@ -67,6 +67,7 @@ public class ProfileSettingsMenu extends Menu {
 
         @Override
         public void clicked(Player player, ClickType clickType) {
+            player.closeInventory();
             new SettingsMenu().openMenu(player);
         }
     }

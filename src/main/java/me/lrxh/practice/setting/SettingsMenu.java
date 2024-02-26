@@ -42,12 +42,18 @@ public class SettingsMenu extends Menu {
         return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("SETTINGS.FILTER"));
     }
 
+    public boolean resetCursor() {
+        return false;
+    }
+
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         HashMap<Integer, Button> buttons = new HashMap<>();
         int i = 10;
         for (Settings settings : Settings.values()) {
             buttons.put(i++, new SettingsButton(settings));
+            System.out.println(i < Settings.values().length);
+            System.out.println("Added Item " + settings.getName() + " at slot " + buttons.get(i));
         }
         return buttons;
     }
@@ -132,6 +138,15 @@ public class SettingsMenu extends Menu {
                     lore.add("&aClick to select");
                     break;
                 }
+                case TIME_CHANGER: {
+                    lore.add(profile.getOptions().time().equals(Times.DAY) ? " &7&l▶ &aDay" : " &7&l▶ &7Day");
+                    lore.add(profile.getOptions().time().equals(Times.NIGHT) ? " &7&l▶ &aNight" : " &7&l▶ &7Night");
+                    lore.add(profile.getOptions().time().equals(Times.SUNRISE) ? " &7&l▶ &aSunrise" : " &7&l▶ &7Sunrise");
+                    lore.add(profile.getOptions().time().equals(Times.SUNSET) ? " &7&l▶ &aSunset" : " &7&l▶ &7Sunset");
+                    lore.add("");
+                    lore.add("&aClick to select");
+                    break;
+                }
             }
             return new ItemBuilder(this.settings.getMaterial()).name(Practice.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
         }
@@ -147,6 +162,25 @@ public class SettingsMenu extends Menu {
                     } else {
                         player.sendMessage(Locale.OPTIONS_SCOREBOARD_DISABLED.format(player));
                     }
+                    break;
+                }
+                case TIME_CHANGER: {
+                    switch (profile.getOptions().time()) {
+                        case DAY:
+                            profile.getOptions().time(Times.NIGHT);
+                            break;
+                        case NIGHT:
+                            profile.getOptions().time(Times.SUNRISE);
+                            break;
+                        case SUNRISE:
+                            profile.getOptions().time(Times.SUNSET);
+                            break;
+                        case SUNSET:
+                            profile.getOptions().time(Times.DAY);
+                            break;
+                    }
+                    player.setPlayerTime(profile.getOptions().time().getTime(), false);
+                    player.sendMessage(Locale.OPTIONS_KILLEFFECT_SELECT.format(player, profile.getOptions().killEffect().getDisplayName()));
                     break;
                 }
                 case MENU_SOUNDS: {

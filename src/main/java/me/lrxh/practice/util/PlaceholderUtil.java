@@ -1,6 +1,7 @@
 package me.lrxh.practice.util;
 
 import lombok.experimental.UtilityClass;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.profile.Profile;
@@ -58,7 +59,7 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<duration>", match.getDuration());
             }
 
-            formattedLines.add(line);
+            formattedLines.add(PlaceholderAPI.setPlaceholders(player, line));
         }
         return formattedLines;
     }

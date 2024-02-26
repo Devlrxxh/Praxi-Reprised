@@ -8,11 +8,14 @@ import me.lrxh.practice.arena.impl.SharedArena;
 import me.lrxh.practice.arena.impl.StandaloneArena;
 import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.util.LocationUtil;
-import org.bukkit.Location;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
@@ -27,6 +30,7 @@ public class Arena extends Cuboid {
     protected Location spawnB;
     protected boolean active;
     private List<String> kits = new ArrayList<>();
+    private Map<Chunk, ChunkSnapshot> chunkSnapshots = new HashMap<>();
 
     public Arena(String name, Location location1, Location location2) {
         super(location1, location2);
@@ -106,7 +110,6 @@ public class Arena extends Cuboid {
         return null;
     }
 
-
     public static Arena getRandomArena(Kit kit) {
         List<Arena> _arenas = new ArrayList<>();
 
@@ -132,6 +135,42 @@ public class Arena extends Cuboid {
         }
 
         return _arenas.get(ThreadLocalRandom.current().nextInt(_arenas.size()));
+    }
+
+    public void takeSnapshot() {
+        chunkSnapshots.clear();
+        World world = getLowerCorner().getWorld();
+
+        for (int x = getLowerCorner().getBlockX() >> 4; x <= getUpperCorner().getBlockX() >> 4; x++) {
+            for (int z = getLowerCorner().getBlockZ() >> 4; z <= getUpperCorner().getBlockZ() >> 4; z++) {
+                Chunk chunk = world.getChunkAt(x, z);
+                ChunkSnapshot snapshot = chunk.getChunkSnapshot();
+                chunkSnapshots.put(chunk, snapshot);
+            }
+        }
+    }
+
+    public void restoreSnapshot() {
+        for (Map.Entry<Chunk, ChunkSnapshot> entry : chunkSnapshots.entrySet()) {
+            Chunk chunk = entry.getKey();
+            ChunkSnapshot snapshot = entry.getValue();
+
+            for (int x = 0; x < 16; x++) {
+                for (int y = 0; y < chunk.getWorld().getMaxHeight(); y++) {
+                    for (int z = 0; z < 16; z++) {
+                        int typeId = snapshot.getBlockTypeId(x, y, z);
+                        byte blockData = (byte) snapshot.getBlockData(x, y, z);
+                        Material material = Material.getMaterial(typeId);
+
+                        if (material != null) {
+                            Block block = chunk.getBlock(x, y, z);
+                            block.setType(material);
+                            block.setData(blockData);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public ArenaType getType() {

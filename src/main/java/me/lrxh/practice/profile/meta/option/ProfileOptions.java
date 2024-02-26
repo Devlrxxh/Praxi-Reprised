@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.KillEffects;
 import me.lrxh.practice.setting.Themes;
+import me.lrxh.practice.setting.Times;
 
 @Setter
 @Getter
@@ -20,4 +21,5 @@ public class ProfileOptions {
     private boolean menuSounds = false;
     private Themes theme = Themes.valueOf(Practice.getInstance().getMainConfig().getString("DEFAULT-THEME-COLOR"));
     private int pingRange = 250;
+    private Times time = Times.DAY;
 }

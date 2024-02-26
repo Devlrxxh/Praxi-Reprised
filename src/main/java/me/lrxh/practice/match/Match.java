@@ -12,7 +12,6 @@ import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.match.task.MatchLogicTask;
 import me.lrxh.practice.match.task.MatchPearlCooldownTask;
-import me.lrxh.practice.match.task.MatchResetTask;
 import me.lrxh.practice.match.task.MatchSnapshotCleanupTask;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.participant.GamePlayer;
@@ -257,6 +256,10 @@ public abstract class Match {
                 }
             }
         }
+
+        if (kit.getGameRules().isBuild()) {
+            arena.takeSnapshot();
+        }
     }
 
     public void end() {
@@ -308,8 +311,10 @@ public abstract class Match {
         }
 
         droppedItems.forEach(Entity::remove);
-
-        new MatchResetTask(this).runTask(Practice.getInstance());
+        if (kit.getGameRules().isBuild()) {
+            arena.restoreSnapshot();
+            arena.setActive(false);
+        }
 
         Practice.getInstance().getCache().getMatches().remove(this);
     }

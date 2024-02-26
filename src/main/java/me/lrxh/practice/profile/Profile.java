@@ -22,6 +22,7 @@ import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.profile.meta.option.ProfileOptions;
 import me.lrxh.practice.queue.QueueProfile;
 import me.lrxh.practice.setting.Themes;
+import me.lrxh.practice.setting.Times;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.Cooldown;
 import me.lrxh.practice.util.InventoryUtil;
@@ -205,6 +206,7 @@ public class Profile {
         this.options.theme(Themes.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
         this.options.menuSounds(options.getBoolean("menuSounds"));
+        this.options.time(Times.valueOf(options.getString("time")));
 
         Document kitStatistics = (Document) document.get("kitStatistics");
 
@@ -262,6 +264,7 @@ public class Profile {
         optionsDocument.put("theme", options.theme().toString());
         optionsDocument.put("pingRange", options.pingRange());
         optionsDocument.put("menuSounds", options.menuSounds());
+        optionsDocument.put("time", options.time().toString());
 
         document.put("options", optionsDocument);
 

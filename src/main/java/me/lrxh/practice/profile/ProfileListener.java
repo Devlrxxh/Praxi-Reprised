@@ -146,6 +146,7 @@ public class ProfileListener implements Listener {
             player.setFlying(true);
             player.updateInventory();
         }
+        player.setPlayerTime(profile.getOptions().time().getTime(), false);
         new BukkitRunnable() {
             @Override
             public void run() {

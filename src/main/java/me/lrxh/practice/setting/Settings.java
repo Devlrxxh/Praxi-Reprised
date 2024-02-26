@@ -5,6 +5,7 @@ import org.bukkit.Material;
 
 @Getter
 public enum Settings {
+
     SHOW_PLAYERS("Toggle Players Visibility", Material.COMPASS, "Show or Hide players."),
     SHOW_SCOREBOARD("Toggle Scoreboard", Material.EYE_OF_ENDER, "Show or Hide Scoreboard."),
     ALLOW_SPECTATORS("Toggle Spectators", Material.EGG, "Show or Hide Players."),
@@ -13,7 +14,9 @@ public enum Settings {
     SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines."),
     THEME("Select Theme", Material.BOOK, "Select Color Theme."),
     PING_RANGE("Ping Range", Material.STICK, "Change Ping Range."),
-    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds.");
+    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds."),
+    TIME_CHANGER("Change Time", Material.LEVER, "Change world time.");
+
     private final String name;
     private final Material material;
     private final String description;
