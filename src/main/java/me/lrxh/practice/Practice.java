@@ -184,7 +184,6 @@ public class Practice extends JavaPlugin {
         getServer().getWorlds().forEach(world -> {
             world.setDifficulty(Difficulty.HARD);
             getEssentials().clearEntities(world);
-
         });
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
