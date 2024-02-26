@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -33,8 +32,7 @@ public class Essentials {
 
         try {
             practice.getMainConfig().getConfiguration().save(practice.getMainConfig().getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 
@@ -51,40 +49,11 @@ public class Essentials {
 
     public void clearEntities(World world) {
         for (Entity entity : world.getEntities()) {
-            if (!(entity.getType() == EntityType.PLAYER)) {
+            if (entity.getType() == EntityType.PLAYER) {
                 continue;
             }
 
             entity.remove();
         }
     }
-
-    public int clearEntities(World world, EntityType... excluded) {
-        int removed = 0;
-
-        entityLoop:
-        for (Entity entity : world.getEntities()) {
-            if (entity instanceof Item) {
-                removed++;
-                entity.remove();
-                continue entityLoop;
-            }
-
-            for (EntityType type : excluded) {
-                if (entity.getType() == EntityType.PLAYER) {
-                    continue entityLoop;
-                }
-
-                if (entity.getType() == type) {
-                    continue entityLoop;
-                }
-            }
-
-            removed++;
-            entity.remove();
-        }
-
-        return removed;
-    }
-
 }

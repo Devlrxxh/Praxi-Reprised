@@ -85,13 +85,7 @@ public abstract class Match {
         }
         for (Player player : Bukkit.getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    profile.save();
-                    System.out.println("Saved Profile: " + profile);
-                }
-            }.runTaskAsynchronously(Practice.getInstance());
+            profile.save();
         }
     }
 
