@@ -1,12 +1,11 @@
 package me.lrxh.practice.util;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
 import me.lrxh.practice.Practice;
-import net.minecraft.server.v1_8_R3.MinecraftServer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
-import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +13,9 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.lang.reflect.Field;
 import java.util.UUID;
 
 public class PlayerUtil {
-    private static Field STATUS_PACKET_ID_FIELD;
-    private static Field STATUS_PACKET_STATUS_FIELD;
-    private static Field SPAWN_PACKET_ID_FIELD;
 
     public static void setLastAttacker(Player victim, Player attacker) {
         victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
@@ -77,28 +72,14 @@ public class PlayerUtil {
     }
 
     public static void animateDeath(Player player) {
-
         try {
-            if (STATUS_PACKET_ID_FIELD == null) {
-                STATUS_PACKET_ID_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("a");
-                STATUS_PACKET_ID_FIELD.setAccessible(true);
-            }
+            final int radius = Bukkit.getServer().getViewDistance() * 16;
 
-            if (STATUS_PACKET_STATUS_FIELD == null) {
-                STATUS_PACKET_STATUS_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("b");
-                STATUS_PACKET_STATUS_FIELD.setAccessible(true);
-            }
+            PacketContainer namedEntitySpawnPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.NAMED_ENTITY_SPAWN);
+            namedEntitySpawnPacket.getIntegers().write(0, player.getEntityId()).write(1, -1);
 
-            if (SPAWN_PACKET_ID_FIELD == null) {
-                SPAWN_PACKET_ID_FIELD = PacketPlayOutNamedEntitySpawn.class.getDeclaredField("a");
-                SPAWN_PACKET_ID_FIELD.setAccessible(true);
-            }
-
-            SPAWN_PACKET_ID_FIELD.set(new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle()), -1);
-            STATUS_PACKET_ID_FIELD.set(new PacketPlayOutEntityStatus(), -1);
-            STATUS_PACKET_STATUS_FIELD.set(new PacketPlayOutEntityStatus(), (byte) 3);
-
-            final int radius = MinecraftServer.getServer().getPlayerList().d();
+            PacketContainer entityStatusPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.ENTITY_STATUS);
+            entityStatusPacket.getIntegers().write(0, player.getEntityId()).write(1, (int) (byte) 3);
 
             for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
                 if (!(entity instanceof Player)) {
@@ -108,11 +89,11 @@ public class PlayerUtil {
                 Player watcher = (Player) entity;
 
                 if (!watcher.getUniqueId().equals(player.getUniqueId())) {
-                    break;
+                    continue;
                 }
 
-                ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle()));
-                ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityStatus());
+                ProtocolLibrary.getProtocolManager().sendServerPacket(watcher, namedEntitySpawnPacket);
+                ProtocolLibrary.getProtocolManager().sendServerPacket(watcher, entityStatusPacket);
             }
         } catch (Exception ignored) {
         }
