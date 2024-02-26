@@ -20,7 +20,7 @@ The most configurable, efficient, and extensive practice plugin.
  -  ``%practice_leaderboards_update%`` |  Returns time left till leaderboard reload
 
 # Credits
-### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/practice-nodependents)
+### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
 
 # TODO
