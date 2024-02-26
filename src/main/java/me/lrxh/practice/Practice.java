@@ -112,7 +112,10 @@ public class Practice extends JavaPlugin {
         loadConfigs();
         loadMongo();
         spigotHandler = new SpigotHandler(practice);
-        spigotHandler.init(false);
+        if(Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].equals("v1_8_R3")){
+            spigotHandler.init(false);
+        }
+
         cache = new Cache();
         Hotbar.init();
         Kit.init();
