@@ -52,7 +52,14 @@ public class BasicTeamMatch extends Match {
         // Teleport the player to their spawn point
         Location spawn = participantA.containsPlayer(player.getUniqueId()) ?
                 getArena().getSpawnA() : getArena().getSpawnB();
-
+        if(kit.getGameRules().isBedwars()){
+            if(participantA.containsPlayer(player.getUniqueId())){
+                player.setBedSpawnLocation(arena.getBedA());
+            }else{
+                player.setBedSpawnLocation(arena.getBedB());
+            }
+        }
+        
         if (spawn.getBlock().getType() == Material.AIR) {
             player.teleport(spawn);
         } else {

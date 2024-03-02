@@ -11,7 +11,6 @@ import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
 import me.lrxh.practice.util.ChatHelper;
@@ -185,7 +184,7 @@ public class ProfileRematchData {
                 profile.setRematchData(null);
 
                 if (profile.getState() == ProfileState.LOBBY) {
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
                 }
             }
         }

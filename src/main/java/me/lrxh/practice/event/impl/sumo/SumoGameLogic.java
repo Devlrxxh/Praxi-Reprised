@@ -14,7 +14,6 @@ import me.lrxh.practice.participant.GamePlayer;
 import me.lrxh.practice.participant.TeamGameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.BlockUtil;
@@ -86,7 +85,7 @@ public class SumoGameLogic implements EventGameLogic {
                 if (player != null) {
                     PlayerUtil.reset(player);
                     player.teleport(game.getGameMap().getSpectatorPoint());
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
                 }
             }
         }
@@ -132,7 +131,7 @@ public class SumoGameLogic implements EventGameLogic {
                     Profile profile = Profile.getByUuid(player.getUniqueId());
                     profile.setState(ProfileState.LOBBY);
 
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
                     Practice.getInstance().getEssentials().teleportToSpawn(player);
                     VisibilityLogic.handle(player);
                 }
@@ -160,7 +159,7 @@ public class SumoGameLogic implements EventGameLogic {
                     Profile profile = Profile.getByUuid(player.getUniqueId());
                     profile.setState(ProfileState.LOBBY);
 
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
 
                     Practice.getInstance().getEssentials().teleportToSpawn(player);
                 }
@@ -245,7 +244,7 @@ public class SumoGameLogic implements EventGameLogic {
 
                 if (player != null) {
                     PlayerUtil.reset(player);
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
                     player.teleport(game.getGameMap().getSpectatorPoint());
                 }
             }
@@ -301,10 +300,10 @@ public class SumoGameLogic implements EventGameLogic {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         profile.setState(ProfileState.EVENT);
 
-        Hotbar.giveHotbarItems(player);
+        Practice.getInstance().getHotbar().giveHotbarItems(player);
 
         for (Map.Entry<EventGameMap, EventGameMapVoteData> entry : game.getVotesData().entrySet()) {
-            ItemStack itemStack = Hotbar.getItems().get(HotbarItem.MAP_SELECTION).clone();
+            ItemStack itemStack = Practice.getInstance().getHotbar().getItems().get(HotbarItem.MAP_SELECTION).clone();
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             itemMeta.setDisplayName(itemMeta.getDisplayName().replace("%MAP%", entry.getKey().getMapName()));
@@ -362,7 +361,7 @@ public class SumoGameLogic implements EventGameLogic {
                             Profile profile = Profile.getByUuid(bukkitPlayer.getUniqueId());
                             profile.setState(ProfileState.LOBBY);
 
-                            Hotbar.giveHotbarItems(bukkitPlayer);
+                            Practice.getInstance().getHotbar().giveHotbarItems(bukkitPlayer);
                             VisibilityLogic.handle(bukkitPlayer, player);
 
                             Practice.getInstance().getEssentials().teleportToSpawn(bukkitPlayer);

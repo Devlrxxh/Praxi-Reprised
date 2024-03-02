@@ -13,6 +13,7 @@ public class KitGameRules {
     private boolean healthRegeneration;
     private boolean showHealth;
     private boolean boxing;
+    private boolean bedwars;
     private int hitDelay = 20;
     private String kbProfile;
 }

@@ -6,7 +6,6 @@ import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.kit.KitLoadout;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.meta.ProfileKitData;
 import me.lrxh.practice.util.BukkitReflection;
 import me.lrxh.practice.util.CC;
@@ -107,7 +106,7 @@ public class KitEditorMenu extends Menu {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Hotbar.giveHotbarItems(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
                 }
             }.runTask(Practice.getInstance());
         }
@@ -227,7 +226,7 @@ public class KitEditorMenu extends Menu {
                 profile.getKitEditorData().getSelectedKitLoadout().setContents(player.getInventory().getContents());
             }
 
-            Hotbar.giveHotbarItems(player);
+            Practice.getInstance().getHotbar().giveHotbarItems(player);
 
             new KitManagementMenu(profile.getKitEditorData().getSelectedKit()).openMenu(player);
         }

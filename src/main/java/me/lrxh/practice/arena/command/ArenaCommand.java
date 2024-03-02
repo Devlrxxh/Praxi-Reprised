@@ -15,6 +15,7 @@ import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
 import me.lrxh.practice.util.ChatHelper;
+import me.lrxh.practice.util.PlayerUtil;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -101,7 +102,7 @@ public class ArenaCommand extends BaseCommand {
                 }
                 Arena.getArenas().add(arena);
 
-                player.sendMessage(CC.GOLD + "Created new arena \"" + arenaName + "\"");
+                player.sendMessage(CC.GREEN + "Created new arena " + arenaName);
             } else {
                 player.sendMessage(CC.RED + "Your selection is incomplete.");
             }
@@ -120,13 +121,9 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-        if (arena != null) {
             arena.delete();
 
-            player.sendMessage(CC.GOLD + "Deleted arena \"" + arena.getName() + "\"");
-        } else {
-            player.sendMessage(CC.RED + "An arena with that name does not exist.");
-        }
+            player.sendMessage(CC.GREEN + "Deleted arena " + arena.getName());
     }
 
     @Subcommand("wand")
@@ -146,7 +143,7 @@ public class ArenaCommand extends BaseCommand {
             arena.save();
         }
 
-        player.sendMessage(ChatColor.GREEN + "Saved all arenas!");
+        player.sendMessage(CC.GREEN + "Saved all arenas!");
     }
 
     @Subcommand("status")
@@ -158,8 +155,7 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-        if (arena != null) {
-            player.sendMessage(CC.GOLD + CC.BOLD + "Arena Status " + CC.GRAY + "(" +
+            player.sendMessage(CC.GREEN + CC.BOLD + "Arena Status " + CC.GRAY + "(" +
                     (arena.isSetup() ? CC.GREEN : CC.RED) + arena.getName() + CC.GRAY + ")");
 
             player.sendMessage(CC.GREEN + "Cuboid Lower Location: " + CC.YELLOW +
@@ -183,9 +179,6 @@ public class ArenaCommand extends BaseCommand {
                             StringEscapeUtils.unescapeJava("✓")));
 
             player.sendMessage(CC.GREEN + "Kits: " + CC.YELLOW + StringUtils.join(arena.getKits(), ", "));
-        } else {
-            player.sendMessage(CC.RED + "An arena with that name does not exist.");
-        }
     }
 
     @Subcommand("genhelper")
@@ -226,8 +219,8 @@ public class ArenaCommand extends BaseCommand {
         arena.getKits().add(kit.getName());
         arena.save();
 
-        player.sendMessage(ChatColor.GOLD + "Added kit \"" + kit.getName() +
-                "\" to arena \"" + arena.getName() + "\"");
+        player.sendMessage(CC.GREEN + "Added kit " + kit.getName() +
+                " to arena " + arena.getName());
     }
 
     @Subcommand("removeKit")
@@ -250,8 +243,8 @@ public class ArenaCommand extends BaseCommand {
         arena.getKits().remove(kit.getName());
         arena.save();
 
-        player.sendMessage(ChatColor.GOLD + "Removed kit \"" + kit.getName() +
-                "\" from arena \"" + arena.getName() + "\"");
+        player.sendMessage(CC.GREEN + "Removed kit " + kit.getName() +
+                " from arena " + arena.getName());
     }
 
     @Subcommand("tp")
@@ -267,7 +260,7 @@ public class ArenaCommand extends BaseCommand {
         if (arena == null) return;
 
         player.teleport(arena.getSpawnA());
-        player.sendMessage(ChatColor.GREEN + "Teleported to arena " + arena.getName());
+        player.sendMessage(CC.GREEN + "Teleported to arena " + arena.getName());
     }
 
     @Subcommand("generate")
@@ -320,7 +313,7 @@ public class ArenaCommand extends BaseCommand {
 
     @Subcommand("list")
     public void list(Player player) {
-        player.sendMessage(CC.GOLD + "Arenas:");
+        player.sendMessage(CC.GREEN + "Arenas:");
 
         if (Arena.getArenas().isEmpty()) {
             player.sendMessage(CC.GRAY + "There are no arenas.");
@@ -357,7 +350,6 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-        if (arena != null) {
             if (pos.equals(SpawnType.A)) {
                 arena.setSpawnA(player.getLocation());
             } else {
@@ -366,10 +358,30 @@ public class ArenaCommand extends BaseCommand {
 
             arena.save();
 
-            player.sendMessage(CC.GOLD + "Updated spawn point \"" + pos + "\" for arena \"" + arena.getName() + "\"");
-        } else {
-            player.sendMessage(CC.RED + "An arena with that name already exists.");
+            player.sendMessage(CC.GREEN + "Updated spawn point " + pos + " for arena " + arena.getName() + "");
+    }
+
+    @Subcommand("setBedSpawn")
+    @CommandCompletion("@arenas")
+    @Syntax("<arena> <pos>")
+    public void setBedSpawn(Player player, String arenaName, SpawnType pos) {
+        if (checkArena(arenaName)) {
+            player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
+            return;
         }
+        if (!(PlayerUtil.getTargetBlock(player, 6).getType().equals(Material.BED_BLOCK) || PlayerUtil.getTargetBlock(player, 6).getType().equals(Material.BED))) {
+            player.sendMessage(CC.translate("&4ERROR - &cYou aren't looking at a bed!"));
+            return;
+        }
+        Arena arena = Arena.getByName(arenaName);
+            if (pos.equals(SpawnType.A)) {
+                arena.setBedA(PlayerUtil.getTargetBlock(player, 6).getLocation());
+            } else {
+                arena.setBedB(PlayerUtil.getTargetBlock(player, 6).getLocation());
+            }
+
+            arena.save();
+            player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getName());
     }
 
     private boolean checkArena(String arena) {

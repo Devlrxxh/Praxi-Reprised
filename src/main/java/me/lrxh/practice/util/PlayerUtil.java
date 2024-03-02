@@ -6,12 +6,14 @@ import com.comphenix.protocol.events.PacketContainer;
 import me.lrxh.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.BlockIterator;
 
 import java.util.UUID;
 
@@ -69,6 +71,20 @@ public class PlayerUtil {
         player.setFoodLevel(20);
         player.setSprinting(true);
         player.removePotionEffect(PotionEffectType.JUMP);
+    }
+
+    public static Block getTargetBlock(Player player, int distance) {
+        BlockIterator iterator = new BlockIterator(player, distance);
+        Block block = null;
+
+        while (iterator.hasNext()) {
+            block = iterator.next();
+            if (block.getType().isSolid()) {
+                break;
+            }
+        }
+
+        return block;
     }
 
     public static void animateDeath(Player player) {

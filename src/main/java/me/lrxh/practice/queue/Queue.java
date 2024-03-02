@@ -6,7 +6,6 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -52,7 +51,7 @@ public class Queue {
 
         Practice.getInstance().getCache().getPlayers().add(queueProfile);
 
-        Hotbar.giveHotbarItems(player);
+        Practice.getInstance().getHotbar().giveHotbarItems(player);
 
         if (ranked) {
             player.sendMessage(Locale.QUEUE_JOIN_RANKED.format(player, kit.getName(), elo));
@@ -72,7 +71,7 @@ public class Queue {
         Player player = Bukkit.getPlayer(queueProfile.getPlayerUuid());
 
         if (player != null) {
-            Hotbar.giveHotbarItems(player);
+            Practice.getInstance().getHotbar().giveHotbarItems(player);
 
             if (ranked) {
                 player.sendMessage(Locale.QUEUE_LEAVE_RANKED.format(player, kit.getName()));

@@ -1,12 +1,12 @@
 package me.lrxh.practice.match;
 
 import me.lrxh.practice.Locale;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.kit.KitLoadout;
 import me.lrxh.practice.match.menu.ViewInventoryMenu;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.Cooldown;
@@ -106,7 +106,12 @@ public class MatchListener implements Listener {
 
         if (profile.getState() == ProfileState.FIGHTING) {
             Match match = profile.getMatch();
-
+            if(match.kit.getGameRules().isBedwars()){
+                if(event.getBlock().getLocation().equals(event.getPlayer().getBedSpawnLocation())){
+                    event.getPlayer().sendMessage(CC.translate("&cYou can't break your own bed!"));
+                    event.setCancelled(true);
+                }
+            }
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
                 if (match.getKit().getGameRules().isSpleef()) {
                     if (event.getBlock().getType() == Material.SNOW_BLOCK ||
@@ -124,6 +129,9 @@ public class MatchListener implements Listener {
                 }
             } else {
                 event.setCancelled(true);
+            }
+            if(match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED))){
+                event.setCancelled(false);
             }
         } else {
             if (!event.getPlayer().isOp() || event.getPlayer().getGameMode() != GameMode.CREATIVE) {
@@ -231,6 +239,10 @@ public class MatchListener implements Listener {
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
         if (profile.getState() == ProfileState.FIGHTING) {
+            if(profile.getMatch().kit.getGameRules().isBedwars()){
+                PlayerUtil.animateDeath(event.getEntity());
+                return;
+            }
             List<Item> entities = new ArrayList<>();
 
             event.getDrops().forEach(itemStack -> {
@@ -517,7 +529,7 @@ public class MatchListener implements Listener {
                 player.getItemInHand() != null) {
             Player target = (Player) event.getRightClicked();
 
-            if (Hotbar.fromItemStack(player.getItemInHand()) == HotbarItem.VIEW_INVENTORY) {
+            if (Practice.getInstance().getHotbar().fromItemStack(player.getItemInHand()) == HotbarItem.VIEW_INVENTORY) {
                 new ViewInventoryMenu(target).openMenu(player);
             }
         }
@@ -567,13 +579,13 @@ public class MatchListener implements Listener {
             if (profile.getState() == ProfileState.FIGHTING) {
                 Match match = profile.getMatch();
 
-                if (Hotbar.fromItemStack(itemStack) == HotbarItem.SPECTATE_STOP) {
+                if (Practice.getInstance().getHotbar().fromItemStack(itemStack) == HotbarItem.SPECTATE_STOP) {
                     match.onDisconnect(player);
                     return;
                 }
 
                 if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
-                    ItemStack kitItem = Hotbar.getItems().get(HotbarItem.KIT_SELECTION);
+                    ItemStack kitItem = Practice.getInstance().getHotbar().getItems().get(HotbarItem.KIT_SELECTION);
 
                     if (itemStack.getType() == kitItem.getType() &&
                             itemStack.getDurability() == kitItem.getDurability()) {

@@ -4,7 +4,6 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.queue.menu.QueueSelectKitMenu;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,7 @@ public class QueueListener implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR ||
                 event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            HotbarItem hotbarItem = Hotbar.fromItemStack(event.getItem());
+            HotbarItem hotbarItem = Practice.getInstance().getHotbar().fromItemStack(event.getItem());
 
             if (hotbarItem != null) {
                 Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());

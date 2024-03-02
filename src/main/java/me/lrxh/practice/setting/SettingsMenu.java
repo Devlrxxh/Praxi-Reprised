@@ -4,6 +4,8 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.KillEffects;
 import me.lrxh.practice.profile.Profile;
+import me.lrxh.practice.profile.Themes;
+import me.lrxh.practice.profile.Times;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ItemBuilder;
@@ -39,7 +41,7 @@ public class SettingsMenu extends Menu {
 
     @Override
     public Filters getFilter() {
-        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("SETTINGS.FILTER"));
+        return Filters.FILL;
     }
 
     public boolean resetCursor() {
@@ -51,9 +53,7 @@ public class SettingsMenu extends Menu {
         HashMap<Integer, Button> buttons = new HashMap<>();
         int i = 10;
         for (Settings settings : Settings.values()) {
-            buttons.put(i++, new SettingsButton(settings));
-            System.out.println(i < Settings.values().length);
-            System.out.println("Added Item " + settings.getName() + " at slot " + buttons.get(i));
+            buttons.put(i+=1, new SettingsButton(settings));
         }
         return buttons;
     }

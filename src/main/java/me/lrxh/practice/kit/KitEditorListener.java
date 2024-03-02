@@ -1,11 +1,12 @@
 package me.lrxh.practice.kit;
 
 import me.lrxh.practice.Locale;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.kit.menu.KitEditorSelectKitMenu;
 import me.lrxh.practice.kit.menu.KitManagementMenu;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
+import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.util.CC;
 import org.bukkit.GameMode;
@@ -59,7 +60,7 @@ public class KitEditorListener implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR ||
                 event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            HotbarItem hotbarItem = Hotbar.fromItemStack(event.getItem());
+            HotbarItem hotbarItem = Practice.getInstance().getHotbar().fromItemStack(event.getItem());
 
             if (hotbarItem != null) {
                 boolean cancelled = true;

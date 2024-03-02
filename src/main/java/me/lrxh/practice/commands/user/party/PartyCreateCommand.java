@@ -1,10 +1,10 @@
 package me.lrxh.practice.commands.user.party;
 
 import me.lrxh.practice.Locale;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.party.Party;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public class PartyCreateCommand {
 
         profile.setParty(new Party(player));
 
-        Hotbar.giveHotbarItems(player);
+        Practice.getInstance().getHotbar().giveHotbarItems(player);
 
         player.sendMessage(Locale.PARTY_CREATE.format(player));
     }

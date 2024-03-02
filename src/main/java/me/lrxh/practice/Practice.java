@@ -43,6 +43,7 @@ import me.lrxh.practice.party.PartyListener;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileListener;
 import me.lrxh.practice.profile.hotbar.Hotbar;
+import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.queue.QueueListener;
 import me.lrxh.practice.queue.QueueThread;
 import me.lrxh.practice.scoreboard.ScoreboardAdapter;
@@ -71,7 +72,6 @@ import java.util.stream.Collectors;
 public class Practice extends JavaPlugin {
 
     private static Practice practice;
-
     private BasicConfigurationFile mainConfig;
     private BasicConfigurationFile arenasConfig;
     private BasicConfigurationFile kitsConfig;
@@ -84,8 +84,9 @@ public class Practice extends JavaPlugin {
     private Cache cache;
     private PaperCommandManager paperCommandManager;
     private Assemble assemble;
+    private boolean placeholder = false;
     private SpigotHandler spigotHandler;
-
+    private Hotbar hotbar;
     public static Practice getInstance() {
         if (practice == null) {
             practice = new Practice();
@@ -117,7 +118,8 @@ public class Practice extends JavaPlugin {
         }
 
         cache = new Cache();
-        Hotbar.init();
+        hotbar = new Hotbar();
+        Practice.getInstance().getHotbar().init();
         Kit.init();
         Arena.init();
         Profile.init();
@@ -191,6 +193,7 @@ public class Practice extends JavaPlugin {
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();
+            placeholder = true;
             Console.sendMessage(CC.translate("&aPlaceholderAPI found!"));
             Console.sendMessage(CC.translate("&aRegistering placeholders"));
         }

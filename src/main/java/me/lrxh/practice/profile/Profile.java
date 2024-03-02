@@ -21,8 +21,6 @@ import me.lrxh.practice.profile.meta.ProfileKitEditorData;
 import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.profile.meta.option.ProfileOptions;
 import me.lrxh.practice.queue.QueueProfile;
-import me.lrxh.practice.setting.Themes;
-import me.lrxh.practice.setting.Times;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.Cooldown;
 import me.lrxh.practice.util.InventoryUtil;

@@ -2,8 +2,8 @@ package me.lrxh.practice.profile.meta;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.kit.KitLoadout;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -68,7 +68,7 @@ public class ProfileKitData {
             }
         }
 
-        ItemStack defaultKitItemStack = Hotbar.getItems().get(HotbarItem.KIT_SELECTION).clone();
+        ItemStack defaultKitItemStack = Practice.getInstance().getHotbar().getItems().get(HotbarItem.KIT_SELECTION).clone();
 
 
         ItemMeta defaultKitItemMeta = defaultKitItemStack.getItemMeta();
@@ -82,7 +82,7 @@ public class ProfileKitData {
             player.getInventory().setItem(8, defaultKitItemStack);
 
             for (KitLoadout loadout : loadouts) {
-                ItemStack itemStack = Hotbar.getItems().get(HotbarItem.KIT_SELECTION).clone();
+                ItemStack itemStack = Practice.getInstance().getHotbar().getItems().get(HotbarItem.KIT_SELECTION).clone();
                 ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(itemMeta.getDisplayName().replace("%KIT%", loadout.getCustomName()));
                 itemStack.setItemMeta(itemMeta);

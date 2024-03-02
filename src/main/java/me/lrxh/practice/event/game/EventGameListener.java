@@ -1,9 +1,9 @@
 package me.lrxh.practice.event.game;
 
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.event.impl.sumo.SumoEvent;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -110,7 +110,7 @@ public class EventGameListener implements Listener {
 
             if (profile.getState() == ProfileState.EVENT && EventGame.getActiveGame() != null) {
                 ItemStack itemStack = event.getItem();
-                ItemStack voteItem = Hotbar.getItems().get(HotbarItem.MAP_SELECTION);
+                ItemStack voteItem = Practice.getInstance().getHotbar().getItems().get(HotbarItem.MAP_SELECTION);
 
                 if (itemStack.getType() == voteItem.getType() &&
                         itemStack.getDurability() == voteItem.getDurability()) {

@@ -17,7 +17,6 @@ import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.participant.GamePlayer;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.meta.ProfileKitData;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.queue.Queue;
@@ -293,7 +292,7 @@ public abstract class Match {
 
                     if (player != null) {
                         VisibilityLogic.handle(player);
-                        Hotbar.giveHotbarItems(player);
+                        Practice.getInstance().getHotbar().giveHotbarItems(player);
                         Practice.getInstance().getEssentials().teleportToSpawn(player);
                     }
                 }
@@ -512,7 +511,7 @@ public abstract class Match {
             dead.setAllowFlight(true);
             dead.setFlying(true);
 
-            Hotbar.giveHotbarItems(dead);
+            Practice.getInstance().getHotbar().giveHotbarItems(dead);
         }
 
     }
@@ -554,7 +553,7 @@ public abstract class Match {
         profile.setMatch(this);
         profile.setState(ProfileState.SPECTATING);
 
-        Hotbar.giveHotbarItems(spectator);
+        Practice.getInstance().getHotbar().giveHotbarItems(spectator);
 
         spectator.teleport(target.getLocation().clone().add(0, 2, 0));
         spectator.setGameMode(GameMode.SURVIVAL);
@@ -586,7 +585,7 @@ public abstract class Match {
         profile.setMatch(null);
 
         PlayerUtil.reset(spectator);
-        Hotbar.giveHotbarItems(spectator);
+        Practice.getInstance().getHotbar().giveHotbarItems(spectator);
         Practice.getInstance().getEssentials().teleportToSpawn(spectator);
 
         VisibilityLogic.handle(spectator);

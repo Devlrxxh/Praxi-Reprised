@@ -59,7 +59,12 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<duration>", match.getDuration());
             }
 
-            formattedLines.add(PlaceholderAPI.setPlaceholders(player, line));
+
+            if(Practice.getInstance().isPlaceholder()){
+                formattedLines.add(PlaceholderAPI.setPlaceholders(player, line));
+            }else {
+                formattedLines.add(line);
+            }
         }
         return formattedLines;
     }

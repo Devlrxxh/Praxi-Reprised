@@ -1,4 +1,4 @@
-package me.lrxh.practice.setting;
+package me.lrxh.practice.profile;
 
 import lombok.Getter;
 

@@ -36,6 +36,8 @@ public class StandaloneArena extends Arena {
         configuration.set(path + ".type", getType().name());
         configuration.set(path + ".spawnA", LocationUtil.serialize(spawnA));
         configuration.set(path + ".spawnB", LocationUtil.serialize(spawnB));
+        configuration.set(path + ".bedA", LocationUtil.serialize(bedA));
+        configuration.set(path + ".bedB", LocationUtil.serialize(bedB));
         configuration.set(path + ".cuboid.location1", LocationUtil.serialize(getLowerCorner()));
         configuration.set(path + ".cuboid.location2", LocationUtil.serialize(getUpperCorner()));
         configuration.set(path + ".kits", getKits());
@@ -58,8 +60,7 @@ public class StandaloneArena extends Arena {
 
         try {
             configuration.save(Practice.getInstance().getArenasConfig().getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 
@@ -72,8 +73,7 @@ public class StandaloneArena extends Arena {
 
         try {
             configuration.save(Practice.getInstance().getArenasConfig().getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 

@@ -2,7 +2,6 @@ package me.lrxh.practice.profile;
 
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.essentials.event.SpawnTeleportEvent;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
 import me.lrxh.practice.profile.meta.option.button.DuelRequestsOptionButton;
@@ -32,7 +31,7 @@ public class ProfileListener implements Listener {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
         if (!profile.isBusy() && event.getPlayer().getGameMode() == GameMode.CREATIVE) {
-            Hotbar.giveHotbarItems(event.getPlayer());
+            Practice.getInstance().getHotbar().giveHotbarItems(event.getPlayer());
         }
     }
 
@@ -104,7 +103,7 @@ public class ProfileListener implements Listener {
         if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             Player player = event.getPlayer();
 
-            HotbarItem hotbarItem = Hotbar.fromItemStack(event.getItem());
+            HotbarItem hotbarItem = Practice.getInstance().getHotbar().fromItemStack(event.getItem());
 
             if (hotbarItem != null) {
                 if (hotbarItem.getCommand() != null) {
@@ -150,7 +149,7 @@ public class ProfileListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Hotbar.giveHotbarItems(event.getPlayer());
+                Practice.getInstance().getHotbar().giveHotbarItems(event.getPlayer());
             }
         }.runTaskLater(Practice.getInstance(), 10L);
     }

@@ -67,6 +67,7 @@ public class Kit {
             kit.getGameRules().setSpleef(config.getBoolean(path + ".game-rules.spleef"));
             kit.getGameRules().setParkour(config.getBoolean(path + ".game-rules.parkour"));
             kit.getGameRules().setSumo(config.getBoolean(path + ".game-rules.sumo"));
+            kit.getGameRules().setBedwars(config.getBoolean(path + ".game-rules.bedwars"));
             kit.getGameRules().setBoxing(config.getBoolean(path + ".game-rules.boxing"));
             kit.getGameRules().setHealthRegeneration(config.getBoolean(path + ".game-rules.health-regeneration"));
             kit.getGameRules().setShowHealth(config.getBoolean(path + ".game-rules.show-health"));
@@ -123,6 +124,7 @@ public class Kit {
         configFile.getConfiguration().set(path + ".game-rules.allow-build", gameRules.isBuild());
         configFile.getConfiguration().set(path + ".game-rules.spleef", gameRules.isSpleef());
         configFile.getConfiguration().set(path + ".game-rules.sumo", gameRules.isSumo());
+        configFile.getConfiguration().set(path + ".game-rules.bedwars", gameRules.isBedwars());
         configFile.getConfiguration().set(path + ".game-rules.health-regeneration", gameRules.isHealthRegeneration());
         configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
         configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
@@ -134,8 +136,7 @@ public class Kit {
 
         try {
             configFile.getConfiguration().save(configFile.getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 

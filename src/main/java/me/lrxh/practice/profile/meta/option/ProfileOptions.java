@@ -5,8 +5,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.KillEffects;
-import me.lrxh.practice.setting.Themes;
-import me.lrxh.practice.setting.Times;
+import me.lrxh.practice.profile.Themes;
+import me.lrxh.practice.profile.Times;
 
 @Setter
 @Getter

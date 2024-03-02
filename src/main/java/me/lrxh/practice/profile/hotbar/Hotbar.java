@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+@Getter
 public class Hotbar {
 
-    @Getter
-    private static final Map<HotbarItem, ItemStack> items = new HashMap<>();
+    private  final Map<HotbarItem, ItemStack> items = new HashMap<>();
 
-    public static void init() {
+    public  void init() {
         FileConfiguration config = Practice.getInstance().getMainConfig().getConfiguration();
 
         ConfigurationSection itemsSection = config.getConfigurationSection("HOTBAR_ITEMS");
@@ -56,7 +56,7 @@ public class Hotbar {
         items.put(hotbarItem, builder.build());
         for (HotbarItem kitEditorItem : items.keySet()) {
             if (kitEditorItem.equals(HotbarItem.KIT_SELECTION)) {
-                String voteName = Hotbar.getItems().get(HotbarItem.KIT_SELECTION).getItemMeta().getDisplayName();
+                String voteName = getItems().get(HotbarItem.KIT_SELECTION).getItemMeta().getDisplayName();
                 String[] nameSplit = voteName.split("%KIT%");
                 kitEditorItem.setPattern(
                         Pattern.compile("(" + nameSplit[0] + ")(.*)(" + (nameSplit.length > 1 ? nameSplit[1] : "") + ")"));
@@ -64,7 +64,7 @@ public class Hotbar {
         }
     }
 
-    public static void giveHotbarItems(Player player) {
+    public  void giveHotbarItems(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         PlayerUtil.reset(player);
 
@@ -98,8 +98,8 @@ public class Hotbar {
         player.updateInventory();
     }
 
-    public static HotbarItem fromItemStack(ItemStack itemStack) {
-        for (Map.Entry<HotbarItem, ItemStack> entry : Hotbar.getItems().entrySet()) {
+    public  HotbarItem fromItemStack(ItemStack itemStack) {
+        for (Map.Entry<HotbarItem, ItemStack> entry : getItems().entrySet()) {
             if (entry.getValue() != null && entry.getValue().equals(itemStack)) {
                 return entry.getKey();
             }

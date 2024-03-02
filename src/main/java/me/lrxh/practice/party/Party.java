@@ -6,7 +6,6 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.duel.DuelRequest;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
@@ -113,7 +112,7 @@ public class Party {
         profile.setParty(this);
 
         if (profile.getState() == ProfileState.LOBBY || profile.getState() == ProfileState.QUEUEING) {
-            Hotbar.giveHotbarItems(player);
+            Practice.getInstance().getHotbar().giveHotbarItems(player);
 
             for (Player otherPlayer : getListOfPlayers()) {
                 VisibilityLogic.handle(player, otherPlayer);
@@ -136,7 +135,7 @@ public class Party {
         profile.setParty(null);
 
         if (profile.getState() == ProfileState.LOBBY || profile.getState() == ProfileState.QUEUEING) {
-            Hotbar.giveHotbarItems(player);
+            Practice.getInstance().getHotbar().giveHotbarItems(player);
         }
 
         VisibilityLogic.handle(player);
@@ -164,7 +163,7 @@ public class Party {
             profile.setParty(null);
 
             if (profile.getState() == ProfileState.LOBBY || profile.getState() == ProfileState.QUEUEING) {
-                Hotbar.giveHotbarItems(player);
+                Practice.getInstance().getHotbar().giveHotbarItems(player);
             }
         }
 
