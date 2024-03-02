@@ -511,10 +511,10 @@ public class MatchListener implements Listener {
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile != null && profile.getState() == ProfileState.FIGHTING) {
             Match match = profile.getMatch();
 
-            if (match.getState() == MatchState.STARTING_ROUND || match.getState() == MatchState.PLAYING_ROUND) {
+            if (match != null && (match.getState() == MatchState.STARTING_ROUND || match.getState() == MatchState.PLAYING_ROUND)) {
                 profile.getMatch().onDisconnect(event.getPlayer());
             }
         }
