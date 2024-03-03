@@ -73,14 +73,14 @@ public class SettingsMenu extends Menu {
             switch (this.settings) {
                 case SHOW_SCOREBOARD: {
                     lore.add(profile.getOptions().showScoreboard() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().showScoreboard() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().showScoreboard() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().showScoreboard() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case MENU_SOUNDS: {
                     lore.add(profile.getOptions().menuSounds() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().menuSounds() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().menuSounds() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().menuSounds() ? "&aClick to enable" : "&aClick to disable");
                     break;
@@ -93,28 +93,28 @@ public class SettingsMenu extends Menu {
                 }
                 case SHOW_LINES: {
                     lore.add(profile.getOptions().scoreboardLines() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().scoreboardLines() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().scoreboardLines() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().scoreboardLines() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case ALLOW_DUELS: {
                     lore.add(profile.getOptions().receiveDuelRequests() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().receiveDuelRequests() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().receiveDuelRequests() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().receiveDuelRequests() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case ALLOW_SPECTATORS: {
                     lore.add(profile.getOptions().allowSpectators() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().allowSpectators() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().allowSpectators() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().allowSpectators() ? "&aClick to enable" : "&aClick to disable");
                     break;
                 }
                 case SHOW_PLAYERS: {
                     lore.add(profile.getOptions().showPlayers() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().showPlayers() ? "  &7&l▶ &cNo" : " &7&l▶ &7No");
+                    lore.add(!profile.getOptions().showPlayers() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().showPlayers() ? "&aClick to enable" : "&aClick to disable");
                     break;
