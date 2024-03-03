@@ -137,7 +137,7 @@ public class ProfileRematchData {
         GameParticipant<MatchGamePlayer> participantA = new GameParticipant<>(playerA);
         GameParticipant<MatchGamePlayer> participantB = new GameParticipant<>(playerB);
 
-        Match match = new BasicTeamMatch(null, kit, arena, false, participantA, participantB);
+        Match match = new BasicTeamMatch(null, kit, arena, false, participantA, participantB, true);
         match.start();
     }
 

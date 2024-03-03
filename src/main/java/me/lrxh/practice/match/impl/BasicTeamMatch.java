@@ -38,11 +38,12 @@ public class BasicTeamMatch extends Match {
     private GameParticipant<MatchGamePlayer> losingParticipant;
 
     public BasicTeamMatch(Queue queue, Kit kit, Arena arena, boolean ranked, GameParticipant<MatchGamePlayer> participantA,
-                          GameParticipant<MatchGamePlayer> participantB) {
-        super(queue, kit, arena, ranked);
+                          GameParticipant<MatchGamePlayer> participantB, boolean duel) {
+        super(queue, kit, arena, ranked, duel);
 
         this.participantA = participantA;
         this.participantB = participantB;
+        Practice.getInstance().getCache().getMatch(getMatchId()).setDuel(duel);
     }
 
     @Override

@@ -118,7 +118,7 @@ public class DuelAcceptCommand {
                 participantB = new GameParticipant<>(playerB);
             }
 
-            Match match = new BasicTeamMatch(null, duelRequest.getKit(), arena, false, participantA, participantB);
+            Match match = new BasicTeamMatch(null, duelRequest.getKit(), arena, false, participantA, participantB, true);
             match.start();
         } else {
             player.sendMessage(CC.RED + "You do not have a duel request from that player.");

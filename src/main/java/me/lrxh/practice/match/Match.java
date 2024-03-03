@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Setter
 public abstract class Match {
 
     protected final Kit kit;
@@ -50,12 +51,13 @@ public abstract class Match {
     private final Queue queue;
     private final List<Location> placedBlocks;
     private final List<BlockState> changedBlocks;
+    private boolean duel;
     @Setter
     protected MatchState state = MatchState.STARTING_ROUND;
     protected long timeData;
     protected MatchLogicTask logicTask;
 
-    public Match(Queue queue, Kit kit, Arena arena, boolean ranked) {
+    public Match(Queue queue, Kit kit, Arena arena, boolean ranked, boolean duel) {
         this.queue = queue;
         this.kit = kit;
         this.arena = arena;
@@ -65,7 +67,7 @@ public abstract class Match {
         this.droppedItems = new ArrayList<>();
         this.placedBlocks = new ArrayList<>();
         this.changedBlocks = new ArrayList<>();
-
+        this.duel = duel;
         Practice.getInstance().getCache().getMatches().add(this);
     }
 
@@ -461,7 +463,9 @@ public abstract class Match {
         snapshot.setLongestCombo(deadGamePlayer.getLongestCombo());
         snapshot.setTotalHits(deadGamePlayer.getHits());
         Profile loserProfile = Profile.getByUuid(deadGamePlayer.getUuid());
-        loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
+        if(!Practice.getInstance().getCache().getMatch(matchId).isDuel()){
+            loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
+        }
         // Add snapshot to list
         snapshots.add(snapshot);
 
@@ -480,7 +484,9 @@ public abstract class Match {
                         sendDeathMessage(player, dead, killer);
                         if (player != dead) {
                             Profile winnerProfile = Profile.getByUuid(player.getUniqueId());
-                            winnerProfile.getKitData().get(winnerProfile.getMatch().getKit()).incrementWon();
+                            if(!Practice.getInstance().getCache().getMatch(matchId).isDuel()){
+                                winnerProfile.getKitData().get(winnerProfile.getMatch().getKit()).incrementWon();
+                            }
                         }
                     }
                 }

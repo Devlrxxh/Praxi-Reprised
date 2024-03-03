@@ -27,7 +27,7 @@ public class BasicFreeForAllMatch extends Match {
     private GameParticipant<MatchGamePlayer> winningParticipant;
 
     public BasicFreeForAllMatch(Queue queue, Kit kit, Arena arena, List<GameParticipant<MatchGamePlayer>> participants) {
-        super(queue, kit, arena, false);
+        super(queue, kit, arena, false, false);
 
         this.participants = participants;
     }

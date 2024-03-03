@@ -96,7 +96,7 @@ public class QueueThread extends Thread {
 
                             // Create match
                             Match match = new BasicTeamMatch(queueProfile.getQueue(), queueProfile.getQueue().getKit(), arena, queueProfile.isRanked(),
-                                    participantA, participantB);
+                                    participantA, participantB, false);
 
 
                             for (String line : Locale.MATCH_START.formatLines(firstPlayer, secondPlayer.getName(), queueProfile.getQueue().getKit().getName(), BukkitReflection.getPing(secondPlayer))) {

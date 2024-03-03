@@ -129,7 +129,7 @@ public class PartyEventSelectKitMenu extends Menu {
                 }
 
                 // Create match
-                match = new BasicTeamMatch(null, kit, arena, false, participantA, participantB);
+                match = new BasicTeamMatch(null, kit, arena, false, participantA, participantB, false);
             }
 
             // Start match
