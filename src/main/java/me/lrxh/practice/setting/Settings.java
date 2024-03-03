@@ -14,8 +14,7 @@ public enum Settings {
     SHOW_LINES("Scoreboard Lines", Material.STRING, "Toggle Scoreboard lines."),
     THEME("Select Theme", Material.BOOK, "Select Color Theme."),
     PING_RANGE("Ping Range", Material.STICK, "Change Ping Range."),
-    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds."),
-    TIME_CHANGER("Change Time", Material.LEVER, "Change world time.");
+    MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds.");
 
     private final String name;
     private final Material material;

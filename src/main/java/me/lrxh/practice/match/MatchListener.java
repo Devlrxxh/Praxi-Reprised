@@ -106,8 +106,8 @@ public class MatchListener implements Listener {
 
         if (profile.getState() == ProfileState.FIGHTING) {
             Match match = profile.getMatch();
-            if(match.kit.getGameRules().isBedwars()){
-                if(event.getBlock().getLocation().equals(event.getPlayer().getBedSpawnLocation())){
+            if (match.kit.getGameRules().isBedwars()) {
+                if (event.getBlock().getLocation().equals(event.getPlayer().getBedSpawnLocation())) {
                     event.getPlayer().sendMessage(CC.translate("&cYou can't break your own bed!"));
                     event.setCancelled(true);
                 }
@@ -130,7 +130,7 @@ public class MatchListener implements Listener {
             } else {
                 event.setCancelled(true);
             }
-            if(match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED))){
+            if (match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED))) {
                 event.setCancelled(false);
             }
         } else {
@@ -239,7 +239,7 @@ public class MatchListener implements Listener {
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
         if (profile.getState() == ProfileState.FIGHTING) {
-            if(profile.getMatch().kit.getGameRules().isBedwars()){
+            if (profile.getMatch().kit.getGameRules().isBedwars()) {
                 PlayerUtil.animateDeath(event.getEntity());
                 return;
             }

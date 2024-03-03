@@ -21,7 +21,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -121,9 +120,9 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-            arena.delete();
+        arena.delete();
 
-            player.sendMessage(CC.GREEN + "Deleted arena " + arena.getName());
+        player.sendMessage(CC.GREEN + "Deleted arena " + arena.getName());
     }
 
     @Subcommand("wand")
@@ -155,30 +154,30 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-            player.sendMessage(CC.GREEN + CC.BOLD + "Arena Status " + CC.GRAY + "(" +
-                    (arena.isSetup() ? CC.GREEN : CC.RED) + arena.getName() + CC.GRAY + ")");
+        player.sendMessage(CC.GREEN + CC.BOLD + "Arena Status " + CC.GRAY + "(" +
+                (arena.isSetup() ? CC.GREEN : CC.RED) + arena.getName() + CC.GRAY + ")");
 
-            player.sendMessage(CC.GREEN + "Cuboid Lower Location: " + CC.YELLOW +
-                    (arena.getLowerCorner() == null ?
-                            StringEscapeUtils.unescapeJava("✗") :
-                            StringEscapeUtils.unescapeJava("✓")));
+        player.sendMessage(CC.GREEN + "Cuboid Lower Location: " + CC.YELLOW +
+                (arena.getLowerCorner() == null ?
+                        StringEscapeUtils.unescapeJava("✗") :
+                        StringEscapeUtils.unescapeJava("✓")));
 
-            player.sendMessage(CC.GREEN + "Cuboid Upper Location: " + CC.YELLOW +
-                    (arena.getUpperCorner() == null ?
-                            StringEscapeUtils.unescapeJava("✗") :
-                            StringEscapeUtils.unescapeJava("✓")));
+        player.sendMessage(CC.GREEN + "Cuboid Upper Location: " + CC.YELLOW +
+                (arena.getUpperCorner() == null ?
+                        StringEscapeUtils.unescapeJava("✗") :
+                        StringEscapeUtils.unescapeJava("✓")));
 
-            player.sendMessage(CC.GREEN + "Spawn A Location: " + CC.YELLOW +
-                    (arena.getSpawnA() == null ?
-                            StringEscapeUtils.unescapeJava("✗") :
-                            StringEscapeUtils.unescapeJava("✓")));
+        player.sendMessage(CC.GREEN + "Spawn A Location: " + CC.YELLOW +
+                (arena.getSpawnA() == null ?
+                        StringEscapeUtils.unescapeJava("✗") :
+                        StringEscapeUtils.unescapeJava("✓")));
 
-            player.sendMessage(CC.GREEN + "Spawn B Location: " + CC.YELLOW +
-                    (arena.getSpawnB() == null ?
-                            StringEscapeUtils.unescapeJava("✗") :
-                            StringEscapeUtils.unescapeJava("✓")));
+        player.sendMessage(CC.GREEN + "Spawn B Location: " + CC.YELLOW +
+                (arena.getSpawnB() == null ?
+                        StringEscapeUtils.unescapeJava("✗") :
+                        StringEscapeUtils.unescapeJava("✓")));
 
-            player.sendMessage(CC.GREEN + "Kits: " + CC.YELLOW + StringUtils.join(arena.getKits(), ", "));
+        player.sendMessage(CC.GREEN + "Kits: " + CC.YELLOW + StringUtils.join(arena.getKits(), ", "));
     }
 
     @Subcommand("genhelper")
@@ -350,15 +349,15 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-            if (pos.equals(SpawnType.A)) {
-                arena.setSpawnA(player.getLocation());
-            } else {
-                arena.setSpawnB(player.getLocation());
-            }
+        if (pos.equals(SpawnType.A)) {
+            arena.setSpawnA(player.getLocation());
+        } else {
+            arena.setSpawnB(player.getLocation());
+        }
 
-            arena.save();
+        arena.save();
 
-            player.sendMessage(CC.GREEN + "Updated spawn point " + pos + " for arena " + arena.getName() + "");
+        player.sendMessage(CC.GREEN + "Updated spawn point " + pos + " for arena " + arena.getName());
     }
 
     @Subcommand("setBedSpawn")
@@ -374,14 +373,14 @@ public class ArenaCommand extends BaseCommand {
             return;
         }
         Arena arena = Arena.getByName(arenaName);
-            if (pos.equals(SpawnType.A)) {
-                arena.setBedA(PlayerUtil.getTargetBlock(player, 6).getLocation());
-            } else {
-                arena.setBedB(PlayerUtil.getTargetBlock(player, 6).getLocation());
-            }
+        if (pos.equals(SpawnType.A)) {
+            arena.setBedA(PlayerUtil.getTargetBlock(player, 6).getLocation());
+        } else {
+            arena.setBedB(PlayerUtil.getTargetBlock(player, 6).getLocation());
+        }
 
-            arena.save();
-            player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getName());
+        arena.save();
+        player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getName());
     }
 
     private boolean checkArena(String arena) {

@@ -19,9 +19,9 @@ import java.util.regex.Pattern;
 @Getter
 public class Hotbar {
 
-    private  final Map<HotbarItem, ItemStack> items = new HashMap<>();
+    private final Map<HotbarItem, ItemStack> items = new HashMap<>();
 
-    public  void init() {
+    public void init() {
         FileConfiguration config = Practice.getInstance().getMainConfig().getConfiguration();
 
         ConfigurationSection itemsSection = config.getConfigurationSection("HOTBAR_ITEMS");
@@ -64,7 +64,7 @@ public class Hotbar {
         }
     }
 
-    public  void giveHotbarItems(Player player) {
+    public void giveHotbarItems(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         PlayerUtil.reset(player);
 
@@ -98,7 +98,7 @@ public class Hotbar {
         player.updateInventory();
     }
 
-    public  HotbarItem fromItemStack(ItemStack itemStack) {
+    public HotbarItem fromItemStack(ItemStack itemStack) {
         for (Map.Entry<HotbarItem, ItemStack> entry : getItems().entrySet()) {
             if (entry.getValue() != null && entry.getValue().equals(itemStack)) {
                 return entry.getKey();

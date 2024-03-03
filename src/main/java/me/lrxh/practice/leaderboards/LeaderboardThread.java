@@ -1,5 +1,6 @@
 package me.lrxh.practice.leaderboards;
 
+import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.util.CC;
@@ -44,8 +45,10 @@ public class LeaderboardThread extends Thread {
                     Console.sendMessage(CC.translate("&aSaved Player Data!"));
                     Leaderboard.getEloLeaderboards().clear();
                     Leaderboard.setEloLeaderboards(Leaderboard.init());
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(CC.translate("&aLeaderboards Refreshed!"));
+                    if (Practice.getInstance().getMainConfig().getBoolean("LEADERBOARD.ENABLE-MESSAGE")) {
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            player.sendMessage(Locale.LEADERBOARD_REFRESH.format(player));
+                        }
                     }
                 }
                 sleep(SECOND_IN_MILLIS);

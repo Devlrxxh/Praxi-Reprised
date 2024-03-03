@@ -7,7 +7,6 @@ import me.lrxh.practice.kit.menu.KitManagementMenu;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
-import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.util.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

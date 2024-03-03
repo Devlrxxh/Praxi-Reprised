@@ -80,7 +80,7 @@ public class QueueSelectKitMenu extends Menu {
             Queue randomQueue = queues.get(rand.nextInt(queues.size()));
 
             player.closeInventory();
-            randomQueue.addPlayer(player, randomQueue.isRanked() ? profile.getKitData().get(randomQueue.getKit()).getElo() : 0, ranked);
+            randomQueue.addPlayer(player, randomQueue.isRanked() ? profile.getKitData().get(randomQueue.getKit()).getElo() : 0, !ranked);
             randomQueue.addQueue();
         }
     }

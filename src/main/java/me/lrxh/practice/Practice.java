@@ -43,7 +43,6 @@ import me.lrxh.practice.party.PartyListener;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileListener;
 import me.lrxh.practice.profile.hotbar.Hotbar;
-import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.queue.QueueListener;
 import me.lrxh.practice.queue.QueueThread;
 import me.lrxh.practice.scoreboard.ScoreboardAdapter;
@@ -87,6 +86,7 @@ public class Practice extends JavaPlugin {
     private boolean placeholder = false;
     private SpigotHandler spigotHandler;
     private Hotbar hotbar;
+
     public static Practice getInstance() {
         if (practice == null) {
             practice = new Practice();
@@ -113,7 +113,7 @@ public class Practice extends JavaPlugin {
         loadConfigs();
         loadMongo();
         spigotHandler = new SpigotHandler(practice);
-        if(Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].equals("v1_8_R3")){
+        if (Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].equals("v1_8_R3")) {
             spigotHandler.init(false);
         }
 

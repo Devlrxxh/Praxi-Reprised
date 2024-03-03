@@ -60,9 +60,9 @@ public final class PlaceholderUtil {
             }
 
 
-            if(Practice.getInstance().isPlaceholder()){
+            if (Practice.getInstance().isPlaceholder()) {
                 formattedLines.add(PlaceholderAPI.setPlaceholders(player, line));
-            }else {
+            } else {
                 formattedLines.add(line);
             }
         }
