@@ -53,7 +53,7 @@ public class QueueSelectKitMenu extends Menu {
                 buttons.put(i++, new SelectKitButton(queue));
             }
         }
-        buttons.put(4, new SelectQueueButton(ranked));
+//        buttons.put(4, new SelectQueueButton(ranked));
         return buttons;
     }
 
