@@ -1,4 +1,4 @@
-package me.lrxh.practice.essentials.event;
+package me.lrxh.practice.profile;
 
 import lombok.Getter;
 import lombok.Setter;

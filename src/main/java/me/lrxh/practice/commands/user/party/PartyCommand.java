@@ -92,16 +92,17 @@ public class PartyCommand extends BaseCommand {
     public void help(Player player) {
         Locale.PARTY_HELP.formatLines(player).forEach(player::sendMessage);
     }
+
     @Subcommand("info")
     public void info(Player player) {
-            Profile profile = Profile.getByUuid(player.getUniqueId());
+        Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile.getParty() == null) {
-                player.sendMessage(CC.RED + "You do not have a party.");
-                return;
-            }
+        if (profile.getParty() == null) {
+            player.sendMessage(CC.RED + "You do not have a party.");
+            return;
+        }
 
-            profile.getParty().sendInformation(player);
+        profile.getParty().sendInformation(player);
 
     }
 
@@ -157,6 +158,7 @@ public class PartyCommand extends BaseCommand {
 
         profile.getParty().invite(target);
     }
+
     @Syntax("<name>")
     @Subcommand("join")
     @CommandCompletion("@names")
@@ -206,6 +208,7 @@ public class PartyCommand extends BaseCommand {
 
         party.join(player);
     }
+
     @Syntax("<name>")
     @Subcommand("kick")
     @CommandCompletion("@names")
@@ -240,6 +243,7 @@ public class PartyCommand extends BaseCommand {
 
         profile.getParty().leave(target, true);
     }
+
     @Subcommand("leave")
     public void leave(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
@@ -255,6 +259,7 @@ public class PartyCommand extends BaseCommand {
             profile.getParty().leave(player, false);
         }
     }
+
     @Subcommand("open")
     public void open(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());

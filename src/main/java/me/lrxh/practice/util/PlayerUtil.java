@@ -4,8 +4,10 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import me.lrxh.practice.Practice;
+import me.lrxh.practice.profile.SpawnTeleportEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -85,6 +87,17 @@ public class PlayerUtil {
         }
 
         return block;
+    }
+
+    public static void teleportToSpawn(Player player) {
+        Location location = Practice.getInstance().getCache().getSpawn() == null ? Practice.getInstance().getServer().getWorlds().get(0).getSpawnLocation() : Practice.getInstance().getCache().getSpawn();
+
+        SpawnTeleportEvent event = new SpawnTeleportEvent(player, location);
+        event.call();
+
+        if (!event.isCancelled() && event.getLocation() != null) {
+            player.teleport(event.getLocation());
+        }
     }
 
     public static void animateDeath(Player player) {

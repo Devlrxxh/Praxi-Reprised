@@ -18,8 +18,8 @@ public class ScoreboardAdapter implements AssembleAdapter {
 
     public String getTitle(Player player) {
         ArrayList<String> list = new ArrayList<>();
-            list.add(getAnimatedText());
-            return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
+        list.add(getAnimatedText());
+        return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
     }
 
     public List<String> getLines(Player player) {

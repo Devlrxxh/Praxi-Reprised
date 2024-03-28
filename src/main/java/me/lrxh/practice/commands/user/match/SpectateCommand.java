@@ -2,7 +2,6 @@ package me.lrxh.practice.commands.user.match;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;

@@ -139,7 +139,7 @@ public class KitCommand extends BaseCommand {
             return;
         }
 
-        if(player.getGameMode().equals(GameMode.CREATIVE)){
+        if (player.getGameMode().equals(GameMode.CREATIVE)) {
             player.sendMessage(CC.translate("&4ERROR - &cYou can't set inv in create!"));
             return;
         }

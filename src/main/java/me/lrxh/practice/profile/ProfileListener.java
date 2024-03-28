@@ -1,7 +1,6 @@
 package me.lrxh.practice.profile;
 
 import me.lrxh.practice.Practice;
-import me.lrxh.practice.essentials.event.SpawnTeleportEvent;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
 import me.lrxh.practice.profile.meta.option.button.DuelRequestsOptionButton;
@@ -10,6 +9,7 @@ import me.lrxh.practice.profile.option.OptionsOpenedEvent;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.PlaceholderUtil;
+import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -85,7 +85,7 @@ public class ProfileListener implements Listener {
                 event.setCancelled(true);
 
                 if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                    Practice.getInstance().getEssentials().teleportToSpawn((Player) event.getEntity());
+                    PlayerUtil.teleportToSpawn((Player) event.getEntity());
                 }
             }
         }
@@ -128,7 +128,7 @@ public class ProfileListener implements Listener {
         }
         Profile.getProfiles().put(player.getUniqueId(), profile);
 
-        Practice.getInstance().getEssentials().teleportToSpawn(player);
+        PlayerUtil.teleportToSpawn(player);
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
             VisibilityLogic.handle(player, otherPlayer);

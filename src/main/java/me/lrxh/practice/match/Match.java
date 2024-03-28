@@ -51,11 +51,11 @@ public abstract class Match {
     private final Queue queue;
     private final List<Location> placedBlocks;
     private final List<BlockState> changedBlocks;
-    private boolean duel;
     @Setter
     protected MatchState state = MatchState.STARTING_ROUND;
     protected long timeData;
     protected MatchLogicTask logicTask;
+    private boolean duel;
 
     public Match(Queue queue, Kit kit, Arena arena, boolean ranked, boolean duel) {
         this.queue = queue;
@@ -294,7 +294,7 @@ public abstract class Match {
                     if (player != null) {
                         VisibilityLogic.handle(player);
                         Practice.getInstance().getHotbar().giveHotbarItems(player);
-                        Practice.getInstance().getEssentials().teleportToSpawn(player);
+                        PlayerUtil.teleportToSpawn(player);
                     }
                 }
             }
@@ -463,7 +463,7 @@ public abstract class Match {
         snapshot.setLongestCombo(deadGamePlayer.getLongestCombo());
         snapshot.setTotalHits(deadGamePlayer.getHits());
         Profile loserProfile = Profile.getByUuid(deadGamePlayer.getUuid());
-        if(!Practice.getInstance().getCache().getMatch(matchId).isDuel()){
+        if (!Practice.getInstance().getCache().getMatch(matchId).isDuel()) {
             loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
         }
         // Add snapshot to list
@@ -484,7 +484,7 @@ public abstract class Match {
                         sendDeathMessage(player, dead, killer);
                         if (player != dead) {
                             Profile winnerProfile = Profile.getByUuid(player.getUniqueId());
-                            if(!Practice.getInstance().getCache().getMatch(matchId).isDuel()){
+                            if (!Practice.getInstance().getCache().getMatch(matchId).isDuel()) {
                                 winnerProfile.getKitData().get(winnerProfile.getMatch().getKit()).incrementWon();
                             }
                         }
@@ -591,7 +591,7 @@ public abstract class Match {
 
         PlayerUtil.reset(spectator);
         Practice.getInstance().getHotbar().giveHotbarItems(spectator);
-        Practice.getInstance().getEssentials().teleportToSpawn(spectator);
+        PlayerUtil.teleportToSpawn(spectator);
 
         VisibilityLogic.handle(spectator);
 

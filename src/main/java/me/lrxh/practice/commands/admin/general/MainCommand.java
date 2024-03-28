@@ -4,7 +4,11 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.util.CC;
+import me.lrxh.practice.util.LocationUtil;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.io.IOException;
 
 
 @CommandAlias("practice")
@@ -26,9 +30,25 @@ public class MainCommand extends BaseCommand {
 
     @Subcommand("setspawn")
     public void setspawn(Player player) {
-        Practice.getInstance().getEssentials().setSpawn(player.getLocation());
+        setSpawn(player.getLocation());
         player.sendMessage(CC.translate("&aSuccessfully set spawn!"));
     }
+
+    public void setSpawn(Location location) {
+        Practice.getInstance().getCache().setSpawn(location);
+
+        if (Practice.getInstance().getCache().getSpawn() == null) {
+            Practice.getInstance().getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", null);
+        } else {
+            Practice.getInstance().getMainConfig().getConfiguration().set("ESSENTIAL.SPAWN_LOCATION", LocationUtil.serialize(Practice.getInstance().getCache().getSpawn()));
+        }
+
+        try {
+            Practice.getInstance().getMainConfig().getConfiguration().save(Practice.getInstance().getMainConfig().getFile());
+        } catch (IOException ignored) {
+        }
+    }
+
 
     @Subcommand("reload")
     public void reload(Player player) {

@@ -24,7 +24,7 @@ import java.util.Map;
 public class StatsMenu extends Menu {
     Player target;
 
-    public StatsMenu(String name){
+    public StatsMenu(String name) {
         this.target = Bukkit.getPlayer(name);
     }
 

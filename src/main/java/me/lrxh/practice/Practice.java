@@ -21,7 +21,6 @@ import me.lrxh.practice.commands.user.duels.RematchCommand;
 import me.lrxh.practice.commands.user.match.SpectateCommand;
 import me.lrxh.practice.commands.user.match.ViewInventoryCommand;
 import me.lrxh.practice.commands.user.party.PartyCommand;
-import me.lrxh.practice.essentials.Essentials;
 import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.kit.KitEditorListener;
 import me.lrxh.practice.kit.command.KitCommand;
@@ -49,6 +48,9 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -67,7 +69,6 @@ public class Practice extends JavaPlugin {
     private BasicConfigurationFile menusConfig;
     private BasicConfigurationFile messagesConfig;
     private MongoDatabase mongoDatabase;
-    private Essentials essentials;
     private Cache cache;
     private PaperCommandManager paperCommandManager;
     private Assemble assemble;
@@ -88,8 +89,7 @@ public class Practice extends JavaPlugin {
         kitsConfig = new BasicConfigurationFile(this, "kits");
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
         menusConfig = new BasicConfigurationFile(this, "menus");
-        messagesConfig= new BasicConfigurationFile(this, "messages");
-        this.essentials = new Essentials(this);
+        messagesConfig = new BasicConfigurationFile(this, "messages");
     }
 
     @Override
@@ -119,8 +119,6 @@ public class Practice extends JavaPlugin {
         new Metrics(this, 20915);
 
 
-
-
         Arrays.asList(
                 new KitEditorListener(),
                 new PartyListener(),
@@ -144,7 +142,7 @@ public class Practice extends JavaPlugin {
         // Clear the droppedItems for each world
         getServer().getWorlds().forEach(world -> {
             world.setDifficulty(Difficulty.HARD);
-            getEssentials().clearEntities(world);
+            clearEntities(world);
         });
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
@@ -173,6 +171,16 @@ public class Practice extends JavaPlugin {
         System.gc();
     }
 
+    public void clearEntities(World world) {
+        for (Entity entity : world.getEntities()) {
+            if (!(entity.getType() == EntityType.PLAYER)) {
+                continue;
+            }
+
+            entity.remove();
+        }
+    }
+
     private void loadCommandManager() {
         paperCommandManager = new PaperCommandManager(getInstance());
         loadCommandCompletions();
@@ -196,7 +204,7 @@ public class Practice extends JavaPlugin {
                 new ViewInventoryCommand(),
                 new SpectateCommand(),
                 new PartyCommand()
-                ).forEach(command -> paperCommandManager.registerCommand(command));
+        ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 
     private void loadCommandCompletions() {
