@@ -63,7 +63,6 @@ public class Practice extends JavaPlugin {
     private BasicConfigurationFile mainConfig;
     private BasicConfigurationFile arenasConfig;
     private BasicConfigurationFile kitsConfig;
-    private BasicConfigurationFile eventsConfig;
     private BasicConfigurationFile scoreboardConfig;
     private BasicConfigurationFile menusConfig;
     private MongoDatabase mongoDatabase;
@@ -86,7 +85,6 @@ public class Practice extends JavaPlugin {
         mainConfig = new BasicConfigurationFile(this, "config");
         arenasConfig = new BasicConfigurationFile(this, "arenas");
         kitsConfig = new BasicConfigurationFile(this, "kits");
-        eventsConfig = new BasicConfigurationFile(this, "events");
         scoreboardConfig = new BasicConfigurationFile(this, "scoreboard");
         menusConfig = new BasicConfigurationFile(this, "menus");
         this.essentials = new Essentials(this);

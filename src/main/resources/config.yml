@@ -1,22 +1,22 @@
 MONGO:
-  URI: "mongodb+srv://lrxh:KlR0lOFSbtAxanOi@cluster0.st1wrul.mongodb.net/?retryWrites=true&w=majority"
-  DATABASE: "practice"
+  URI:
+  DATABASE:
 RANKED:
   REQUIRED-WINS: 3
   ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins.
     You need {0} more wins!'
 DEFAULT-THEME-COLOR: AQUA
 LEADERBOARD:
-  ENABLE-MESSAGE: True
+  ENABLE-MESSAGE: true
   MESSAGE: '&aLeaderboards Refreshed!'
   UPDATE-TIME: 1
 JOIN_MESSAGE:
   - '&7&m--------------------------------'
   - '&fWelcome to the <theme>Practice Network!'
   - ' '
-  - ' &f✦ <theme>Discord: &fdiscord.gg/server'
-  - ' &f✦ <theme>Twitter: &ftwitter.com/@server'
-  - ' &f✦ <theme>Store: &fstore.server.net'
+  - " &7* <theme>Discord: &fdiscord.gg/server"
+  - " &7* <theme>Twitter: &ftwitter.com/@server"
+  - " &7* <theme>Store: &fstore.server.net"
   - ' '
   - '&7&m--------------------------------'
 PING:
@@ -72,42 +72,6 @@ PARTY:
   LEAVE: <theme>{0} &ehas {1} your party.
   PRIVACY_CHANGE: '&eYour party privacy has been set to &7{0}&e.'
   CHAT_PREFIX: '&c[Party] &r'
-EVENT:
-  HELP:
-    - '&7&m------------------------------------------------'
-    - '&cEvent Help'
-    - '&9/events &7- &7Show events that can be hosted'
-    - '&9/event host <type> &7- &7Host an event by name'
-    - '&9/event info &7- &7Shows active event information'
-    - '&9/event join &7- &7Join the event'
-    - '&9/event leave &7- &7Leave the event'
-    - '&7&m------------------------------------------------'
-  JOIN_BROADCAST:
-    - '&7███████'
-    - '&7██&4███&7██'
-    - '&7██&4█&7████  &c[{0} Event]'
-    - '&7██&4███&7██  &r{1} &eis hosting an event!'
-    - '&7██&4█&7████  &r&7Click to join!'
-    - '&7██&4███&7██'
-    - '&7███████'
-  JOIN_HOVER: '&eClick to join,'
-  PLAYER_JOIN: '&7[&7Event&7] &r{0} &ehas joined the event. &7&o({1}/{2})'
-  PLAYER_LEAVE: '&7[&7Event&7] &r{0} &ehas left the event. &7&o({1}/{2})'
-  PLAYER_VOTE: '&7[&7Event&7] &r{0} &ehas voted for the &7{1} &emap. &7&o({2} votes)'
-  ROUND_START: '&7[&7Event&7] &7{1} &evs &7{2}'
-  ROUND_START_TIMER: '&7[&7Event&7] &7Round {0} &ewill start in &7{1} {2}&e.'
-  ROUND_ELIMINATION: '&7[&7Event&7] &7{0} &e{1} eliminated.'
-  ROUND_OPPONENT: '&7[&7Event&7] &eYour Opponent{0}: &7{1}'
-  STARTED:
-    - '&7[&7Event&7] &7{0} &ehas started. &7&o({1}/{2})'
-  FINISHED:
-    - '&7███████'
-    - '&7██&4███&7██'
-    - '&7██&4█&7████  &c[{0} Event]'
-    - '&7██&4███&7██  &r{1} won the event!'
-    - '&7██&4█&7████  &r&cGood game!'
-    - '&7██&4███&7██'
-    - '&7███████'
 DUEL:
   SENT: '&eYou sent <theme>{1} &ea duel request to &a{0} &eon arena &d{2}&e.'
   SENT_PARTY: '&aYour party sent a &7{0} &cduel request to &7{1}''''s party &c(&7{2}&c)
@@ -177,101 +141,88 @@ HOTBAR_ITEMS:
       MATERIAL: IRON_SWORD
       DURABILITY: 0
       NAME: '&bUnranked Queue &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 0
     QUEUE_JOIN_RANKED:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
       NAME: '&bRanked Queue &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 1
     LEADERBOARDS:
       MATERIAL: EMERALD
       DURABILITY: 0
       NAME: '&bLeaderboards &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 6
     PARTY_CREATE:
       MATERIAL: NAME_TAG
       DURABILITY: 0
       NAME: '&bCreate a Party &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 4
     PROFILE_SETTINGS:
       MATERIAL: PAPER
       DURABILITY: 0
       NAME: '&bProfile Menu &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
       NAME: '&bKit Editor &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
   QUEUEING:
     QUEUE_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Queue &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
-  EVENT:
-    EVENT_LEAVE:
-      MATERIAL: NETHER_STAR
-      DURABILITY: 0
-      NAME: '&cLeave Event &7(Right Click)'
-      LORE: [ ]
-      SLOT: 2
-    MAP_SELECTION:
-      MATERIAL: MAP
-      DURABILITY: 0
-      NAME: '&7» &c%MAP% &7«'
-      LORE: [ ]
-      SLOT: 3
   PARTY:
     PARTY_INFORMATION:
       MATERIAL: NETHER_STAR
       DURABILITY: 0
       NAME: '&bParty Information &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 0
     PARTY_EVENTS:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
       NAME: '&bParty Events &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 1
     OTHER_PARTIES:
       MATERIAL: CHEST
       DURABILITY: 0
       NAME: '&bOther Parties &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 2
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
       NAME: '&bKit Editor &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 7
     PARTY_DISBAND:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cDisaband Party &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
     PARTY_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Party &7(Right Click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
   SPECTATING:
     SPECTATE_STOP:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Match &7(Right click)'
-      LORE: [ ]
+      LORE: []
       SLOT: 8
 ESSENTIAL:
-  SPAWN_LOCATION: world:8558.5:172.0:8983.5:179.93808:-4.879943
+  SPAWN_LOCATION: world:0.5:52.0:0.5:0.68951416:-3.124416

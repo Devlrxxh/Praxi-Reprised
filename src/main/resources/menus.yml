@@ -11,13 +11,13 @@ QUEUES-MENUS:
     LORE:
       - "<description>"
       - " "
-      - " &f• In Fights: &b<playing>"
-      - " &f• Queued: &b<queueing>"
+      - " &f&7* &fIn Fights: &b<playing>"
+      - " &f&7* &fQueued: &b<queueing>"
       - ""
       - "&bTop ELO"
-      - " &c1. &f<lb_1_name_> &7- <lb_1_elo_>"
-      - " &32. &f<lb_2_name_> &7- <lb_2_elo_>"
-      - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
+      - " &c1. &f<lb_1_name_> &7[<lb_1_elo_>]"
+      - " &32. &f<lb_2_name_> &7[<lb_2_elo_>]"
+      - " &63. &f<lb_3_name_> &7[<lb_3_elo_>]"
       - " "
       - " &aClick to here play."
   RANKED:
@@ -26,13 +26,13 @@ QUEUES-MENUS:
     LORE:
       - "<description>"
       - " "
-      - " &f• In Fights: &b<playing>"
-      - " &f• Queued: &b<queueing>"
+      - " &f&7* &fIn Fights: &b<playing>"
+      - " &f&7* &fQueued: &b<queueing>"
       - ""
       - "&bTop ELO"
-      - " &c1. &f<lb_1_name_> &7- <lb_1_elo_>"
-      - " &32. &f<lb_2_name_> &7- <lb_2_elo_>"
-      - " &63. &f<lb_3_name_> &7- <lb_3_elo_>"
+      - " &c1. &f<lb_1_name_> &7[<lb_1_elo_>]"
+      - " &32. &f<lb_2_name_> &7[<lb_2_elo_>]"
+      - " &63. &f<lb_3_name_> &7[<lb_3_elo_>]"
       - " "
       - " &aClick to here play."
 PARTY:
@@ -43,9 +43,9 @@ PARTY:
     FILTER: FILL
     EVENT-COLOR: "&b<event>"
     SELECT-KIT:
-      TITLE: "&6Select a Kit"
+      TITLE: "&7Select a Kit"
   OTHER-PARTIES:
-    TITLE: "&9Other Parties"
+    TITLE: "&7Other Parties"
     SIZE: 27
 KIT-EDITOR:
   TITLE: "&7Select a Kit"
@@ -85,7 +85,7 @@ SETTINGS:
   TITLE: "&7Settings"
   FILTER: FILL # THERE IS FILL AND BRODER
   SETTING-NAME: "&b<settings>"
-  SIZE: 45
+  SIZE: 36
 EVENTS:
   TITLE: "&7Select an event"
   FILTER: FILL # THERE IS FILL AND BRODER
@@ -97,15 +97,21 @@ STATS:
   KIT-NAME: "&a<kit>"
   FILTER: FILL # THERE IS FILL AND BRODER
   LORE:
-    - " &7* &fWins: &b<wins>"
-    - " &7* &fLoses: &b<loses>"
-    - " &7* &fElo: &b<elo>"
+    - "&7&m--------------"
+    - "    &bGlobal Stats"
+    - "       &7* &fWins: &b<wins>"
+    - "    &7* &fLosses: &b<loses>"
+    - "      &7* &fElo: &b<elo>"
+    - "&7&m--------------"
   GLOBAL-STATS:
     GLOBAL-STATS-NAME: "&aGlobal Stats"
     LORE:
-      - " &7* &fWins: &b<wins>"
-      - " &7* &fLoses: &b<loses>"
-      - " &7* &fElo: &b<elo>"
+      - "&7&m--------------"
+      - "     &bUser Stats"
+      - "       &7* &fWins: &b<wins>"
+      - "    &7* &fLosses: &b<loses>"
+      - "      &7* &fElo: &b<elo>"
+      - "&7&m--------------"
 PROFILE-SETTINGS:
   TITLE: "&7Profile Menu"
   SIZE: 27
