@@ -19,6 +19,8 @@ The most configurable, efficient, and extensive practice plugin.
 
  -  ``%practice_leaderboards_update%`` |  Returns time left till leaderboard reload
 
+ -  ``%practice_player_theme%`` |  Returns player's theme
+
 # Credits
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
 ### Joeleoli - Made praxi
