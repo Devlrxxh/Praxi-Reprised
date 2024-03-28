@@ -98,24 +98,24 @@ public enum Locale {
 
     public String format(Object... objects) {
         return new MessageFormat(ChatColor.translateAlternateColorCodes('&',
-                Practice.getInstance().getMainConfig().getString(path))).format(objects);
+                Practice.getInstance().getMessagesConfig().getString(path))).format(objects);
     }
 
     public String format(Player player, Object... objects) {
         ArrayList<String> list = new ArrayList<>();
         list.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&',
-                Practice.getInstance().getMainConfig().getString(path))).format(objects));
+                Practice.getInstance().getMessagesConfig().getString(path))).format(objects));
         return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
     }
 
     public List<String> formatLines(Player player, Object... objects) {
         List<String> lines = new ArrayList<>();
 
-        if (Practice.getInstance().getMainConfig().get(path) instanceof String) {
+        if (Practice.getInstance().getMessagesConfig().get(path) instanceof String) {
             lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&',
-                    Practice.getInstance().getMainConfig().getString(path))).format(objects));
+                    Practice.getInstance().getMessagesConfig().getString(path))).format(objects));
         } else {
-            for (String string : Practice.getInstance().getMainConfig().getStringList(path)) {
+            for (String string : Practice.getInstance().getMessagesConfig().getStringList(path)) {
                 lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&', string))
                         .format(objects));
             }
@@ -127,11 +127,11 @@ public enum Locale {
     public List<String> formatLines(Object... objects) {
         List<String> lines = new ArrayList<>();
 
-        if (Practice.getInstance().getMainConfig().get(path) instanceof String) {
+        if (Practice.getInstance().getMessagesConfig().get(path) instanceof String) {
             lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&',
-                    Practice.getInstance().getMainConfig().getString(path))).format(objects));
+                    Practice.getInstance().getMessagesConfig().getString(path))).format(objects));
         } else {
-            for (String string : Practice.getInstance().getMainConfig().getStringList(path)) {
+            for (String string : Practice.getInstance().getMessagesConfig().getStringList(path)) {
                 lines.add(new MessageFormat(ChatColor.translateAlternateColorCodes('&', string))
                         .format(objects));
             }

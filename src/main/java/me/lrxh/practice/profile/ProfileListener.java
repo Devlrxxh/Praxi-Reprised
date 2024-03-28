@@ -134,7 +134,7 @@ public class ProfileListener implements Listener {
             VisibilityLogic.handle(player, otherPlayer);
             VisibilityLogic.handle(otherPlayer, player);
         }
-        for (String line : Practice.getInstance().getMainConfig().getStringList("JOIN_MESSAGE")) {
+        for (String line : Practice.getInstance().getMessagesConfig().getStringList("JOIN_MESSAGE")) {
             ArrayList<String> list = new ArrayList<>();
             list.add(CC.translate(line));
             player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
