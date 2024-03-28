@@ -1,19 +1,31 @@
 package me.lrxh.practice.commands.user.match;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.command.command.CommandMeta;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = {"spectate", "spec"})
-public class SpectateCommand {
-
-    public void execute(Player player, Player target) {
+@CommandAlias("spectate")
+@Description("Spectate a player.")
+public class SpectateCommand extends BaseCommand {
+    @Default
+    @Syntax("<name>")
+    @CommandCompletion("@names")
+    public void execute(Player player, String targetName) {
         if (player.hasMetadata("frozen")) {
             player.sendMessage(CC.RED + "You cannot spectate while frozen.");
             return;
         }
+        if (Bukkit.getPlayer(targetName) == null) {
+            player.sendMessage(CC.RED + "A player with that name could not be found.");
+            return;
+        }
+
+        Player target = Bukkit.getPlayer(targetName);
 
         if (target == null) {
             player.sendMessage(CC.RED + "A player with that name could not be found.");
@@ -47,4 +59,19 @@ public class SpectateCommand {
         targetProfile.getMatch().addSpectator(player, target);
     }
 
+    @Default
+    @Subcommand("leave")
+    public void leave(Player player) {
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+
+        if (profile.getState() == ProfileState.FIGHTING && profile.getMatch().getGamePlayer(player).isDead()) {
+            profile.getMatch().getGamePlayer(player).setDisconnected(true);
+            profile.setState(ProfileState.LOBBY);
+            profile.setMatch(null);
+        } else if (profile.getState() == ProfileState.SPECTATING) {
+            profile.getMatch().removeSpectator(player);
+        } else {
+            player.sendMessage(CC.RED + "You are not spectating a match.");
+        }
+    }
 }

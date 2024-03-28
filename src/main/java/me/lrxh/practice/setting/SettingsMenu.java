@@ -91,13 +91,6 @@ public class SettingsMenu extends Menu {
                     lore.add(profile.getOptions().pingRange() == 250 ? "&aClick to decrease" : "&aClick to increase");
                     break;
                 }
-                case SHOW_LINES: {
-                    lore.add(profile.getOptions().scoreboardLines() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
-                    lore.add(!profile.getOptions().scoreboardLines() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
-                    lore.add(" ");
-                    lore.add(!profile.getOptions().scoreboardLines() ? "&aClick to enable" : "&aClick to disable");
-                    break;
-                }
                 case ALLOW_DUELS: {
                     lore.add(profile.getOptions().receiveDuelRequests() ? " &7&l▶ &aYes" : " &7&l▶ &7Yes");
                     lore.add(!profile.getOptions().receiveDuelRequests() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
@@ -169,15 +162,6 @@ public class SettingsMenu extends Menu {
                         profile.getOptions().pingRange(10);
                     } else {
                         profile.getOptions().pingRange(profile.getOptions().pingRange() + 10);
-                    }
-                    break;
-                }
-                case SHOW_LINES: {
-                    profile.getOptions().scoreboardLines(!profile.getOptions().scoreboardLines());
-                    if (profile.getOptions().scoreboardLines()) {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_ENABLED.format(player));
-                    } else {
-                        player.sendMessage(Locale.OPTIONS_SCOREBOARD_LINES_DISABLED.format(player));
                     }
                     break;
                 }

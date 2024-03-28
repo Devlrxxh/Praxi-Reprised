@@ -9,6 +9,7 @@ import me.lrxh.practice.util.ItemBuilder;
 import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
 import me.lrxh.practice.util.menu.filters.Filters;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
@@ -20,11 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@AllArgsConstructor
 public class StatsMenu extends Menu {
+    Player target;
 
-    {
-        setAutoUpdate(true);
+    public StatsMenu(String name){
+        this.target = Bukkit.getPlayer(name);
     }
 
     @Override
@@ -61,14 +62,13 @@ public class StatsMenu extends Menu {
     @AllArgsConstructor
     private class GlobalStatsButton extends Button {
         public ItemStack getButtonItem(Player player) {
-
             ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
             SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
-            skullMeta.setOwner(player.getName());
+            skullMeta.setOwner(target.getName());
             head.setItemMeta(skullMeta);
 
             List<String> lore = new ArrayList<>();
-            Profile profile = Profile.getByUuid(player.getUniqueId());
+            Profile profile = Profile.getByUuid(target.getUniqueId());
 
             for (String line : Practice.getInstance().getMenusConfig().getStringList("STATS.GLOBAL-STATS.LORE")) {
                 line = line.replaceAll("<wins>", String.valueOf(profile.getWins()));
@@ -97,7 +97,7 @@ public class StatsMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             List<String> lore = new ArrayList<>();
-            Profile profile = Profile.getByUuid(player.getUniqueId());
+            Profile profile = Profile.getByUuid(target.getUniqueId());
             for (String line : Practice.getInstance().getMenusConfig().getStringList("STATS.LORE")) {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
                 line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));

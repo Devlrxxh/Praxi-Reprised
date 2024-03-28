@@ -26,9 +26,6 @@ public final class PlaceholderUtil {
             line = line.replaceAll("<in-match>", String.valueOf(Practice.getInstance().getCache().getMatches().size() * 2));
             line = line.replaceAll("<player>", player.getName());
             line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
-            if (!profile.getOptions().scoreboardLines()) {
-                line = line.replaceAll("&7&m--------------------", "");
-            }
             line = line.replaceAll("<theme>", CC.translate("&" + profile.getOptions().theme().getColor().getChar()));
 
             if (profile.getState() == ProfileState.QUEUEING) {

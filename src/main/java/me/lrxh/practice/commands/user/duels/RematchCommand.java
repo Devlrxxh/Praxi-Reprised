@@ -1,15 +1,20 @@
 package me.lrxh.practice.commands.user.duels;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "rematch")
-public class RematchCommand {
+@CommandAlias("rematch")
+@Description("Rematch Command.")
+public class RematchCommand extends BaseCommand {
 
-    public void execute(Player player) {
+    @Default
+    @Syntax("<name>")
+    @CommandCompletion("@names")
+    public void execute(Player player, String targetName) {
         if (player.hasMetadata("frozen")) {
             player.sendMessage(CC.RED + "You cannot duel while frozen.");
             return;
@@ -41,5 +46,4 @@ public class RematchCommand {
             rematchData.request();
         }
     }
-
 }

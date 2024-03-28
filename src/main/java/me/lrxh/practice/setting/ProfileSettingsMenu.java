@@ -2,7 +2,6 @@ package me.lrxh.practice.setting;
 
 import lombok.AllArgsConstructor;
 import me.lrxh.practice.Practice;
-import me.lrxh.practice.event.game.menu.EventHostMenu;
 import me.lrxh.practice.menus.StatsMenu;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ItemBuilder;
@@ -40,9 +39,8 @@ public class ProfileSettingsMenu extends Menu {
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
 
-        buttons.put(15, new StatsButton());
-        buttons.put(13, new SettingButton());
-        buttons.put(11, new EventHostButton());
+        buttons.put(14, new StatsButton());
+        buttons.put(12, new SettingButton());
 
         return buttons;
     }
@@ -72,28 +70,6 @@ public class ProfileSettingsMenu extends Menu {
         }
     }
 
-    @AllArgsConstructor
-    private class EventHostButton extends Button {
-
-        @Override
-        public ItemStack getButtonItem(Player player) {
-            List<String> lore = new ArrayList<>();
-            lore.add(CC.translate("&7Host Events."));
-            lore.add(CC.translate(""));
-            lore.add(CC.translate("&aClick to open"));
-
-            return new ItemBuilder(Material.PAPER)
-                    .name("&bEvents")
-                    .lore(lore)
-                    .clearFlags()
-                    .build();
-        }
-
-        @Override
-        public void clicked(Player player, ClickType clickType) {
-            new EventHostMenu().openMenu(player);
-        }
-    }
 
     @AllArgsConstructor
     private class StatsButton extends Button {
@@ -115,7 +91,7 @@ public class ProfileSettingsMenu extends Menu {
 
         @Override
         public void clicked(Player player, ClickType clickType) {
-            new StatsMenu().openMenu(player);
+            new StatsMenu(player.getName()).openMenu(player);
         }
     }
 }

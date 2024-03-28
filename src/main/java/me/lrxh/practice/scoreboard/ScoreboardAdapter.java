@@ -17,15 +17,9 @@ public class ScoreboardAdapter implements AssembleAdapter {
     private int index;
 
     public String getTitle(Player player) {
-        Profile profile = Profile.getByUuid(player.getUniqueId());
         ArrayList<String> list = new ArrayList<>();
-        if (!profile.getOptions().scoreboardLines()) {
-            list.add("   " + getAnimatedText() + "   ");
-            return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
-        } else {
             list.add(getAnimatedText());
             return PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", "");
-        }
     }
 
     public List<String> getLines(Player player) {

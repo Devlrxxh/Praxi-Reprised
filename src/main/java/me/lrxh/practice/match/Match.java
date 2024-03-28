@@ -323,11 +323,11 @@ public abstract class Match {
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
-            if (Practice.getInstance().getSpigotHandler() == null) return;
-            if (kit.getKnockbackProfile() == null) return;
-            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Practice.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
-            }
+//            if (Practice.getInstance().getSpigotHandler() == null) return;
+//            if (kit.getKnockbackProfile() == null) return;
+//            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+//                Practice.getInstance().getSpigotHandler().getKnockback().setKnockback(gamePlayer.getPlayer(), kit.getKnockbackProfile());
+//            }
         }
     }
 

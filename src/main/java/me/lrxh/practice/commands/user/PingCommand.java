@@ -1,10 +1,7 @@
 package me.lrxh.practice.commands.user;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandCompletion;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.*;
 import me.lrxh.practice.Locale;
 import me.lrxh.practice.util.BukkitReflection;
 import org.bukkit.Bukkit;
@@ -20,6 +17,7 @@ public class PingCommand extends BaseCommand {
     }
 
     @Default
+    @Syntax("<name>")
     @CommandCompletion("@names")
     public void pingOthers(Player player, String otherPlayer) {
         player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(Bukkit.getPlayer(otherPlayer)), Bukkit.getPlayer(otherPlayer).getName()));

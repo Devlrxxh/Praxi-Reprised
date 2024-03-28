@@ -199,7 +199,6 @@ public class Profile {
         this.options.allowSpectators(options.getBoolean("allowSpectators"));
         this.options.receiveDuelRequests(options.getBoolean("receiveDuelRequests"));
         this.options.killEffect(KillEffects.valueOf(options.getString("killeffect")));
-        this.options.scoreboardLines(options.getBoolean("scoreboradLines"));
         this.options.showPlayers(options.getBoolean("showPlayers"));
         this.options.theme(Themes.valueOf(options.getString("theme")));
         this.options.pingRange(options.getInteger("pingRange"));
@@ -257,7 +256,6 @@ public class Profile {
         optionsDocument.put("allowSpectators", options.allowSpectators());
         optionsDocument.put("receiveDuelRequests", options.receiveDuelRequests());
         optionsDocument.put("killeffect", options.killEffect().toString());
-        optionsDocument.put("scoreboradLines", options.scoreboardLines());
         optionsDocument.put("showPlayers", options.showPlayers());
         optionsDocument.put("theme", options.theme().toString());
         optionsDocument.put("pingRange", options.pingRange());

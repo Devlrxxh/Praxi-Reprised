@@ -1,11 +1,9 @@
 package me.lrxh.practice.commands.user;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandCompletion;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.*;
 import me.lrxh.practice.menus.StatsMenu;
+import me.lrxh.practice.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,12 +13,17 @@ public class StatsCommand extends BaseCommand {
 
     @Default
     public void open(Player player) {
-        new StatsMenu().openMenu(player);
+        new StatsMenu(player.getName()).openMenu(player);
 
     }
 
+    @Syntax("<name>")
     @CommandCompletion("@names")
     public void statsOthers(Player player, String otherPlayer) {
-        new StatsMenu().openMenu(Bukkit.getPlayer(otherPlayer));
+        if (Bukkit.getPlayer(otherPlayer) == null) {
+            player.sendMessage(CC.translate("&4ERROR - &cPlayer isn't online!"));
+            return;
+        }
+        new StatsMenu(otherPlayer).openMenu(player);
     }
 }
