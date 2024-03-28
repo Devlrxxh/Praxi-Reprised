@@ -1,16 +1,23 @@
 package me.lrxh.practice.commands.user.match;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.Syntax;
 import me.lrxh.practice.match.MatchSnapshot;
 import me.lrxh.practice.match.menu.MatchDetailsMenu;
 import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.command.command.CommandMeta;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-@CommandMeta(label = "viewinv")
-public class ViewInventoryCommand {
+@CommandAlias("viewinv")
+@Description("View post match inventories.")
+public class ViewInventoryCommand extends BaseCommand {
 
+    @Default
+    @Syntax("<uuid>")
     public void execute(Player player, String id) {
         MatchSnapshot cachedInventory;
 
@@ -27,5 +34,4 @@ public class ViewInventoryCommand {
 
         new MatchDetailsMenu(cachedInventory).openMenu(player);
     }
-
 }

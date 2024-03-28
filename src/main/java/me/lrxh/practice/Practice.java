@@ -1,5 +1,6 @@
 package me.lrxh.practice;
 
+
 import co.aikar.commands.BukkitCommandCompletionContext;
 import co.aikar.commands.CommandCompletions;
 import co.aikar.commands.PaperCommandManager;
@@ -8,31 +9,21 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
-import me.lrxh.practice.arena.*;
+import me.lrxh.practice.arena.Arena;
+import me.lrxh.practice.arena.ArenaListener;
 import me.lrxh.practice.arena.command.ArenaCommand;
 import me.lrxh.practice.commands.admin.general.MainCommand;
 import me.lrxh.practice.commands.donater.FlyCommand;
-import me.lrxh.practice.commands.event.map.*;
-import me.lrxh.practice.commands.event.user.HostCommand;
-import me.lrxh.practice.commands.event.vote.EventMapVoteCommand;
 import me.lrxh.practice.commands.user.PingCommand;
 import me.lrxh.practice.commands.user.StatsCommand;
-import me.lrxh.practice.commands.user.duels.DuelAcceptCommand;
 import me.lrxh.practice.commands.user.duels.DuelCommand;
 import me.lrxh.practice.commands.user.duels.RematchCommand;
 import me.lrxh.practice.commands.user.match.SpectateCommand;
-import me.lrxh.practice.commands.user.match.StopSpectatingCommand;
 import me.lrxh.practice.commands.user.match.ViewInventoryCommand;
-import me.lrxh.practice.commands.user.party.*;
+import me.lrxh.practice.commands.user.party.PartyCommand;
 import me.lrxh.practice.essentials.Essentials;
-import me.lrxh.practice.event.Event;
-import me.lrxh.practice.event.EventTypeAdapter;
-import me.lrxh.practice.event.game.EventGameListener;
-import me.lrxh.practice.event.game.map.EventGameMap;
-import me.lrxh.practice.event.game.map.EventGameMapTypeAdapter;
 import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.kit.KitEditorListener;
-import me.lrxh.practice.kit.KitTypeAdapter;
 import me.lrxh.practice.kit.command.KitCommand;
 import me.lrxh.practice.leaderboards.LeaderboardThread;
 import me.lrxh.practice.leaderboards.LeaderboardsCommand;
@@ -52,7 +43,6 @@ import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.Console;
 import me.lrxh.practice.util.InventoryUtil;
 import me.lrxh.practice.util.assemble.Assemble;
-import me.lrxh.practice.util.command.Honcho;
 import me.lrxh.practice.util.config.BasicConfigurationFile;
 import me.lrxh.practice.util.menu.MenuListener;
 import org.bstats.bukkit.Metrics;
@@ -62,7 +52,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.refinedev.api.spigot.SpigotHandler;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -78,13 +67,12 @@ public class Practice extends JavaPlugin {
     private BasicConfigurationFile scoreboardConfig;
     private BasicConfigurationFile menusConfig;
     private MongoDatabase mongoDatabase;
-    private Honcho honcho;
     private Essentials essentials;
     private Cache cache;
     private PaperCommandManager paperCommandManager;
     private Assemble assemble;
     private boolean placeholder = false;
-    private SpigotHandler spigotHandler;
+    //private SpigotHandler spigotHandler;
     private Hotbar hotbar;
 
     public static Practice getInstance() {
@@ -109,13 +97,12 @@ public class Practice extends JavaPlugin {
         long oldTime = System.currentTimeMillis();
         practice = this;
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
-        honcho = new Honcho(this);
         loadConfigs();
         loadMongo();
-        spigotHandler = new SpigotHandler(practice);
-        if (Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].equals("v1_8_R3")) {
-            spigotHandler.init(false);
-        }
+//        spigotHandler = new SpigotHandler(practice);
+//        if (Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3].equals("v1_8_R3")) {
+//            spigotHandler.init(false);
+//        }
 
         cache = new Cache();
         hotbar = new Hotbar();
@@ -125,45 +112,15 @@ public class Practice extends JavaPlugin {
         Profile.init();
         Match.init();
         Party.init();
-        Event.init();
-        EventGameMap.init();
         loadCommandManager();
         assemble = new Assemble(this, new ScoreboardAdapter());
         new QueueThread().start();
         new LeaderboardThread().start();
         new Metrics(this, 20915);
 
-        getHoncho().registerTypeAdapter(Arena.class, new ArenaTypeAdapter());
-        getHoncho().registerTypeAdapter(ArenaType.class, new ArenaTypeTypeAdapter());
-        getHoncho().registerTypeAdapter(Kit.class, new KitTypeAdapter());
-        getHoncho().registerTypeAdapter(EventGameMap.class, new EventGameMapTypeAdapter());
-        getHoncho().registerTypeAdapter(Event.class, new EventTypeAdapter());
 
-        Arrays.asList(
-                new DuelCommand(),
-                new DuelAcceptCommand(),
-                new EventMapCreateCommand(),
-                new EventMapDeleteCommand(),
-                new EventMapsCommand(),
-                new EventMapSetSpawnCommand(),
-                new EventMapStatusCommand(),
-                new EventMapVoteCommand(),
-                new RematchCommand(),
-                new SpectateCommand(),
-                new StopSpectatingCommand(),
-                new PartyChatCommand(),
-                new PartyCloseCommand(),
-                new PartyCreateCommand(),
-                new PartyDisbandCommand(),
-                new PartyHelpCommand(),
-                new PartyInfoCommand(),
-                new PartyInviteCommand(),
-                new PartyJoinCommand(),
-                new PartyKickCommand(),
-                new PartyLeaveCommand(),
-                new PartyOpenCommand(),
-                new ViewInventoryCommand()
-        ).forEach(command -> getHoncho().registerCommand(command));
+
+
         Arrays.asList(
                 new KitEditorListener(),
                 new PartyListener(),
@@ -171,8 +128,7 @@ public class Practice extends JavaPlugin {
                 new PartyListener(),
                 new MatchListener(),
                 new QueueListener(),
-                new ArenaListener(),
-                new EventGameListener()
+                new ArenaListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
 
@@ -207,9 +163,9 @@ public class Practice extends JavaPlugin {
         Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7| &fKits: &c" + Kit.getKits().size()));
         Console.sendMessage(CC.translate("&7| &fArenas: &c" + Arena.getArenas().size()));
-        if (spigotHandler != null) {
-            Console.sendMessage(CC.translate("&7| &fKB Controller: &c" + spigotHandler.getType()));
-        }
+//        if (spigotHandler != null) {
+//            Console.sendMessage(CC.translate("&7| &fKB Controller: &c" + spigotHandler.getType()));
+//        }
         Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7| &fPlugin Loaded in : &c" + (System.currentTimeMillis() - oldTime) + "ms"));
         Console.sendMessage(CC.translate(" "));
@@ -224,18 +180,23 @@ public class Practice extends JavaPlugin {
     }
 
     private void registerCommands() {
+
         Arrays.asList(
                 new ArenaCommand(),
                 new MainCommand(),
                 new KitCommand(),
                 new FlyCommand(),
                 new SettingsCommand(),
-                new HostCommand(),
+                new DuelCommand(),
                 new PingCommand(),
                 new StatsCommand(),
                 new ProfileSettingsCommand(),
-                new LeaderboardsCommand()
-        ).forEach(command -> paperCommandManager.registerCommand(command));
+                new LeaderboardsCommand(),
+                new RematchCommand(),
+                new ViewInventoryCommand(),
+                new SpectateCommand(),
+                new PartyCommand()
+                ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 
     private void loadCommandCompletions() {
@@ -243,8 +204,6 @@ public class Practice extends JavaPlugin {
         commandCompletions.registerCompletion("names", c -> Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("arenas", c -> Arena.getArenas().stream().map(Arena::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("kits", c -> Kit.getKits().stream().map(Kit::getName).collect(Collectors.toList()));
-        commandCompletions.registerCompletion("events", c -> Event.events.stream().map(Event::getDisplayName).collect(Collectors.toList()));
-        commandCompletions.registerCompletion("maps", c -> EventGameMap.getMaps().stream().map(EventGameMap::getMapName).collect(Collectors.toList()));
     }
 
     @Override
