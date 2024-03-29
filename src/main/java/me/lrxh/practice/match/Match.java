@@ -234,7 +234,7 @@ public abstract class Match {
                     Profile profile = Profile.getByUuid(player.getUniqueId());
                     profile.setState(ProfileState.FIGHTING);
                     profile.setMatch(this);
-
+                    profile.getDuelRequests().clear();
                     setupPlayer(player);
                 }
             }
