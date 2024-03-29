@@ -192,25 +192,6 @@ public abstract class Match {
     }
 
 
-    public ArrayList<Player> getOpponent(Player player, boolean yes) {
-        yes = false;
-        ArrayList<Player> players = new ArrayList<>();
-        GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(player);
-        if (playerParticipant != null) {
-            for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-                if (!gameParticipant.equals(playerParticipant)) {
-                    for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                        if (!gamePlayer.isDisconnected()) {
-                            players.add(player);
-                        }
-                    }
-                }
-                return players;
-            }
-        }
-        return null;
-    }
-
     public void start() {
         // Set state
         state = MatchState.STARTING_ROUND;

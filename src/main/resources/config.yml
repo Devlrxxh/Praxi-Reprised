@@ -16,88 +16,88 @@ HOTBAR_ITEMS:
       MATERIAL: IRON_SWORD
       DURABILITY: 0
       NAME: '&bUnranked Queue &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 0
     QUEUE_JOIN_RANKED:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
       NAME: '&bRanked Queue &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 1
     LEADERBOARDS:
       MATERIAL: EMERALD
       DURABILITY: 0
       NAME: '&bLeaderboards &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 6
     PARTY_CREATE:
       MATERIAL: NAME_TAG
       DURABILITY: 0
       NAME: '&bCreate a Party &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 4
     PROFILE_SETTINGS:
       MATERIAL: PAPER
       DURABILITY: 0
       NAME: '&bProfile Menu &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
       NAME: '&bKit Editor &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
   QUEUEING:
     QUEUE_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Queue &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
   PARTY:
     PARTY_INFORMATION:
       MATERIAL: NETHER_STAR
       DURABILITY: 0
       NAME: '&bParty Information &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 0
     PARTY_EVENTS:
       MATERIAL: DIAMOND_SWORD
       DURABILITY: 0
       NAME: '&bParty Events &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 1
     OTHER_PARTIES:
       MATERIAL: CHEST
       DURABILITY: 0
       NAME: '&bOther Parties &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 2
     KIT_EDITOR:
       MATERIAL: BOOK
       DURABILITY: 0
       NAME: '&bKit Editor &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 7
     PARTY_DISBAND:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cDisaband Party &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
     PARTY_LEAVE:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Party &7(Right Click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
   SPECTATING:
     SPECTATE_STOP:
       MATERIAL: INK_SACK
       DURABILITY: 1
       NAME: '&cLeave Match &7(Right click)'
-      LORE: []
+      LORE: [ ]
       SLOT: 8
 ESSENTIAL:
   SPAWN_LOCATION: world:0.5:52.0:0.5:0.68951416:-3.124416

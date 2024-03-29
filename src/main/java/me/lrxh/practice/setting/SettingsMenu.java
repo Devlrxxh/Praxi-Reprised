@@ -5,6 +5,7 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.KillEffects;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.Themes;
+import me.lrxh.practice.profile.Times;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ItemBuilder;
@@ -83,6 +84,15 @@ public class SettingsMenu extends Menu {
                     lore.add(!profile.getOptions().menuSounds() ? " &7&l▶ &cNo" : " &7&l▶ &7No");
                     lore.add(" ");
                     lore.add(!profile.getOptions().menuSounds() ? "&aClick to enable" : "&aClick to disable");
+                    break;
+                }
+                case TIME_CHANGE: {
+                    lore.add(profile.getOptions().time().equals(Times.DAY) ? " &7&l▶ &aDay" : " &7&l▶ &7Day");
+                    lore.add(profile.getOptions().time().equals(Times.NIGHT) ? " &7&l▶ &aNight" : " &7&l▶ &7Night");
+                    lore.add(profile.getOptions().time().equals(Times.SUNRISE) ? " &7&l▶ &aSunrise" : " &7&l▶ &7Sunrise");
+                    lore.add(profile.getOptions().time().equals(Times.SUNSET) ? " &7&l▶ &aSunset" : " &7&l▶ &7Sunset");
+                    lore.add("");
+                    lore.add("&aClick to select");
                     break;
                 }
                 case PING_RANGE: {
@@ -181,6 +191,25 @@ public class SettingsMenu extends Menu {
                     } else {
                         player.sendMessage(Locale.OPTIONS_SPECTATORS_DISABLED.format(player));
                     }
+                    break;
+                }
+                case TIME_CHANGE: {
+                    switch (profile.getOptions().time()) {
+                        case DAY:
+                            profile.getOptions().time(Times.NIGHT);
+                            break;
+                        case NIGHT:
+                            profile.getOptions().time(Times.SUNRISE);
+                            break;
+                        case SUNRISE:
+                            profile.getOptions().time(Times.SUNSET);
+                            break;
+                        case SUNSET:
+                            profile.getOptions().time(Times.DAY);
+                            break;
+                    }
+                    player.setPlayerTime(profile.getOptions().time().getTime(), false);
+                    player.sendMessage(Locale.OPTIONS_TIME_SELECT.format(player, profile.getOptions().time().getName()));
                     break;
                 }
                 case SHOW_PLAYERS: {
