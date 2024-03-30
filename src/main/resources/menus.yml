@@ -129,3 +129,11 @@ LEADERBOARD:
       - " &7* &fWins: &b<wins>"
       - " &7* &fLoses: &b<loses>"
       - " &7* &fElo: &b<elo>"
+SHOP-MENU:
+  TITLE: "&7Coin shop"
+  SIZE: 27
+  FILTER: FILL # THERE IS FILL AND BRODER
+SHOP:
+  TITLE: "&7Coin shop"
+  SIZE: 27
+  FILTER: FILL # THERE IS FILL AND BRODER

@@ -66,10 +66,7 @@ public class QueueSelectKitMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            ArrayList<String> lore = new ArrayList<>();
-
-            lore.add(CC.translate("&7Click to queue a random kit"));
-            return new ItemBuilder(Material.REDSTONE_COMPARATOR).name("&aRandom Queue").lore(lore).clearEnchantments().clearFlags().clearFlags().build();
+            return new ItemBuilder(Material.REDSTONE_COMPARATOR).name("&aRandom Queue").clearEnchantments().clearFlags().clearFlags().build();
         }
 
         @Override

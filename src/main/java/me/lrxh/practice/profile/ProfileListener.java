@@ -129,6 +129,7 @@ public class ProfileListener implements Listener {
         Profile.getProfiles().put(player.getUniqueId(), profile);
 
         PlayerUtil.teleportToSpawn(player);
+        player.setPlayerTime(profile.getOptions().time().getTime(), false);
 
         for (Player otherPlayer : Bukkit.getOnlinePlayers()) {
             VisibilityLogic.handle(player, otherPlayer);
@@ -145,7 +146,6 @@ public class ProfileListener implements Listener {
             player.setFlying(true);
             player.updateInventory();
         }
-        player.setPlayerTime(profile.getOptions().time().getTime(), false);
         new BukkitRunnable() {
             @Override
             public void run() {

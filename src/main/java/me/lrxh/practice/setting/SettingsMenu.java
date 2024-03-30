@@ -41,7 +41,7 @@ public class SettingsMenu extends Menu {
 
     @Override
     public Filters getFilter() {
-        return Filters.FILL;
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("SETTINGS.FILTER"));
     }
 
     public boolean resetCursor() {

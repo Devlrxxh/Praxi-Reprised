@@ -13,7 +13,7 @@ public enum Settings {
     KILL_EFFECTS("Kill Effects", Material.DIAMOND_AXE, "Select Kill Effect."),
     THEME("Select Theme", Material.BOOK, "Select Color Theme."),
     PING_RANGE("Ping Range", Material.STICK, "Change Ping Range."),
-    TIME_CHANGE("Change Time", Material.LEVER, "Change Ping Range."),
+    TIME_CHANGE("Change Time", Material.WATCH, "Change Ping Range."),
     MENU_SOUNDS("Menu Sounds", Material.REDSTONE_COMPARATOR, "Toggle Menu Sounds.");
 
     private final String name;
