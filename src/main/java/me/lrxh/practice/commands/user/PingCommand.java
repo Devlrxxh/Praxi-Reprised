@@ -6,6 +6,8 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.util.BukkitReflection;
+import me.lrxh.practice.util.CC;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("ping")
@@ -29,5 +31,12 @@ public class PingCommand extends BaseCommand {
     @Syntax("<name>")
     @CommandCompletion("@names")
     public void pingOthers(Player player, String otherPlayer) {
+        if (Bukkit.getPlayer(otherPlayer) == null) {
+            player.sendMessage(CC.translate("&4ERROR - &cPlayer isn't online!"));
+            return;
+        }
+        Player otherP = Bukkit.getPlayer(otherPlayer);
+        player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(otherP), otherP.getName()));
+
     }
 }
