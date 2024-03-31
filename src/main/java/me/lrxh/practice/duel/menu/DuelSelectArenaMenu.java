@@ -103,6 +103,10 @@ public class DuelSelectArenaMenu extends Menu {
             // Set closed by menu
             Menu.currentlyOpenedMenus.get(player.getName()).setClosedByMenu(true);
 
+            // Play Sound
+
+            Button.playSuccess(player);
+
             // Force close inventory
             player.closeInventory();
         }

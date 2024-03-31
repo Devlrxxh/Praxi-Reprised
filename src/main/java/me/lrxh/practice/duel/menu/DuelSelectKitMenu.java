@@ -33,7 +33,6 @@ public class DuelSelectKitMenu extends Menu {
         return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("DUEL.FILTER"));
     }
 
-
     @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
@@ -86,6 +85,9 @@ public class DuelSelectKitMenu extends Menu {
 
             // Force close inventory
             player.closeInventory();
+
+            // Play Sound
+            Button.playNeutral(player);
 
             // Open arena selection menu
             new DuelSelectArenaMenu().openMenu(player);

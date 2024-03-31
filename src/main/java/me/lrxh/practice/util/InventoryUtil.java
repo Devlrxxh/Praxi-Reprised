@@ -40,9 +40,9 @@ public class InventoryUtil {
         int slotsPerRow = 9;
         int rows = (int) Math.ceil((double) numberOfItems / slotsPerRow);
         rows = Math.max(rows, 1);
-        if(filling){
+        if (filling) {
             return rows * slotsPerRow + 18;
-        }else{
+        } else {
             return rows * slotsPerRow;
         }
     }
