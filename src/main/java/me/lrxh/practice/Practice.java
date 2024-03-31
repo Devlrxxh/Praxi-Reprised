@@ -30,6 +30,7 @@ import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchListener;
 import me.lrxh.practice.party.Party;
 import me.lrxh.practice.party.PartyListener;
+import me.lrxh.practice.profile.KillEffects;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileListener;
 import me.lrxh.practice.profile.hotbar.Hotbar;
@@ -52,7 +53,10 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -185,6 +189,7 @@ public class Practice extends JavaPlugin {
         paperCommandManager = new PaperCommandManager(getInstance());
         loadCommandCompletions();
         registerCommands();
+        registerPermissions();
     }
 
     private void registerCommands() {
@@ -212,6 +217,19 @@ public class Practice extends JavaPlugin {
         commandCompletions.registerCompletion("names", c -> Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("arenas", c -> Arena.getArenas().stream().map(Arena::getName).collect(Collectors.toList()));
         commandCompletions.registerCompletion("kits", c -> Kit.getKits().stream().map(Kit::getName).collect(Collectors.toList()));
+    }
+
+    private void registerPermissions() {
+        PluginManager pluginManager = getServer().getPluginManager();
+        for (KillEffects killEffects : KillEffects.values()) {
+            pluginManager.addPermission(new Permission("practice.killeffect." + killEffects.getDisplayName(), PermissionDefault.OP));
+        }
+        Arrays.asList(
+                "practice.admin.arena",
+                "practice.donor.fly",
+                "practice.admin.main",
+                "practice.admin.kit"
+        ).forEach(permission -> pluginManager.addPermission(new Permission(permission, PermissionDefault.OP)));
     }
 
     @Override
