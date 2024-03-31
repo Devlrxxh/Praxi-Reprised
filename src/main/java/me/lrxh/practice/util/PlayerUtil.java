@@ -1,8 +1,5 @@
 package me.lrxh.practice.util;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.SpawnTeleportEvent;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
@@ -144,7 +141,7 @@ public class PlayerUtil {
                     ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityStatus());
                 }
             }
-            } catch(Exception ignored){
-            }
+        } catch (Exception ignored) {
         }
     }
+}

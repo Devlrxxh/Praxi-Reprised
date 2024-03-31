@@ -1,8 +1,5 @@
 package me.lrxh.practice.match;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
 import lombok.Getter;
 import lombok.Setter;
 import me.lrxh.practice.Locale;
@@ -31,7 +28,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.util.Vector;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -479,7 +475,6 @@ public abstract class Match {
         for (Player player : getSpectatorsAsPlayers()) {
             VisibilityLogic.handle(player, dead);
             sendDeathMessage(player, dead, killer);
-            sendDeathPackets(player, dead.getLocation());
         }
 
         if (canEndRound()) {
@@ -642,52 +637,6 @@ public abstract class Match {
 
     public abstract List<BaseComponent[]> generateEndComponents();
 
-    public void sendDeathPackets(Player player, Location location) {
-        PacketContainer lightningPacket = new PacketContainer(PacketType.Play.Server.SPAWN_ENTITY_WEATHER);
-        lightningPacket.getIntegers().write(0, -500)
-                .write(1, MathHelper.floor(location.getX() * 32.0D))
-                .write(2, MathHelper.floor(location.getX() * 32.0D))
-                .write(3, MathHelper.floor(location.getX() * 32.0D))
-                .write(4, 0);
-
-        PacketContainer statusPacket = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
-        statusPacket.getIntegers().write(0, player.getEntityId());
-        statusPacket.getBytes().write(0, (byte) 3);
-
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                if (!gamePlayer.isDisconnected()) {
-                    Player bukkitPlayer = gamePlayer.getPlayer();
-
-                    if (bukkitPlayer != null) {
-                        try {
-                            ProtocolLibrary.getProtocolManager().sendServerPacket(bukkitPlayer, lightningPacket);
-
-                            if (!bukkitPlayer.equals(player)) {
-                                ProtocolLibrary.getProtocolManager().sendServerPacket(bukkitPlayer, statusPacket);
-                            }
-                        } catch (InvocationTargetException ignored) {
-                        }
-
-                        bukkitPlayer.playSound(location, Sound.AMBIENCE_THUNDER, 1.0F, 1.0F);
-                    }
-                }
-            }
-        }
-
-        for (Player spectator : getSpectatorsAsPlayers()) {
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(spectator, lightningPacket);
-
-                if (!spectator.equals(player)) {
-                    ProtocolLibrary.getProtocolManager().sendServerPacket(spectator, statusPacket);
-                }
-            } catch (InvocationTargetException ignored) {
-            }
-
-            spectator.playSound(location, Sound.AMBIENCE_THUNDER, 1.0F, 1.0F);
-        }
-    }
 
     public void sendDeathMessage(Player player, Player dead, Player killer) {
         String deathMessage;

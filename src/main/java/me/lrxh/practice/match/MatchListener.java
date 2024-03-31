@@ -553,8 +553,6 @@ public class MatchListener implements Listener {
 
             if (!profile.isEnderpearlOnCooldown()) {
                 profile.setEnderpearlCooldown(new Cooldown(16_000));
-
-
             } else {
                 event.setCancelled(true);
                 shooter.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));

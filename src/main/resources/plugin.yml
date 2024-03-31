@@ -3,7 +3,5 @@ name: Practice
 version: '1.0.0'
 author: funkyranveer, joeleoli, lugami, lrxh
 load: POSTWORLD
-depend:
-  - ProtocolLib
 softdepend:
   - PlaceholderAPI

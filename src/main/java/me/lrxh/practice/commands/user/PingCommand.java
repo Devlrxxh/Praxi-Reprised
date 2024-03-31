@@ -6,7 +6,6 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.util.BukkitReflection;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("ping")
@@ -17,11 +16,11 @@ public class PingCommand extends BaseCommand {
     public void ping(Player player) {
         Profile profile = Profile.getProfiles().get(player.getUniqueId());
 
-        if(profile.getMatch() != null){
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             player.sendMessage(Locale.PING_YOUR.format(player, BukkitReflection.getPing(player)));
             player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(match.getOpponent(player)), match.getOpponent(player).getName()));
-        }else {
+        } else {
             player.sendMessage(Locale.PING_YOUR.format(player, BukkitReflection.getPing(player)));
         }
     }

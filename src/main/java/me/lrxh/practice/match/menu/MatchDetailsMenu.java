@@ -11,6 +11,7 @@ import me.lrxh.practice.util.menu.Menu;
 import me.lrxh.practice.util.menu.button.DisplayButton;
 import me.lrxh.practice.util.menu.filters.Filters;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -172,7 +173,7 @@ public class MatchDetailsMenu extends Menu {
 
             if (snapshot != null) {
                 return new ItemBuilder(Material.ARROW)
-                        .name("&7Press to switch to other inventory.")
+                        .name("&7Press to switch to " + Bukkit.getPlayer(opponent).getName() + " inventory.")
                         .lore("&aClick to Switch")
                         .clearFlags()
                         .build();

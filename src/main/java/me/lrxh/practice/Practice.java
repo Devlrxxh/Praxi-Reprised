@@ -75,6 +75,7 @@ public class Practice extends JavaPlugin {
     private boolean placeholder = false;
     //private SpigotHandler spigotHandler;
     private Hotbar hotbar;
+
     public static Practice getInstance() {
         if (practice == null) {
             practice = new Practice();

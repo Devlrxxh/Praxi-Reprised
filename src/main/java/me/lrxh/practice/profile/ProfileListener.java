@@ -167,7 +167,7 @@ public class ProfileListener implements Listener {
             }
         }.runTaskAsynchronously(Practice.getInstance());
 
-        if (profile.getState().equals(ProfileState.FIGHTING)) {
+        if (profile.getMatch() != null) {
             profile.getMatch().end();
 
         }
