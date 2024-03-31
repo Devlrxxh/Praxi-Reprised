@@ -29,6 +29,8 @@ OPTIONS:
   TIME_SELECT: '&aYou have selected {0}!'
   MENU_SOUNDS_ENABLED: '&aEnabled Menu sounds!'
   MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
+LEADERBOARD:
+  MESSAGE: '&aLeaderboards Refreshed!'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'
