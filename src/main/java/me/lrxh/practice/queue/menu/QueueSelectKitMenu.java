@@ -53,7 +53,7 @@ public class QueueSelectKitMenu extends Menu {
                 buttons.put(i++, new SelectKitButton(queue));
             }
         }
-//        buttons.put(4, new SelectQueueButton(ranked));
+        //buttons.put(4, new SelectQueueButton(ranked));
         return buttons;
     }
 
@@ -97,6 +97,7 @@ public class QueueSelectKitMenu extends Menu {
             configLore.forEach(line -> {
                 line = line.replaceAll("<playing>", String.valueOf(Match.getInFightsCount(queue)));
                 line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
+                line = line.replaceAll("<kit>", queue.getKit().getName());
                 line = replaceLeaderboardPlaceholders(line, queue);
                 if (!line.contains("<description>") || !queue.getKit().getDescription().equalsIgnoreCase("none")) {
                     line = line.replaceAll("<description>", queue.getKit().getDescription());

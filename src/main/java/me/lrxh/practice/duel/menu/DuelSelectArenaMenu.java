@@ -5,6 +5,7 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.arena.ArenaType;
 import me.lrxh.practice.profile.Profile;
+import me.lrxh.practice.util.InventoryUtil;
 import me.lrxh.practice.util.ItemBuilder;
 import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DuelSelectArenaMenu extends Menu {
+    Map<Integer, Button> buttons = new HashMap<>();
 
     @Override
     public String getTitle(Player player) {
@@ -26,7 +28,7 @@ public class DuelSelectArenaMenu extends Menu {
 
     @Override
     public int getSize() {
-        return Practice.getInstance().getMenusConfig().getInteger("DUEL.ARENA-SELECTOR.SIZE");
+        return InventoryUtil.getMenuSize(buttons.size(), true);
     }
 
     @Override
@@ -38,7 +40,6 @@ public class DuelSelectArenaMenu extends Menu {
     public Map<Integer, Button> getButtons(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
-        Map<Integer, Button> buttons = new HashMap<>();
         int i = 10;
 
         for (Arena arena : Arena.getArenas()) {

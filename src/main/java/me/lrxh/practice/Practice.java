@@ -33,6 +33,7 @@ import me.lrxh.practice.party.PartyListener;
 import me.lrxh.practice.profile.KillEffects;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileListener;
+import me.lrxh.practice.profile.Themes;
 import me.lrxh.practice.profile.hotbar.Hotbar;
 import me.lrxh.practice.queue.QueueListener;
 import me.lrxh.practice.queue.QueueThread;
@@ -221,8 +222,11 @@ public class Practice extends JavaPlugin {
 
     private void registerPermissions() {
         PluginManager pluginManager = getServer().getPluginManager();
-        for (KillEffects killEffects : KillEffects.values()) {
-            pluginManager.addPermission(new Permission("practice.killeffect." + killEffects.getDisplayName(), PermissionDefault.OP));
+        for (KillEffects killEffect : KillEffects.values()) {
+            pluginManager.addPermission(new Permission("practice.killeffect." + killEffect.getDisplayName(), PermissionDefault.OP));
+        }
+        for (Themes theme : Themes.values()) {
+            pluginManager.addPermission(new Permission("practice.theme." + theme.getName(), PermissionDefault.OP));
         }
         Arrays.asList(
                 "practice.admin.arena",

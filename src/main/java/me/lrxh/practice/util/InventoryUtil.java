@@ -36,6 +36,17 @@ public class InventoryUtil {
         return builder.toString();
     }
 
+    public static int getMenuSize(int numberOfItems, boolean filling) {
+        int slotsPerRow = 9;
+        int rows = (int) Math.ceil((double) numberOfItems / slotsPerRow);
+        rows = Math.max(rows, 1);
+        if(filling){
+            return rows * slotsPerRow + 18;
+        }else{
+            return rows * slotsPerRow;
+        }
+    }
+
     public static ItemStack[] deserializeInventory(String source) {
         List<ItemStack> items = new ArrayList<>();
         String[] split = source.split(";");

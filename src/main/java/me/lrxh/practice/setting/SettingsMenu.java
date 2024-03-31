@@ -245,7 +245,7 @@ public class SettingsMenu extends Menu {
                     break;
                 }
                 case THEME: {
-                    if (!player.hasPermission("practice.options.theme.selector")) {
+                    if (!player.hasPermission("practice.theme." + profile.getOptions().theme().getName())) {
                         player.sendMessage(CC.translate("&cYou don't have permission to use the theme selector"));
                         break;
                     }
