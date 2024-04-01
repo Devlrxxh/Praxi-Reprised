@@ -112,7 +112,7 @@ public class QueueSelectKitMenu extends Menu {
                     .replace("<kit>", queue.getKit().getName())
                     .replace("<type>", ranked ? "Unranked" : "Ranked");
 
-            if(queue.getQueuing() > 0){
+            if (queue.getQueuing() > 0) {
                 return new ItemBuilder(queue.getKit().getDisplayIcon())
                         .name(kitName)
                         .lore(lore)
@@ -120,7 +120,7 @@ public class QueueSelectKitMenu extends Menu {
                         .enchantment(Enchantment.DURABILITY)
                         .clearFlags()
                         .build();
-            }else{
+            } else {
                 return new ItemBuilder(queue.getKit().getDisplayIcon())
                         .name(kitName)
                         .lore(lore)

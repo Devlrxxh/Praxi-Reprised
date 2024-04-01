@@ -1,9 +1,6 @@
 package me.lrxh.practice.queue;
 
 import lombok.Data;
-import me.lrxh.practice.Locale;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 

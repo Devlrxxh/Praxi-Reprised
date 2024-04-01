@@ -28,6 +28,12 @@ public final class PlaceholderUtil {
             line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
             line = line.replaceAll("<theme>", CC.translate("&" + profile.getOptions().theme().getColor().getChar()));
 
+            if (line.contains("<silent>") && !profile.isSilent()){
+                continue;
+            }else{
+                line = line.replaceAll("<silent>", "&7&lSilent Mode");
+            }
+
             if (profile.getState() == ProfileState.QUEUEING) {
                 line = line.replaceAll("<kit>", queueProfile.getQueue().getKit().getName());
                 line = line.replaceAll("<type>", queueProfile.getQueue().isRanked() ? "Ranked" : "Unranked");

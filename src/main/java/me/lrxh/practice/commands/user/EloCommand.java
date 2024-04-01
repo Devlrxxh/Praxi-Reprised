@@ -2,12 +2,9 @@ package me.lrxh.practice.commands.user;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
-import me.lrxh.practice.match.Match;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.queue.Queue;
-import me.lrxh.practice.util.BukkitReflection;
 import me.lrxh.practice.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,7 +20,7 @@ public class EloCommand extends BaseCommand {
         player.sendMessage(CC.translate("&eYour elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
-                player.sendMessage(CC.translate("&c✦ &e"+ queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
+                player.sendMessage(CC.translate("&c✦ &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
         player.sendMessage(CC.translate("&f&m---------------------------"));
@@ -44,7 +41,7 @@ public class EloCommand extends BaseCommand {
         player.sendMessage(CC.translate("&e" + otherPlayer + "'s elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
-                player.sendMessage(CC.translate("&c✦ &e"+ queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
+                player.sendMessage(CC.translate("&c✦ &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
         player.sendMessage(CC.translate("&f&m---------------------------"));

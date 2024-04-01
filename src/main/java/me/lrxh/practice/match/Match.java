@@ -551,7 +551,9 @@ public abstract class Match {
 
                     if (bukkitPlayer != null) {
                         VisibilityLogic.handle(bukkitPlayer);
-                        bukkitPlayer.sendMessage(Locale.MATCH_NOW_SPECTATING.format(bukkitPlayer, spectator.getName()));
+                        if(!profile.isSilent()){
+                            bukkitPlayer.sendMessage(Locale.MATCH_NOW_SPECTATING.format(bukkitPlayer, spectator.getName()));
+                        }
                     }
                 }
             }

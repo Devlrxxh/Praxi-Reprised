@@ -52,7 +52,7 @@ public class Profile {
     private QueueProfile queueProfile;
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
-
+    private boolean silent = false;
     public Profile(UUID uuid) {
         this.uuid = uuid;
         this.username = Bukkit.getPlayer(uuid).getName();

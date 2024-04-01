@@ -13,6 +13,7 @@ import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.arena.ArenaListener;
 import me.lrxh.practice.arena.command.ArenaCommand;
 import me.lrxh.practice.commands.admin.general.MainCommand;
+import me.lrxh.practice.commands.admin.general.SilentCommand;
 import me.lrxh.practice.commands.donater.FlyCommand;
 import me.lrxh.practice.commands.user.EloCommand;
 import me.lrxh.practice.commands.user.PingCommand;
@@ -211,7 +212,8 @@ public class Practice extends JavaPlugin {
                 new ViewInventoryCommand(),
                 new SpectateCommand(),
                 new PartyCommand(),
-                new EloCommand()
+                new EloCommand(),
+                new SilentCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

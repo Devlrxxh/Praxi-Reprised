@@ -8,7 +8,7 @@ import me.lrxh.practice.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-@CommandAlias("spectate")
+@CommandAlias("spectate|spec")
 @Description("Spectate a player.")
 public class SpectateCommand extends BaseCommand {
     @Default
@@ -45,7 +45,7 @@ public class SpectateCommand extends BaseCommand {
 
         Profile targetProfile = Profile.getByUuid(target.getUniqueId());
 
-        if (targetProfile == null || targetProfile.getState() != ProfileState.FIGHTING) {
+        if (targetProfile.getState() != ProfileState.FIGHTING) {
             player.sendMessage(CC.RED + "That player is not in a match.");
             return;
         }
