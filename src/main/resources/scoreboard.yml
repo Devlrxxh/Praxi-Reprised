@@ -18,7 +18,7 @@ LOBBY:
   - "&fOnline: <theme><online>"
   - "&fIn Fights: <theme><in-match>"
   - "&fIn Queue: <theme><queued>"
-  - " "
+  - "<silent>"
   - "<theme>server.net"
   - "&7&m--------------------"
 IN-PARTY:
@@ -30,7 +30,7 @@ IN-PARTY:
   - "<theme>Party:"
   - " • &fLeader: <theme><leader>"
   - " • &fSize: <theme><party-size>"
-  - " "
+  - "<silent>"
   - "<theme>server.net"
   - "&7&m--------------------"
 QUEUE:
@@ -43,7 +43,7 @@ QUEUE:
     - "<theme>Unranked Queue"
     - " • &fKit: <theme><kit>"
     - " • &fTime: <theme><time>"
-    - ""
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
   RANKED:
@@ -55,14 +55,14 @@ QUEUE:
     - "&fQueuing: <theme><kit>"
     - "&fElapsed: <theme><time>"
     - "&fElo: <theme>[<minElo>-<maxElo>]"
-    - ""
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
 MATCH:
   STARTING:
     - "&7&m--------------------"
     - "<theme>Fighting: &f<opponent>"
-    - " "
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
   IN-MATCH:
@@ -72,7 +72,7 @@ MATCH:
     - " "
     - "&aYour Ping: &f<ping>ms"
     - "&cTheir Ping: &f<opponent-ping>ms"
-    - " "
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
   IN-MATCH-BOXING:
@@ -85,19 +85,19 @@ MATCH:
     - " "
     - "&aYour Ping: &f<ping>ms"
     - "&cTheir Ping: &f<opponent-ping>ms"
-    - " "
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
   ENDING:
     - "&7&m--------------------"
     - "&fMatch Ended"
-    - " "
+    - "<silent>"
     - "<theme>server.net"
     - "&7&m--------------------"
 SPECTATING:
   - "&7&m--------------------"
   - "<theme>Spectating match"
   - "<theme>Duration: &f<duration>"
-  - " "
+  - "<silent>"
   - "<theme>server.net"
   - "&7&m--------------------"

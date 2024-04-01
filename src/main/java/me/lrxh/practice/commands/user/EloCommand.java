@@ -20,7 +20,7 @@ public class EloCommand extends BaseCommand {
         player.sendMessage(CC.translate("&eYour elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
-                player.sendMessage(CC.translate("&c✦ &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
+                player.sendMessage(CC.translate("&c• &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
         player.sendMessage(CC.translate("&f&m---------------------------"));
@@ -41,7 +41,7 @@ public class EloCommand extends BaseCommand {
         player.sendMessage(CC.translate("&e" + otherPlayer + "'s elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
-                player.sendMessage(CC.translate("&c✦ &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
+                player.sendMessage(CC.translate("&c• &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
         player.sendMessage(CC.translate("&f&m---------------------------"));
