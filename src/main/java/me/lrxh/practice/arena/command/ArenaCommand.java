@@ -126,6 +126,8 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.GREEN + "Successfully set " + arena.getDisplayName() + " display name!");
     }
 
+
+    @Subcommand("remove")
     @CommandCompletion("@arenas")
     @Syntax("<arena>")
     public void remove(Player player, String arenaName) {
