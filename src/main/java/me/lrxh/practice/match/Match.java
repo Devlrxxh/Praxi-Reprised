@@ -166,13 +166,13 @@ public abstract class Match {
             } else {
                 player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
                 player.getInventory().setContents(getKit().getKitLoadout().getContents());
-                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
+                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default", kit.getName()));
             }
         }
     }
 
-    public Player getOpponent(Player player) {
-        GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(player);
+    public Player getOpponent(UUID playerUUID) {
+        GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(Bukkit.getPlayer(playerUUID));
         if (playerParticipant != null) {
             for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
                 if (!gameParticipant.equals(playerParticipant)) {

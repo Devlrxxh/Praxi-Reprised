@@ -14,6 +14,7 @@ import me.lrxh.practice.arena.ArenaListener;
 import me.lrxh.practice.arena.command.ArenaCommand;
 import me.lrxh.practice.commands.admin.general.MainCommand;
 import me.lrxh.practice.commands.donater.FlyCommand;
+import me.lrxh.practice.commands.user.EloCommand;
 import me.lrxh.practice.commands.user.PingCommand;
 import me.lrxh.practice.commands.user.StatsCommand;
 import me.lrxh.practice.commands.user.duels.DuelCommand;
@@ -209,7 +210,8 @@ public class Practice extends JavaPlugin {
                 new RematchCommand(),
                 new ViewInventoryCommand(),
                 new SpectateCommand(),
-                new PartyCommand()
+                new PartyCommand(),
+                new EloCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

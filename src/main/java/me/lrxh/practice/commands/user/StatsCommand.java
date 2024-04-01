@@ -17,6 +17,7 @@ public class StatsCommand extends BaseCommand {
 
     }
 
+    @Default
     @Syntax("<name>")
     @CommandCompletion("@names")
     public void statsOthers(Player player, String otherPlayer) {

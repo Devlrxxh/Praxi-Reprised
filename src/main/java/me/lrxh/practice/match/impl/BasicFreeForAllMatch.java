@@ -14,6 +14,7 @@ import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
 import me.lrxh.practice.util.PlayerUtil;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -65,7 +66,7 @@ public class BasicFreeForAllMatch extends Match {
             } else {
                 player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
                 player.getInventory().setContents(getKit().getKitLoadout().getContents());
-                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default"));
+                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default", kit.getName()));
             }
         }
 
@@ -158,8 +159,10 @@ public class BasicFreeForAllMatch extends Match {
     @Override
     public void addSpectator(Player spectator, Player target) {
         super.addSpectator(spectator, target);
+        Profile profile = Profile.getByUuid(spectator.getUniqueId());
+        Match match = profile.getMatch();
 
-        spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(spectator, CC.GREEN, target.getUniqueId()));
+        spectator.sendMessage(Locale.MATCH_START_SPECTATING.format(spectator, CC.GREEN, target.getUniqueId(), CC.GREEN, match.getOpponent(target.getUniqueId())));
     }
 
     @Override

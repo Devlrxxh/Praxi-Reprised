@@ -21,7 +21,7 @@ public class PingCommand extends BaseCommand {
         if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             player.sendMessage(Locale.PING_YOUR.format(player, BukkitReflection.getPing(player)));
-            player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(match.getOpponent(player)), match.getOpponent(player).getName()));
+            player.sendMessage(Locale.PING_OTHERS.format(player, BukkitReflection.getPing(match.getOpponent(player.getUniqueId())), match.getOpponent(player.getUniqueId()).getName()));
         } else {
             player.sendMessage(Locale.PING_YOUR.format(player, BukkitReflection.getPing(player)));
         }

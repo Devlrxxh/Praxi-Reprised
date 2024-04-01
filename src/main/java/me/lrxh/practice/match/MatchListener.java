@@ -605,7 +605,7 @@ public class MatchListener implements Listener {
                             }
 
                             if (kitLoadout != null) {
-                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName()));
+                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName(), kitName));
                                 player.getInventory().setArmorContents(kitLoadout.getArmor());
                                 player.getInventory().setContents(kitLoadout.getContents());
                                 player.updateInventory();

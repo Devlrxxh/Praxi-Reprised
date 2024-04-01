@@ -43,11 +43,11 @@ public final class PlaceholderUtil {
 
             if (profile.getState() == ProfileState.FIGHTING) {
                 Match match = profile.getMatch();
-                line = line.replaceAll("<opponent>", match.getOpponent(player).getName());
+                line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
                 line = line.replaceAll("<duration>", match.getDuration());
-                line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player))));
+                line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));
                 line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
-                line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player)).getHits()));
+                line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
                 line = line.replaceAll("<diffrence>", getDifference(player));
             }
 
@@ -69,12 +69,12 @@ public final class PlaceholderUtil {
     public String getDifference(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
-        if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() > 0) {
-            return CC.translate("&a(+" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
-        } else if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits() < 0) {
-            return CC.translate("&c(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
+        if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits() > 0) {
+            return CC.translate("&a(+" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
+        } else if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits() < 0) {
+            return CC.translate("&c(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
         } else {
-            return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player)).getHits()) + ")");
+            return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
         }
     }
 
