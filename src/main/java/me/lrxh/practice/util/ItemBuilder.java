@@ -23,8 +23,12 @@ public class ItemBuilder implements Listener {
         this.is = is;
     }
 
-    public ItemBuilder amount(int amount) {
-        is.setAmount(amount);
+    public ItemBuilder amount(int amount, boolean fixed) {
+        if (!fixed) {
+            is.setAmount(Math.min(amount, 64));
+        } else {
+            is.setAmount(amount == 0 ? 1 : Math.min(amount, 64));
+        }
         return this;
     }
 

@@ -79,7 +79,7 @@ public class OtherPartiesMenu extends Menu {
 
             return new ItemBuilder(Material.SKULL_ITEM)
                     .name("&6Party of &r" + party.getLeader().getName())
-                    .amount(party.getPlayers().size())
+                    .amount(party.getPlayers().size(), false)
                     .durability(3)
                     .lore(lore)
                     .clearFlags()

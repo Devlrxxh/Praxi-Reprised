@@ -86,7 +86,7 @@ public class MatchDetailsMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.MELON)
                     .name("&bHealth: &f" + health + "/10 &4" + StringEscapeUtils.unescapeJava("❤"))
-                    .amount((int) (health == 0 ? 1 : health))
+                    .amount((int) (health == 0 ? 1 : health), false)
                     .clearFlags()
                     .build();
         }
@@ -131,7 +131,7 @@ public class MatchDetailsMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.POTION)
                     .durability(16421)
-                    .amount(potions == 0 ? 1 : potions)
+                    .amount(potions == 0 ? 1 : potions, false)
                     .name("&bPotions")
                     .lore("&b" + name + " &fhad &b" + potions + " &fpotion" + (potions == 1 ? "" : "s") + " left.")
                     .clearFlags()
@@ -197,7 +197,7 @@ public class MatchDetailsMenu extends Menu {
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.COOKED_BEEF)
                     .name("&bHunger: &f" + hunger + "/20")
-                    .amount(hunger == 0 ? 1 : hunger)
+                    .amount(hunger == 0 ? 1 : hunger, false)
                     .clearFlags()
                     .build();
         }

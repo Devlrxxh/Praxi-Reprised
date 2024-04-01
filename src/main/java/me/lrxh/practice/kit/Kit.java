@@ -80,7 +80,7 @@ public class Kit {
                     kit.getEditRules().getEditorItems().add(new ItemBuilder(Material.valueOf(
                             config.getString(path + ".edit-rules.items." + itemKey + ".material")))
                             .durability(config.getInt(path + ".edit-rules.items." + itemKey + ".durability"))
-                            .amount(config.getInt(path + ".edit-rules.items." + itemKey + ".amount"))
+                            .amount(config.getInt(path + ".edit-rules.items." + itemKey + ".amount"), false)
                             .build());
                 }
             }
