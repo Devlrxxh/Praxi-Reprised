@@ -13,9 +13,11 @@ import me.lrxh.practice.util.menu.filters.Filters;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.*;
@@ -78,13 +80,18 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private static class HealthButton extends Button {
+    private class HealthButton extends Button {
 
         private double health;
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.MELON)
+            ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+            SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
+            skullMeta.setOwner(player.getName());
+            head.setItemMeta(skullMeta);
+
+            return new ItemBuilder(head)
                     .name("&bHealth: &f" + health + "/10 &4" + StringEscapeUtils.unescapeJava("❤"))
                     .amount((int) (health == 0 ? 1 : health), false)
                     .clearFlags()
@@ -94,13 +101,13 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private static class EffectsButton extends Button {
+    private class EffectsButton extends Button {
 
         private Collection<PotionEffect> effects;
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            ItemBuilder builder = new ItemBuilder(Material.POTION).name("&bPotion Effects");
+            ItemBuilder builder = new ItemBuilder(Material.BREWING_STAND_ITEM).name("&bPotion Effects");
 
             if (effects.isEmpty()) {
                 builder.lore("&bNo potion effects");
@@ -122,7 +129,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private static class PotionsButton extends Button {
+    private class PotionsButton extends Button {
 
         private String name;
         private int potions;
@@ -141,7 +148,7 @@ public class MatchDetailsMenu extends Menu {
     }
 
     @AllArgsConstructor
-    private static class StatisticsButton extends Button {
+    private class StatisticsButton extends Button {
 
         private MatchSnapshot snapshot;
 
@@ -174,7 +181,7 @@ public class MatchDetailsMenu extends Menu {
             MatchSnapshot snapshot = MatchSnapshot.getByUuid(opponent);
 
             if (snapshot != null) {
-                return new ItemBuilder(Material.ARROW)
+                return new ItemBuilder(Material.PAPER)
                         .name("&7Press to switch to " + Bukkit.getPlayer(opponent).getName() + " inventory.")
                         .lore("&aClick to Switch")
                         .clearFlags()

@@ -547,6 +547,7 @@ public class MatchListener implements Listener {
 
         if (projectile instanceof EnderPearl) {
             if (match.getState() != MatchState.PLAYING_ROUND) {
+                shooter.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
                 event.setCancelled(true);
                 return;
             }

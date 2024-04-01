@@ -162,6 +162,7 @@ public class QueueSelectKitMenu extends Menu {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             if(!profile.getFollowing().isEmpty()){
                 player.sendMessage(CC.translate("&4ERROR - &cYou can't queue while following someone!"));
+                player.closeInventory();
                 return;
             }
             if (player.hasMetadata("frozen")) {
