@@ -36,15 +36,6 @@ public class QueueProfile {
 
             if (ticked >= 50) {
                 ticked = 0;
-
-                if (queue.isRanked()) {
-                    Player player = Bukkit.getPlayer(playerUuid);
-
-                    if (player != null) {
-                        player.sendMessage(Locale.QUEUE_RANGE_INCREMENT.format(player, queue.getQueueName(), getMinRange(),
-                                getMaxRange()));
-                    }
-                }
             }
         }
     }

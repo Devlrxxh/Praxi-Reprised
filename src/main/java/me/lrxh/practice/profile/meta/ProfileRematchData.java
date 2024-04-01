@@ -70,13 +70,13 @@ public class ProfileRematchData {
             return;
         }
 
-        for (String line : Locale.REMATCH_SENT_REQUEST.formatLines(sender, target.getName(), arena.getName())) {
+        for (String line : Locale.REMATCH_SENT_REQUEST.formatLines(sender, target.getName(), arena.getDisplayName())) {
             sender.sendMessage(line);
         }
 
         List<BaseComponent[]> components = new ArrayList<>();
 
-        for (String line : Locale.REMATCH_RECEIVED_REQUEST.formatLines(sender, sender.getName(), arena.getName())) {
+        for (String line : Locale.REMATCH_RECEIVED_REQUEST.formatLines(sender, sender.getName(), arena.getDisplayName())) {
             BaseComponent[] lineComponents = new ChatComponentBuilder("")
                     .parse(line)
                     .attachToEachPart(ChatHelper.hover(Locale.REMATCH_RECEIVED_REQUEST_HOVER.format(target)))

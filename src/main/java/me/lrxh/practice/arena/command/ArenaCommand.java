@@ -82,6 +82,7 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/arena list &7- &fList all arenas"));
         player.sendMessage(CC.translate("&7* &c/arena setspawn &7<arena> &7<a/b> &7- &fSet arena spawns"));
         player.sendMessage(CC.translate("&7* &c/arena tp &7<arena> &7- &fTeleport arena"));
+        player.sendMessage(CC.translate("&7* &c/arena setDisplayName &7<arena> &7<value> &7- &fSet arena display name"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -111,7 +112,20 @@ public class ArenaCommand extends BaseCommand {
     }
 
 
-    @Subcommand("remove")
+    @Subcommand("setDisplayName")
+    @CommandCompletion("@arenas")
+    @Syntax("<arena> <value>")
+    public void setDisplayName(Player player, String arenaName, String value) {
+        if (checkArena(arenaName)) {
+            player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
+            return;
+        }
+        Arena arena = Arena.getByName(arenaName);
+        arena.setDisplayName(value);
+
+        player.sendMessage(CC.GREEN + "Successfully set " + arena.getDisplayName() + " display name!");
+    }
+
     @CommandCompletion("@arenas")
     @Syntax("<arena>")
     public void remove(Player player, String arenaName) {
@@ -122,8 +136,9 @@ public class ArenaCommand extends BaseCommand {
         Arena arena = Arena.getByName(arenaName);
         arena.delete();
 
-        player.sendMessage(CC.GREEN + "Deleted arena " + arena.getName());
+        player.sendMessage(CC.GREEN + "Deleted arena " + arena.getDisplayName());
     }
+
 
     @Subcommand("wand")
     public void wand(Player player) {
@@ -259,7 +274,7 @@ public class ArenaCommand extends BaseCommand {
         if (arena == null) return;
 
         player.teleport(arena.getSpawnA());
-        player.sendMessage(CC.GREEN + "Teleported to arena " + arena.getName());
+        player.sendMessage(CC.GREEN + "Teleported to arena " + arena.getDisplayName());
     }
 
     @Subcommand("generate")
@@ -380,7 +395,7 @@ public class ArenaCommand extends BaseCommand {
         }
 
         arena.save();
-        player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getName());
+        player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getDisplayName());
     }
 
     private boolean checkArena(String arena) {

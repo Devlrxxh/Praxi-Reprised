@@ -50,7 +50,7 @@ public class Hotbar {
         HotbarItem hotbarItem = HotbarItem.KIT_SELECTION;
         ItemBuilder builder = new ItemBuilder(Material.ENCHANTED_BOOK);
         builder.durability(0);
-        builder.name("&7» &a&l%KIT% &7«");
+        builder.name("&e%KIT%");
         builder.lore("");
         builder.clearFlags();
         items.put(hotbarItem, builder.build());

@@ -79,7 +79,6 @@ QUEUE:
   LEAVE_UNRANKED: '&cYou have been removed from queue.'
   JOIN_RANKED: '&aYou are now queued for &aRanked {0}. &7[{1} ELO]'
   LEAVE_RANKED: '&cYou have been removed from queue.'
-  RANGE_INCREMENT: '&eSearching in ELO range &7[{1} -> {2}]&e...'
   RANKED-ERROR-MESSAGE: '&cYou cannot join ranked queues with less than 10 unranked 1v1 wins. You need {0} more wins!'
 MATCH:
   START:

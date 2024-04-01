@@ -37,11 +37,11 @@ public class CC {
     public static char CIRCLE = '●';
     public static char DOUBLE_ARROW_RIGHT = '»';
     public static char DOUBLE_ARROW_LEFT = '«';
-    public static String STAR = StringEscapeUtils.unescapeJava("\u2606");
-    public static String CHECKMARK = StringEscapeUtils.unescapeJava("\u2713");
-    public static String X = StringEscapeUtils.unescapeJava("\u2717");
-    public static String LUNAR = StringEscapeUtils.unescapeJava("\u272A");
-    public static String LINE = StringEscapeUtils.unescapeJava("\u2503");
+    public static String STAR = StringEscapeUtils.unescapeJava("☆");
+    public static String CHECKMARK = StringEscapeUtils.unescapeJava("✓");
+    public static String X = StringEscapeUtils.unescapeJava("✗");
+    public static String LUNAR = StringEscapeUtils.unescapeJava("✪");
+    public static String LINE = StringEscapeUtils.unescapeJava("┃");
 
     public static String translate(String in) {
         return ChatColor.translateAlternateColorCodes('&', in);

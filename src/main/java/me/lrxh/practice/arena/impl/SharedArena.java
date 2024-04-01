@@ -31,6 +31,7 @@ public class SharedArena extends Arena {
         FileConfiguration configuration = Practice.getInstance().getArenasConfig().getConfiguration();
         configuration.set(path, null);
         configuration.set(path + ".type", getType().name());
+        configuration.set(path + ".displayName", displayName);
         configuration.set(path + ".spawnA", LocationUtil.serialize(spawnA));
         configuration.set(path + ".spawnB", LocationUtil.serialize(spawnB));
         configuration.set(path + ".cuboid.location1", LocationUtil.serialize(getLowerCorner()));

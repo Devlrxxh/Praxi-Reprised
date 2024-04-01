@@ -87,7 +87,7 @@ public class DuelSelectArenaMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(Material.PAPER)
-                    .name(Practice.getInstance().getMenusConfig().getString("DUEL.ARENA-SELECTOR.ARENA-NAME").replace("<arena>", arena.getName()))
+                    .name(Practice.getInstance().getMenusConfig().getString("DUEL.ARENA-SELECTOR.ARENA-NAME").replace("<arena>", arena.getDisplayName()))
                     .clearFlags()
                     .build();
         }

@@ -26,6 +26,7 @@ public class Arena extends Cuboid {
     private static final List<Arena> arenas = new ArrayList<>();
 
     protected String name;
+    protected String displayName;
     protected Location spawnA;
     protected Location spawnB;
     protected boolean active;
@@ -76,6 +77,9 @@ public class Arena extends Cuboid {
                 if (configuration.contains(path + ".bedB")) {
                     arena.setBedB(LocationUtil.deserialize(configuration.getString(path + ".bedB")));
                 }
+
+                String displayName = configuration.getString(path + ".displayName");
+                arena.setDisplayName(displayName);
 
                 if (configuration.contains(path + ".kits")) {
                     for (String kitName : configuration.getStringList(path + ".kits")) {

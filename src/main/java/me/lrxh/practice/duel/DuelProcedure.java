@@ -51,10 +51,10 @@ public class DuelProcedure {
 
         if (party) {
             sender.sendMessage(Locale.DUEL_SENT_PARTY.format(target, kit.getName(), target.getName(),
-                    targetProfile.getParty().getPlayers().size(), arena.getName()));
+                    targetProfile.getParty().getPlayers().size(), arena.getDisplayName()));
 
             for (String msg : Locale.DUEL_RECEIVED_PARTY.formatLines(sender, kit.getName(), sender.getName(),
-                    senderProfile.getParty().getPlayers().size(), arena.getName())) {
+                    senderProfile.getParty().getPlayers().size(), arena.getDisplayName())) {
                 if (msg.contains("%CLICKABLE%")) {
                     ChatComponentBuilder builder = new ChatComponentBuilder(Locale.DUEL_RECEIVED_CLICKABLE.format(target,
                             sender.getName()

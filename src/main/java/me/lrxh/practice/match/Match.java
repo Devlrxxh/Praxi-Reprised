@@ -200,7 +200,7 @@ public abstract class Match {
         arena.setActive(true);
 
         // Send arena message
-        sendMessage(Locale.MATCH_PLAYING_ARENA.format(arena.getName()));
+        sendMessage(Locale.MATCH_PLAYING_ARENA.format(arena.getDisplayName()));
 
         // Setup players
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
