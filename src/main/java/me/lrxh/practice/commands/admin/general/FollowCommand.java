@@ -26,13 +26,14 @@ public class FollowCommand extends BaseCommand {
             player.sendMessage(CC.translate("&4ERROR - &cYou can't follow yourself!"));
             return;
         }
+        Player otherP = Bukkit.getPlayer(otherPlayer);
+
         Profile playerProfile = Profile.getProfiles().get(player.getUniqueId());
-        if (!playerProfile.getFollowing().isEmpty() && !playerProfile.getFollowing().contains(player.getUniqueId())) {
+        if (!playerProfile.getFollowing().isEmpty() && !playerProfile.getFollowing().contains(otherP.getUniqueId())) {
             player.sendMessage(CC.translate("&4ERROR - &cYou can't follow multiple players!"));
             return;
         }
 
-        Player otherP = Bukkit.getPlayer(otherPlayer);
         Profile profile = Profile.getProfiles().get(otherP.getUniqueId());
 
         if (profile.getFollowers().contains(player.getUniqueId())) {

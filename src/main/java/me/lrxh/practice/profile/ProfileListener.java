@@ -165,7 +165,9 @@ public class ProfileListener implements Listener {
 
         if (!profile.getFollowers().isEmpty()) {
             for (UUID playerUUID : profile.getFollowers()) {
+                Bukkit.getPlayer(playerUUID).sendMessage(Locale.FOLLOW_END.format(Bukkit.getPlayer(playerUUID), event.getPlayer().getName()));
                 Bukkit.getPlayer(playerUUID).sendMessage(Locale.FOLLOWED_LEFT.format(Bukkit.getPlayer(playerUUID), event.getPlayer().getName()));
+                Profile.getByUuid(playerUUID).getFollowing().remove(event.getPlayer().getUniqueId());
             }
         }
 

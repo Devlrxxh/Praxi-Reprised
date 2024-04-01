@@ -160,7 +160,10 @@ public class QueueSelectKitMenu extends Menu {
         @Override
         public void clicked(Player player, ClickType clickType) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
-
+            if(!profile.getFollowing().isEmpty()){
+                player.sendMessage(CC.translate("&4ERROR - &cYou can't queue while following someone!"));
+                return;
+            }
             if (player.hasMetadata("frozen")) {
                 player.sendMessage(CC.RED + "You cannot queue while frozen.");
                 return;

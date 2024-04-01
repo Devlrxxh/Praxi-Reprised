@@ -31,7 +31,7 @@ public final class PlaceholderUtil {
             if (line.contains("<silent>") && !profile.isSilent()) {
                 continue;
             } else {
-                line = line.replaceAll("<silent>", "&7&lSilent Mode");
+                line = line.replaceAll("<silent>", "");
             }
             if (line.contains("<follow>") && profile.getFollowing().isEmpty()) {
                 continue;

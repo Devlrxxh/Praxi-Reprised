@@ -150,11 +150,13 @@ public class MatchDetailsMenu extends Menu {
             return new ItemBuilder(Material.PAPER)
                     .name("&bMatch Stats")
                     .lore(Arrays.asList(
-                            "&bHits: &f" + snapshot.getTotalHits(),
-                            "&bLongest Combo: &f" + snapshot.getLongestCombo(),
-                            "&bPotions Thrown: &f" + snapshot.getPotionsThrown(),
-                            "&bPotions Missed: &f" + snapshot.getPotionsMissed(),
-                            "&bPotion Accuracy: &f" + snapshot.getPotionAccuracy()
+                            "&7• &bHits: &f" + snapshot.getTotalHits(),
+                            "&7• &bLongest Combo: &f" + snapshot.getLongestCombo(),
+                            "",
+                            "&bPotions: ",
+                            "&7• &bPotions Thrown: &f" + snapshot.getPotionsThrown(),
+                            "&7• &bPotions Missed: &f" + snapshot.getPotionsMissed(),
+                            "&7• &bPotion Accuracy: &f" + snapshot.getPotionAccuracy()
                     ))
                     .clearFlags()
                     .build();
