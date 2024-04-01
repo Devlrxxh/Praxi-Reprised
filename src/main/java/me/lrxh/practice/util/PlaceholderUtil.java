@@ -28,10 +28,21 @@ public final class PlaceholderUtil {
             line = line.replaceAll("<ping>", String.valueOf((BukkitReflection.getPing(player))));
             line = line.replaceAll("<theme>", CC.translate("&" + profile.getOptions().theme().getColor().getChar()));
 
-            if (line.contains("<silent>") && !profile.isSilent()){
+            if (line.contains("<silent>") && !profile.isSilent()) {
                 continue;
-            }else{
+            } else {
                 line = line.replaceAll("<silent>", "&7&lSilent Mode");
+            }
+            if (line.contains("<follow>") && profile.getFollowing().isEmpty()) {
+                continue;
+            } else {
+                line = line.replaceAll("<follow>", "");
+            }
+
+            if (!profile.getFollowing().isEmpty()) {
+                line = line.replaceAll("<followedPlayer>", Bukkit.getPlayer(profile.getFollowing().get(0)).getName());
+            } else {
+                line = line.replaceAll("<followedPlayer>", "");
             }
 
             if (profile.getState() == ProfileState.QUEUEING) {

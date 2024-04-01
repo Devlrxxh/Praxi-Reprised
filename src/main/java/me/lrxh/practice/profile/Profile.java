@@ -44,6 +44,8 @@ public class Profile {
     private final List<DuelRequest> duelRequests;
     private final UUID uuid;
     private final String username;
+    private final List<UUID> followers;
+    private final List<UUID> following;
     private ProfileState state;
     private DuelProcedure duelProcedure;
     private ProfileRematchData rematchData;
@@ -53,6 +55,7 @@ public class Profile {
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
     private boolean silent = false;
+
     public Profile(UUID uuid) {
         this.uuid = uuid;
         this.username = Bukkit.getPlayer(uuid).getName();
@@ -61,6 +64,8 @@ public class Profile {
         this.kitEditorData = new ProfileKitEditorData();
         this.kitData = new HashMap<>();
         this.duelRequests = new ArrayList<>();
+        this.followers = new ArrayList<>();
+        this.following = new ArrayList<>();
         this.enderpearlCooldown = new Cooldown(0);
         this.voteCooldown = new Cooldown(0);
 

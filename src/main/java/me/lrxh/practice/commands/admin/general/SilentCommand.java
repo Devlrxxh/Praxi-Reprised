@@ -1,16 +1,13 @@
 package me.lrxh.practice.commands.admin.general;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.*;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Description;
 import me.lrxh.practice.Locale;
-import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.Profile;
-import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.LocationUtil;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import java.io.IOException;
 
 
 @CommandAlias("silent")

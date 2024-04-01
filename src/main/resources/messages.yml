@@ -31,8 +31,14 @@ OPTIONS:
   MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
   SILENT_ENABLED: '&aEnabled Silent Mode!'
   SILENT_DISABLED: '&cDisabled Silent Mode!'
+  FOLLOW_START: '&bStarted following &f{0}.'
+  FOLLOW_END: '&bStopped following &f{0}.'
 LEADERBOARD:
   MESSAGE: '&aLeaderboards Refreshed!'
+FOLLOW:
+  FOLLOW_START: '&bStarted following &f{0}.'
+  FOLLOW_END: '&bStopped following &f{0}.'
+  FOLLOWED_LEFT: '&b{0} &left.'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'

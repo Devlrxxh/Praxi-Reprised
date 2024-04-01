@@ -12,6 +12,7 @@ import lombok.Getter;
 import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.arena.ArenaListener;
 import me.lrxh.practice.arena.command.ArenaCommand;
+import me.lrxh.practice.commands.admin.general.FollowCommand;
 import me.lrxh.practice.commands.admin.general.MainCommand;
 import me.lrxh.practice.commands.admin.general.SilentCommand;
 import me.lrxh.practice.commands.donater.FlyCommand;
@@ -213,7 +214,8 @@ public class Practice extends JavaPlugin {
                 new SpectateCommand(),
                 new PartyCommand(),
                 new EloCommand(),
-                new SilentCommand()
+                new SilentCommand(),
+                new FollowCommand()
         ).forEach(command -> paperCommandManager.registerCommand(command));
     }
 

@@ -1,5 +1,6 @@
 package me.lrxh.practice.profile;
 
+import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
@@ -23,6 +24,8 @@ import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class ProfileListener implements Listener {
 
@@ -159,6 +162,25 @@ public class ProfileListener implements Listener {
         event.setQuitMessage(null);
 
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
+
+        if (!profile.getFollowers().isEmpty()) {
+            for (UUID playerUUID : profile.getFollowers()) {
+                Bukkit.getPlayer(playerUUID).sendMessage(Locale.FOLLOWED_LEFT.format(Bukkit.getPlayer(playerUUID), event.getPlayer().getName()));
+            }
+        }
+
+        if (!profile.getFollowing().isEmpty()) {
+            List<UUID> followingCopy = new ArrayList<>(profile.getFollowing());
+
+            for (UUID playerUUID : followingCopy) {
+                Profile followerProfile = Profile.getByUuid(playerUUID);
+                followerProfile.getFollowers().remove(event.getPlayer().getUniqueId());
+
+                profile.getFollowing().remove(playerUUID);
+            }
+        }
+
+
         new BukkitRunnable() {
             @Override
             public void run() {

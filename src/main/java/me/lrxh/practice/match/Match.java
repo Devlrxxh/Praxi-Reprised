@@ -296,7 +296,7 @@ public abstract class Match {
         // Reset snapshots
         snapshots.clear();
         timeData = System.currentTimeMillis() - timeData;
-
+        checkFollowers();
         // Reset each game participant
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.reset();
@@ -551,7 +551,7 @@ public abstract class Match {
 
                     if (bukkitPlayer != null) {
                         VisibilityLogic.handle(bukkitPlayer);
-                        if(!profile.isSilent()){
+                        if (!profile.isSilent()) {
                             bukkitPlayer.sendMessage(Locale.MATCH_NOW_SPECTATING.format(bukkitPlayer, spectator.getName()));
                         }
                     }
@@ -620,6 +620,18 @@ public abstract class Match {
 
         for (Player player : getSpectatorsAsPlayers()) {
             player.playSound(player.getLocation(), sound, volume, pitch);
+        }
+    }
+
+    public void checkFollowers() {
+        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+            for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                if (!Profile.getByUuid(gamePlayer.getUuid()).getFollowers().isEmpty()) {
+                    for (UUID playerUUID : Profile.getByUuid(gamePlayer.getUuid()).getFollowers()) {
+                        Bukkit.getPlayer(playerUUID).chat("/spec " + gamePlayer.getUsername());
+                    }
+                }
+            }
         }
     }
 

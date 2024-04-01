@@ -16,15 +16,16 @@ public class EloCommand extends BaseCommand {
     @Default
     public void elo(Player player) {
         Profile profile = Profile.getProfiles().get(player.getUniqueId());
-        player.sendMessage(CC.translate("&f&m---------------------------"));
+        player.sendMessage(" ");
+        player.sendMessage(CC.translate("&f&m---------------------"));
         player.sendMessage(CC.translate("&eYour elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
                 player.sendMessage(CC.translate("&c• &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
-        player.sendMessage(CC.translate("&f&m---------------------------"));
-
+        player.sendMessage(CC.translate("&f&m---------------------"));
+        player.sendMessage(" ");
     }
 
     @Default
@@ -37,13 +38,15 @@ public class EloCommand extends BaseCommand {
         }
         Player otherP = Bukkit.getPlayer(otherPlayer);
         Profile profile = Profile.getProfiles().get(otherP.getUniqueId());
-        player.sendMessage(CC.translate("&f&m---------------------------"));
+        player.sendMessage(" ");
+        player.sendMessage(CC.translate("&f&m---------------------"));
         player.sendMessage(CC.translate("&e" + otherPlayer + "'s elo!"));
         for (Queue queue : Practice.getInstance().getCache().getQueues()) {
             if (queue.isRanked()) {
                 player.sendMessage(CC.translate("&c• &e" + queue.getKit().getName() + "&7: &f" + profile.getKitData().get(queue.getKit()).getElo()));
             }
         }
-        player.sendMessage(CC.translate("&f&m---------------------------"));
+        player.sendMessage(CC.translate("&f&m---------------------"));
+        player.sendMessage(" ");
     }
 }
