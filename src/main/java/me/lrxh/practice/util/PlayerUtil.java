@@ -47,6 +47,10 @@ public class PlayerUtil {
         victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
     }
 
+    public static void setImmune(Player player, int ticks) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, ticks, 250));
+    }
+
     public Player getLastAttacker(Player victim) {
         if (victim.hasMetadata("lastAttacker")) {
             return Bukkit.getPlayer((UUID) victim.getMetadata("lastAttacker").get(0).value());

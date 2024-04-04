@@ -88,9 +88,21 @@ public class MatchListener implements Listener {
                 }
 
                 Arena arena = match.getArena();
+                Location blockLocation = event.getBlockPlaced().getLocation();
                 int x = (int) event.getBlockPlaced().getLocation().getX();
                 int y = (int) event.getBlockPlaced().getLocation().getY();
                 int z = (int) event.getBlockPlaced().getLocation().getZ();
+                Location newBlockLocation = new Location(arena.getWorld(), x, y, z);
+                event.getPlayer().sendMessage(newBlockLocation.toString());
+                if (newBlockLocation.equals(new Location(arena.getSpawnA().getWorld(), (int) arena.getSpawnA().getX(), (int) arena.getSpawnA().getY(), (int) arena.getSpawnA().getZ()))
+                        || newBlockLocation.equals(new Location(arena.getSpawnB().getWorld(), (int) arena.getSpawnB().getX(), (int) arena.getSpawnB().getY(), (int) arena.getSpawnB().getZ()))
+                        || newBlockLocation.equals(new Location(arena.getSpawnA().getWorld(), (int) arena.getSpawnA().getX(), (int) arena.getSpawnA().getY() + 1, (int) arena.getSpawnA().getZ()))
+                        || newBlockLocation.equals(new Location(arena.getSpawnB().getWorld(), (int) arena.getSpawnB().getX(), (int) arena.getSpawnB().getY() + 1, (int) arena.getSpawnB().getZ()))){
+
+                    event.getPlayer().sendMessage(CC.translate("&cYou cannot place block blocks here!"));
+                    event.setCancelled(true);
+                    return;
+                }
 
                 if (y > arena.getMaxBuildHeight()) {
                     event.getPlayer().sendMessage(CC.RED + "You have reached the maximum build height.");
@@ -100,7 +112,7 @@ public class MatchListener implements Listener {
 
                 if (x >= arena.getX1() && x <= arena.getX2() && y >= arena.getY1() && y <= arena.getY2() &&
                         z >= arena.getZ1() && z <= arena.getZ2()) {
-                    match.getPlacedBlocks().add(event.getBlock().getLocation());
+                    match.getPlacedBlocks().add(blockLocation);
                 } else {
                     event.getPlayer().sendMessage(CC.RED + "You cannot build outside of the arena!");
                     event.setCancelled(true);
@@ -704,7 +716,7 @@ public class MatchListener implements Listener {
                                 profile.getMatch().getGamePlayer(player).setKitLoadout(kitLoadout);
                                 GameParticipant<MatchGamePlayer> participantA = match.getParticipantA();
                                 player.getInventory().setArmorContents(InventoryUtil.color(kitLoadout.getArmor(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
-                                player.getInventory().setContents(kitLoadout.getContents());
+                                player.getInventory().setContents(InventoryUtil.color(kitLoadout.getContents(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
                                 player.updateInventory();
                                 event.setCancelled(true);
                             }

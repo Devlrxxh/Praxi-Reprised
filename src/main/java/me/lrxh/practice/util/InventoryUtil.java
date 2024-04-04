@@ -4,6 +4,7 @@ import me.lrxh.practice.Practice;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -256,6 +257,12 @@ public class InventoryUtil {
                 LeatherArmorMeta meta = (LeatherArmorMeta) itemStack.getItemMeta();
                 meta.setColor(color);
                 itemStack.setItemMeta(meta);
+            } else if (itemStack.getType() == Material.WOOL) {
+                if (color.equals(Color.BLUE)){
+                    itemStack.setDurability((short) 11);
+                }else{
+                    itemStack.setDurability((short) 14);
+                }
             }
             items.add(itemStack);
         }
