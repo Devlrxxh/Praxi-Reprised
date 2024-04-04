@@ -19,8 +19,10 @@ import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.queue.Queue;
 import me.lrxh.practice.util.*;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import org.bukkit.*;
 import org.bukkit.block.BlockState;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
@@ -249,8 +251,8 @@ public abstract class Match {
     public void end() {
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                Player player = gamePlayer.getPlayer();
                 if (!gamePlayer.isDisconnected()) {
-                    Player player = gamePlayer.getPlayer();
                     if (player != null) {
                         player.setFireTicks(0);
                         player.updateInventory();
@@ -261,7 +263,6 @@ public abstract class Match {
                         profile.setEnderpearlCooldown(new Cooldown(0));
                     }
                 } else {
-                    Player player = gamePlayer.getPlayer();
                     if (player != null) {
                         player.setFireTicks(0);
                         player.updateInventory();
@@ -294,9 +295,10 @@ public abstract class Match {
             removeSpectator(player);
         }
 
-        droppedItems.forEach(Entity::remove);
+
         if (kit.getGameRules().isBuild()) {
             arena.restoreSnapshot();
+
             arena.setActive(false);
         }
 
@@ -500,11 +502,12 @@ public abstract class Match {
     }
 
     public void onDeath(Player dead) {
-        PlayerUtil.animateDeath(dead);
         // Don't continue if the match is already ending
         if (!(state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND)) {
             return;
         }
+        dead.getInventory().setContents(new ItemStack[36]);
+        PlayerUtil.animateDeath(dead);
 
         MatchGamePlayer deadGamePlayer = getGamePlayer(dead);
         Player killer = PlayerUtil.getLastAttacker(dead);

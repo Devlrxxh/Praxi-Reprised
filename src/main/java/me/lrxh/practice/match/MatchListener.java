@@ -12,10 +12,7 @@ import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.util.*;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -30,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -306,14 +304,16 @@ public class MatchListener implements Listener {
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         event.setDeathMessage(null);
-
         player.getInventory().setContents(new ItemStack[36]);
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
         if (profile.getState() == ProfileState.FIGHTING) {
 
+
             Match match = profile.getMatch();
+            event.getDrops().clear();
+
             boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
 
             boolean bedGone = aTeam ? match.bedBBroken : match.bedABroken;
@@ -328,16 +328,6 @@ public class MatchListener implements Listener {
                 return;
             }
 
-            List<Item> entities = new ArrayList<>();
-
-            event.getDrops().forEach(itemStack -> {
-                if (!(itemStack.getType() == Material.BOOK || itemStack.getType() == Material.ENCHANTED_BOOK)) {
-                    entities.add(event.getEntity().getLocation().getWorld()
-                            .dropItemNaturally(event.getEntity().getLocation(), itemStack));
-                }
-            });
-
-            match.getDroppedItems().addAll(entities);
             match.onDeath(event.getEntity());
         }
     }

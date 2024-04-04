@@ -149,7 +149,6 @@ public class Practice extends JavaPlugin {
         // Clear the droppedItems for each world
         getServer().getWorlds().forEach(world -> {
             world.setDifficulty(Difficulty.HARD);
-            clearEntities(world);
         });
 
         for (World world : getInstance().getServer().getWorlds()) {
@@ -183,13 +182,16 @@ public class Practice extends JavaPlugin {
         System.gc();
     }
 
-    public void clearEntities(World world) {
-        for (Entity entity : world.getEntities()) {
-            if (!(entity.getType() == EntityType.PLAYER)) {
-                continue;
+    public void clearEntities() {
+        for (World world : practice.getServer().getWorlds()) {
+            for (Entity entity : world.getEntities()) {
+                if (!(entity.getType() == EntityType.PLAYER)) {
+                    continue;
+                }
+                if(entity.getType().equals(EntityType.DROPPED_ITEM)){
+                    entity.remove();
+                }
             }
-
-            entity.remove();
         }
     }
 
@@ -248,6 +250,7 @@ public class Practice extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        clearEntities();
         Match.cleanup();
     }
 

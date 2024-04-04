@@ -24,6 +24,7 @@ public class MainCommand extends BaseCommand {
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7* &c/practice setspawn &7- &fSet server spawn"));
         player.sendMessage(CC.translate("&7* &c/practice reload &7- &fReload all configs"));
+        player.sendMessage(CC.translate("&7* &c/practice clear &7- &fClear all items"));
         player.sendMessage(" ");
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
@@ -54,5 +55,10 @@ public class MainCommand extends BaseCommand {
     public void reload(Player player) {
         Practice.getInstance().loadConfigs();
         player.sendMessage(CC.translate("&aSuccessfully reloaded configs!"));
+    }
+
+    @Subcommand("clear")
+    public void clear(Player player) {
+        Practice.getInstance().clearEntities();
     }
 }

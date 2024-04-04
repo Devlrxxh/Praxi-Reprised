@@ -275,7 +275,7 @@ public class ArenaCommand extends BaseCommand {
         if (arena == null) return;
 
         player.teleport(arena.getSpawnA());
-        player.sendMessage(CC.GREEN + "Teleported to arena " + arena.getDisplayName());
+        player.sendMessage(CC.GREEN + "Teleported to arena " + arena.getName());
     }
 
     @Subcommand("generate")
