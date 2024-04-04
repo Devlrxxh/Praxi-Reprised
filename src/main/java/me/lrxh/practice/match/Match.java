@@ -250,23 +250,19 @@ public abstract class Match {
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 Player player = gamePlayer.getPlayer();
-                if (!gamePlayer.isDisconnected()) {
                     if (player != null) {
                         player.setFireTicks(0);
                         player.updateInventory();
 
                         Profile profile = Profile.getByUuid(player.getUniqueId());
                         profile.setState(ProfileState.LOBBY);
-                        profile.setMatch(null);
                         profile.setEnderpearlCooldown(new Cooldown(0));
                         PlayerUtil.allowMovement(gamePlayer.getPlayer());
-                        player.sendMessage(CC.translate("&cEnemy &7committed suicide."));
                         VisibilityLogic.handle(player);
                         Practice.getInstance().getHotbar().giveHotbarItems(player);
                         PlayerUtil.teleportToSpawn(player);
                         PlayerUtil.allowMovement(gamePlayer.getPlayer());
                     }
-                }
             }
         }
 
@@ -373,6 +369,7 @@ public abstract class Match {
         gamePlayer.setRespawned(true);
 
         sendDeathMessage(player, PlayerUtil.getLastAttacker(player), false);
+        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1);
         player.addPotionEffect(
                 new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
 
@@ -382,12 +379,8 @@ public abstract class Match {
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
 
-        player.setVelocity(player.getVelocity().add(new Vector(0, 0.25, 0)));
-        player.setAllowFlight(true);
-        player.setFlying(true);
-        player.setVelocity(player.getVelocity().add(new Vector(0, 0.15, 0)));
-        player.setAllowFlight(true);
-        player.setFlying(true);
+        PlayerUtil.doVelocityChange(player);
+
         new BukkitRunnable() {
             int countdown = 3;
 
@@ -395,7 +388,6 @@ public abstract class Match {
             public void run() {
                 if (countdown > 0) {
                     player.sendMessage(Locale.MATCH_RESPAWN_TIMER.format(player, countdown));
-                    player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
                     if (!gamePlayer.isRespawned()) {
                         gamePlayer.setRespawned(false);
                         this.cancel();
@@ -403,7 +395,7 @@ public abstract class Match {
                     countdown--;
                 } else {
                     player.sendMessage(Locale.MATCH_RESPAWNED.format(player));
-                    player.playSound(player.getLocation(), Sound.ORB_PICKUP, 10, 1);
+                    player.playSound(player.getLocation(), Sound.FALL_BIG, 1.0f, 1.0f);
                     player.setAllowFlight(false);
                     player.setFlying(false);
                     boolean aTeam = getParticipantA().containsPlayer(player.getUniqueId());
@@ -464,7 +456,6 @@ public abstract class Match {
     public abstract boolean canEndRound();
 
     public void onDisconnect(Player dead) {
-        // Don't continue if the match is already ending
         if (!(state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND)) {
             return;
         }
@@ -479,7 +470,6 @@ public abstract class Match {
             }
         }
         end();
-        sendDeathMessage(dead, null, false);
     }
 
     public void onDeath(Player dead) {
@@ -530,14 +520,6 @@ public abstract class Match {
                     break;
             }
         }
-        dead.setHealth(dead.getMaxHealth());
-        dead.setFoodLevel(20);
-        dead.setVelocity(dead.getVelocity().add(new Vector(0, 0.25, 0)));
-        dead.setAllowFlight(true);
-        dead.setFlying(true);
-        dead.setVelocity(dead.getVelocity().add(new Vector(0, 0.15, 0)));
-        dead.setAllowFlight(true);
-        dead.setFlying(true);
 
         // Store snapshot of player inventory and stats
         MatchSnapshot snapshot = new MatchSnapshot(dead, true);
@@ -554,6 +536,8 @@ public abstract class Match {
 
         // Reset inventory
         PlayerUtil.reset(dead);
+
+        PlayerUtil.doVelocityChange(dead);
 
         // Handle visibility for match players
         // Send death message
@@ -776,7 +760,7 @@ public abstract class Match {
                 for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                     Player player = gamePlayer.getPlayer();
                     if (killer == null) {
-                        deathMessage = Locale.MATCH_PLAYER_FINAL_KILL.format(player,
+                        deathMessage = Locale.MATCH_PLAYER_DIED_FINAL.format(player,
                                 getRelationColor(player, dead) + dead.getName()
                         );
                     } else {
@@ -791,7 +775,7 @@ public abstract class Match {
 
             for (Player player : getSpectatorsAsPlayers()) {
                 if (killer == null) {
-                    deathMessage = Locale.MATCH_PLAYER_FINAL_KILL.format(player,
+                    deathMessage = Locale.MATCH_PLAYER_DIED_FINAL.format(player,
                             getRelationColor(player, dead) + dead.getName()
                     );
                 } else {

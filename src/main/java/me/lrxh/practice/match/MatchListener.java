@@ -12,10 +12,7 @@ import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.util.*;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -62,6 +59,11 @@ public class MatchListener implements Listener {
                 if (profile.getMatch().kit.getGameRules().isBedwars()) {
                     if (!(player.getLocation().getY() >= match.getArena().getDeathZone()) && !match.getGamePlayer(player).isRespawned()) {
                         if (!bedGone) {
+
+                            if(PlayerUtil.getLastAttacker(player) != null){
+                                player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                            }
+
                             match.respawn(player.getUniqueId());
                         } else {
                             profile.getMatch().onDeath(player);
@@ -191,8 +193,12 @@ public class MatchListener implements Listener {
                     return;
                 }
 
+                match.sendSound(Sound.ORB_PICKUP, 1.0F, 1.0F);
+                match.sendSound(Sound.WITHER_DEATH, 1.0F, 1.0F);
+                match.broadcast(" ");
                 match.broadcast(Locale.MATCH_BED_BROKEN.format(player, aTeam ? CC.translate("&9Blue") : CC.translate("&cRed"),
                         aTeam ? CC.translate("&c" + player.getName()) : CC.translate("&9" + player.getName())));
+                match.broadcast(" ");
             }
 
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
@@ -276,7 +282,7 @@ public class MatchListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
-            if (event.getItem().getItemStack().getType().equals(Material.ENDER_STONE) || (event.getItem().getItemStack().getType().equals(Material.WOOD))) {
+            if (event.getItem().getItemStack().getType().equals(Material.ENDER_STONE) || (event.getItem().getItemStack().getType().equals(Material.WOOD) || event.getItem().getItemStack().getType().equals(Material.WOOL))) {
 
                 event.setCancelled(false);
                 return;
@@ -341,7 +347,6 @@ public class MatchListener implements Listener {
 
         if (profile.getState() == ProfileState.FIGHTING) {
 
-
             Match match = profile.getMatch();
             event.getDrops().clear();
 
@@ -352,6 +357,11 @@ public class MatchListener implements Listener {
             if (profile.getMatch().getKit().getGameRules().isBedwars()) {
                 event.getDrops().clear();
                 if (!bedGone) {
+
+                    if(PlayerUtil.getLastAttacker(player) != null){
+                        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                    }
+
                     match.respawn(player.getUniqueId());
                 } else {
                     profile.getMatch().onDeath(player);

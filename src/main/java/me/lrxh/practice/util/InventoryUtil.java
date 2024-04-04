@@ -251,6 +251,9 @@ public class InventoryUtil {
     public static List<ItemStack> color(ItemStack[] itemStackList, Color color) {
         List<ItemStack> items = new ArrayList<>();
         for (ItemStack itemStack : itemStackList) {
+            if(itemStack.getType()==null){
+                continue;
+            }
             if (itemStack.getType() == Material.LEATHER_BOOTS || itemStack.getType() == Material.LEATHER_CHESTPLATE || itemStack.getType() == Material.LEATHER_HELMET
                     || itemStack.getType() == Material.LEATHER_LEGGINGS) {
                 LeatherArmorMeta meta = (LeatherArmorMeta) itemStack.getItemMeta();

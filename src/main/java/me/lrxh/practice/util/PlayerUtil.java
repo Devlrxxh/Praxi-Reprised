@@ -91,7 +91,6 @@ public class PlayerUtil {
         player.getInventory().setContents(new ItemStack[36]);
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
         player.getInventory().setHeldItemSlot(0);
-
         player.updateInventory();
     }
 
@@ -110,6 +109,15 @@ public class PlayerUtil {
 
             player.setVelocity(velocity);
         }
+    }
+
+    public void doVelocityChange(Player player){
+        player.setVelocity(player.getVelocity().add(new Vector(0, 0.25, 0)));
+        player.setAllowFlight(true);
+        player.setFlying(true);
+        player.setVelocity(player.getVelocity().add(new Vector(0, 0.15, 0)));
+        player.setAllowFlight(true);
+        player.setFlying(true);
     }
 
     public void denyMovement(Player player) {

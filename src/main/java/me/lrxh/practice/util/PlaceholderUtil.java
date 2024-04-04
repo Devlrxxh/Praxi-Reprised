@@ -57,27 +57,26 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<leader>", profile.getParty().getLeader().getName());
                 line = line.replaceAll("<party-size>", String.valueOf(profile.getParty().getListOfPlayers().size()));
             }
+            Match match = profile.getMatch();
+            if(match != null) {
+                if (match.getOpponent(player.getUniqueId()) != null) {
+                    line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
+                    line = line.replaceAll("<duration>", match.getDuration());
+                    line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));
+                    line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
+                    line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
+                    line = line.replaceAll("<diffrence>", getDifference(player));
 
-            if (profile.getMatch() != null) {
-                Match match = profile.getMatch();
-                line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
-                line = line.replaceAll("<duration>", match.getDuration());
-                line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));
-                line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
-                line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
-                line = line.replaceAll("<diffrence>", getDifference(player));
+                    if (match.getKit().getGameRules().isBedwars()) {
+                        line = line.replaceAll("<bedA>", match.isBedABroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+                        line = line.replaceAll("<bedB>", match.isBedBBroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+                    }
+                }
 
-                if (match.getKit().getGameRules().isBedwars()) {
-                    line = line.replaceAll("<bedA>", match.isBedABroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
-                    line = line.replaceAll("<bedB>", match.isBedBBroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+                if (profile.getState() == ProfileState.SPECTATING) {
+                    line = line.replaceAll("<duration>", match.getDuration());
                 }
             }
-
-            if (profile.getState() == ProfileState.SPECTATING) {
-                Match match = profile.getMatch();
-                line = line.replaceAll("<duration>", match.getDuration());
-            }
-
 
             if (Practice.getInstance().isPlaceholder()) {
                 formattedLines.add(PlaceholderAPI.setPlaceholders(player, line));

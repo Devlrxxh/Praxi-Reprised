@@ -42,8 +42,7 @@ public class AssembleThread extends Thread {
     private void tick() {
         for (Player player : this.assemble.getPlugin().getServer().getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
-            if (player != null) {
-                try {
+            try {
                     if (!profile.getOptions().showScoreboard()) {
                         return;
                     }
@@ -128,9 +127,8 @@ public class AssembleThread extends Thread {
                 } catch (Exception e) {
                     //Bukkit.getServer().getScheduler().runTask(assemble.getPlugin(), () -> player.kickPlayer(CC.translate("&cPlease rejoin.")));
                     Bukkit.getLogger().warning("Error updating scoreboard for player " + player.getName() + ": " + e.getMessage());
-                }
+
             }
         }
     }
-
 }
