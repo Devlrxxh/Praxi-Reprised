@@ -188,7 +188,7 @@ public class Arena extends Cuboid {
 
     public int getMaxBuildHeight() {
         int highest = (int) (Math.max(spawnA.getY(), spawnB.getY()));
-        return highest + 5;
+        return highest + 8;
     }
 
     public int getDeathZone() {
