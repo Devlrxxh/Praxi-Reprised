@@ -108,10 +108,20 @@ public class MatchListener implements Listener {
             } else {
                 event.setCancelled(true);
             }
+            if(match.getGamePlayer(event.getPlayer()).isRespawned()){
+                event.setCancelled(true);
+            }
         } else {
             if (!event.getPlayer().isOp() || event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler
+    public void onFallDamageEvent(EntityDamageEvent event) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            event.setCancelled(true);
         }
     }
 
@@ -170,6 +180,9 @@ public class MatchListener implements Listener {
             }
             if (match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED)) || event.getBlock().getType().equals(Material.ENDER_STONE) || (event.getBlock().getType().equals(Material.WOOD) && event.getBlock().getData() == 0)) {
                 event.setCancelled(false);
+            }
+            if(match.getGamePlayer(event.getPlayer()).isRespawned()){
+                event.setCancelled(true);
             }
         } else {
             if (!event.getPlayer().isOp() || event.getPlayer().getGameMode() != GameMode.CREATIVE) {
@@ -448,6 +461,7 @@ public class MatchListener implements Listener {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         if (!profile.getState().equals(ProfileState.FIGHTING)) return;
         if (profile.getMatch().getKit().getGameRules().isSumo()
+                || profile.getMatch().getKit().getGameRules().isBedwars()
                 || profile.getMatch().getKit().getGameRules().isSpleef()
                 || profile.getMatch().getKit().getGameRules().isBoxing()) {
             event.setCancelled(true);
@@ -524,6 +538,9 @@ public class MatchListener implements Listener {
                             health,
                             StringEscapeUtils.unescapeJava("❤")
                     ));
+                }
+                if(match.getGamePlayer(attacker).isRespawned()){
+                    event.setCancelled(true);
                 }
             }
         }

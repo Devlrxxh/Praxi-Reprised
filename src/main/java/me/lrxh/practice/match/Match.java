@@ -403,7 +403,6 @@ public abstract class Match {
         player.updateInventory();
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
-        player.setGameMode(GameMode.ADVENTURE);
 
         player.setVelocity(player.getVelocity().add(new Vector(0, 0.25, 0)));
         player.setAllowFlight(true);
