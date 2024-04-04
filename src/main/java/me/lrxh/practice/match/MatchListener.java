@@ -93,7 +93,6 @@ public class MatchListener implements Listener {
                 int y = (int) event.getBlockPlaced().getLocation().getY();
                 int z = (int) event.getBlockPlaced().getLocation().getZ();
                 Location newBlockLocation = new Location(arena.getWorld(), x, y, z);
-                event.getPlayer().sendMessage(newBlockLocation.toString());
                 if (newBlockLocation.equals(new Location(arena.getSpawnA().getWorld(), (int) arena.getSpawnA().getX(), (int) arena.getSpawnA().getY(), (int) arena.getSpawnA().getZ()))
                         || newBlockLocation.equals(new Location(arena.getSpawnB().getWorld(), (int) arena.getSpawnB().getX(), (int) arena.getSpawnB().getY(), (int) arena.getSpawnB().getZ()))
                         || newBlockLocation.equals(new Location(arena.getSpawnA().getWorld(), (int) arena.getSpawnA().getX(), (int) arena.getSpawnA().getY() + 1, (int) arena.getSpawnA().getZ()))
@@ -309,8 +308,6 @@ public class MatchListener implements Listener {
         event.setDeathMessage(null);
 
         player.getInventory().setContents(new ItemStack[36]);
-
-        PlayerUtil.animateDeath(player);
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 

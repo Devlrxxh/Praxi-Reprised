@@ -147,7 +147,7 @@ public class PlayerUtil {
                 for (Player watcher : sentTo) {
                     ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityDestroy(entityId));
                 }
-            }, 100L);
+            }, 10L);
         } catch (IllegalAccessException ignored) {
         }
     }

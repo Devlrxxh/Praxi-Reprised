@@ -388,15 +388,12 @@ public abstract class Match {
         if (state != MatchState.PLAYING_ROUND) {
             return;
         }
-
+        hidePlayer(playerUUID);
         gamePlayer.setRespawned(true);
-
 
         sendDeathMessage(player, PlayerUtil.getLastAttacker(player), false);
         player.addPotionEffect(
                 new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
-
-        hidePlayer(playerUUID);
 
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
