@@ -13,7 +13,6 @@ import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
 import me.lrxh.practice.util.menu.filters.Filters;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -112,24 +111,12 @@ public class QueueSelectKitMenu extends Menu {
                     .replace("<kit>", queue.getKit().getName())
                     .replace("<type>", ranked ? "Unranked" : "Ranked");
 
-            if (queue.getQueuing() > 0) {
-                return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(kitName)
-                        .lore(lore)
-                        .clearEnchantments()
-                        .enchantment(Enchantment.DURABILITY)
-                        .clearFlags()
-                        .build();
-            } else {
-                return new ItemBuilder(queue.getKit().getDisplayIcon())
-                        .name(kitName)
-                        .lore(lore)
-                        .clearEnchantments()
-                        .amount(Match.getInFightsCount(queue), true)
-                        .clearFlags()
-                        .build();
-            }
-
+            return new ItemBuilder(queue.getKit().getDisplayIcon())
+                    .name(kitName)
+                    .lore(lore)
+                    .amount(Match.getInFightsCount(queue), true)
+                    .clearFlags()
+                    .build();
         }
 
         private String replaceLeaderboardPlaceholders(String line, Queue queue) {

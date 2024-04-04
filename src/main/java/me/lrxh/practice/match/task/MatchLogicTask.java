@@ -2,6 +2,7 @@ package me.lrxh.practice.match.task;
 
 import lombok.Setter;
 import me.lrxh.practice.Locale;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
@@ -30,6 +31,10 @@ public class MatchLogicTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (!Practice.getInstance().getCache().getMatches().contains(match)) {
+            cancel();
+            return;
+        }
         nextAction--;
         if (match.getState() == MatchState.STARTING_ROUND) {
             if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars()) {

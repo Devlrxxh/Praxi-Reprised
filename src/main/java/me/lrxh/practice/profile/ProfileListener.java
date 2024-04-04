@@ -189,15 +189,6 @@ public class ProfileListener implements Listener {
             }
         }
 
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                profile.save();
-                Profile.getProfiles().remove(event.getPlayer().getUniqueId());
-            }
-        }.runTaskAsynchronously(Practice.getInstance());
-
         if (profile.getMatch() != null) {
             profile.getMatch().end();
 
@@ -212,6 +203,7 @@ public class ProfileListener implements Listener {
         if (profile.getRematchData() != null) {
             profile.getRematchData().validate();
         }
+
     }
 
     @EventHandler

@@ -19,10 +19,8 @@ import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.queue.Queue;
 import me.lrxh.practice.util.*;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import org.bukkit.*;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
@@ -180,8 +178,8 @@ public abstract class Match {
                 //player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
                 player.getInventory().setContents(InventoryUtil.color(getKit().getKitLoadout().getContents(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
                 //player.getInventory().setContents(getKit().getKitLoadout().getContents());
-                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default", kit.getName()));
-                profile.getMatch().getGamePlayer(player).setKitLoadout(kit.getKitLoadout());
+                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default", getKit().getName()));
+                profile.getMatch().getGamePlayer(player).setKitLoadout(getKit().getKitLoadout());
             }
         }
     }
@@ -261,31 +259,12 @@ public abstract class Match {
                         profile.setState(ProfileState.LOBBY);
                         profile.setMatch(null);
                         profile.setEnderpearlCooldown(new Cooldown(0));
-                    }
-                } else {
-                    if (player != null) {
-                        player.setFireTicks(0);
-                        player.updateInventory();
-
-                        Profile profile = Profile.getByUuid(player.getUniqueId());
-                        profile.setState(ProfileState.LOBBY);
-                        profile.setMatch(null);
-                        profile.setEnderpearlCooldown(new Cooldown(0));
+                        PlayerUtil.allowMovement(gamePlayer.getPlayer());
                         player.sendMessage(CC.translate("&cEnemy &7committed suicide."));
-                    }
-                }
-            }
-        }
-
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                if (!gamePlayer.isDisconnected()) {
-                    Player player = gamePlayer.getPlayer();
-
-                    if (player != null) {
                         VisibilityLogic.handle(player);
                         Practice.getInstance().getHotbar().giveHotbarItems(player);
                         PlayerUtil.teleportToSpawn(player);
+                        PlayerUtil.allowMovement(gamePlayer.getPlayer());
                     }
                 }
             }
@@ -417,7 +396,7 @@ public abstract class Match {
                 if (countdown > 0) {
                     player.sendMessage(Locale.MATCH_RESPAWN_TIMER.format(player, countdown));
                     player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-                    if(!gamePlayer.isRespawned()){
+                    if (!gamePlayer.isRespawned()) {
                         gamePlayer.setRespawned(false);
                         this.cancel();
                     }
@@ -499,6 +478,8 @@ public abstract class Match {
                 onDeath(dead);
             }
         }
+        end();
+        sendDeathMessage(dead, null, false);
     }
 
     public void onDeath(Player dead) {
@@ -549,8 +530,14 @@ public abstract class Match {
                     break;
             }
         }
-        // Prevent further movement
-        dead.setVelocity(new Vector());
+        dead.setHealth(dead.getMaxHealth());
+        dead.setFoodLevel(20);
+        dead.setVelocity(dead.getVelocity().add(new Vector(0, 0.25, 0)));
+        dead.setAllowFlight(true);
+        dead.setFlying(true);
+        dead.setVelocity(dead.getVelocity().add(new Vector(0, 0.15, 0)));
+        dead.setAllowFlight(true);
+        dead.setFlying(true);
 
         // Store snapshot of player inventory and stats
         MatchSnapshot snapshot = new MatchSnapshot(dead, true);
@@ -817,7 +804,6 @@ public abstract class Match {
             }
             return;
         }
-
 
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {

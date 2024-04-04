@@ -58,7 +58,7 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<party-size>", String.valueOf(profile.getParty().getListOfPlayers().size()));
             }
 
-            if (profile.getState() == ProfileState.FIGHTING) {
+            if (profile.getMatch() != null) {
                 Match match = profile.getMatch();
                 line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
                 line = line.replaceAll("<duration>", match.getDuration());

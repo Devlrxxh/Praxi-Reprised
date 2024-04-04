@@ -188,7 +188,7 @@ public class Practice extends JavaPlugin {
                 if (!(entity.getType() == EntityType.PLAYER)) {
                     continue;
                 }
-                if(entity.getType().equals(EntityType.DROPPED_ITEM)){
+                if (entity.getType().equals(EntityType.DROPPED_ITEM)) {
                     entity.remove();
                 }
             }

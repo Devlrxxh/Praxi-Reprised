@@ -16,9 +16,11 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -93,7 +95,27 @@ public class PlayerUtil {
         player.updateInventory();
     }
 
+    public void applyFireballKnockback(Location location, List<Player> entities) {
+        for (Player player : entities) {
+            if (player.getGameMode() != GameMode.SURVIVAL) continue;
+
+            double vertical = 2 / 2.0;
+            double reference = 3 / 2.0;
+
+            double magnitude = Math.max(-15.0, Math.min(15.0, -1.0 * reference));
+
+            Vector velocity = location.toVector().subtract(player.getLocation().toVector()).normalize();
+            velocity.multiply(magnitude);
+            velocity.setY(vertical);
+
+            player.setVelocity(velocity);
+        }
+    }
+
     public void denyMovement(Player player) {
+        if (player == null) {
+            return;
+        }
         player.setFlying(false);
         player.setWalkSpeed(0.0F);
         player.setFoodLevel(0);
@@ -102,6 +124,9 @@ public class PlayerUtil {
     }
 
     public void allowMovement(Player player) {
+        if (player == null) {
+            return;
+        }
         player.setFlying(false);
         player.setWalkSpeed(0.2F);
         player.setFoodLevel(20);
