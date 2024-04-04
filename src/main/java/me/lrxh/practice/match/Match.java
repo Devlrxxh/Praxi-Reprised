@@ -418,9 +418,12 @@ public abstract class Match {
             public void run() {
                 if (countdown > 0) {
                     player.sendMessage(Locale.MATCH_RESPAWN_TIMER.format(player, countdown));
+                    player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
                     countdown--;
                 } else {
+                    showPlayer(playerUUID);
                     player.sendMessage(Locale.MATCH_RESPAWNED.format(player));
+                    player.playSound(player.getLocation(), Sound.ORB_PICKUP, 10, 1);
                     player.setAllowFlight(false);
                     player.setFlying(false);
                     boolean aTeam = getParticipantA().containsPlayer(player.getUniqueId());
@@ -429,7 +432,6 @@ public abstract class Match {
                     player.getInventory().setArmorContents(InventoryUtil.color(gamePlayer.getKitLoadout().getArmor(), aTeam ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
                     player.getInventory().setContents(gamePlayer.getKitLoadout().getContents());
                     player.setGameMode(GameMode.SURVIVAL);
-                    showPlayer(playerUUID);
                     gamePlayer.setRespawned(false);
                     this.cancel();
                 }
