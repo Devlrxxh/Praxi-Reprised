@@ -66,6 +66,11 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
                 line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
                 line = line.replaceAll("<diffrence>", getDifference(player));
+
+                if (match.getKit().getGameRules().isBedwars()) {
+                    line = line.replaceAll("<bedA>", match.isBedABroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+                    line = line.replaceAll("<bedB>", match.isBedBBroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+                }
             }
 
             if (profile.getState() == ProfileState.SPECTATING) {

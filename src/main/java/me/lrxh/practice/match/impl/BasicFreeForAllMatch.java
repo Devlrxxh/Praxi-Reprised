@@ -12,11 +12,14 @@ import me.lrxh.practice.profile.meta.ProfileKitData;
 import me.lrxh.practice.queue.Queue;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
+import me.lrxh.practice.util.InventoryUtil;
 import me.lrxh.practice.util.PlayerUtil;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,7 @@ public class BasicFreeForAllMatch extends Match {
         PlayerUtil.reset(player);
 
         // Deny movement if the kit is sumo
-        if (getKit().getGameRules().isSumo()) {
+        if (getKit().getGameRules().isSumo() || getKit().getGameRules().isBedwars()) {
             PlayerUtil.denyMovement(player);
         }
 
@@ -63,9 +66,14 @@ public class BasicFreeForAllMatch extends Match {
             if (kitData.getKitCount() > 0) {
                 profile.getKitData().get(getKit()).giveBooks(player);
             } else {
-                player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
-                player.getInventory().setContents(getKit().getKitLoadout().getContents());
+                GameParticipant<MatchGamePlayer> participantA = this.getParticipantA();
+                player.getInventory().setArmorContents(InventoryUtil.color(getKit().getKitLoadout().getArmor(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
+                //player.getInventory().setArmorContents(getKit().getKitLoadout().getArmor());
+                //player.getInventory().setContents(getKit().getKitLoadout().getContents());
+                player.getInventory().setContents(InventoryUtil.color(getKit().getKitLoadout().getContents(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
+
                 player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, "Default", kit.getName()));
+                profile.getMatch().getGamePlayer(player).setKitLoadout(kit.getKitLoadout());
             }
         }
 
@@ -121,6 +129,7 @@ public class BasicFreeForAllMatch extends Match {
 
     @Override
     public List<GameParticipant<MatchGamePlayer>> getParticipants() {
+        System.out.println("This getting ran");
         return new ArrayList<>(participants);
     }
 

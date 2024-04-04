@@ -5,14 +5,14 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.kit.KitLoadout;
 import me.lrxh.practice.match.menu.ViewInventoryMenu;
+import me.lrxh.practice.match.participant.MatchGamePlayer;
+import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
-import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.Cooldown;
-import me.lrxh.practice.util.PlayerUtil;
-import me.lrxh.practice.util.TimeUtil;
+import me.lrxh.practice.util.*;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -44,7 +44,6 @@ public class MatchListener implements Listener {
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-
         if (profile.getState() == ProfileState.FIGHTING) {
             if (profile.getMatch().getKit().getGameRules().isSumo() ||
                     profile.getMatch().getKit().getGameRules().isSpleef()) {
@@ -54,6 +53,22 @@ public class MatchListener implements Listener {
 
                 if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER) {
                     match.onDeath(event.getPlayer());
+                }
+            }
+            if (profile.getMatch().getKit().getGameRules().isBedwars()) {
+                Player player = event.getPlayer();
+                Match match = profile.getMatch();
+
+                boolean bedGone = match.getParticipantA().containsPlayer(player.getUniqueId()) ? match.bedBBroken : match.bedABroken;
+
+                if (profile.getMatch().kit.getGameRules().isBedwars()) {
+                    if (!(player.getLocation().getY() >= match.getArena().getDeathZone()) && !match.getGamePlayer(player).isRespawned()) {
+                        if (!bedGone) {
+                            match.respawn(player.getUniqueId());
+                        } else {
+                            profile.getMatch().onDeath(player);
+                        }
+                    }
                 }
             }
         }
@@ -106,12 +121,35 @@ public class MatchListener implements Listener {
 
         if (profile.getState() == ProfileState.FIGHTING) {
             Match match = profile.getMatch();
-            if (match.kit.getGameRules().isBedwars()) {
-                if (event.getBlock().getLocation().equals(event.getPlayer().getBedSpawnLocation())) {
-                    event.getPlayer().sendMessage(CC.translate("&cYou can't break your own bed!"));
+            if (event.getBlock().getType() == Material.BED_BLOCK || event.getBlock().getType() == Material.BED) {
+                Player player = event.getPlayer();
+
+                GameParticipant<MatchGamePlayer> participantA = match.getParticipantA();
+
+                boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
+
+                Location spawn = aTeam ? match.getArena().getSpawnA() : match.getArena().getSpawnB();
+
+                Location bed = event.getBlock().getLocation();
+                if (bed.distanceSquared(spawn) > bed.distanceSquared(participantA != null && participantA.containsPlayer(match.getOpponent(player.getUniqueId()).getUniqueId()) ?
+                        match.getArena().getSpawnA() : match.getArena().getSpawnB())) {
+
+                    if (aTeam) {
+                        match.setBedABroken(true);
+                    } else {
+                        match.setBedBBroken(true);
+                    }
+
+                } else if (bed.distanceSquared(spawn) < bed.distanceSquared(match.getOpponent(player.getUniqueId()).getLocation())) {
+                    player.sendMessage(CC.translate("&cYou cannot break your own bed!"));
                     event.setCancelled(true);
+                    return;
                 }
+
+                match.broadcast(Locale.MATCH_BED_BROKEN.format(player, aTeam ? CC.translate("&cRed") : CC.translate("&9Blue"),
+                        aTeam ? CC.translate("&c" + player.getName()) : CC.translate("&9" + player.getName())));
             }
+
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
                 if (match.getKit().getGameRules().isSpleef()) {
                     if (event.getBlock().getType() == Material.SNOW_BLOCK ||
@@ -130,7 +168,7 @@ public class MatchListener implements Listener {
             } else {
                 event.setCancelled(true);
             }
-            if (match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED))) {
+            if (match.kit.getGameRules().isBedwars() && (event.getBlock().getType().equals(Material.BED_BLOCK) || event.getBlock().getType().equals(Material.BED)) || event.getBlock().getType().equals(Material.ENDER_STONE) || (event.getBlock().getType().equals(Material.WOOD) && event.getBlock().getData() == 0)) {
                 event.setCancelled(false);
             }
         } else {
@@ -232,17 +270,42 @@ public class MatchListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerPickUpEvent(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+        if (profile.getMatch() != null && profile.getMatch().getState().equals(MatchState.ENDING_MATCH)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
+        Player player = event.getEntity();
         event.setDeathMessage(null);
-        event.getDrops().clear();
+
+        player.getInventory().setContents(new ItemStack[36]);
+
+        PlayerUtil.animateDeath(player);
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
         if (profile.getState() == ProfileState.FIGHTING) {
-            if (profile.getMatch().kit.getGameRules().isBedwars()) {
-                PlayerUtil.animateDeath(event.getEntity());
+
+            Match match = profile.getMatch();
+            boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
+
+            boolean bedGone = aTeam ? match.bedBBroken : match.bedABroken;
+
+            if (profile.getMatch().getKit().getGameRules().isBedwars()) {
+                event.getDrops().clear();
+                if (!bedGone) {
+                    match.respawn(player.getUniqueId());
+                } else {
+                    profile.getMatch().onDeath(player);
+                }
                 return;
             }
+
             List<Item> entities = new ArrayList<>();
 
             event.getDrops().forEach(itemStack -> {
@@ -252,8 +315,8 @@ public class MatchListener implements Listener {
                 }
             });
 
-            profile.getMatch().getDroppedItems().addAll(entities);
-            profile.getMatch().onDeath(event.getEntity());
+            match.getDroppedItems().addAll(entities);
+            match.onDeath(event.getEntity());
         }
     }
 
@@ -339,9 +402,23 @@ public class MatchListener implements Listener {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
             if (profile.getState() == ProfileState.FIGHTING) {
+
                 if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                    profile.getMatch().onDeath(player);
-                    return;
+
+                    Match match = profile.getMatch();
+                    GameParticipant<MatchGamePlayer> participantA = match.getParticipant(player);
+
+                    boolean bedGone = participantA != null && participantA.containsPlayer(event.getEntity().getUniqueId()) ? match.bedABroken : match.bedBBroken;
+                    if (profile.getMatch().kit.getGameRules().isBedwars() && !bedGone) {
+                        Location spawn = participantA != null && participantA.containsPlayer(event.getEntity().getUniqueId()) ?
+                                match.getArena().getSpawnA() : match.getArena().getSpawnB();
+
+                        event.getEntity().teleport(spawn);
+                        return;
+                    } else {
+                        profile.getMatch().onDeath(player);
+                        return;
+                    }
                 }
 
                 if (profile.getMatch().getState() != MatchState.PLAYING_ROUND) {
@@ -607,7 +684,9 @@ public class MatchListener implements Listener {
 
                             if (kitLoadout != null) {
                                 player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName(), kitName));
-                                player.getInventory().setArmorContents(kitLoadout.getArmor());
+                                profile.getMatch().getGamePlayer(player).setKitLoadout(kitLoadout);
+                                GameParticipant<MatchGamePlayer> participantA = match.getParticipantA();
+                                player.getInventory().setArmorContents(InventoryUtil.color(kitLoadout.getArmor(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
                                 player.getInventory().setContents(kitLoadout.getContents());
                                 player.updateInventory();
                                 event.setCancelled(true);

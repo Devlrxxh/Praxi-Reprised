@@ -1,36 +1,53 @@
 package me.lrxh.practice.util;
 
+import lombok.experimental.UtilityClass;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.SpawnTeleportEvent;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.BlockIterator;
 
 import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+@UtilityClass
 public class PlayerUtil {
-    private static Field STATUS_PACKET_ID_FIELD;
-    private static Field STATUS_PACKET_STATUS_FIELD;
-    private static Field SPAWN_PACKET_ID_FIELD;
+    private Field STATUS_PACKET_ID_FIELD;
+    private Field STATUS_PACKET_STATUS_FIELD;
+    private Field SPAWN_PACKET_ID_FIELD;
 
-    public static void setLastAttacker(Player victim, Player attacker) {
+    static {
+        try {
+            STATUS_PACKET_ID_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("a");
+            STATUS_PACKET_ID_FIELD.setAccessible(true);
+
+            STATUS_PACKET_STATUS_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("b");
+            STATUS_PACKET_STATUS_FIELD.setAccessible(true);
+
+            SPAWN_PACKET_ID_FIELD = PacketPlayOutNamedEntitySpawn.class.getDeclaredField("a");
+            SPAWN_PACKET_ID_FIELD.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setLastAttacker(Player victim, Player attacker) {
         victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
     }
 
-    public static Player getLastAttacker(Player victim) {
+    public Player getLastAttacker(Player victim) {
         if (victim.hasMetadata("lastAttacker")) {
             return Bukkit.getPlayer((UUID) victim.getMetadata("lastAttacker").get(0).value());
         } else {
@@ -38,7 +55,15 @@ public class PlayerUtil {
         }
     }
 
-    public static void reset(Player player) {
+    public ItemStack getPlayerHead(UUID playerUUID) {
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+        SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
+        skullMeta.setOwner(Bukkit.getPlayer(playerUUID).getName());
+        head.setItemMeta(skullMeta);
+        return head;
+    }
+
+    public void reset(Player player) {
 
         if (!player.hasMetadata("frozen")) {
             player.setWalkSpeed(0.2F);
@@ -64,7 +89,7 @@ public class PlayerUtil {
         player.updateInventory();
     }
 
-    public static void denyMovement(Player player) {
+    public void denyMovement(Player player) {
         player.setFlying(false);
         player.setWalkSpeed(0.0F);
         player.setFoodLevel(0);
@@ -72,7 +97,7 @@ public class PlayerUtil {
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200));
     }
 
-    public static void allowMovement(Player player) {
+    public void allowMovement(Player player) {
         player.setFlying(false);
         player.setWalkSpeed(0.2F);
         player.setFoodLevel(20);
@@ -80,21 +105,8 @@ public class PlayerUtil {
         player.removePotionEffect(PotionEffectType.JUMP);
     }
 
-    public static Block getTargetBlock(Player player, int distance) {
-        BlockIterator iterator = new BlockIterator(player, distance);
-        Block block = null;
 
-        while (iterator.hasNext()) {
-            block = iterator.next();
-            if (block.getType().isSolid()) {
-                break;
-            }
-        }
-
-        return block;
-    }
-
-    public static void teleportToSpawn(Player player) {
+    public void teleportToSpawn(Player player) {
         Location location = Practice.getInstance().getCache().getSpawn() == null ? Practice.getInstance().getServer().getWorlds().get(0).getSpawnLocation() : Practice.getInstance().getCache().getSpawn();
 
         SpawnTeleportEvent event = new SpawnTeleportEvent(player, location);
@@ -105,43 +117,34 @@ public class PlayerUtil {
         }
     }
 
-    public static void animateDeath(Player player) {
+    public void animateDeath(Player player) {
+        int entityId = EntityUtils.getFakeEntityId();
+        PacketPlayOutNamedEntitySpawn spawnPacket = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
+        PacketPlayOutEntityStatus statusPacket = new PacketPlayOutEntityStatus();
 
         try {
-            if (STATUS_PACKET_ID_FIELD == null) {
-                STATUS_PACKET_ID_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("a");
-                STATUS_PACKET_ID_FIELD.setAccessible(true);
-            }
-
-            if (STATUS_PACKET_STATUS_FIELD == null) {
-                STATUS_PACKET_STATUS_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("b");
-                STATUS_PACKET_STATUS_FIELD.setAccessible(true);
-            }
-
-            if (SPAWN_PACKET_ID_FIELD == null) {
-                SPAWN_PACKET_ID_FIELD = PacketPlayOutNamedEntitySpawn.class.getDeclaredField("a");
-                SPAWN_PACKET_ID_FIELD.setAccessible(true);
-            }
-
-            SPAWN_PACKET_ID_FIELD.set(new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle()), -1);
-            STATUS_PACKET_ID_FIELD.set(new PacketPlayOutEntityStatus(), -1);
-            STATUS_PACKET_STATUS_FIELD.set(new PacketPlayOutEntityStatus(), (byte) 3);
-
-            final int radius = MinecraftServer.getServer().getPlayerList().d();
-
+            SPAWN_PACKET_ID_FIELD.set(spawnPacket, entityId);
+            STATUS_PACKET_ID_FIELD.set(statusPacket, entityId);
+            STATUS_PACKET_STATUS_FIELD.set(statusPacket, (byte) 3);
+            int radius = MinecraftServer.getServer().getPlayerList().d();
+            Set<Player> sentTo = new HashSet<>();
             for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
-                if (!(entity instanceof Player)) {
+                if (entity instanceof Player) {
                     Player watcher = (Player) entity;
-
                     if (!watcher.getUniqueId().equals(player.getUniqueId())) {
-                        break;
+                        ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(spawnPacket);
+                        ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(statusPacket);
+                        sentTo.add(watcher);
                     }
-
-                    ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle()));
-                    ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityStatus());
                 }
             }
-        } catch (Exception ignored) {
+
+            Bukkit.getScheduler().runTaskLater(Practice.getInstance(), () -> {
+                for (Player watcher : sentTo) {
+                    ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityDestroy(entityId));
+                }
+            }, 100L);
+        } catch (IllegalAccessException ignored) {
         }
     }
 }

@@ -160,7 +160,7 @@ public class QueueSelectKitMenu extends Menu {
         @Override
         public void clicked(Player player, ClickType clickType) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
-            if(!profile.getFollowing().isEmpty()){
+            if (!profile.getFollowing().isEmpty()) {
                 player.sendMessage(CC.translate("&4ERROR - &cYou can't queue while following someone!"));
                 player.closeInventory();
                 return;

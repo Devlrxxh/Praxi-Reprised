@@ -126,7 +126,6 @@ public class Practice extends JavaPlugin {
         new LeaderboardThread().start();
         new Metrics(this, 20915);
 
-
         Arrays.asList(
                 new KitEditorListener(),
                 new PartyListener(),
@@ -152,6 +151,11 @@ public class Practice extends JavaPlugin {
             world.setDifficulty(Difficulty.HARD);
             clearEntities(world);
         });
+
+        for (World world : getInstance().getServer().getWorlds()) {
+            world.setGameRuleValue("doDaylightCycle", "false");
+        }
+
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (placeholderAPI != null && placeholderAPI.isEnabled()) {
             new Placeholder().register();

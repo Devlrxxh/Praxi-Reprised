@@ -37,8 +37,6 @@ public class StandaloneArena extends Arena {
         configuration.set(path + ".spawnA", LocationUtil.serialize(spawnA));
         configuration.set(path + ".displayName", displayName);
         configuration.set(path + ".spawnB", LocationUtil.serialize(spawnB));
-        configuration.set(path + ".bedA", LocationUtil.serialize(bedA));
-        configuration.set(path + ".bedB", LocationUtil.serialize(bedB));
         configuration.set(path + ".cuboid.location1", LocationUtil.serialize(getLowerCorner()));
         configuration.set(path + ".cuboid.location2", LocationUtil.serialize(getUpperCorner()));
         configuration.set(path + ".kits", getKits());

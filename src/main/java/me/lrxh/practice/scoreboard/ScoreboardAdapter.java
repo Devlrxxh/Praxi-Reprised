@@ -59,6 +59,9 @@ public class ScoreboardAdapter implements AssembleAdapter {
                 if (match.getKit().getGameRules().isBoxing()) {
                     return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH-BOXING")), player);
                 }
+                if (match.getKit().getGameRules().isBedwars()) {
+                    return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH-BEDWARS")), player);
+                }
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("MATCH.IN-MATCH")), player);
             }
         }

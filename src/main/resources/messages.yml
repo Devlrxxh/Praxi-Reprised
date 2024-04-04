@@ -31,14 +31,14 @@ OPTIONS:
   MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
   SILENT_ENABLED: '&aEnabled Silent Mode!'
   SILENT_DISABLED: '&cDisabled Silent Mode!'
-  FOLLOW_START: '&bStarted following &f{0}.'
-  FOLLOW_END: '&bStopped following &f{0}.'
+  FOLLOW_START: '<theme>Started following &f{0}.'
+  FOLLOW_END: '<theme>Stopped following &f{0}.'
 LEADERBOARD:
   MESSAGE: '&aLeaderboards Refreshed!'
 FOLLOW:
-  FOLLOW_START: '&bStarted following &f{0}.'
-  FOLLOW_END: '&bStopped following &f{0}.'
-  FOLLOWED_LEFT: '&b{0} &left.'
+  FOLLOW_START: '<theme>Started following &f{0}.'
+  FOLLOW_END: '<theme>Stopped following &f{0}.'
+  FOLLOWED_LEFT: '<theme>{0} &left.'
 PARTY:
   HELP:
     - '&7&m------------------------------------------------'
@@ -104,14 +104,17 @@ MATCH:
   NOW_SPECTATING: <theme>{0} &eis now spectating.
   NO_LONGER_SPECTATING: <theme>{0} &eis no longer spectating.
   PLAYING_ARENA: ' '
-  START_TIMER: '&fMatch starting in &b{0}&f...'
+  START_TIMER: '&fMatch starting in <theme>{0}&f...'
+  RESPAWN_TIMER: '&fRespawning in <theme>{0}&f...'
+  RESPAWNED: '&aRespawned!'
+  BED_BROKEN: '{0} Bed &fwas broken by {1}'
   STARTED: '&aMatch started!'
   WARNING: '&4&lWARNING: &cIrregular clicking methods such as butterfly clicking,
     changing your debounce time, and other modifications are strongly discouraged
     and may result in a ban, Your debounce time should be 10 ms.'
   END_DETAILS:
     - '&7&m------------------------------------------------'
-    - '&bPost-Match Inventories &7&o&7(Click to view)'
+    - '<theme>Post-Match Inventories &7&o&7(Click to view)'
     - '%INVENTORIES%'
     - '%ELO_CHANGES%'
     - '&7&m------------------------------------------------'
@@ -123,6 +126,7 @@ MATCH:
     - '&a{0} +{1} ({2}) &7| &c{3} -{4} ({5})'
   PLAYER_KILLED: '&a{1} &7killed &c{0}&7.'
   PLAYER_DIED: '{0} &7committed suicide.'
+  PLAYER_FINAL_KILL: '&a{1} &7killed &c{0}&7. &b&lFINAL KILL'
   ROUNDS_TO_WIN: ''
 REMATCH:
   SENT_REQUEST:

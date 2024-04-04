@@ -14,6 +14,7 @@ import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -92,6 +93,12 @@ public class ProfileListener implements Listener {
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void soilChangePlayer(PlayerInteractEvent event) {
+        if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL)
+            event.setCancelled(true);
     }
 
     @EventHandler

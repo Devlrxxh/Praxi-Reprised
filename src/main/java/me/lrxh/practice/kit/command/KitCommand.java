@@ -66,7 +66,7 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/kit hpregen &7<kit> - &fSet HPRegen rule"));
         player.sendMessage(CC.translate("&7* &c/kit hitdelay &7<kit> <value> - &fSet hit delay"));
         player.sendMessage(CC.translate("&7* &c/kit boxing &7<kit> - &fAdd Boxing rule"));
-//        player.sendMessage(CC.translate("&7* &c/kit bedwars &7<kit> - &fAdd Bedwars rule"));
+        player.sendMessage(CC.translate("&7* &c/kit bedwars &7<kit> - &fAdd Bedwars rule"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -255,22 +255,22 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.GREEN + "You updated the kit's build status to " + (kit.getGameRules().isBuild() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
-//    @Subcommand("bedwars")
-//    @CommandCompletion("@kits")
-//    @Syntax("<kit>")
-//    public void bedwars(Player player, String kitName) {
-//        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
-//            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
-//            return;
-//        }
-//        Kit kit = Kit.getByName(kitName);
-//        if (kit == null) return;
-//
-//        kit.getGameRules().setBedwars(!kit.getGameRules().isBedwars());
-//        kit.save();
-//
-//        player.sendMessage(CC.GREEN + "You updated the kit's bedwars status to " + (kit.getGameRules().isBedwars() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
-//    }
+    @Subcommand("bedwars")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void bedwars(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setBedwars(!kit.getGameRules().isBedwars());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's bedwars status to " + (kit.getGameRules().isBedwars() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
 
     @Subcommand("spleef")
     @CommandCompletion("@kits")

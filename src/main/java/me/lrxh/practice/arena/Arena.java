@@ -30,8 +30,6 @@ public class Arena extends Cuboid {
     protected Location spawnA;
     protected Location spawnB;
     protected boolean active;
-    protected Location bedA;
-    protected Location bedB;
     private List<String> kits = new ArrayList<>();
     private Map<Chunk, ChunkSnapshot> chunkSnapshots = new HashMap<>();
 
@@ -70,13 +68,6 @@ public class Arena extends Cuboid {
                     arena.setSpawnB(LocationUtil.deserialize(configuration.getString(path + ".spawnB")));
                 }
 
-                if (configuration.contains(path + ".bedA")) {
-                    arena.setBedA(LocationUtil.deserialize(configuration.getString(path + ".bedA")));
-                }
-
-                if (configuration.contains(path + ".bedB")) {
-                    arena.setBedB(LocationUtil.deserialize(configuration.getString(path + ".bedB")));
-                }
 
                 String displayName = configuration.getString(path + ".displayName");
                 arena.setDisplayName(displayName);
@@ -98,13 +89,6 @@ public class Arena extends Cuboid {
 
                         duplicate.setSpawnA(spawn1);
                         duplicate.setSpawnB(spawn2);
-                        if (configuration.contains(path + ".bedA")) {
-                            arena.setBedA(LocationUtil.deserialize(configuration.getString(path + ".bedA")));
-                        }
-
-                        if (configuration.contains(path + ".bedB")) {
-                            arena.setBedB(LocationUtil.deserialize(configuration.getString(path + ".bedB")));
-                        }
                         duplicate.setKits(arena.getKits());
 
                         ((StandaloneArena) arena).getDuplicates().add(duplicate);
@@ -205,6 +189,11 @@ public class Arena extends Cuboid {
     public int getMaxBuildHeight() {
         int highest = (int) (Math.max(spawnA.getY(), spawnB.getY()));
         return highest + 5;
+    }
+
+    public int getDeathZone() {
+        int lowest = (int) (Math.min(spawnA.getY(), spawnB.getY()));
+        return lowest - 8;
     }
 
     public Location getSpawnA() {

@@ -6,15 +6,13 @@ import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.queue.Queue;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ItemBuilder;
+import me.lrxh.practice.util.PlayerUtil;
 import me.lrxh.practice.util.TimeUtil;
 import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
 import me.lrxh.practice.util.menu.filters.Filters;
-import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,11 +61,6 @@ public class LeaderboardsMenu extends Menu {
     private class GlobalStatsButton extends Button {
         public ItemStack getButtonItem(Player player) {
 
-            ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
-            SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
-            skullMeta.setOwner(player.getName());
-            head.setItemMeta(skullMeta);
-
             List<String> lore = new ArrayList<>();
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
@@ -80,7 +73,7 @@ public class LeaderboardsMenu extends Menu {
             }
 
 
-            return new ItemBuilder(head)
+            return new ItemBuilder(PlayerUtil.getPlayerHead(player.getUniqueId()))
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.GLOBAL-STATS.GLOBAL-STATS-NAME"))
                     .lore(lore)
                     .clearEnchantments()

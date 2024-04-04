@@ -1,11 +1,13 @@
 package me.lrxh.practice.util;
 
 import me.lrxh.practice.Practice;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
@@ -246,4 +248,17 @@ public class InventoryUtil {
         }
     }
 
+    public static List<ItemStack> color(ItemStack[] itemStackList, Color color) {
+        List<ItemStack> items = new ArrayList<>();
+        for (ItemStack itemStack : itemStackList) {
+            if (itemStack.getType() == Material.LEATHER_BOOTS || itemStack.getType() == Material.LEATHER_CHESTPLATE || itemStack.getType() == Material.LEATHER_HELMET
+                    || itemStack.getType() == Material.LEATHER_LEGGINGS) {
+                LeatherArmorMeta meta = (LeatherArmorMeta) itemStack.getItemMeta();
+                meta.setColor(color);
+                itemStack.setItemMeta(meta);
+            }
+            items.add(itemStack);
+        }
+        return items;
+    }
 }

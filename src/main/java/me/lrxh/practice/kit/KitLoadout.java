@@ -21,9 +21,4 @@ public class KitLoadout {
         this.contents = new ItemStack[36];
     }
 
-    public KitLoadout(ItemStack[] armor, ItemStack[] contents) {
-        this.armor = armor;
-        this.contents = contents;
-    }
-
 }

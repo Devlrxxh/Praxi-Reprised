@@ -2,10 +2,7 @@ package me.lrxh.practice.match.menu;
 
 import lombok.AllArgsConstructor;
 import me.lrxh.practice.match.MatchSnapshot;
-import me.lrxh.practice.util.InventoryUtil;
-import me.lrxh.practice.util.ItemBuilder;
-import me.lrxh.practice.util.PotionUtil;
-import me.lrxh.practice.util.TimeUtil;
+import me.lrxh.practice.util.*;
 import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
 import me.lrxh.practice.util.menu.button.DisplayButton;
@@ -13,11 +10,9 @@ import me.lrxh.practice.util.menu.filters.Filters;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.*;
@@ -86,12 +81,7 @@ public class MatchDetailsMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
-            SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
-            skullMeta.setOwner(player.getName());
-            head.setItemMeta(skullMeta);
-
-            return new ItemBuilder(head)
+            return new ItemBuilder(PlayerUtil.getPlayerHead(snapshot.getUuid()))
                     .name("&bHealth: &f" + health + "/10 &4" + StringEscapeUtils.unescapeJava("❤"))
                     .amount((int) (health == 0 ? 1 : health), false)
                     .clearFlags()
@@ -181,7 +171,7 @@ public class MatchDetailsMenu extends Menu {
             MatchSnapshot snapshot = MatchSnapshot.getByUuid(opponent);
 
             if (snapshot != null) {
-                return new ItemBuilder(Material.PAPER)
+                return new ItemBuilder(Material.LEVER)
                         .name("&7Press to switch to " + Bukkit.getPlayer(opponent).getName() + " inventory.")
                         .lore("&aClick to Switch")
                         .clearFlags()

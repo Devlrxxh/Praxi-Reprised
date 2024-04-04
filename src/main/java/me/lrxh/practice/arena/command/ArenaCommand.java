@@ -15,7 +15,6 @@ import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
 import me.lrxh.practice.util.ChatHelper;
-import me.lrxh.practice.util.PlayerUtil;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -122,8 +121,8 @@ public class ArenaCommand extends BaseCommand {
         }
         Arena arena = Arena.getByName(arenaName);
         arena.setDisplayName(value);
-
-        player.sendMessage(CC.GREEN + "Successfully set " + arena.getDisplayName() + " display name!");
+        arena.save();
+        player.sendMessage(CC.GREEN + "Successfully set " + arena.getName() + " display name!");
     }
 
 
@@ -377,28 +376,6 @@ public class ArenaCommand extends BaseCommand {
         player.sendMessage(CC.GREEN + "Updated spawn point " + pos + " for arena " + arena.getName());
     }
 
-    @Subcommand("setBedSpawn")
-    @CommandCompletion("@arenas")
-    @Syntax("<arena> <pos>")
-    public void setBedSpawn(Player player, String arenaName, SpawnType pos) {
-        if (checkArena(arenaName)) {
-            player.sendMessage(CC.translate("&4ERROR - &cArena doesn't exists!"));
-            return;
-        }
-        if (!(PlayerUtil.getTargetBlock(player, 6).getType().equals(Material.BED_BLOCK) || PlayerUtil.getTargetBlock(player, 6).getType().equals(Material.BED))) {
-            player.sendMessage(CC.translate("&4ERROR - &cYou aren't looking at a bed!"));
-            return;
-        }
-        Arena arena = Arena.getByName(arenaName);
-        if (pos.equals(SpawnType.A)) {
-            arena.setBedA(PlayerUtil.getTargetBlock(player, 6).getLocation());
-        } else {
-            arena.setBedB(PlayerUtil.getTargetBlock(player, 6).getLocation());
-        }
-
-        arena.save();
-        player.sendMessage(CC.GREEN + "Updated bed " + pos + " for arena " + arena.getDisplayName());
-    }
 
     private boolean checkArena(String arena) {
         return !Arena.getArenas().contains(Arena.getByName(arena));

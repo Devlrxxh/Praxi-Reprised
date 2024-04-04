@@ -12,12 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Setter
 public class GameParticipant<T extends GamePlayer> {
 
     private final T leader;
-    @Setter
     private int roundWins;
-    @Setter
     private boolean eliminated;
 
     public GameParticipant(T leader) {
