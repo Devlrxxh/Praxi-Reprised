@@ -192,6 +192,7 @@ public class ProfileListener implements Listener {
         if (profile.getMatch() != null) {
             profile.getMatch().sendDeathMessage(event.getPlayer(), null, false);
             profile.getMatch().end();
+            profile.setMatch(null);
 
         }
         if (profile.getState().equals(ProfileState.QUEUEING)) {

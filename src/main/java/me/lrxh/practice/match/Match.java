@@ -369,7 +369,8 @@ public abstract class Match {
         gamePlayer.setRespawned(true);
 
         sendDeathMessage(player, PlayerUtil.getLastAttacker(player), false);
-        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1);
+
+        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
         player.addPotionEffect(
                 new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
 
@@ -519,6 +520,7 @@ public abstract class Match {
                     Bukkit.getScheduler().runTaskLater(Practice.getInstance(), firework::detonate, 5L);
                     break;
             }
+            killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }
 
         // Store snapshot of player inventory and stats
