@@ -147,7 +147,7 @@ public class MatchListener implements Listener {
                 }
 
                 match.broadcast(Locale.MATCH_BED_BROKEN.format(player, aTeam ? CC.translate("&9Blue") : CC.translate("&cRed"),
-                        aTeam ? CC.translate("&9" + player.getName()) : CC.translate("&c" + player.getName())));
+                        aTeam ? CC.translate("&c" + player.getName()) : CC.translate("&9" + player.getName())));
             }
 
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
