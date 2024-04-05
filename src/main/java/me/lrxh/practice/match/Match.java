@@ -517,6 +517,7 @@ public abstract class Match {
             killerProfile.getOptions().killEffect().execute(killer, dead.getLocation());
             PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 70);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
+            PlayerUtil.doVelocityChange(killer);
         }
 
         PlayerUtil.setLastAttacker(dead, null);
@@ -524,6 +525,7 @@ public abstract class Match {
         PlayerUtil.reset(dead);
 
         PlayerUtil.doVelocityChange(dead);
+
 
         // Handle visibility for match players
         // Send death message
@@ -590,7 +592,7 @@ public abstract class Match {
         return getParticipants().get(0);
     }
 
-    public void sendTeamAMessage(String message){
+    public void sendTeamAMessage(String message) {
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             gameParticipant.sendMessage(message);
         }

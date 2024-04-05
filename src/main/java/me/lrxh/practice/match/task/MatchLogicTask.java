@@ -10,6 +10,7 @@ import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.participant.GamePlayer;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.PlayerUtil;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MatchLogicTask extends BukkitRunnable {
@@ -44,6 +45,7 @@ public class MatchLogicTask extends BukkitRunnable {
                 match.sendMessage(Locale.MATCH_STARTED.format());
                 match.sendMessage(" ");
                 match.sendMessage(Locale.MATCH_WARNING.format());
+
                 if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars()) {
                     for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
                         for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
@@ -51,9 +53,11 @@ public class MatchLogicTask extends BukkitRunnable {
                         }
                     }
                 }
+                match.sendSound(Sound.FIREWORK_BLAST, 1.0F, 1.0F);
             } else {
                 match.sendMessage(Locale.MATCH_START_TIMER.format(nextAction, nextAction == 1 ? "" : "s"));
                 match.sendTitle(CC.translate("&e" + nextAction), "", 20);
+                match.sendSound(Sound.CLICK, 1.0F, 1.0F);
                 if (match.getKit().getGameRules().isBoxing()) {
                     for (GameParticipant<MatchGamePlayer> players : match.getParticipants()) {
                         players.addSpeed();

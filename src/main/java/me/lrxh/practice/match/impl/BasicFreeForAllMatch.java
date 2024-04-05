@@ -129,7 +129,6 @@ public class BasicFreeForAllMatch extends Match {
 
     @Override
     public List<GameParticipant<MatchGamePlayer>> getParticipants() {
-        System.out.println("This getting ran");
         return new ArrayList<>(participants);
     }
 
