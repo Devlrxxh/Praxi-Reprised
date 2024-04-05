@@ -39,8 +39,8 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/kit create &7<value> - &fCreate kit"));
         player.sendMessage(CC.translate("&7* &c/kit getinv &7<kit> - &fGet kit loadout"));
         player.sendMessage(CC.translate("&7* &c/kit list &7- &fList all kits"));
-        player.sendMessage(CC.translate("&7* &c/arena setinv &7<kit> &7- &fSet kit loadout"));
-        player.sendMessage(CC.translate("&7* &c/arena setkb &7<kit> &7<kb> &7- &fSet kit KB Profile"));
+        player.sendMessage(CC.translate("&7* &c/kit setinv &7<kit> &7- &fSet kit loadout"));
+        player.sendMessage(CC.translate("&7* &c/kit setkb &7<kit> &7<kb> &7- &fSet kit KB Profile"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 

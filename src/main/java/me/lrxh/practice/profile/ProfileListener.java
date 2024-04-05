@@ -155,8 +155,8 @@ public class ProfileListener implements Listener {
         if (player.hasPermission("practice.donor.fly")) {
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.updateInventory();
         }
+        PlayerUtil.reset(player);
         new BukkitRunnable() {
             @Override
             public void run() {
