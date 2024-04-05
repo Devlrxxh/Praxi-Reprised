@@ -22,14 +22,14 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.*;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -159,6 +159,11 @@ public abstract class Match {
         // Reset the player's inventory
         PlayerUtil.reset(player);
 
+        if (kit.getGameRules().isShowHealth()) {
+
+
+        }
+
 
         // Set the player's max damage ticks
         player.setMaximumNoDamageTicks(getKit().getGameRules().getHitDelay());
@@ -263,6 +268,11 @@ public abstract class Match {
                     Practice.getInstance().getHotbar().giveHotbarItems(player);
                     PlayerUtil.teleportToSpawn(player);
                     PlayerUtil.allowMovement(gamePlayer.getPlayer());
+                    Objective objective = player.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
+
+                    if (objective != null) {
+                        objective.unregister();
+                    }
                 }
             }
         }
@@ -501,31 +511,10 @@ public abstract class Match {
 
         // Get killer
         if (killer != null) {
+
             Profile killerProfile = Profile.getByUuid(killer.getUniqueId());
             Location location = dead.getLocation();
-            World world = location.getWorld();
-            switch (killerProfile.getOptions().killEffect()) {
-                case LIGHTNING:
-                    double x = location.getX();
-                    double y = location.getY() + 2.0;
-                    double z = location.getZ();
-                    Location lightningLocation = new Location(world, x, y, z);
-                    world.strikeLightning(lightningLocation);
-                    break;
-                case FIREWORKS:
-                    Firework firework = world.spawn(location, Firework.class);
-                    FireworkMeta meta = firework.getFireworkMeta();
-                    FireworkEffect.Builder builder = FireworkEffect.builder()
-                            .withColor(Color.RED)
-                            .with(FireworkEffect.Type.BALL_LARGE)
-                            .trail(true)
-                            .flicker(false);
-                    meta.addEffect(builder.build());
-                    meta.setPower(1);
-                    firework.setFireworkMeta(meta);
-                    Bukkit.getScheduler().runTaskLater(Practice.getInstance(), firework::detonate, 5L);
-                    break;
-            }
+            killerProfile.getOptions().killEffect().execute(killer, location);
             PlayerUtil.setLastAttacker(killer, null);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }

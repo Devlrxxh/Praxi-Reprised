@@ -63,7 +63,7 @@ public class SpectateCommand extends BaseCommand {
     public void leave(Player player) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING && profile.getMatch().getGamePlayer(player).isDead()) {
+        if (profile.getMatch() != null && profile.getMatch().getGamePlayer(player).isDead()) {
             profile.getMatch().getGamePlayer(player).setDisconnected(true);
             profile.setState(ProfileState.LOBBY);
             profile.setMatch(null);

@@ -77,7 +77,7 @@ public class KitManagementMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.STAINED_CLAY)
+            return new ItemBuilder(Material.REDSTONE)
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.DELETE-BUTTON"))
                     .clearFlags()
                     .build();

@@ -166,7 +166,7 @@ public class Practice extends JavaPlugin {
         Console.sendMessage(CC.translate(" "));
         Console.sendMessage(CC.translate("&7| &cPractice Core"));
         Console.sendMessage(CC.translate(" "));
-        Console.sendMessage(CC.translate("&7| &fAutor(s): &c" + getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
+        Console.sendMessage(CC.translate("&7| &fAuthor(s): &c" + getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
         Console.sendMessage(CC.translate("&7| &fVersion: &c" + getInstance().getDescription().getVersion()));
         Console.sendMessage(CC.translate("&7| &fSpigot: &c" + getInstance().getServer().getName()));
         Console.sendMessage(CC.translate(" "));

@@ -47,7 +47,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
         }
 
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             if (match.getState().equals(MatchState.STARTING_ROUND)) {
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("MATCH.STARTING")), player);

@@ -14,7 +14,7 @@ public class MatchPearlCooldownTask extends BukkitRunnable {
         for (Player player : Practice.getInstance().getServer().getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile.getState() == ProfileState.FIGHTING || profile.getState() == ProfileState.EVENT) {
+            if (profile.getMatch() != null || profile.getState() == ProfileState.EVENT) {
                 if (profile.getEnderpearlCooldown().hasExpired()) {
                     if (!profile.getEnderpearlCooldown().isNotified()) {
                         profile.getEnderpearlCooldown().setNotified(true);

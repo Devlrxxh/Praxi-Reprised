@@ -3,8 +3,12 @@ package me.lrxh.practice.profile.visibility;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
+import me.lrxh.practice.util.CC;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 
 public class VisibilityLogic {
 
@@ -53,7 +57,16 @@ public class VisibilityLogic {
             } else {
                 viewer.hidePlayer(target);
             }
+            if (viewerProfile.getMatch().getKit().getGameRules().isShowHealth()) {
+                Objective objective = viewer.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
 
+                if (objective == null) {
+                    objective = viewer.getScoreboard().registerNewObjective("showhealth", "health");
+                }
+                objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+                objective.setDisplayName(CC.RED + StringEscapeUtils.unescapeJava("❤"));
+                objective.getScore(target.getName()).setScore((int) Math.floor(target.getHealth() / 2));
+            }
         } else if (viewerProfile.getState() == ProfileState.EVENT) {
             if (targetProfile.getState() == ProfileState.EVENT) {
                 viewer.showPlayer(target);

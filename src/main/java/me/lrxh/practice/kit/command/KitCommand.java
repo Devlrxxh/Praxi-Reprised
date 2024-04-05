@@ -7,7 +7,6 @@ import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
-import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -54,6 +53,7 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.translate("&7* &c/kit setdescription &7<kit> &7<value> &7- &fSet kit description"));
         player.sendMessage(CC.translate("&7* &c/kit build &7<kit> &7- &fAdd Build rule"));
         player.sendMessage(CC.translate("&7* &c/kit spleef &7<kit> &7- &fAdd Spleef rule"));
+        player.sendMessage(CC.translate("&7* &c/kit showhp &7<kit> &7- &fAdd Shop HP rule"));
         player.sendMessage(CC.translate("&7&m-----------------------------------------"));
     }
 
@@ -340,6 +340,24 @@ public class KitCommand extends BaseCommand {
         player.sendMessage(CC.GREEN + "You updated the kit's health regeneration status to " + (kit.getGameRules().isShowHealth() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
     }
 
+    @Subcommand("showhp")
+    @CommandCompletion("@kits")
+    @Syntax("<kit>")
+    public void showhp(Player player, String kitName) {
+        if (!Kit.getKits().contains(Kit.getByName(kitName))) {
+            player.sendMessage(CC.translate("&4ERROR - &cKit doesn't exists!"));
+            return;
+        }
+        Kit kit = Kit.getByName(kitName);
+        if (kit == null) return;
+
+        kit.getGameRules().setShowHealth(!kit.getGameRules().isShowHealth());
+        kit.save();
+
+        player.sendMessage(CC.GREEN + "You updated the kit's show health status to " + (kit.getGameRules().isShowHealth() ? "Enabled" : ChatColor.RED + "Disabled" + "."));
+    }
+
+
     @Subcommand("hitdelay")
     @CommandCompletion("@kits")
     @Syntax("<kit>")
@@ -353,7 +371,7 @@ public class KitCommand extends BaseCommand {
 
         kit.getGameRules().setHitDelay(delay);
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
                 for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {

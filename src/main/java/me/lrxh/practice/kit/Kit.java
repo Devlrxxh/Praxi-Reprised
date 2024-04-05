@@ -126,7 +126,7 @@ public class Kit {
         configFile.getConfiguration().set(path + ".game-rules.sumo", gameRules.isSumo());
         configFile.getConfiguration().set(path + ".game-rules.bedwars", gameRules.isBedwars());
         configFile.getConfiguration().set(path + ".game-rules.health-regeneration", gameRules.isHealthRegeneration());
-        configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
+        configFile.getConfiguration().set(path + ".game-rules.show-health", gameRules.isShowHealth());
         configFile.getConfiguration().set(path + ".game-rules.hit-delay", gameRules.getHitDelay());
         configFile.getConfiguration().set(path + ".game-rules.boxing", gameRules.isBoxing());
 

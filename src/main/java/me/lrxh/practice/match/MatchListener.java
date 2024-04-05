@@ -39,7 +39,8 @@ public class MatchListener implements Listener {
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+
+        if (profile.getMatch() != null) {
             if (profile.getMatch().getKit().getGameRules().isSumo() ||
                     profile.getMatch().getKit().getGameRules().isSpleef()) {
                 Match match = profile.getMatch();
@@ -103,7 +104,7 @@ public class MatchListener implements Listener {
     public void onBlockPlaceEvent(BlockPlaceEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
 
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
@@ -165,7 +166,7 @@ public class MatchListener implements Listener {
     public void onBlockBreakEvent(BlockBreakEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             if (event.getBlock().getType() == Material.BED_BLOCK || event.getBlock().getType() == Material.BED) {
                 Player player = event.getPlayer();
@@ -235,7 +236,7 @@ public class MatchListener implements Listener {
     public void onBucketEmptyEvent(PlayerBucketEmptyEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             Match match = profile.getMatch();
 
             if (match.getKit().getGameRules().isBuild() && match.getState() == MatchState.PLAYING_ROUND) {
@@ -271,7 +272,7 @@ public class MatchListener implements Listener {
     public void onPlayerPickupItemEvent(PlayerPickupItemEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             if (profile.getMatch().getGamePlayer(event.getPlayer()).isDead()) {
                 event.setCancelled(true);
                 return;
@@ -312,7 +313,7 @@ public class MatchListener implements Listener {
             return;
         }
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
             if (event.getItemDrop().getItemStack().getType() == Material.GLASS_BOTTLE) {
                 event.getItemDrop().remove();
                 return;
@@ -347,7 +348,7 @@ public class MatchListener implements Listener {
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
-        if (profile.getState() == ProfileState.FIGHTING) {
+        if (profile.getMatch() != null) {
 
             Match match = profile.getMatch();
             event.getDrops().clear();
@@ -386,7 +387,7 @@ public class MatchListener implements Listener {
             Player shooter = (Player) event.getEntity().getShooter();
             Profile profile = Profile.getByUuid(shooter.getUniqueId());
 
-            if (profile.getState() == ProfileState.FIGHTING) {
+            if (profile.getMatch() != null) {
                 Match match = profile.getMatch();
 
                 if (match.getState() == MatchState.STARTING_ROUND) {
@@ -443,7 +444,7 @@ public class MatchListener implements Listener {
             if (event.getRegainReason() == EntityRegainHealthEvent.RegainReason.SATIATED) {
                 Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
-                if (profile.getState() == ProfileState.FIGHTING && !profile.getMatch().getKit().getGameRules().isHealthRegeneration()) {
+                if (profile.getMatch() != null && !profile.getMatch().getKit().getGameRules().isHealthRegeneration()) {
                     event.setCancelled(true);
                 }
             }
@@ -456,7 +457,7 @@ public class MatchListener implements Listener {
             Player player = (Player) event.getEntity();
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile.getState() == ProfileState.FIGHTING) {
+            if (profile.getMatch() != null) {
 
                 if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
 
@@ -500,7 +501,7 @@ public class MatchListener implements Listener {
     public void onHungerChange(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
         Profile profile = Profile.getByUuid(player.getUniqueId());
-        if (!profile.getState().equals(ProfileState.FIGHTING)) return;
+        if (profile.getMatch() == null) return;
         if (profile.getMatch().getKit().getGameRules().isSumo()
                 || profile.getMatch().getKit().getGameRules().isBedwars()
                 || profile.getMatch().getKit().getGameRules().isSpleef()
@@ -628,7 +629,7 @@ public class MatchListener implements Listener {
             Player player = (Player) event.getEntity();
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile.getState() == ProfileState.FIGHTING &&
+            if (profile.getMatch() != null &&
                     profile.getMatch().getState() == MatchState.PLAYING_ROUND) {
                 if (event.getFoodLevel() >= 20) {
                     event.setFoodLevel(20);
@@ -646,7 +647,7 @@ public class MatchListener implements Listener {
 //    public void onPlayerQuitEvent(PlayerQuitEvent event) {
 //        Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
 //
-//        if (profile.getState() == ProfileState.FIGHTING) {
+//        if (profile.getMatch() != null) {
 //            Match match = profile.getMatch();
 //
 //            if (match != null && (match.getState() == MatchState.STARTING_ROUND || match.getState() == MatchState.PLAYING_ROUND)) {
@@ -710,7 +711,7 @@ public class MatchListener implements Listener {
                 event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
 
-            if (profile.getState() == ProfileState.FIGHTING) {
+            if (profile.getMatch() != null) {
                 Match match = profile.getMatch();
 
                 if (Practice.getInstance().getHotbar().fromItemStack(itemStack) == HotbarItem.SPECTATE_STOP) {

@@ -152,8 +152,8 @@ public class KitEditorMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.STAINED_CLAY)
-                    .durability(7)
+            return new ItemBuilder(Material.WOOL)
+                    .durability(3)
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CLEAR-BUTTON"))
                     .clearFlags()
                     .build();
@@ -178,8 +178,8 @@ public class KitEditorMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.STAINED_CLAY)
-                    .durability(7)
+            return new ItemBuilder(Material.WOOL)
+                    .durability(4)
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.LOAD-DEFAULT-BUTTON"))
                     .clearFlags()
                     .build();
@@ -208,7 +208,7 @@ public class KitEditorMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.STAINED_CLAY)
+            return new ItemBuilder(Material.WOOL)
                     .durability(5)
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.SAVE-BUTTON"))
                     .clearFlags()
@@ -240,7 +240,7 @@ public class KitEditorMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(Material.STAINED_CLAY)
+            return new ItemBuilder(Material.WOOL)
                     .durability(14)
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.EDITOR.BUTTONS.CANCEL-BUTTON"))
                     .clearFlags()
