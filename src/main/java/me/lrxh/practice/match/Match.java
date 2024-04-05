@@ -478,10 +478,27 @@ public abstract class Match {
         if (!(state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND)) {
             return;
         }
-        PlayerUtil.animateDeath(dead);
 
         MatchGamePlayer deadGamePlayer = getGamePlayer(dead);
         Player killer = PlayerUtil.getLastAttacker(dead);
+
+        // Store snapshot of player inventory and stats
+        MatchSnapshot snapshot = new MatchSnapshot(dead, true);
+        snapshot.setPotionsMissed(deadGamePlayer.getPotionsMissed());
+        snapshot.setPotionsThrown(deadGamePlayer.getPotionsThrown());
+        snapshot.setLongestCombo(deadGamePlayer.getLongestCombo());
+        snapshot.setTotalHits(deadGamePlayer.getHits());
+        Profile loserProfile = Profile.getByUuid(deadGamePlayer.getUuid());
+        if (!Practice.getInstance().getCache().getMatch(matchId).isDuel()) {
+            loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
+        }
+        dead.setItemInHand(null);
+
+        // Add snapshot to list
+        snapshots.add(snapshot);
+
+        PlayerUtil.animateDeath(dead);
+
         if (killer != null) {
             PlayerUtil.sendTitle(dead, CC.translate("&cLOST!"), "&c" + killer.getName() + " &fwon the match!", 60);
         }
@@ -502,19 +519,6 @@ public abstract class Match {
             PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 60);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }
-
-        // Store snapshot of player inventory and stats
-        MatchSnapshot snapshot = new MatchSnapshot(dead, true);
-        snapshot.setPotionsMissed(deadGamePlayer.getPotionsMissed());
-        snapshot.setPotionsThrown(deadGamePlayer.getPotionsThrown());
-        snapshot.setLongestCombo(deadGamePlayer.getLongestCombo());
-        snapshot.setTotalHits(deadGamePlayer.getHits());
-        Profile loserProfile = Profile.getByUuid(deadGamePlayer.getUuid());
-        if (!Practice.getInstance().getCache().getMatch(matchId).isDuel()) {
-            loserProfile.getKitData().get(loserProfile.getMatch().getKit()).incrementLost();
-        }
-        // Add snapshot to list
-        snapshots.add(snapshot);
 
         PlayerUtil.setLastAttacker(dead, null);
 

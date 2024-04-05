@@ -343,13 +343,13 @@ public class MatchListener implements Listener {
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         event.setDeathMessage(null);
+        event.getDrops().clear();
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
         if (profile.getMatch() != null) {
 
             Match match = profile.getMatch();
-            event.getDrops().clear();
 
             boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
 

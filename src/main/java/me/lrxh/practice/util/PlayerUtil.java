@@ -164,8 +164,6 @@ public class PlayerUtil {
     }
 
     public void animateDeath(Player player) {
-        player.setItemInHand(null);
-
         int entityId = EntityUtils.getFakeEntityId();
         PacketPlayOutNamedEntitySpawn spawnPacket = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
         PacketPlayOutEntityStatus statusPacket = new PacketPlayOutEntityStatus();
