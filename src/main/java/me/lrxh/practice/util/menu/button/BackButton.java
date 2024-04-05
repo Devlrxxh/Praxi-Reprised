@@ -17,7 +17,7 @@ public class BackButton extends Button {
 
     @Override
     public ItemStack getButtonItem(Player player) {
-        return new ItemBuilder(Material.REDSTONE)
+        return new ItemBuilder(Material.REDSTONE_TORCH_ON)
                 .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.MANAGEMENT.BUTTONS.BACK-BUTTON"))
                 .build();
     }

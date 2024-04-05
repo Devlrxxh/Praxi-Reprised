@@ -41,6 +41,7 @@ public class Hotbar {
                 hotbarItem.setSlot(config.getInt(path + "SLOT"));
                 if (section.equals("PARTY")) {
                     hotbarItem.setParty(true);
+                    hotbarItem.setStaffmode(false);
                 } else {
                     hotbarItem.setState(ProfileState.valueOf(section));
                 }
@@ -70,17 +71,15 @@ public class Hotbar {
 
         switch (profile.getState()) {
             case LOBBY:
-                if (profile.getParty() == null) {
-                    for (HotbarItem item : items.keySet()) {
+
+                for (HotbarItem item : items.keySet()) {
+                    if (profile.getParty() == null) {
                         if (item.getState() != null && item.getState().equals(ProfileState.LOBBY) || item.equals(HotbarItem.KIT_EDITOR)) {
                             player.getInventory().setItem(item.getSlot(), items.get(item));
                         }
-                    }
-                } else {
-                    for (HotbarItem item : items.keySet()) {
-                        if (item.isParty()) {
-                            player.getInventory().setItem(item.getSlot(), items.get(item));
-                        }
+                    } else if (item.isParty()) {
+
+                        player.getInventory().setItem(item.getSlot(), items.get(item));
                     }
                 }
                 break;

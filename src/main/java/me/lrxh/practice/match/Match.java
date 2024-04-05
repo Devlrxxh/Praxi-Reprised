@@ -25,8 +25,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -159,11 +157,6 @@ public abstract class Match {
         // Reset the player's inventory
         PlayerUtil.reset(player);
 
-        if (kit.getGameRules().isShowHealth()) {
-
-
-        }
-
 
         // Set the player's max damage ticks
         player.setMaximumNoDamageTicks(getKit().getGameRules().getHitDelay());
@@ -269,7 +262,7 @@ public abstract class Match {
                     PlayerUtil.teleportToSpawn(player);
                     PlayerUtil.allowMovement(gamePlayer.getPlayer());
                     Objective objective = player.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
-
+                    profile.setMatch(null);
                     if (objective != null) {
                         objective.unregister();
                     }
@@ -358,18 +351,10 @@ public abstract class Match {
         // Send ending messages to spectators
         for (Player player : getSpectatorsAsPlayers()) {
             for (BaseComponent[] components : endingMessages) {
-                player.spigot().sendMessage(components);
+                player.sendMessage(components);
             }
 
             removeSpectator(player);
-        }
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                if (!gamePlayer.isDisconnected()) {
-                    Profile profile = Profile.getByUuid(gamePlayer.getPlayer().getUniqueId());
-                    profile.setMatch(null);
-                }
-            }
         }
     }
 
@@ -388,9 +373,6 @@ public abstract class Match {
 
         sendDeathMessage(player, PlayerUtil.getLastAttacker(player), false);
 
-        player.addPotionEffect(
-                new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
-
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         player.updateInventory();
@@ -406,6 +388,7 @@ public abstract class Match {
             public void run() {
                 if (countdown > 0) {
                     player.sendMessage(Locale.MATCH_RESPAWN_TIMER.format(player, countdown));
+                    PlayerUtil.sendTitle(player, CC.translate("&c" + countdown), "", 20);
                     if (!gamePlayer.isRespawned()) {
                         gamePlayer.setRespawned(false);
                         this.cancel();
@@ -422,11 +405,11 @@ public abstract class Match {
                     player.getInventory().setArmorContents(InventoryUtil.color(gamePlayer.getKitLoadout().getArmor(), aTeam ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
                     //player.getInventory().setContents(gamePlayer.getKitLoadout().getContents());
                     player.getInventory().setContents(InventoryUtil.color(gamePlayer.getKitLoadout().getContents(), aTeam ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));
-
                     player.setGameMode(GameMode.SURVIVAL);
-                    gamePlayer.setRespawned(false);
-                    PlayerUtil.setImmune(player, 30);
                     showPlayer(playerUUID);
+                    gamePlayer.setRespawned(false);
+                    PlayerUtil.setImmune(player, 40);
+                    PlayerUtil.sendTitle(player, CC.translate("&aRespawned!"), "", 20);
                     this.cancel();
                 }
             }
@@ -499,7 +482,9 @@ public abstract class Match {
 
         MatchGamePlayer deadGamePlayer = getGamePlayer(dead);
         Player killer = PlayerUtil.getLastAttacker(dead);
-
+        if (killer != null) {
+            PlayerUtil.sendTitle(dead, CC.translate("&cLOST!"), "&c" + killer.getName() + " &fwon the match!", 60);
+        }
 
         // Don't continue if the player is already dead
         if (deadGamePlayer.isDead()) {
@@ -511,11 +496,10 @@ public abstract class Match {
 
         // Get killer
         if (killer != null) {
-
             Profile killerProfile = Profile.getByUuid(killer.getUniqueId());
-            Location location = dead.getLocation();
-            killerProfile.getOptions().killEffect().execute(killer, location);
+            killerProfile.getOptions().killEffect().execute(killer, dead.getLocation());
             PlayerUtil.setLastAttacker(killer, null);
+            PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 60);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }
 
@@ -532,10 +516,11 @@ public abstract class Match {
         // Add snapshot to list
         snapshots.add(snapshot);
 
+        PlayerUtil.setLastAttacker(dead, null);
+
+        PlayerUtil.reset(dead);
 
         PlayerUtil.doVelocityChange(dead);
-
-        PlayerUtil.setLastAttacker(dead, null);
 
         // Handle visibility for match players
         // Send death message
@@ -582,8 +567,6 @@ public abstract class Match {
         } else {
             Practice.getInstance().getHotbar().giveHotbarItems(dead);
         }
-        // Reset inventory
-        PlayerUtil.reset(dead);
     }
 
     public abstract boolean isOnSameTeam(Player first, Player second);
@@ -707,6 +690,14 @@ public abstract class Match {
             ArrayList<String> list = new ArrayList<>();
             list.add(CC.translate(message));
             player.sendMessage(PlaceholderUtil.format(list, player).toString().replace("[", "").replace("]", ""));
+        }
+    }
+
+    public void sendTitle(String header, String footer, int duration) {
+        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                PlayerUtil.sendTitle(gamePlayer.getPlayer(), header, footer, duration);
+            }
         }
     }
 

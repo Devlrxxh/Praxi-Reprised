@@ -2,6 +2,7 @@ package me.lrxh.practice.profile;
 
 import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
+import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
@@ -91,6 +92,11 @@ public class ProfileListener implements Listener {
 
                 if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
                     PlayerUtil.teleportToSpawn((Player) event.getEntity());
+                }
+
+                Match match = profile.getMatch();
+                if (match != null && match.getState().equals(MatchState.ENDING_MATCH)) {
+                    event.setCancelled(true);
                 }
             }
         }

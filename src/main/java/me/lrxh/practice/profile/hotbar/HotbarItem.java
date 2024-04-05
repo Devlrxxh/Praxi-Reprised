@@ -40,6 +40,8 @@ public enum HotbarItem {
     private int slot;
     @Setter
     private boolean party;
+    @Setter
+    private boolean staffmode;
 
     HotbarItem(String command) {
         this.command = command;

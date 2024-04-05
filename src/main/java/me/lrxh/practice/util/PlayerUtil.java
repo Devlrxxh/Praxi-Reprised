@@ -17,6 +17,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import org.github.paperspigot.Title;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -63,6 +64,10 @@ public class PlayerUtil {
         } else {
             return null;
         }
+    }
+
+    public static void sendTitle(Player player, String header, String footer, int duration) {
+        player.sendTitle(new Title(CC.translate(header), CC.translate(footer), 1, duration, 0));
     }
 
     public ItemStack getPlayerHead(UUID playerUUID) {
@@ -159,6 +164,8 @@ public class PlayerUtil {
     }
 
     public void animateDeath(Player player) {
+        player.setItemInHand(null);
+
         int entityId = EntityUtils.getFakeEntityId();
         PacketPlayOutNamedEntitySpawn spawnPacket = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
         PacketPlayOutEntityStatus statusPacket = new PacketPlayOutEntityStatus();

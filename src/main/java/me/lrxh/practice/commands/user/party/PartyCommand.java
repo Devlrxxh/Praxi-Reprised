@@ -50,12 +50,14 @@ public class PartyCommand extends BaseCommand {
             return;
         }
 
+
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         if (profile.getParty() != null) {
             player.sendMessage(CC.RED + "You already have a party.");
             return;
         }
+
 
         if (profile.getState() != ProfileState.LOBBY) {
             player.sendMessage(CC.RED + "You must be in the lobby to create a party.");
@@ -174,6 +176,7 @@ public class PartyCommand extends BaseCommand {
             return;
         }
 
+
         if (player.hasMetadata("frozen")) {
             player.sendMessage(CC.RED + "You cannot join a party while frozen.");
             return;
@@ -185,6 +188,7 @@ public class PartyCommand extends BaseCommand {
             player.sendMessage(CC.RED + "You already have a party.");
             return;
         }
+
 
         Profile targetProfile = Profile.getByUuid(target.getUniqueId());
         Party party = targetProfile.getParty();

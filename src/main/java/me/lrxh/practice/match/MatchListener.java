@@ -38,12 +38,12 @@ public class MatchListener implements Listener {
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
+        Match match = profile.getMatch();
 
 
         if (profile.getMatch() != null) {
             if (profile.getMatch().getKit().getGameRules().isSumo() ||
                     profile.getMatch().getKit().getGameRules().isSpleef()) {
-                Match match = profile.getMatch();
                 Location playerLocation = event.getPlayer().getLocation();
                 Block block = playerLocation.getBlock();
 
@@ -51,9 +51,8 @@ public class MatchListener implements Listener {
                     match.onDeath(event.getPlayer());
                 }
             }
-            if (profile.getMatch().getKit().getGameRules().isBedwars()) {
+            if (match.getKit().getGameRules().isBedwars()) {
                 Player player = event.getPlayer();
-                Match match = profile.getMatch();
 
                 boolean bedGone = match.getParticipantA().containsPlayer(player.getUniqueId()) ? match.bedBBroken : match.bedABroken;
 
@@ -344,7 +343,6 @@ public class MatchListener implements Listener {
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         event.setDeathMessage(null);
-        player.getInventory().setContents(new ItemStack[36]);
 
         Profile profile = Profile.getByUuid(event.getEntity().getUniqueId());
 
@@ -421,8 +419,8 @@ public class MatchListener implements Listener {
             Player shooter = (Player) event.getPotion().getShooter();
             Profile shooterData = Profile.getByUuid(shooter.getUniqueId());
 
-            if (shooterData.getState() == ProfileState.FIGHTING &&
-                    shooterData.getMatch().getState() == MatchState.PLAYING_ROUND) {
+            if (shooterData.getMatch() != null &&
+                    shooterData.getMatch().getState().equals(MatchState.PLAYING_ROUND)) {
                 if (event.getIntensity(shooter) <= 0.5D) {
                     shooterData.getMatch().getGamePlayer(shooter).incrementPotionsMissed();
                 }
@@ -581,7 +579,7 @@ public class MatchListener implements Listener {
                             StringEscapeUtils.unescapeJava("❤")
                     ));
                 }
-                if (match.getGamePlayer(attacker).isRespawned()) {
+                if (match.getGamePlayer(attacker).isRespawned() && match.getState().equals(MatchState.ENDING_MATCH)) {
                     event.setCancelled(true);
                 }
             }
@@ -606,6 +604,17 @@ public class MatchListener implements Listener {
 
             if (attacker != null) {
                 PlayerUtil.setLastAttacker(victim, attacker);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+            Player attacker = (Player) event.getDamager();
+            Match match = Profile.getByUuid(attacker.getUniqueId()).getMatch();
+            if (match != null && match.getGamePlayer(attacker).isRespawned()) {
+                event.setCancelled(true);
             }
         }
     }

@@ -8,6 +8,7 @@ import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.participant.GamePlayer;
+import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -58,6 +59,7 @@ public class MatchLogicTask extends BukkitRunnable {
                 }
             } else {
                 match.sendMessage(Locale.MATCH_START_TIMER.format(nextAction, nextAction == 1 ? "" : "s"));
+                match.sendTitle(CC.translate("&e" + nextAction), "", 20);
                 if (match.getKit().getGameRules().isBoxing()) {
                     for (GameParticipant<MatchGamePlayer> players : match.getParticipants()) {
                         players.addSpeed();

@@ -140,7 +140,7 @@ public class KitCommand extends BaseCommand {
         }
 
         if (player.getGameMode().equals(GameMode.CREATIVE)) {
-            player.sendMessage(CC.translate("&4ERROR - &cYou can't set inv in create!"));
+            player.sendMessage(CC.translate("&4ERROR - &cYou cannot set inv in creative mode!"));
             return;
         }
         Kit kit = Kit.getByName(kitName);

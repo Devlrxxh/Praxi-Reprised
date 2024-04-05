@@ -31,8 +31,8 @@ OPTIONS:
   MENU_SOUNDS_DISABLED: '&cDisabled Menu sounds!'
   SILENT_ENABLED: '&aEnabled Silent Mode!'
   SILENT_DISABLED: '&cDisabled Silent Mode!'
-  FOLLOW_START: '<theme>Started following &f{0}.'
-  FOLLOW_END: '<theme>Stopped following &f{0}.'
+  STAFF_MODE_ENABLE: '&aEnabled Staff mode'
+  STAFF_MODE_DISABLE: '&cDisabled Staff mode'
 LEADERBOARD:
   MESSAGE: '&aLeaderboards Refreshed!'
 FOLLOW:
