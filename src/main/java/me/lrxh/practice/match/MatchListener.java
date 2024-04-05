@@ -60,7 +60,7 @@ public class MatchListener implements Listener {
                     if (!(player.getLocation().getY() >= match.getArena().getDeathZone()) && !match.getGamePlayer(player).isRespawned()) {
                         if (!bedGone) {
 
-                            if(PlayerUtil.getLastAttacker(player) != null){
+                            if (PlayerUtil.getLastAttacker(player) != null) {
                                 player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
                             }
 
@@ -335,6 +335,9 @@ public class MatchListener implements Listener {
         if (profile.getMatch() != null && profile.getMatch().getState().equals(MatchState.ENDING_MATCH)) {
             event.setCancelled(true);
         }
+        if (event.getPlayer().isOp() || event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+            event.setCancelled(false);
+        }
     }
 
     @EventHandler
@@ -358,7 +361,7 @@ public class MatchListener implements Listener {
                 event.getDrops().clear();
                 if (!bedGone) {
 
-                    if(PlayerUtil.getLastAttacker(player) != null){
+                    if (PlayerUtil.getLastAttacker(player) != null) {
                         player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
                     }
 
@@ -739,7 +742,7 @@ public class MatchListener implements Listener {
                             }
 
                             if (kitLoadout != null) {
-                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName(), kitName));
+                                player.sendMessage(Locale.MATCH_GIVE_KIT.format(player, kitLoadout.getCustomName(), match.getKit().getName()));
                                 profile.getMatch().getGamePlayer(player).setKitLoadout(kitLoadout);
                                 GameParticipant<MatchGamePlayer> participantA = match.getParticipantA();
                                 player.getInventory().setArmorContents(InventoryUtil.color(kitLoadout.getArmor(), participantA.containsPlayer(player.getUniqueId()) ? Color.RED : Color.BLUE).toArray(new ItemStack[0]));

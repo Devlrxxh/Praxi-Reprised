@@ -46,7 +46,11 @@ public class PlayerUtil {
     }
 
     public void setLastAttacker(Player victim, Player attacker) {
-        victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
+        if(attacker == null){
+            victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), null));
+        }else{
+            victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
+        }
     }
 
     public static void setImmune(Player player, int ticks) {
@@ -111,7 +115,7 @@ public class PlayerUtil {
         }
     }
 
-    public void doVelocityChange(Player player){
+    public void doVelocityChange(Player player) {
         player.setVelocity(player.getVelocity().add(new Vector(0, 0.25, 0)));
         player.setAllowFlight(true);
         player.setFlying(true);

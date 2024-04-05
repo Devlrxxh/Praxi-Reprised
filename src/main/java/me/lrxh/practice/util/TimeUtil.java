@@ -1,5 +1,7 @@
 package me.lrxh.practice.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -8,14 +10,11 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@UtilityClass
 public final class TimeUtil {
 
     private static final String HOUR_FORMAT = "%02d:%02d:%02d";
     private static final String MINUTE_FORMAT = "%02d:%02d";
-
-    private TimeUtil() {
-        throw new RuntimeException("Cannot instantiate a utility class.");
-    }
 
     public static String millisToTimer(long millis) {
         long seconds = millis / 1000L;

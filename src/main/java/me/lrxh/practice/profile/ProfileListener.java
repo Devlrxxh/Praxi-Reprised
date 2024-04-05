@@ -2,6 +2,7 @@ package me.lrxh.practice.profile;
 
 import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
+import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
 import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
 import me.lrxh.practice.profile.meta.option.button.DuelRequestsOptionButton;
@@ -190,10 +191,13 @@ public class ProfileListener implements Listener {
         }
 
         if (profile.getMatch() != null) {
-            profile.getMatch().sendDeathMessage(event.getPlayer(), null, false);
-            profile.getMatch().end();
-            profile.setMatch(null);
+            if(profile.getMatch().getState().equals(MatchState.PLAYING_ROUND)
+                    || profile.getMatch().getState().equals(MatchState.ENDING_MATCH)
+                    || profile.getMatch().getState().equals(MatchState.STARTING_ROUND)){
+                profile.getMatch().sendDeathMessage(event.getPlayer(), null, false);
+            }
 
+            profile.getMatch().end();
         }
         if (profile.getState().equals(ProfileState.QUEUEING)) {
             profile.getQueueProfile().getQueue().removeQueue();

@@ -58,7 +58,7 @@ public final class PlaceholderUtil {
                 line = line.replaceAll("<party-size>", String.valueOf(profile.getParty().getListOfPlayers().size()));
             }
             Match match = profile.getMatch();
-            if(match != null) {
+            if (match != null) {
                 if (match.getOpponent(player.getUniqueId()) != null) {
                     line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
                     line = line.replaceAll("<duration>", match.getDuration());
@@ -70,6 +70,10 @@ public final class PlaceholderUtil {
                     if (match.getKit().getGameRules().isBedwars()) {
                         line = line.replaceAll("<bedA>", match.isBedABroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
                         line = line.replaceAll("<bedB>", match.isBedBBroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
+
+                        boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
+                        line = line.replaceAll("<youA>", aTeam ? "" : "&7YOU");
+                        line = line.replaceAll("<youB>", !aTeam ? "" : "&7YOU");
                     }
                 }
 

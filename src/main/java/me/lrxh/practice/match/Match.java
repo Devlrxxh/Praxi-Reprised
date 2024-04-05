@@ -30,7 +30,6 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -186,13 +185,15 @@ public abstract class Match {
 
     public Player getOpponent(UUID playerUUID) {
         GameParticipant<MatchGamePlayer> playerParticipant = getParticipant(Bukkit.getPlayer(playerUUID));
-        if (playerParticipant != null) {
-            for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-                if (!gameParticipant.equals(playerParticipant)) {
-                    for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                        if (!gamePlayer.isDisconnected()) {
-                            return gamePlayer.getPlayer();
-                        }
+        if (playerParticipant == null) {
+            return null;
+        }
+
+        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+            if (!gameParticipant.equals(playerParticipant)) {
+                for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                    if (!gamePlayer.isDisconnected()) {
+                        return gamePlayer.getPlayer();
                     }
                 }
             }
@@ -250,19 +251,19 @@ public abstract class Match {
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 Player player = gamePlayer.getPlayer();
-                    if (player != null) {
-                        player.setFireTicks(0);
-                        player.updateInventory();
+                if (player != null) {
+                    player.setFireTicks(0);
+                    player.updateInventory();
 
-                        Profile profile = Profile.getByUuid(player.getUniqueId());
-                        profile.setState(ProfileState.LOBBY);
-                        profile.setEnderpearlCooldown(new Cooldown(0));
-                        PlayerUtil.allowMovement(gamePlayer.getPlayer());
-                        VisibilityLogic.handle(player);
-                        Practice.getInstance().getHotbar().giveHotbarItems(player);
-                        PlayerUtil.teleportToSpawn(player);
-                        PlayerUtil.allowMovement(gamePlayer.getPlayer());
-                    }
+                    Profile profile = Profile.getByUuid(player.getUniqueId());
+                    profile.setState(ProfileState.LOBBY);
+                    profile.setEnderpearlCooldown(new Cooldown(0));
+                    PlayerUtil.allowMovement(gamePlayer.getPlayer());
+                    VisibilityLogic.handle(player);
+                    Practice.getInstance().getHotbar().giveHotbarItems(player);
+                    PlayerUtil.teleportToSpawn(player);
+                    PlayerUtil.allowMovement(gamePlayer.getPlayer());
+                }
             }
         }
 
@@ -276,7 +277,6 @@ public abstract class Match {
 
             arena.setActive(false);
         }
-
         Practice.getInstance().getCache().getMatches().remove(this);
     }
 
@@ -352,6 +352,14 @@ public abstract class Match {
             }
 
             removeSpectator(player);
+        }
+        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
+                if (!gamePlayer.isDisconnected()) {
+                    Profile profile = Profile.getByUuid(gamePlayer.getPlayer().getUniqueId());
+                    profile.setMatch(null);
+                }
+            }
         }
     }
 
@@ -478,7 +486,6 @@ public abstract class Match {
         if (!(state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND)) {
             return;
         }
-        dead.getInventory().setContents(new ItemStack[36]);
         PlayerUtil.animateDeath(dead);
 
         MatchGamePlayer deadGamePlayer = getGamePlayer(dead);
@@ -520,6 +527,7 @@ public abstract class Match {
                     Bukkit.getScheduler().runTaskLater(Practice.getInstance(), firework::detonate, 5L);
                     break;
             }
+            PlayerUtil.setLastAttacker(killer, null);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }
 
@@ -536,10 +544,10 @@ public abstract class Match {
         // Add snapshot to list
         snapshots.add(snapshot);
 
-        // Reset inventory
-        PlayerUtil.reset(dead);
 
         PlayerUtil.doVelocityChange(dead);
+
+        PlayerUtil.setLastAttacker(dead, null);
 
         // Handle visibility for match players
         // Send death message
@@ -584,12 +592,10 @@ public abstract class Match {
                 logicTask.setNextAction(4);
             }
         } else {
-            dead.setAllowFlight(true);
-            dead.setFlying(true);
-
             Practice.getInstance().getHotbar().giveHotbarItems(dead);
         }
-
+        // Reset inventory
+        PlayerUtil.reset(dead);
     }
 
     public abstract boolean isOnSameTeam(Player first, Player second);
@@ -757,71 +763,40 @@ public abstract class Match {
 
     public void sendDeathMessage(Player dead, Player killer, boolean finalKill) {
         String deathMessage;
-        if (finalKill) {
-            for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-                for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                    Player player = gamePlayer.getPlayer();
-                    if (killer == null) {
-                        deathMessage = Locale.MATCH_PLAYER_DIED_FINAL.format(player,
-                                getRelationColor(player, dead) + dead.getName()
-                        );
-                    } else {
-                        deathMessage = Locale.MATCH_PLAYER_FINAL_KILL.format(player,
-                                getRelationColor(player, dead) + dead.getName(),
-                                getRelationColor(player, killer) + killer.getName()
-                        );
-                    }
-                    player.sendMessage(deathMessage);
-                }
-            }
+        Locale deathLocale;
 
-            for (Player player : getSpectatorsAsPlayers()) {
-                if (killer == null) {
-                    deathMessage = Locale.MATCH_PLAYER_DIED_FINAL.format(player,
-                            getRelationColor(player, dead) + dead.getName()
-                    );
-                } else {
-                    deathMessage = Locale.MATCH_PLAYER_FINAL_KILL.format(player,
-                            getRelationColor(player, dead) + dead.getName(),
-                            getRelationColor(player, killer) + killer.getName()
-                    );
-                }
-                player.sendMessage(deathMessage);
-            }
-            return;
+        if (finalKill) {
+            deathLocale = (killer == null) ? Locale.MATCH_PLAYER_DIED_FINAL : Locale.MATCH_PLAYER_FINAL_KILL;
+        } else {
+            deathLocale = (killer == null) ? Locale.MATCH_PLAYER_DIED : Locale.MATCH_PLAYER_KILLED;
         }
 
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 Player player = gamePlayer.getPlayer();
-                if (killer == null) {
-                    deathMessage = Locale.MATCH_PLAYER_DIED.format(player,
-                            getRelationColor(player, dead) + dead.getName()
-                    );
-                } else {
-                    deathMessage = Locale.MATCH_PLAYER_KILLED.format(player,
-                            getRelationColor(player, dead) + dead.getName(),
-                            getRelationColor(player, killer) + killer.getName()
-                    );
-                }
+                deathMessage = formatDeathMessage(deathLocale, player, dead, killer);
                 player.sendMessage(deathMessage);
             }
         }
 
         for (Player player : getSpectatorsAsPlayers()) {
-            if (killer == null) {
-                deathMessage = Locale.MATCH_PLAYER_DIED.format(player,
-                        getRelationColor(player, dead) + dead.getName()
-                );
-            } else {
-                deathMessage = Locale.MATCH_PLAYER_KILLED.format(player,
-                        getRelationColor(player, dead) + dead.getName(),
-                        getRelationColor(player, killer) + killer.getName()
-                );
-            }
+            deathMessage = formatDeathMessage(deathLocale, player, dead, killer);
             player.sendMessage(deathMessage);
         }
-
     }
 
+    private String formatDeathMessage(Locale deathLocale, Player player, Player dead, Player killer) {
+        String deathMessage;
+        if (killer == null) {
+            deathMessage = deathLocale.format(player,
+                    getRelationColor(player, dead) + dead.getName()
+            );
+        } else {
+            deathMessage = deathLocale.format(player,
+                    getRelationColor(player, dead) + dead.getName(),
+                    getRelationColor(player, killer) + killer.getName()
+            );
+        }
+        return deathMessage;
+    }
 }

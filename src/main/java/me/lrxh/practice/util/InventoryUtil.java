@@ -251,7 +251,7 @@ public class InventoryUtil {
     public static List<ItemStack> color(ItemStack[] itemStackList, Color color) {
         List<ItemStack> items = new ArrayList<>();
         for (ItemStack itemStack : itemStackList) {
-            if(itemStack.getType()==null){
+            if (itemStack == null || itemStack.getType() == null) {
                 continue;
             }
             if (itemStack.getType() == Material.LEATHER_BOOTS || itemStack.getType() == Material.LEATHER_CHESTPLATE || itemStack.getType() == Material.LEATHER_HELMET
