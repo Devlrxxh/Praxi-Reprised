@@ -61,9 +61,8 @@ public class MatchListener implements Listener {
                         if (!bedGone) {
 
                             if (PlayerUtil.getLastAttacker(player) != null) {
-                                player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                                PlayerUtil.getLastAttacker(player).playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
                             }
-
                             match.respawn(player.getUniqueId());
                         } else {
                             profile.getMatch().onDeath(player);
@@ -362,7 +361,7 @@ public class MatchListener implements Listener {
                 if (!bedGone) {
 
                     if (PlayerUtil.getLastAttacker(player) != null) {
-                        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                        PlayerUtil.getLastAttacker(player).playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
                     }
 
                     match.respawn(player.getUniqueId());

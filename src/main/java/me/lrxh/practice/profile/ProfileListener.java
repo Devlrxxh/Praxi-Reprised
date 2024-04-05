@@ -190,10 +190,17 @@ public class ProfileListener implements Listener {
             }
         }
 
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                profile.save();
+            }
+        }.runTaskAsynchronously(Practice.getInstance());
+
         if (profile.getMatch() != null) {
-            if(profile.getMatch().getState().equals(MatchState.PLAYING_ROUND)
+            if (profile.getMatch().getState().equals(MatchState.PLAYING_ROUND)
                     || profile.getMatch().getState().equals(MatchState.ENDING_MATCH)
-                    || profile.getMatch().getState().equals(MatchState.STARTING_ROUND)){
+                    || profile.getMatch().getState().equals(MatchState.STARTING_ROUND)) {
                 profile.getMatch().sendDeathMessage(event.getPlayer(), null, false);
             }
 
@@ -210,6 +217,7 @@ public class ProfileListener implements Listener {
             profile.getRematchData().validate();
         }
 
+        Profile.getProfiles().remove(event.getPlayer().getUniqueId());
     }
 
     @EventHandler

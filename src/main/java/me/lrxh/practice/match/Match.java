@@ -378,7 +378,6 @@ public abstract class Match {
 
         sendDeathMessage(player, PlayerUtil.getLastAttacker(player), false);
 
-        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
         player.addPotionEffect(
                 new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0));
 

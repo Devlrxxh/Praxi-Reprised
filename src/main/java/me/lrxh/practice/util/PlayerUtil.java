@@ -46,9 +46,9 @@ public class PlayerUtil {
     }
 
     public void setLastAttacker(Player victim, Player attacker) {
-        if(attacker == null){
+        if (attacker == null) {
             victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), null));
-        }else{
+        } else {
             victim.setMetadata("lastAttacker", new FixedMetadataValue(Practice.getInstance(), attacker.getUniqueId()));
         }
     }
