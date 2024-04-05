@@ -192,6 +192,12 @@ public class MatchListener implements Listener {
                     return;
                 }
 
+                if(!aTeam){
+                    match.sendTitleA("&cBED DESTROYED!", "&fYou will no longer respawn!", 40);
+                }else{
+                    match.sendTitleB("&cBED DESTROYED!", "&fYou will no longer respawn!", 40);
+                }
+
                 match.sendSound(Sound.ORB_PICKUP, 1.0F, 1.0F);
                 match.sendSound(Sound.WITHER_DEATH, 1.0F, 1.0F);
                 match.broadcast(" ");

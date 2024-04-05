@@ -2,6 +2,7 @@ package me.lrxh.practice.participant;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -75,6 +76,14 @@ public class GameParticipant<T extends GamePlayer> {
         }
     }
 
+    public void sendTitle(String header, String footer, int duration) {
+        for (GamePlayer gamePlayer : getPlayers()) {
+            if (!gamePlayer.isDisconnected()) {
+                PlayerUtil.sendTitle(gamePlayer.getPlayer(), header, footer, duration);
+            }
+        }
+    }
+
     public void sendSound(Sound sound, float volume, float pitch) {
         for (GamePlayer gamePlayer : getPlayers()) {
             if (!gamePlayer.isDisconnected()) {
@@ -99,6 +108,4 @@ public class GameParticipant<T extends GamePlayer> {
             }
         }
     }
-
-
 }

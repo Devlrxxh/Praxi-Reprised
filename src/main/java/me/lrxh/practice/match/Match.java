@@ -500,7 +500,7 @@ public abstract class Match {
         PlayerUtil.animateDeath(dead);
 
         if (killer != null) {
-            PlayerUtil.sendTitle(dead, CC.translate("&cLOST!"), "&c" + killer.getName() + " &fwon the match!", 60);
+            PlayerUtil.sendTitle(dead, CC.translate("&cLOST!"), "&c" + killer.getName() + " &fwon the match!", 70);
         }
 
         // Don't continue if the player is already dead
@@ -515,8 +515,7 @@ public abstract class Match {
         if (killer != null) {
             Profile killerProfile = Profile.getByUuid(killer.getUniqueId());
             killerProfile.getOptions().killEffect().execute(killer, dead.getLocation());
-            PlayerUtil.setLastAttacker(killer, null);
-            PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 60);
+            PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 70);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
         }
 
@@ -589,6 +588,12 @@ public abstract class Match {
 
     public GameParticipant<MatchGamePlayer> getParticipantA() {
         return getParticipants().get(0);
+    }
+
+    public void sendTeamAMessage(String message){
+        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
+            gameParticipant.sendMessage(message);
+        }
     }
 
     public GameParticipant<MatchGamePlayer> getParticipantB() {
@@ -703,6 +708,14 @@ public abstract class Match {
                 PlayerUtil.sendTitle(gamePlayer.getPlayer(), header, footer, duration);
             }
         }
+    }
+
+    public void sendTitleA(String header, String footer, int duration) {
+        getParticipantA().sendTitle(header, footer, duration);
+    }
+
+    public void sendTitleB(String header, String footer, int duration) {
+        getParticipantB().sendTitle(header, footer, duration);
     }
 
     public void sendSound(Sound sound, float volume, float pitch) {

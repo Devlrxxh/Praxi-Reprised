@@ -67,7 +67,7 @@ public class PlayerUtil {
     }
 
     public static void sendTitle(Player player, String header, String footer, int duration) {
-        player.sendTitle(new Title(CC.translate(header), CC.translate(footer), 1, duration, 0));
+        player.sendTitle(new Title(CC.translate(header), CC.translate(footer), 1, duration, 10));
     }
 
     public ItemStack getPlayerHead(UUID playerUUID) {

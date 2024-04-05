@@ -16,16 +16,10 @@ public class MatchLogicTask extends BukkitRunnable {
 
     private final Match match;
     @Setter
-    private int nextAction;
+    private int nextAction = 6;
 
     public MatchLogicTask(Match match) {
         this.match = match;
-
-        if (match.getKit().getGameRules().isSumo()) {
-            nextAction = 4;
-        } else {
-            nextAction = 6;
-        }
     }
 
 
