@@ -54,6 +54,18 @@ public class PlayerUtil {
         }
     }
 
+    public void setInParty(Player victim, Boolean value) {
+        victim.setMetadata("inParty", new FixedMetadataValue(Practice.getInstance(), value));
+    }
+
+    public Boolean inReplay(Player player) {
+        if (player.hasMetadata("inReplay")) {
+            return player.getMetadata("inReplay").get(0).value().equals(true);
+        }
+        return false;
+    }
+
+
     public static void setImmune(Player player, int ticks) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, ticks, 250));
     }

@@ -43,6 +43,24 @@ public class ProfileListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        String command = event.getMessage().split(" ")[0].substring(1);
+
+        if (command.equalsIgnoreCase("msg")) return;
+        if (command.equalsIgnoreCase("reply")) return;
+        if (command.equalsIgnoreCase("r")) return;
+        if (command.equalsIgnoreCase("elo")) return;
+
+        if (Practice.getInstance().isReplay()) {
+            if (PlayerUtil.inReplay(player)) {
+                player.sendMessage(CC.RED + "You cannot run commands while in replay mode.");
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
     public void onPlayerPickupItemEvent(PlayerPickupItemEvent event) {
         Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
 
@@ -178,9 +196,9 @@ public class ProfileListener implements Listener {
 
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
         if (Practice.getInstance().isReplay()) {
-            if (!profile.getLastMatchId().isEmpty()) {
-                if (ReplaySaver.exists(profile.getLastMatchId())) {
-                    ReplaySaver.delete(profile.getLastMatchId());
+            if (profile.isReplay()) {
+                if (ReplaySaver.exists(profile.getUuid().toString())) {
+                    ReplaySaver.delete(profile.getUuid().toString());
                 }
             }
         }

@@ -21,6 +21,12 @@ LOBBY:
   - "<silent>"
   - "<theme>server.net"
   - "&7&m--------------------"
+REPLAYING:
+  - "&7&m--------------------"
+  - "<theme>Replaying Match"
+  - "<silent>"
+  - "<theme>server.net"
+  - "&7&m--------------------"
 IN-PARTY:
   LOBBY:
     - "&7&m--------------------"

@@ -7,10 +7,7 @@ import me.lrxh.practice.duel.DuelRequest;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
-import me.lrxh.practice.util.CC;
-import me.lrxh.practice.util.ChatComponentBuilder;
-import me.lrxh.practice.util.ChatHelper;
-import me.lrxh.practice.util.PlaceholderUtil;
+import me.lrxh.practice.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -159,6 +156,7 @@ public class Party {
         for (Player player : getListOfPlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             profile.setParty(null);
+            PlayerUtil.setInParty(player, false);
 
             if (profile.getState() == ProfileState.LOBBY || profile.getState() == ProfileState.QUEUEING) {
                 Practice.getInstance().getHotbar().giveHotbarItems(player);

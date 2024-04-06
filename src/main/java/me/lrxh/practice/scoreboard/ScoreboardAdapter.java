@@ -9,6 +9,7 @@ import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.queue.QueueProfile;
 import me.lrxh.practice.util.PlaceholderUtil;
+import me.lrxh.practice.util.PlayerUtil;
 import me.lrxh.practice.util.assemble.AssembleAdapter;
 import org.bukkit.entity.Player;
 
@@ -27,9 +28,13 @@ public class ScoreboardAdapter implements AssembleAdapter {
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         if (profile.getState() == ProfileState.LOBBY) {
-
             if (profile.getParty() != null) {
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("IN-PARTY.LOBBY")), player);
+            }
+            if (Practice.getInstance().isReplay()) {
+                if (PlayerUtil.inReplay(player)) {
+                    return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("REPLAYING")), player);
+                }
             }
             return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("LOBBY")), player);
         }
@@ -47,7 +52,6 @@ public class ScoreboardAdapter implements AssembleAdapter {
             return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("QUEUE.UNRANKED")), player);
         }
 
-
         if (profile.getMatch() != null) {
             Match match = profile.getMatch();
             if (match instanceof BasicTeamMatch && profile.getParty() != null) {
@@ -56,6 +60,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
             if (match instanceof BasicFreeForAllMatch) {
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("IN-PARTY.IN-FFA-MATCH")), player);
             }
+
             if (match.getState().equals(MatchState.STARTING_ROUND)) {
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("MATCH.STARTING")), player);
             }

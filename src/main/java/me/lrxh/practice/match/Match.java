@@ -162,12 +162,13 @@ public abstract class Match {
         PlayerUtil.reset(player);
 
         if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
-            if (!profile.getLastMatchId().isEmpty()) {
-                if (ReplaySaver.exists(profile.getLastMatchId())) {
-                    ReplaySaver.delete(profile.getLastMatchId());
+            if (profile.isReplay()) {
+                if (ReplaySaver.exists(profile.getUuid().toString())) {
+                    ReplaySaver.delete(profile.getUuid().toString());
                 }
+            } else {
+                profile.setReplay(true);
             }
-            profile.setLastMatchId(matchId.toString());
         }
 
         // Set the player's max damage ticks
@@ -190,6 +191,7 @@ public abstract class Match {
                 profile.getMatch().getGamePlayer(player).setKitLoadout(getKit().getKitLoadout());
             }
         }
+
     }
 
     public Player getOpponent(UUID playerUUID) {
@@ -227,13 +229,19 @@ public abstract class Match {
 
         // Setup players
         for (Player player : getPlayers()) {
-
             if (player != null) {
                 Profile profile = Profile.getByUuid(player.getUniqueId());
                 profile.setState(ProfileState.FIGHTING);
                 profile.setMatch(this);
                 profile.getDuelRequests().clear();
                 setupPlayer(player);
+                if (Practice.getInstance().isReplay()) {
+                    ReplayAPI.getInstance().recordReplay
+                            (profile.getUuid().toString(), getParticipants().stream().flatMap(participant -> participant.getPlayers().stream())
+                                    .filter(gamePlayer -> !gamePlayer.isDisconnected()).map(MatchGamePlayer::getPlayer)
+                                    .collect(Collectors.toList()));
+
+                }
             }
         }
 
@@ -246,14 +254,6 @@ public abstract class Match {
 
         if (kit.getGameRules().isBuild()) {
             arena.takeSnapshot();
-        }
-
-        if (Practice.getInstance().isReplay()) {
-            ReplayAPI.getInstance().recordReplay
-                    (matchId.toString(), getParticipants().stream().flatMap(participant -> participant.getPlayers().stream())
-                            .filter(gamePlayer -> !gamePlayer.isDisconnected()).map(MatchGamePlayer::getPlayer)
-                            .collect(Collectors.toList()));
-
         }
     }
 
@@ -269,9 +269,7 @@ public abstract class Match {
 
 
     public void end() {
-        if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
-            ReplayAPI.getInstance().stopReplay(matchId.toString(), true, true);
-        }
+
         for (Player player : getPlayers()) {
             if (player != null) {
                 player.setFireTicks(0);
@@ -290,7 +288,9 @@ public abstract class Match {
                 if (objective != null) {
                     objective.unregister();
                 }
-                profile.setLastMatchId(matchId.toString());
+                if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
+                    ReplayAPI.getInstance().stopReplay(profile.getUuid().toString(), true, true);
+                }
             }
         }
 
@@ -312,7 +312,7 @@ public abstract class Match {
                     if (msg.contains("%CLICKABLE%")) {
                         ChatComponentBuilder builder = new ChatComponentBuilder(Locale.MATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(participant
                         ));
-                        builder.attachToEachPart(ChatHelper.click("/replay play " + matchId));
+                        builder.attachToEachPart(ChatHelper.click("/replay play " + participant.getUniqueId()));
                         builder.attachToEachPart(ChatHelper.hover(Locale.MATCH_SHOW_REPLAY_HOVER.format(participant)));
 
                         participant.sendMessage(builder.create());

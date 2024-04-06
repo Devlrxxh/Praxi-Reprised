@@ -11,6 +11,7 @@ import me.lrxh.practice.party.menu.PartyEventSelectEventMenu;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;
+import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -52,7 +53,12 @@ public class PartyCommand extends BaseCommand {
             return;
         }
 
-
+        if (Practice.getInstance().isReplay()) {
+            if (PlayerUtil.inReplay(player)) {
+                player.sendMessage(CC.RED + "You cannot create a party while in replay.");
+                return;
+            }
+        }
         Profile profile = Profile.getByUuid(player.getUniqueId());
 
         if (profile.getParty() != null) {
@@ -66,6 +72,7 @@ public class PartyCommand extends BaseCommand {
             return;
         }
 
+        PlayerUtil.setInParty(player, true);
         profile.setParty(new Party(player));
 
         Practice.getInstance().getHotbar().giveHotbarItems(player);
@@ -87,6 +94,7 @@ public class PartyCommand extends BaseCommand {
             player.sendMessage(CC.RED + "You are not the leader of your party.");
             return;
         }
+        PlayerUtil.setInParty(player, false);
 
         profile.getParty().disband();
     }
@@ -210,6 +218,7 @@ public class PartyCommand extends BaseCommand {
             player.sendMessage(CC.RED + "That party is full and cannot hold anymore players.");
             return;
         }
+        PlayerUtil.setInParty(player, true);
 
         party.join(player);
     }
@@ -245,6 +254,7 @@ public class PartyCommand extends BaseCommand {
             player.sendMessage(CC.RED + "You cannot kick yourself from your party.");
             return;
         }
+        PlayerUtil.setInParty(target, false);
 
         profile.getParty().leave(target, true);
     }
@@ -293,8 +303,10 @@ public class PartyCommand extends BaseCommand {
         }
 
         if (profile.getParty().getLeader().equals(player)) {
+            PlayerUtil.setInParty(player, false);
             profile.getParty().disband();
         } else {
+            PlayerUtil.setInParty(player, false);
             profile.getParty().leave(player, false);
         }
     }

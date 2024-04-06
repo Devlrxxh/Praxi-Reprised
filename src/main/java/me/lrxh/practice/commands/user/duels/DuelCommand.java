@@ -2,6 +2,7 @@ package me.lrxh.practice.commands.user.duels;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.duel.DuelProcedure;
 import me.lrxh.practice.duel.DuelRequest;
@@ -14,6 +15,7 @@ import me.lrxh.practice.participant.TeamGameParticipant;
 import me.lrxh.practice.party.Party;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.util.CC;
+import me.lrxh.practice.util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -40,6 +42,14 @@ public class DuelCommand extends BaseCommand {
             sender.sendMessage(CC.RED + "You cannot duel a frozen player.");
             return;
         }
+
+        if (Practice.getInstance().isReplay()) {
+            if (PlayerUtil.inReplay(target)) {
+                sender.sendMessage(CC.RED + "You cannot duel a replaying player.");
+                return;
+            }
+        }
+
         Profile targetProfile = Profile.getByUuid(target.getUniqueId());
 //        if (sender.getUniqueId().equals(target.getUniqueId())) {
 //            sender.sendMessage(CC.RED + "You cannot duel yourself.");
