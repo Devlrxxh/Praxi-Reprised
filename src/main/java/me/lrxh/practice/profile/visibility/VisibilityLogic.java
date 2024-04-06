@@ -88,14 +88,5 @@ public class VisibilityLogic {
                 viewer.hidePlayer(target);
             }
         }
-        if (Practice.getInstance().isReplay()) {
-            if(PlayerUtil.inReplay(target) || PlayerUtil.inReplay(viewer)){
-                viewer.hidePlayer(target);
-                target.hidePlayer(viewer);
-            } else {
-                viewer.showPlayer(target);
-                target.showPlayer(viewer);
-            }
-        }
     }
 }
