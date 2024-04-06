@@ -1,17 +1,11 @@
 package me.lrxh.practice.party;
 
-import me.lrxh.practice.Practice;
-import me.lrxh.practice.party.menu.OtherPartiesMenu;
-import me.lrxh.practice.party.menu.PartyEventSelectEventMenu;
 import me.lrxh.practice.profile.Profile;
-import me.lrxh.practice.profile.hotbar.HotbarItem;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PartyListener implements Listener {
@@ -24,28 +18,6 @@ public class PartyListener implements Listener {
             if (profile.getParty() != null) {
                 event.setCancelled(true);
                 profile.getParty().sendChat(event.getPlayer(), ChatColor.stripColor(event.getMessage().substring(1)));
-            }
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if (event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR ||
-                event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            HotbarItem hotbarItem = Practice.getInstance().getHotbar().fromItemStack(event.getItem());
-
-            if (hotbarItem != null) {
-                boolean cancelled = true;
-
-                if (hotbarItem == HotbarItem.PARTY_EVENTS) {
-                    new PartyEventSelectEventMenu().openMenu(event.getPlayer());
-                } else if (hotbarItem == HotbarItem.OTHER_PARTIES) {
-                    new OtherPartiesMenu().openMenu(event.getPlayer());
-                } else {
-                    cancelled = false;
-                }
-
-                event.setCancelled(cancelled);
             }
         }
     }

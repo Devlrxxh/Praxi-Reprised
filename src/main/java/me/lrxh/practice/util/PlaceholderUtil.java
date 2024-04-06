@@ -4,6 +4,10 @@ import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
+import me.lrxh.practice.match.impl.BasicFreeForAllMatch;
+import me.lrxh.practice.match.impl.BasicTeamMatch;
+import me.lrxh.practice.match.participant.MatchGamePlayer;
+import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.queue.QueueProfile;
@@ -59,7 +63,26 @@ public final class PlaceholderUtil {
             }
             Match match = profile.getMatch();
             if (match != null) {
+                if (match instanceof BasicTeamMatch) {
+                    GameParticipant<MatchGamePlayer> participantA = match.getParticipantA();
+                    GameParticipant<MatchGamePlayer> participantB = match.getParticipantB();
+
+                    boolean aTeam = match.getParticipantA().containsPlayer(player.getUniqueId());
+                    GameParticipant<MatchGamePlayer> playerTeam = aTeam ? participantA : participantB;
+                    GameParticipant<MatchGamePlayer> opponentTeam = aTeam ? participantB : participantA;
+
+                    line = line.replaceAll("<opponentsCount>", String.valueOf(opponentTeam.getAliveCount()))
+                            .replaceAll("<opponentsMax>", String.valueOf(opponentTeam.getPlayers().size()))
+                            .replaceAll("<teamCount>", String.valueOf(playerTeam.getAliveCount()))
+                            .replaceAll("<teamMax>", String.valueOf(playerTeam.getPlayers().size()));
+                }
+                if (match instanceof BasicFreeForAllMatch) {
+                    BasicFreeForAllMatch basicFreeForAllMatch = (BasicFreeForAllMatch) match;
+                    line = line.replaceAll("<remaning>", String.valueOf(basicFreeForAllMatch.getRemainingTeams()));
+                }
+
                 if (match.getOpponent(player.getUniqueId()) != null) {
+                    line = line.replaceAll("<diffrence>", getDifference(player));
                     line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
                     line = line.replaceAll("<duration>", match.getDuration());
                     line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));

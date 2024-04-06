@@ -7,14 +7,12 @@ import me.lrxh.practice.arena.Arena;
 import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchSnapshot;
-import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.queue.Queue;
 import me.lrxh.practice.util.ChatComponentBuilder;
-import me.lrxh.practice.util.TimeUtil;
 import me.lrxh.practice.util.elo.EloUtil;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -218,79 +216,6 @@ public class BasicTeamMatch extends Match {
         } else {
             return org.bukkit.ChatColor.YELLOW;
         }
-    }
-
-    @Override
-    public List<String> getScoreboardLines(Player player) {
-        List<String> lines = new ArrayList<>();
-
-        if (getParticipant(player) != null) {
-            if (state == MatchState.STARTING_ROUND || state == MatchState.PLAYING_ROUND) {
-                if (participantA.getPlayers().size() == 1 && participantB.getPlayers().size() == 1) {
-                    GameParticipant<MatchGamePlayer> opponent;
-
-                    if (participantA.containsPlayer(player.getUniqueId())) {
-                        opponent = participantB;
-                    } else {
-                        opponent = participantA;
-                    }
-
-                    lines.add("&cDuration: &r" + getDuration());
-                    lines.add("&cOpponent: &r" + opponent.getConjoinedNames());
-                } else {
-                    GameParticipant<MatchGamePlayer> friendly = getParticipant(player);
-                    GameParticipant<MatchGamePlayer> opponent = participantA.equals(friendly) ?
-                            participantB : participantA;
-
-                    if (friendly.getPlayers().size() + opponent.getPlayers().size() <= 6) {
-                        lines.add("&cDuration: &7" + getDuration());
-                        lines.add("");
-                        lines.add("&aTeam &a(" + friendly.getAliveCount() + "/" + friendly.getPlayers().size() + ")");
-
-                        for (MatchGamePlayer gamePlayer : friendly.getPlayers()) {
-                            lines.add(" " + (gamePlayer.isDead() || gamePlayer.isDisconnected() ? "&7&m" : "") +
-                                    gamePlayer.getUsername());
-                        }
-
-                        lines.add("");
-                        lines.add("&cOpponents &c(" + opponent.getAliveCount() + "/" + opponent.getPlayers().size() +
-                                ")");
-
-                        for (MatchGamePlayer gamePlayer : opponent.getPlayers()) {
-                            lines.add(" " + (gamePlayer.isDead() || gamePlayer.isDisconnected() ? "&7&m" : "") +
-                                    gamePlayer.getUsername());
-                        }
-                    } else {
-                        lines.add("&cDuration: &7" + getDuration());
-                        lines.add("&aTeam: &7" + friendly.getAliveCount() + "/" + friendly.getPlayers().size());
-                        lines.add("&cOpponents: &7" + opponent.getAliveCount() + "/" + opponent.getPlayers().size());
-                    }
-                }
-            } else {
-                lines.add("&cDuration: &7" + TimeUtil.millisToTimer(timeData));
-            }
-        } else {
-            lines.add("&cKit: &7" + getKit().getName());
-            lines.add("&cDuration: &7" + getDuration());
-            lines.add("");
-
-            if (participantA.getPlayers().size() <= 2 && participantB.getPlayers().size() <= 2) {
-                for (MatchGamePlayer gamePlayer : participantA.getPlayers()) {
-                    lines.add(gamePlayer.getUsername());
-                }
-
-                lines.add("vs");
-
-                for (MatchGamePlayer gamePlayer : participantB.getPlayers()) {
-                    lines.add(gamePlayer.getUsername());
-                }
-            } else {
-                lines.add(participantA.getLeader().getUsername() + "'s Team");
-                lines.add(participantB.getLeader().getUsername() + "'s Team");
-            }
-        }
-
-        return lines;
     }
 
     @Override

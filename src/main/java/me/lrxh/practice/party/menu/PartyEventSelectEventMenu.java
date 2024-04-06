@@ -14,7 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PartyEventSelectEventMenu extends Menu {
@@ -49,8 +51,21 @@ public class PartyEventSelectEventMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem(Player player) {
-            return new ItemBuilder(partyEvent == PartyEvent.FFA ? Material.QUARTZ : Material.REDSTONE)
+            List<String> splitLore = new ArrayList<>();
+            splitLore.add(CC.translate("&7Split your party into"));
+            splitLore.add(CC.translate("&72 teams and fight."));
+            splitLore.add(CC.translate(""));
+            splitLore.add(CC.translate("&aClick to host!"));
+
+            List<String> ffaLore = new ArrayList<>();
+            ffaLore.add(CC.translate("&7Everybody in the party"));
+            ffaLore.add(CC.translate("&7fights everybody else."));
+            ffaLore.add(CC.translate(""));
+            ffaLore.add(CC.translate("&aClick to host!"));
+
+            return new ItemBuilder(partyEvent == PartyEvent.FFA ? Material.DIAMOND_SWORD : Material.GOLD_AXE)
                     .name(Practice.getInstance().getMenusConfig().getString("PARTY.EVENTS.EVENT-COLOR").replace("<event>", partyEvent.getName()))
+                    .lore(partyEvent == PartyEvent.FFA ? ffaLore : splitLore)
                     .clearFlags()
                     .build();
         }

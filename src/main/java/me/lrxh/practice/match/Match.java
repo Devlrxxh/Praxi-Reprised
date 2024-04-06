@@ -500,7 +500,9 @@ public abstract class Match {
         PlayerUtil.animateDeath(dead);
 
         if (killer != null) {
-            PlayerUtil.sendTitle(dead, CC.translate("&cLOST!"), "&c" + killer.getName() + " &fwon the match!", 70);
+            PlayerUtil.sendTitle(dead, CC.translate("&cDEFEAT!"), "&a" + killer.getName() + " &7won the match!", 70);
+        } else {
+            PlayerUtil.sendTitle(dead, CC.translate("&cDEFEAT!"), "&aEnemy" + " &7won the match!", 70);
         }
 
         // Don't continue if the player is already dead
@@ -515,7 +517,7 @@ public abstract class Match {
         if (killer != null) {
             Profile killerProfile = Profile.getByUuid(killer.getUniqueId());
             killerProfile.getOptions().killEffect().execute(killer, dead.getLocation());
-            PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&a" + killer.getName() + " &fwon the match!", 70);
+            PlayerUtil.sendTitle(killer, CC.translate("&aVICTORY!"), "&aYou" + " &7won the match!", 70);
             killer.playSound(killer.getLocation(), Sound.EXPLODE, 1.0f, 1.0f);
             PlayerUtil.doVelocityChange(killer);
         }
@@ -615,8 +617,6 @@ public abstract class Match {
     }
 
     public abstract ChatColor getRelationColor(Player viewer, Player target);
-
-    public abstract List<String> getScoreboardLines(Player player);
 
     public void addSpectator(Player spectator, Player target) {
         spectators.add(spectator.getUniqueId());

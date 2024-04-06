@@ -44,6 +44,8 @@ PARTY:
     EVENT-COLOR: "&b<event>"
     SELECT-KIT:
       TITLE: "&7Select a Kit"
+      SIZE: 27
+      KIT-NAME: "&b<kit>"
   OTHER-PARTIES:
     TITLE: "&7Other Parties"
     SIZE: 27
@@ -129,11 +131,3 @@ LEADERBOARD:
       - " &7* &fWins: &b<wins>"
       - " &7* &fLoses: &b<loses>"
       - " &7* &fElo: &b<elo>"
-SHOP-MENU:
-  TITLE: "&7Coin shop"
-  SIZE: 27
-  FILTER: FILL # THERE IS FILL AND BRODER
-SHOP:
-  TITLE: "&7Coin shop"
-  SIZE: 27
-  FILTER: FILL # THERE IS FILL AND BRODER

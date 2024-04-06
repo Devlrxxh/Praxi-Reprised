@@ -148,22 +148,6 @@ public class BasicFreeForAllMatch extends Match {
     }
 
     @Override
-    public List<String> getScoreboardLines(Player player) {
-        List<String> lines = new ArrayList<>();
-
-        if (getParticipant(player) != null) {
-            lines.add("&cDuration: &r" + getDuration());
-            lines.add("&cOpponents: &r" + (getRemainingTeams() - 1));
-        } else {
-            lines.add("&cKit: &7" + getKit().getName());
-            lines.add("&cDuration: &7" + getDuration());
-            lines.add("&cTeams: &7" + getRemainingTeams());
-        }
-
-        return lines;
-    }
-
-    @Override
     public void addSpectator(Player spectator, Player target) {
         super.addSpectator(spectator, target);
         Profile profile = Profile.getByUuid(spectator.getUniqueId());
@@ -204,7 +188,7 @@ public class BasicFreeForAllMatch extends Match {
         return componentsList;
     }
 
-    private int getRemainingTeams() {
+    public int getRemainingTeams() {
         int remaining = 0;
 
         for (GameParticipant<MatchGamePlayer> gameParticipant : participants) {

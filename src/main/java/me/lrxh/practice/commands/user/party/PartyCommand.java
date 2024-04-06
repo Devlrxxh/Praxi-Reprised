@@ -6,6 +6,8 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.party.Party;
 import me.lrxh.practice.party.PartyPrivacy;
+import me.lrxh.practice.party.menu.OtherPartiesMenu;
+import me.lrxh.practice.party.menu.PartyEventSelectEventMenu;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;
@@ -105,7 +107,6 @@ public class PartyCommand extends BaseCommand {
         }
 
         profile.getParty().sendInformation(player);
-
     }
 
     @Syntax("<name>")
@@ -246,6 +247,40 @@ public class PartyCommand extends BaseCommand {
         }
 
         profile.getParty().leave(target, true);
+    }
+
+    @Subcommand("event")
+    public void event(Player player) {
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+
+        if (profile.getParty() == null) {
+            player.sendMessage(CC.RED + "You do not have a party.");
+            return;
+        }
+
+        if (!profile.getParty().getLeader().equals(player)) {
+            player.sendMessage(CC.RED + "You are not the leader of your party.");
+            return;
+        }
+
+        new PartyEventSelectEventMenu().openMenu(player);
+    }
+
+    @Subcommand("other")
+    public void other(Player player) {
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+
+        if (profile.getParty() == null) {
+            player.sendMessage(CC.RED + "You do not have a party.");
+            return;
+        }
+
+        if (!profile.getParty().getLeader().equals(player)) {
+            player.sendMessage(CC.RED + "You are not the leader of your party.");
+            return;
+        }
+
+        new OtherPartiesMenu().openMenu(player);
     }
 
     @Subcommand("leave")

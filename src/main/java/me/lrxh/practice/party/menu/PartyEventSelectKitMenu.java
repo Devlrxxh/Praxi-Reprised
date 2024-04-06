@@ -17,6 +17,7 @@ import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ItemBuilder;
 import me.lrxh.practice.util.menu.Button;
 import me.lrxh.practice.util.menu.Menu;
+import me.lrxh.practice.util.menu.filters.Filters;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -35,12 +36,23 @@ public class PartyEventSelectKitMenu extends Menu {
     }
 
     @Override
+    public Filters getFilter() {
+        return Filters.valueOf(Practice.getInstance().getMenusConfig().getString("PARTY.EVENTS.FILTER"));
+    }
+
+
+    public int getSize() {
+        return Practice.getInstance().getMenusConfig().getInteger("PARTY.EVENTS.SELECT-KIT.SIZE");
+    }
+
+    @Override
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
+        int i = 10;
 
         for (Kit kit : Kit.getKits()) {
             if (kit.isEnabled()) {
-                buttons.put(buttons.size(), new SelectKitButton(partyEvent, kit));
+                buttons.put(i++, new SelectKitButton(partyEvent, kit));
             }
         }
 
@@ -56,7 +68,7 @@ public class PartyEventSelectKitMenu extends Menu {
         @Override
         public ItemStack getButtonItem(Player player) {
             return new ItemBuilder(kit.getDisplayIcon())
-                    .name("&6" + kit.getName())
+                    .name(Practice.getInstance().getMenusConfig().getString("PARTY.EVENTS.SELECT-KIT.KIT-NAME").replace("<kit>", kit.getName()))
                     .clearFlags()
                     .build();
         }

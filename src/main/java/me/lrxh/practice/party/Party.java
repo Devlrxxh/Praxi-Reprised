@@ -153,9 +153,7 @@ public class Party {
         // Remove any party duel requests
         Profile leaderProfile = Profile.getByUuid(leader.getUniqueId());
 
-        if (leaderProfile != null) {
-            leaderProfile.getDuelRequests().removeIf(DuelRequest::isParty);
-        }
+        leaderProfile.getDuelRequests().removeIf(DuelRequest::isParty);
 
         // Reset player profiles
         for (Player player : getListOfPlayers()) {
