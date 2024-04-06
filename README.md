@@ -29,6 +29,11 @@ The most configurable, efficient, and extensive practice plugin.
 
 - ``%practice_player_theme%`` | Returns player's theme
 
+# Match Replay
+
+- Match Replay's depends on AdvancedReplay
+- [Recommended Version (This a simple fork I made)](https://www.mediafire.com/file/iubj5xde5ckpdjh/Replay.jar/file)
+
 # Credits
 
 ### [Funkyranveer - Praxi without dependencies](https://github.com/funkyranveer/praxi-nodependents)
