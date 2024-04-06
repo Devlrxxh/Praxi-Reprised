@@ -1,9 +1,11 @@
 package me.lrxh.practice.profile.visibility;
 
+import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.ProfileState;
 import me.lrxh.practice.util.CC;
+import me.lrxh.practice.util.PlayerUtil;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -84,6 +86,15 @@ public class VisibilityLogic {
                 }
             } else {
                 viewer.hidePlayer(target);
+            }
+        }
+        if (Practice.getInstance().isReplay()) {
+            if(PlayerUtil.inReplay(target) || PlayerUtil.inReplay(viewer)){
+                viewer.hidePlayer(target);
+                target.hidePlayer(viewer);
+            } else {
+                viewer.showPlayer(target);
+                target.showPlayer(viewer);
             }
         }
     }

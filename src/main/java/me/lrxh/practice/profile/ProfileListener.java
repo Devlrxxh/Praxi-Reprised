@@ -46,7 +46,6 @@ public class ProfileListener implements Listener {
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0].substring(1);
-
         if (command.equalsIgnoreCase("msg")) return;
         if (command.equalsIgnoreCase("reply")) return;
         if (command.equalsIgnoreCase("r")) return;

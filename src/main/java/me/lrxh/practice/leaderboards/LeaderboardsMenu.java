@@ -103,8 +103,6 @@ public class LeaderboardsMenu extends Menu {
                         .replace("<player_elo>", String.valueOf(playerElo.getElo()))
                         .replace("<player>", playerElo.getPlayerName()));
             }
-            lore.add("");
-            lore.add(CC.translate("&aUpdating in " + TimeUtil.millisToTimer(Leaderboard.getRefreshTime())) + " minutes");
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName()))
