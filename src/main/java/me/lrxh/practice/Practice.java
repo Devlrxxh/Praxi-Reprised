@@ -165,7 +165,7 @@ public class Practice extends JavaPlugin {
             Console.sendMessage(CC.translate("&aRegistering placeholders"));
         }
         Plugin advancedReplays = getServer().getPluginManager().getPlugin("AdvancedReplay");
-        if (advancedReplays != null) {
+        if (advancedReplays != null && advancedReplays.isEnabled()) {
             replay = true;
             Console.sendMessage(CC.translate("&aAdvancedReplay found!"));
         }
