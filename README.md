@@ -29,7 +29,7 @@ The most configurable, efficient, and extensive practice plugin.
 
 - ``%practice_player_theme%`` | Returns player's theme
 
-# Match Replay
+# Match Replay (Might be buggy)
 
 - Match Replay's depends on AdvancedReplay
 - [Required Version (This a simple fork I made)](https://www.mediafire.com/file/6q1696sog1y1zwg/Replay.jar/file)
