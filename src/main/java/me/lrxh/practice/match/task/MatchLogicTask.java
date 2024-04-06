@@ -5,7 +5,6 @@ import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchState;
-import me.lrxh.practice.match.impl.BasicTeamMatch;
 import me.lrxh.practice.match.participant.MatchGamePlayer;
 import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.participant.GamePlayer;
@@ -33,7 +32,7 @@ public class MatchLogicTask extends BukkitRunnable {
         }
         nextAction--;
         if (match.getState() == MatchState.STARTING_ROUND) {
-            if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars() || match instanceof BasicTeamMatch) {
+            if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars()) {
                 for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
                     for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
                         PlayerUtil.denyMovement(gamePlayer.getPlayer());
@@ -47,7 +46,7 @@ public class MatchLogicTask extends BukkitRunnable {
                 match.sendMessage(" ");
                 match.sendMessage(Locale.MATCH_WARNING.format());
 
-                if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars() || match instanceof BasicTeamMatch) {
+                if (match.getKit().getGameRules().isSumo() || match.getKit().getGameRules().isBedwars()) {
                     for (GameParticipant<MatchGamePlayer> gameParticipant : match.getParticipants()) {
                         for (GamePlayer gamePlayer : gameParticipant.getPlayers()) {
                             PlayerUtil.allowMovement(gamePlayer.getPlayer());

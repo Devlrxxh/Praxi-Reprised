@@ -2,6 +2,8 @@ package me.lrxh.practice.match;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.jumper251.replay.api.ReplayAPI;
+import me.jumper251.replay.filesystem.saving.ReplaySaver;
 import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.arena.Arena;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -153,10 +156,19 @@ public abstract class Match {
         if (gamePlayer.isDisconnected()) {
             return;
         }
+        Profile profile = Profile.getByUuid(player.getUniqueId());
 
         // Reset the player's inventory
         PlayerUtil.reset(player);
 
+        if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
+            if (!profile.getLastMatchId().isEmpty()) {
+                if (ReplaySaver.exists(profile.getLastMatchId())) {
+                    ReplaySaver.delete(profile.getLastMatchId());
+                }
+            }
+            profile.setLastMatchId(matchId.toString());
+        }
 
         // Set the player's max damage ticks
         player.setMaximumNoDamageTicks(getKit().getGameRules().getHitDelay());
@@ -164,7 +176,6 @@ public abstract class Match {
         // If the player has no kits, apply the default kit, otherwise
         // give the player a list of kit books to choose from
         if (!getKit().getGameRules().isSumo()) {
-            Profile profile = Profile.getByUuid(player.getUniqueId());
             ProfileKitData kitData = profile.getKitData().get(getKit());
 
             if (kitData.getKitCount() > 0) {
@@ -215,58 +226,71 @@ public abstract class Match {
         sendMessage(Locale.MATCH_PLAYING_ARENA.format(arena.getDisplayName()));
 
         // Setup players
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Player player = gamePlayer.getPlayer();
+        for (Player player : getPlayers()) {
 
-                if (player != null) {
-                    Profile profile = Profile.getByUuid(player.getUniqueId());
-                    profile.setState(ProfileState.FIGHTING);
-                    profile.setMatch(this);
-                    profile.getDuelRequests().clear();
-                    setupPlayer(player);
-                }
+            if (player != null) {
+                Profile profile = Profile.getByUuid(player.getUniqueId());
+                profile.setState(ProfileState.FIGHTING);
+                profile.setMatch(this);
+                profile.getDuelRequests().clear();
+                setupPlayer(player);
             }
         }
 
         // Handle player visibility
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Player player = gamePlayer.getPlayer();
-
-                if (player != null) {
-                    VisibilityLogic.handle(player);
-                }
+        for (Player player : getPlayers()) {
+            if (player != null) {
+                VisibilityLogic.handle(player);
             }
         }
 
         if (kit.getGameRules().isBuild()) {
             arena.takeSnapshot();
         }
+
+        if (Practice.getInstance().isReplay()) {
+            ReplayAPI.getInstance().recordReplay
+                    (matchId.toString(), getParticipants().stream().flatMap(participant -> participant.getPlayers().stream())
+                            .filter(gamePlayer -> !gamePlayer.isDisconnected()).map(MatchGamePlayer::getPlayer)
+                            .collect(Collectors.toList()));
+
+        }
     }
 
-    public void end() {
+    public List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>();
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Player player = gamePlayer.getPlayer();
-                if (player != null) {
-                    player.setFireTicks(0);
-                    player.updateInventory();
+            for (MatchGamePlayer matchGamePlayer : gameParticipant.getPlayers()) {
+                players.add(matchGamePlayer.getPlayer());
+            }
+        }
+        return players;
+    }
 
-                    Profile profile = Profile.getByUuid(player.getUniqueId());
-                    profile.setState(ProfileState.LOBBY);
-                    profile.setEnderpearlCooldown(new Cooldown(0));
-                    PlayerUtil.allowMovement(gamePlayer.getPlayer());
-                    VisibilityLogic.handle(player);
-                    Practice.getInstance().getHotbar().giveHotbarItems(player);
-                    PlayerUtil.teleportToSpawn(player);
-                    PlayerUtil.allowMovement(gamePlayer.getPlayer());
-                    Objective objective = player.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
-                    profile.setMatch(null);
-                    if (objective != null) {
-                        objective.unregister();
-                    }
+
+    public void end() {
+        if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
+            ReplayAPI.getInstance().stopReplay(matchId.toString(), true, true);
+        }
+        for (Player player : getPlayers()) {
+            if (player != null) {
+                player.setFireTicks(0);
+                player.updateInventory();
+
+                Profile profile = Profile.getByUuid(player.getUniqueId());
+                profile.setState(ProfileState.LOBBY);
+                profile.setEnderpearlCooldown(new Cooldown(0));
+                PlayerUtil.allowMovement(player);
+                VisibilityLogic.handle(player);
+                Practice.getInstance().getHotbar().giveHotbarItems(player);
+                PlayerUtil.teleportToSpawn(player);
+                PlayerUtil.allowMovement(player);
+                Objective objective = player.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
+                profile.setMatch(null);
+                if (objective != null) {
+                    objective.unregister();
                 }
+                profile.setLastMatchId(matchId.toString());
             }
         }
 
@@ -280,6 +304,25 @@ public abstract class Match {
 
             arena.setActive(false);
         }
+
+        for (Player participant : getPlayers()) {
+            if (participant != null && participant.isOnline()) {
+
+                for (String msg : Locale.MATCH_SHOW_REPLAY.formatLines(participant)) {
+                    if (msg.contains("%CLICKABLE%")) {
+                        ChatComponentBuilder builder = new ChatComponentBuilder(Locale.MATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(participant
+                        ));
+                        builder.attachToEachPart(ChatHelper.click("/replay play " + matchId));
+                        builder.attachToEachPart(ChatHelper.hover(Locale.MATCH_SHOW_REPLAY_HOVER.format(participant)));
+
+                        participant.sendMessage(builder.create());
+                    } else {
+                        participant.sendMessage(msg);
+                    }
+                }
+            }
+        }
+
         Practice.getInstance().getCache().getMatches().remove(this);
     }
 
@@ -769,12 +812,9 @@ public abstract class Match {
             deathLocale = (killer == null) ? Locale.MATCH_PLAYER_DIED : Locale.MATCH_PLAYER_KILLED;
         }
 
-        for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
-            for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
-                Player player = gamePlayer.getPlayer();
-                deathMessage = formatDeathMessage(deathLocale, player, dead, killer);
-                player.sendMessage(deathMessage);
-            }
+        for (Player player : getPlayers()) {
+            deathMessage = formatDeathMessage(deathLocale, player, dead, killer);
+            player.sendMessage(deathMessage);
         }
 
         for (Player player : getSpectatorsAsPlayers()) {

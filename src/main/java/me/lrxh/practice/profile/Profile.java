@@ -55,6 +55,7 @@ public class Profile {
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
     private boolean silent = false;
+    private String lastMatchId = "";
 
     public Profile(UUID uuid) {
         this.uuid = uuid;

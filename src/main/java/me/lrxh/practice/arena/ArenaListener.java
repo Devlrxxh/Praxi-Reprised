@@ -14,7 +14,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -127,9 +126,14 @@ public class ArenaListener implements Listener {
 
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent event) {
-        if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING) {
+        if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING || event.getCause() == BlockIgniteEvent.IgniteCause.FIREBALL || event.getCause() == BlockIgniteEvent.IgniteCause.EXPLOSION) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onBlockExplosion(BlockExplodeEvent event) {
+        event.setCancelled(true);
     }
 
     @EventHandler
@@ -152,9 +156,5 @@ public class ArenaListener implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler
-    public void onPrime(ExplosionPrimeEvent event) {
-        event.setCancelled(true);
-    }
 
 }

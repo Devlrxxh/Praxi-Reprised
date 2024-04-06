@@ -5,3 +5,4 @@ author: funkyranveer, joeleoli, lugami, lrxh
 load: POSTWORLD
 softdepend:
   - PlaceholderAPI
+  - AdvancedReplay

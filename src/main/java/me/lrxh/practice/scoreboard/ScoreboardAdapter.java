@@ -50,7 +50,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
 
         if (profile.getMatch() != null) {
             Match match = profile.getMatch();
-            if (match instanceof BasicTeamMatch) {
+            if (match instanceof BasicTeamMatch && profile.getParty() != null) {
                 return PlaceholderUtil.format(new ArrayList<>(Practice.getInstance().getScoreboardConfig().getStringList("IN-PARTY.IN-SPLIT-MATCH")), player);
             }
             if (match instanceof BasicFreeForAllMatch) {

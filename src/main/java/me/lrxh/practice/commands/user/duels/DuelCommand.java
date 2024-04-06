@@ -40,14 +40,13 @@ public class DuelCommand extends BaseCommand {
             sender.sendMessage(CC.RED + "You cannot duel a frozen player.");
             return;
         }
-
+        Profile targetProfile = Profile.getByUuid(target.getUniqueId());
 //        if (sender.getUniqueId().equals(target.getUniqueId())) {
 //            sender.sendMessage(CC.RED + "You cannot duel yourself.");
 //            return;
 //        }
 
         Profile senderProfile = Profile.getByUuid(sender.getUniqueId());
-        Profile targetProfile = Profile.getByUuid(target.getUniqueId());
 
         if (senderProfile.isBusy()) {
             sender.sendMessage(CC.RED + "You cannot duel right now.");

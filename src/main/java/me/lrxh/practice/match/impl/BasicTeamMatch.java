@@ -209,10 +209,10 @@ public class BasicTeamMatch extends Match {
         if ((booleans[0] && booleans[3]) || (booleans[2] && booleans[1])) {
             return org.bukkit.ChatColor.RED;
         } else if ((booleans[0] && booleans[2]) || (booleans[1] && booleans[3])) {
-            return org.bukkit.ChatColor.GREEN;
+            return org.bukkit.ChatColor.BLUE;
         } else if (spectators.contains(viewer.getUniqueId())) {
             return participantA.containsPlayer(target.getUniqueId()) ?
-                    org.bukkit.ChatColor.GREEN : org.bukkit.ChatColor.RED;
+                    org.bukkit.ChatColor.BLUE : org.bukkit.ChatColor.RED;
         } else {
             return org.bukkit.ChatColor.YELLOW;
         }
@@ -273,7 +273,7 @@ public class BasicTeamMatch extends Match {
                         builder.append((TextComponent) component);
                     }
 
-                    builder.append(new ChatComponentBuilder("&7 - ").create());
+                    builder.append(new ChatComponentBuilder("&7 | ").create());
 
                     for (BaseComponent component : losers) {
                         builder.append((TextComponent) component);

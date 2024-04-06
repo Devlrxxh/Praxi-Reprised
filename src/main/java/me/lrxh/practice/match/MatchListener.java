@@ -73,31 +73,35 @@ public class MatchListener implements Listener {
         }
     }
 
-//    @EventHandler
-//    public void onExplosionKB(EntityDamageByEntityEvent event) {
+
+//        @EventHandler
+//    public void onExplosionKB(EntityExplodeEvent event) {
 //        if (!(event.getEntity() instanceof Player)) return;
-//        if (!(event.getDamager() instanceof Fireball)) return;
-//        List<Player> entities = Collections.singletonList(((Player) event.getEntity()).getPlayer());
-//        PlayerUtil.applyFireballKnockback(event.getEntity().getLocation(), entities);
+//        if (!(event.getEntityType() == EntityType.FIREBALL)) return;
+//
+//        PlayerUtil.applyFireballKnockback(event.getEntity().getLocation(), Collections.singletonList(event.getEntity()));
 //    }
 //
 //    @EventHandler
-//    public void onFireballLaunch(PlayerInteractEvent event){
-//
-//        Player player = event.getPlayer();
-//        Match match = Profile.getByUuid(player.getUniqueId()).getMatch();
-//
-//        if(event.getAction().name().contains("RIGHT") && event.hasItem() && event.getItem().getType().equals(Material.FIREBALL) && match != null){
+//    public void onFireballLaunch(PlayerInteractEvent event) {
+//        if (event.getAction().name().contains("RIGHT") && event.hasItem() &&
+//                event.getItem().getType().equals(Material.FIREBALL)) {
+//            Player player = event.getPlayer();
+//            Match match = Profile.getByUuid(player.getUniqueId()).getMatch();
 //            LargeFireball fireball = player.launchProjectile(LargeFireball.class);
 //            fireball.setMetadata("Bolt", new FixedMetadataValue(Practice.getInstance(), match.getMatchId().toString()));
 //            fireball.setYield(3);
 //            fireball.setBounce(false);
 //
+//            // Deletes the fireball when player dies, disconnects or match ends.
+//            //FireballExpireTask task = new FireballExpireTask(match, match.getMatchPlayer(player), fireball);
+//            //task.runTaskTimerAsynchronously(Bolt.getInstance(), 20L, 20L);
 //
 //            Vector direction = player.getLocation().getDirection();
 //            fireball.setVelocity(direction);
 //        }
 //    }
+
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockPlaceEvent(BlockPlaceEvent event) {
@@ -587,6 +591,9 @@ public class MatchListener implements Listener {
                 }
                 if (match.getGamePlayer(attacker).isRespawned() && match.getState().equals(MatchState.ENDING_MATCH)) {
                     event.setCancelled(true);
+                }
+                if (event.getDamager() instanceof Fireball) {
+                    event.setCancelled(false);
                 }
             }
         }

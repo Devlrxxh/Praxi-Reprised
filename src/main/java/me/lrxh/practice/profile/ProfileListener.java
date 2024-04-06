@@ -1,5 +1,6 @@
 package me.lrxh.practice.profile;
 
+import me.jumper251.replay.filesystem.saving.ReplaySaver;
 import me.lrxh.practice.Locale;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
@@ -176,6 +177,13 @@ public class ProfileListener implements Listener {
         event.setQuitMessage(null);
 
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
+        if (Practice.getInstance().isReplay()) {
+            if (!profile.getLastMatchId().isEmpty()) {
+                if (ReplaySaver.exists(profile.getLastMatchId())) {
+                    ReplaySaver.delete(profile.getLastMatchId());
+                }
+            }
+        }
 
         if (!profile.getFollowers().isEmpty()) {
             for (UUID playerUUID : profile.getFollowers()) {

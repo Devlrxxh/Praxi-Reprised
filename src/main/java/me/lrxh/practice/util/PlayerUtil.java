@@ -103,10 +103,11 @@ public class PlayerUtil {
         player.updateInventory();
     }
 
-    public void applyFireballKnockback(Location location, List<Player> entities) {
-        for (Player player : entities) {
+    public void applyFireballKnockback(Location location, List<Entity> entities) {
+        for (Entity entity : entities) {
+            if (!(entity instanceof Player)) continue;
+            Player player = (Player) entity;
             if (player.getGameMode() != GameMode.SURVIVAL) continue;
-
             double vertical = 2 / 2.0;
             double reference = 3 / 2.0;
 

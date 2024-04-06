@@ -81,6 +81,7 @@ public class Practice extends JavaPlugin {
     private PaperCommandManager paperCommandManager;
     private Assemble assemble;
     private boolean placeholder = false;
+    private boolean replay = false;
     //private SpigotHandler spigotHandler;
     private Hotbar hotbar;
 
@@ -104,7 +105,6 @@ public class Practice extends JavaPlugin {
     public void onEnable() {
         long oldTime = System.currentTimeMillis();
         practice = this;
-        getServer().getPluginManager().registerEvents(new MenuListener(), this);
         loadConfigs();
         loadMongo();
 //        spigotHandler = new SpigotHandler(practice);
@@ -133,7 +133,8 @@ public class Practice extends JavaPlugin {
                 new PartyListener(),
                 new MatchListener(),
                 new QueueListener(),
-                new ArenaListener()
+                new ArenaListener(),
+                new MenuListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
 
@@ -153,6 +154,7 @@ public class Practice extends JavaPlugin {
 
         for (World world : getInstance().getServer().getWorlds()) {
             world.setGameRuleValue("doDaylightCycle", "false");
+            world.setGameRuleValue("doWeatherCycle", "false");
         }
 
         Plugin placeholderAPI = getServer().getPluginManager().getPlugin("PlaceholderAPI");
@@ -161,6 +163,11 @@ public class Practice extends JavaPlugin {
             placeholder = true;
             Console.sendMessage(CC.translate("&aPlaceholderAPI found!"));
             Console.sendMessage(CC.translate("&aRegistering placeholders"));
+        }
+        Plugin advancedReplays = getServer().getPluginManager().getPlugin("AdvancedReplay");
+        if (advancedReplays != null) {
+            replay = true;
+            Console.sendMessage(CC.translate("&aAdvancedReplay found!"));
         }
         Console.sendMessage(CC.translate("&7&m-----------------------------------------"));
         Console.sendMessage(CC.translate(" "));
