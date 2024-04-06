@@ -6,10 +6,6 @@ import me.lrxh.practice.Practice;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchState;
 import me.lrxh.practice.profile.hotbar.HotbarItem;
-import me.lrxh.practice.profile.meta.option.button.AllowSpectatorsOptionButton;
-import me.lrxh.practice.profile.meta.option.button.DuelRequestsOptionButton;
-import me.lrxh.practice.profile.meta.option.button.ShowScoreboardOptionButton;
-import me.lrxh.practice.profile.option.OptionsOpenedEvent;
 import me.lrxh.practice.profile.visibility.VisibilityLogic;
 import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.PlaceholderUtil;
@@ -124,13 +120,6 @@ public class ProfileListener implements Listener {
     public void soilChangePlayer(PlayerInteractEvent event) {
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL)
             event.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onOptionsOpenedEvent(OptionsOpenedEvent event) {
-        event.getButtons().add(new ShowScoreboardOptionButton());
-        event.getButtons().add(new AllowSpectatorsOptionButton());
-        event.getButtons().add(new DuelRequestsOptionButton());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
