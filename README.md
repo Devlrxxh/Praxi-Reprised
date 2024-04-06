@@ -32,7 +32,7 @@ The most configurable, efficient, and extensive practice plugin.
 # Match Replay
 
 - Match Replay's depends on AdvancedReplay
-- [Recommended Version (This a simple fork I made)](https://www.mediafire.com/file/iubj5xde5ckpdjh/Replay.jar/file)
+- [Required Version (This a simple fork I made)](https://www.mediafire.com/file/bpzrshxkb0uw1a3/Replay.jar/file)
 
 # Credits
 
