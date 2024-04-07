@@ -184,10 +184,8 @@ public class ProfileListener implements Listener {
 
         Profile profile = Profile.getProfiles().get(event.getPlayer().getUniqueId());
         if (Practice.getInstance().isReplay()) {
-            if (profile.isReplay()) {
                 if (ReplaySaver.exists(profile.getUuid().toString())) {
                     ReplaySaver.delete(profile.getUuid().toString());
-                }
             }
         }
 

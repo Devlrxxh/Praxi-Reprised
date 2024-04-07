@@ -176,12 +176,8 @@ public abstract class Match {
         PlayerUtil.reset(player);
 
         if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
-            if (profile.isReplay()) {
                 if (ReplaySaver.exists(profile.getUuid().toString())) {
                     ReplaySaver.delete(profile.getUuid().toString());
-                }
-            } else {
-                profile.setReplay(true);
             }
         }
 

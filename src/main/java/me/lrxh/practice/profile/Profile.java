@@ -55,7 +55,6 @@ public class Profile {
     private Cooldown enderpearlCooldown;
     private Cooldown voteCooldown;
     private boolean silent = false;
-    private boolean replay = false;
 
     public Profile(UUID uuid) {
         this.uuid = uuid;
