@@ -124,7 +124,9 @@ LEADERBOARD:
   FILTER: FILL # THERE IS FILL AND BRODER
   KIT-NAME: "&a<kit> &7| &fTop 10"
   PLAYER-ELO: "&bYour Elo: &f<player_elo>"
-  POSITION: "&b<position>. &f<player> &7- &b <player_elo>"
+  PLAYER-KILL: "&bYour Kills: &f<player_kill>"
+  TOGGLE_VIEW: "&bToggle view"
+  POSITION: "&b<position>. &f<player> &7- &b <value>"
   GLOBAL-STATS:
     GLOBAL-STATS-NAME: "&aGlobal Stats"
     LORE:

@@ -28,7 +28,7 @@ import me.lrxh.practice.kit.Kit;
 import me.lrxh.practice.kit.KitEditorListener;
 import me.lrxh.practice.kit.command.KitCommand;
 import me.lrxh.practice.leaderboards.LeaderboardThread;
-import me.lrxh.practice.leaderboards.LeaderboardsCommand;
+import me.lrxh.practice.leaderboards.command.LeaderboardsCommand;
 import me.lrxh.practice.match.Match;
 import me.lrxh.practice.match.MatchListener;
 import me.lrxh.practice.party.Party;

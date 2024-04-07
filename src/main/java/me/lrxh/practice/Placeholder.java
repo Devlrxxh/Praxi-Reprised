@@ -2,7 +2,6 @@ package me.lrxh.practice;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.lrxh.practice.leaderboards.Leaderboard;
-import me.lrxh.practice.leaderboards.PlayerElo;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.util.TimeUtil;
 import org.bukkit.Bukkit;
@@ -36,16 +35,23 @@ public class Placeholder extends PlaceholderExpansion {
         if (!player.isOnline()) return "Offline Player";
 
         String[] parts = identifier.split("_");
-        if (parts.length == 4 && parts[0].equalsIgnoreCase("lb")) {
+        if (parts.length >= 4 && parts.length <= 6 && parts[0].equalsIgnoreCase("lb")) {
             String queue = parts[1];
             int position = Integer.parseInt(parts[2]);
-            PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue).getTopPlayers().get(position - 1);
+            String valueType = parts[parts.length - 1];
+            boolean showName = parts[parts.length - 2].equalsIgnoreCase("name");
 
-            switch (parts[3]) {
-                case "name":
-                    return playerElo.getPlayerName();
+            if (position > 10 || position < 1) return "";
+
+            switch (valueType) {
                 case "elo":
-                    return String.valueOf(playerElo.getElo());
+                    return showName ?
+                            Leaderboard.getEloLeaderboards().get(queue).getTopEloPlayers().get(position - 1).getPlayerName() :
+                            String.valueOf(Leaderboard.getEloLeaderboards().get(queue).getTopEloPlayers().get(position - 1).getElo());
+                case "kills":
+                    return showName ?
+                            Leaderboard.getEloLeaderboards().get(queue).getTopKillPlayers().get(position - 1).getPlayerName() :
+                            String.valueOf(Leaderboard.getEloLeaderboards().get(queue).getTopKillPlayers().get(position - 1).getKills());
             }
         } else if (identifier.equalsIgnoreCase("leaderboards_update")) {
             return TimeUtil.millisToTimer(Leaderboard.getRefreshTime());

@@ -130,6 +130,7 @@ public abstract class Menu {
                     previousMenu.setClosedByMenu(true);
                     inventory = player.getOpenInventory().getTopInventory();
                     update = true;
+                    player.updateInventory();
                 }
             }
         }

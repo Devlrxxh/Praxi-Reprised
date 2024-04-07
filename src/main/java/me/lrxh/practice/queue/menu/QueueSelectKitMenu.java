@@ -124,17 +124,25 @@ public class QueueSelectKitMenu extends Menu {
                 Matcher matcher = Pattern.compile("<lb_(\\d+)_(\\w+)_>").matcher(line);
                 while (matcher.find()) {
                     int position = Integer.parseInt(matcher.group(1));
-                    String placeholder = matcher.group(2);
-                    PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue.getKit().getName()).getTopPlayers().get(position - 1);
-                    switch (placeholder) {
+                    String valueType = matcher.group(2);
+                    boolean showName = line.contains("_name_");
+
+                    if (position > 10 || position < 1) return line;
+
+                    PlayerElo playerElo = Leaderboard.getEloLeaderboards().get(queue.getKit().getName()).getTopEloPlayers().get(position - 1);
+                    PlayerElo playerKills = Leaderboard.getEloLeaderboards().get(queue.getKit().getName()).getTopKillPlayers().get(position - 1);
+
+                    switch (valueType) {
                         case "name":
-                            line = line.replace("<lb_" + position + "_name_>", playerElo.getPlayerName());
+                            line = showName ?
+                                    line.replace("<lb_" + position + "_name_>", playerElo.getPlayerName()) :
+                                    line.replace("<lb_" + position + "_name_>", playerKills.getPlayerName());
                             break;
                         case "elo":
                             line = line.replace("<lb_" + position + "_elo_>", String.valueOf(playerElo.getElo()));
                             break;
                         case "kills":
-                            line = line.replace("<lb_" + position + "_kills_>", String.valueOf(playerElo.getKills()));
+                            line = line.replace("<lb_" + position + "_kills_>", String.valueOf(playerKills.getKills()));
                             break;
                         default:
                             break;
@@ -143,6 +151,7 @@ public class QueueSelectKitMenu extends Menu {
             }
             return line;
         }
+
 
         @Override
         public void clicked(Player player, ClickType clickType) {

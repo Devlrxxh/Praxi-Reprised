@@ -307,7 +307,7 @@ public abstract class Match {
 
         for (Player participant : getPlayers()) {
             if (participant != null && participant.isOnline()) {
-                if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()){
+                if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
                     for (String msg : Locale.MATCH_SHOW_REPLAY.formatLines(participant)) {
                         if (msg.contains("%CLICKABLE%")) {
                             ChatComponentBuilder builder = new ChatComponentBuilder(Locale.MATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(participant

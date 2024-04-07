@@ -11,5 +11,6 @@ import java.util.List;
 @Setter
 public class QueueLeaderboard {
     private String queue;
-    private List<PlayerElo> topPlayers;
+    private List<PlayerElo> topEloPlayers;
+    private List<PlayerElo> topKillPlayers;
 }
