@@ -87,7 +87,7 @@ public class LeaderboardsMenu extends Menu {
 
             return new ItemBuilder(PlayerUtil.getPlayerHead(player.getUniqueId()))
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.GLOBAL-STATS.GLOBAL-STATS-NAME"))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();
@@ -112,7 +112,7 @@ public class LeaderboardsMenu extends Menu {
 
             return new ItemBuilder(Material.COMPASS)
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.TOGGLE_VIEW"))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();
@@ -151,7 +151,7 @@ public class LeaderboardsMenu extends Menu {
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName()))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();
@@ -183,7 +183,7 @@ public class LeaderboardsMenu extends Menu {
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name(Practice.getInstance().getMenusConfig().getString("LEADERBOARD.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName()))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();

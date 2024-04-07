@@ -141,7 +141,7 @@ public class SettingsMenu extends Menu {
                     break;
                 }
             }
-            return new ItemBuilder(this.settings.getMaterial()).name(Practice.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore).clearEnchantments().clearFlags().clearFlags().build();
+            return new ItemBuilder(this.settings.getMaterial()).name(Practice.getInstance().getMenusConfig().getString("SETTINGS.SETTING-NAME").replace("<settings>", settings.getName())).lore(lore, player).clearEnchantments().clearFlags().clearFlags().build();
         }
 
         @Override

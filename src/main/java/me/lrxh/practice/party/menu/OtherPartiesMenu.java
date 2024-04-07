@@ -81,7 +81,7 @@ public class OtherPartiesMenu extends Menu {
                     .name("&6Party of &r" + party.getLeader().getName())
                     .amount(party.getPlayers().size(), false)
                     .durability(3)
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearFlags()
                     .build();
         }

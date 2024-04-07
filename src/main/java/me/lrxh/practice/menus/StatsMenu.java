@@ -75,7 +75,7 @@ public class StatsMenu extends Menu {
 
             return new ItemBuilder(PlayerUtil.getPlayerHead(target.getUniqueId()))
                     .name(Practice.getInstance().getMenusConfig().getString("STATS.GLOBAL-STATS.GLOBAL-STATS-NAME"))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();
@@ -116,7 +116,7 @@ public class StatsMenu extends Menu {
                     .name(Practice.getInstance().getMenusConfig().getString("STATS.KIT-NAME")
                             .replace("<kit>", queue.getKit().getName())
                             .replace("<type>", queue.isRanked() ? "Unranked" : "Ranked"))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearEnchantments()
                     .clearFlags()
                     .build();

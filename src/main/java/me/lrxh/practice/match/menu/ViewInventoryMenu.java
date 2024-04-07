@@ -118,7 +118,7 @@ public class ViewInventoryMenu extends Menu {
                     lore.add(CC.PINK + name + CC.GRAY + duration);
                 });
 
-                builder.lore(lore);
+                builder.lore(lore, player);
             }
 
             return builder.build();

@@ -55,7 +55,7 @@ public class PageFilterButton<T> extends Button {
 
         return new ItemBuilder(Material.HOPPER)
                 .name("&7Filters")
-                .lore(lore)
+                .lore(lore, player)
                 .build();
     }
 

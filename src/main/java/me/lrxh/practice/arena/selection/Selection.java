@@ -20,6 +20,8 @@ public class Selection {
     public static final ItemStack SELECTION_WAND;
     private static final String SELECTION_METADATA_KEY = "CLAIM_SELECTION";
 
+
+
     static {
         SELECTION_WAND = new ItemBuilder(Material.GOLD_AXE)
                 .name("&6Selection Wand")

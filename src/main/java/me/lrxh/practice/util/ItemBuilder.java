@@ -3,6 +3,7 @@ package me.lrxh.practice.util;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -69,10 +70,23 @@ public class ItemBuilder implements Listener {
         return this;
     }
 
-    public ItemBuilder lore(List<String> lore) {
+    public ItemBuilder lore(List<String> lore, Player player) {
         List<String> toSet = new ArrayList<>();
         ItemMeta meta = is.getItemMeta();
 
+        for (String string : lore) {
+            toSet.add(ChatColor.translateAlternateColorCodes('&', string));
+        }
+
+        meta.setLore(PlaceholderUtil.format(toSet, player));
+        is.setItemMeta(meta);
+
+        return this;
+    }
+
+    public ItemBuilder lore(List<String> lore) {
+        List<String> toSet = new ArrayList<>();
+        ItemMeta meta = is.getItemMeta();
         for (String string : lore) {
             toSet.add(ChatColor.translateAlternateColorCodes('&', string));
         }

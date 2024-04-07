@@ -113,7 +113,7 @@ public class QueueSelectKitMenu extends Menu {
 
             return new ItemBuilder(queue.getKit().getDisplayIcon())
                     .name(kitName)
-                    .lore(lore)
+                    .lore(lore, player)
                     .amount(Match.getInFightsCount(queue), true)
                     .clearFlags()
                     .build();

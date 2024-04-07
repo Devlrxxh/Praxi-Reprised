@@ -65,7 +65,7 @@ public class PartyEventSelectEventMenu extends Menu {
 
             return new ItemBuilder(partyEvent == PartyEvent.FFA ? Material.DIAMOND_SWORD : Material.GOLD_AXE)
                     .name(Practice.getInstance().getMenusConfig().getString("PARTY.EVENTS.EVENT-COLOR").replace("<event>", partyEvent.getName()))
-                    .lore(partyEvent == PartyEvent.FFA ? ffaLore : splitLore)
+                    .lore(partyEvent == PartyEvent.FFA ? ffaLore : splitLore, player)
                     .clearFlags()
                     .build();
         }

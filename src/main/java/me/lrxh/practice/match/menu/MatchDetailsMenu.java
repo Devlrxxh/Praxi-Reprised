@@ -110,7 +110,7 @@ public class MatchDetailsMenu extends Menu {
                     lore.add("&b" + name + "&f" + duration);
                 });
 
-                builder.lore(lore);
+                builder.lore(lore, player);
             }
 
             return builder.build();
@@ -154,7 +154,7 @@ public class MatchDetailsMenu extends Menu {
                             "&7• &bPotions Thrown: &f" + snapshot.getPotionsThrown(),
                             "&7• &bPotions Missed: &f" + snapshot.getPotionsMissed(),
                             "&7• &bPotion Accuracy: &f" + snapshot.getPotionAccuracy()
-                    ))
+                    ), player)
                     .clearFlags()
                     .build();
         }

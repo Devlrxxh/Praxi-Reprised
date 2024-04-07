@@ -58,7 +58,7 @@ public class ProfileSettingsMenu extends Menu {
 
             return new ItemBuilder(Material.REDSTONE_COMPARATOR)
                     .name("&bSettings")
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearFlags()
                     .build();
         }
@@ -84,7 +84,7 @@ public class ProfileSettingsMenu extends Menu {
 
             return new ItemBuilder(Material.EMERALD)
                     .name("&bStatistics")
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearFlags()
                     .build();
         }

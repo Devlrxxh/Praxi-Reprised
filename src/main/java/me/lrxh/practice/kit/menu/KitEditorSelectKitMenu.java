@@ -58,7 +58,7 @@ public class KitEditorSelectKitMenu extends Menu {
             List<String> lore = new ArrayList<>(Practice.getInstance().getMenusConfig().getStringList("KIT-EDITOR.LORE"));
             return new ItemBuilder(kit.getDisplayIcon())
                     .name(Practice.getInstance().getMenusConfig().getString("KIT-EDITOR.KIT-NAME").replace("<kit>", kit.getName()))
-                    .lore(lore)
+                    .lore(lore, player)
                     .clearFlags()
                     .build();
         }
