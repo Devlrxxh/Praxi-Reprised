@@ -12,20 +12,18 @@ import me.lrxh.practice.participant.GameParticipant;
 import me.lrxh.practice.profile.Profile;
 import me.lrxh.practice.profile.meta.ProfileRematchData;
 import me.lrxh.practice.queue.Queue;
+import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
+import me.lrxh.practice.util.ChatHelper;
+import me.lrxh.practice.util.PlayerUtil;
 import me.lrxh.practice.util.elo.EloUtil;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public class BasicTeamMatch extends Match {
@@ -253,42 +251,46 @@ public class BasicTeamMatch extends Match {
     }
 
     @Override
-    public List<BaseComponent[]> generateEndComponents() {
-        List<BaseComponent[]> componentsList = new ArrayList<>();
+    public void sendEndMessage(Player player) {
+        List<String> formattedStrings = new ArrayList<>(Locale.MATCH_END_DETAILS.formatLines());
+        for (String string : formattedStrings) {
+            if (string.equalsIgnoreCase("%INVENTORIES%")) {
+                ChatComponentBuilder winner = new ChatComponentBuilder(Locale.MATCH_END_WINNER_INVENTORY
+                        .format(player));
 
-        for (String line : Locale.MATCH_END_DETAILS.formatLines()) {
-            if (line.equalsIgnoreCase("%INVENTORIES%")) {
-                BaseComponent[] winners = generateInventoriesComponents(
-                        Locale.MATCH_END_WINNER_INVENTORY.format(participantA.getPlayers().size() == 1 ? "" : "s"),
-                        winningParticipant);
+                ChatComponentBuilder separator = new ChatComponentBuilder("&7 | ");
 
-                BaseComponent[] losers = generateInventoriesComponents(
-                        Locale.MATCH_END_LOSER_INVENTORY.format(participantB.getPlayers().size() == 1 ? "" : "s"),
-                        losingParticipant);
+                ChatComponentBuilder loser = new ChatComponentBuilder(Locale.MATCH_END_LOSER_INVENTORY
+                        .format(player));
 
-                if (participantA.getPlayers().size() == 1 && participantB.getPlayers().size() == 1) {
-                    ChatComponentBuilder builder = new ChatComponentBuilder("");
+                PlayerUtil.sendMessage(player,
+                        Collections.singletonList(winner).toArray(new ChatComponentBuilder[0]),
+                        getTeamAsComponent(winningParticipant),
+                        Collections.singletonList(separator).toArray(new ChatComponentBuilder[0]),
+                        Collections.singletonList(loser).toArray(new ChatComponentBuilder[0]),
+                        getTeamAsComponent(losingParticipant));
 
-                    for (BaseComponent component : winners) {
-                        builder.append((TextComponent) component);
-                    }
+            } else if (string.equalsIgnoreCase("%ENDMESSAGE%")) {
+                ChatComponentBuilder replay = new ChatComponentBuilder(Locale.MATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(player));
+                replay.attachToEachPart(ChatHelper.click("/replay play " + player.getUniqueId()));
+                replay.attachToEachPart(ChatHelper.hover(Locale.MATCH_SHOW_REPLAY_HOVER.format(player)));
 
-                    builder.append(new ChatComponentBuilder("&7 | ").create());
+                ChatComponentBuilder rematch = new ChatComponentBuilder(Locale.REMATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(player));
+                rematch.attachToEachPart(ChatHelper.click("/rematch " + player.getName()));
+                rematch.attachToEachPart(ChatHelper.hover(Locale.REMATCH_SHOW_REPLAY_HOVER.format(player)));
 
-                    for (BaseComponent component : losers) {
-                        builder.append((TextComponent) component);
-                    }
 
-                    componentsList.add(builder.create());
+                if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
+                    PlayerUtil.sendMessage(player,
+                            Collections.singletonList(replay).toArray(new ChatComponentBuilder[0]),
+                            Collections.singletonList(rematch).toArray(new ChatComponentBuilder[0]));
                 } else {
-                    componentsList.add(winners);
-                    componentsList.add(losers);
+                    PlayerUtil.sendMessage(player,
+                            Collections.singletonList(rematch).toArray(new ChatComponentBuilder[0]));
+
                 }
 
-                continue;
-            }
-
-            if (line.equalsIgnoreCase("%ELO_CHANGES%")) {
+            } else if (string.equalsIgnoreCase("%ELO_CHANGES%")) {
                 if (participantA.getPlayers().size() == 1 && participantB.getPlayers().size() == 1 && ranked) {
                     List<String> sectionLines = Locale.MATCH_ELO_CHANGES.formatLines(
                             winningParticipant.getConjoinedNames(),
@@ -298,19 +300,15 @@ public class BasicTeamMatch extends Match {
                             (losingParticipant.getLeader().getEloMod()),
                             (losingParticipant.getLeader().getElo() - losingParticipant.getLeader().getEloMod())
                     );
-
                     for (String sectionLine : sectionLines) {
-                        componentsList.add(new ChatComponentBuilder("").parse(sectionLine).create());
+                        player.sendMessage(CC.translate(sectionLine));
                     }
                 }
-
-                continue;
+            } else {
+                player.sendMessage(CC.translate(string));
             }
-
-            componentsList.add(new ChatComponentBuilder("").parse(line).create());
         }
-
-        return componentsList;
     }
+
 
 }

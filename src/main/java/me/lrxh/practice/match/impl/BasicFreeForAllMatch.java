@@ -14,7 +14,6 @@ import me.lrxh.practice.util.CC;
 import me.lrxh.practice.util.ChatComponentBuilder;
 import me.lrxh.practice.util.InventoryUtil;
 import me.lrxh.practice.util.PlayerUtil;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BasicFreeForAllMatch extends Match {
@@ -157,36 +157,57 @@ public class BasicFreeForAllMatch extends Match {
     }
 
     @Override
-    public List<BaseComponent[]> generateEndComponents() {
-        List<BaseComponent[]> componentsList = new ArrayList<>();
+    public void sendEndMessage(Player player) {
+        List<String> formattedStrings = new ArrayList<>(Locale.MATCH_END_DETAILS.formatLines());
+        for (String string : formattedStrings) {
+            if (string.equalsIgnoreCase("%INVENTORIES%")) {
+                ChatComponentBuilder winner = new ChatComponentBuilder(Locale.MATCH_END_WINNER_INVENTORY
+                        .format(player));
 
-        for (String line : Locale.MATCH_END_DETAILS.formatLines()) {
-            if (line.equalsIgnoreCase("%INVENTORIES%")) {
-                List<GameParticipant<MatchGamePlayer>> participants = new ArrayList<>(this.participants);
-                participants.remove(winningParticipant);
+                PlayerUtil.sendMessage(player, Collections.singletonList(winner).toArray(new ChatComponentBuilder[0]), getTeamAsComponent(winningParticipant),
+                        getTeamAsComponent(winningParticipant));
 
-
-                BaseComponent[] winners = generateInventoriesComponents(
-                        Locale.MATCH_END_WINNER_INVENTORY.format(""), winningParticipant);
-
-                BaseComponent[] losers = generateInventoriesComponents(
-                        Locale.MATCH_END_LOSER_INVENTORY.format(participants.size() > 1 ? "s" : ""), participants);
-
-                componentsList.add(winners);
-                componentsList.add(losers);
-
-                continue;
+            } else if (string.equalsIgnoreCase("%ENDMESSAGE%")) {
+                formattedStrings.remove(string);
+            } else if (string.equalsIgnoreCase("%ELO_CHANGES%")) {
+                formattedStrings.remove(string);
+            } else {
+                player.sendMessage(CC.translate(string));
             }
-
-            if (line.equalsIgnoreCase("%ELO_CHANGES%")) {
-                continue;
-            }
-
-            componentsList.add(new ChatComponentBuilder("").parse(line).create());
         }
-
-        return componentsList;
     }
+
+//    @Override
+//    public List<BaseComponent[]> generateEndComponents(Player player) {
+//        List<BaseComponent[]> componentsList = new ArrayList<>();
+//
+//        for (String line : Locale.MATCH_END_DETAILS.formatLines()) {
+//            if (line.equalsIgnoreCase("%INVENTORIES%")) {
+//                List<GameParticipant<MatchGamePlayer>> participants = new ArrayList<>(this.participants);
+//                participants.remove(winningParticipant);
+//
+//
+//                BaseComponent[] winners = generateInventoriesComponents(
+//                        Locale.MATCH_END_WINNER_INVENTORY.format(""), winningParticipant);
+//
+//                BaseComponent[] losers = generateInventoriesComponents(
+//                        Locale.MATCH_END_LOSER_INVENTORY.format(participants.size() > 1 ? "s" : ""), participants);
+//
+//                componentsList.add(winners);
+//                componentsList.add(losers);
+//
+//                continue;
+//            }
+//
+//            if (line.equalsIgnoreCase("%ELO_CHANGES%")) {
+//                continue;
+//            }
+//
+//            componentsList.add(new ChatComponentBuilder("").parse(line).create());
+//        }
+//
+//        return componentsList;
+//    }
 
     public int getRemainingTeams() {
         int remaining = 0;

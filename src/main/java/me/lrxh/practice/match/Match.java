@@ -94,6 +94,20 @@ public abstract class Match {
         }
     }
 
+    public static ChatComponentBuilder[] getTeamAsComponent(GameParticipant<MatchGamePlayer> participants) {
+        List<ChatComponentBuilder> chatComponentBuilders = new ArrayList<>();
+
+        for (MatchGamePlayer matchGamePlayer : participants.getPlayers()) {
+            ChatComponentBuilder current = new ChatComponentBuilder(
+                    Locale.MATCH_CLICK_TO_VIEW_NAME.format(matchGamePlayer.getUsername()))
+                    .attachToEachPart(ChatHelper.hover(Locale.MATCH_CLICK_TO_VIEW_HOVER.format(matchGamePlayer.getUsername())))
+                    .attachToEachPart(ChatHelper.click("/viewinv " + matchGamePlayer.getUuid().toString()));
+            chatComponentBuilders.add(current);
+        }
+        return chatComponentBuilders.toArray(new ChatComponentBuilder[0]);
+    }
+
+
     public static int getInFightsCount(Queue queue) {
         int i = 0;
 
@@ -305,25 +319,6 @@ public abstract class Match {
             arena.setActive(false);
         }
 
-        for (Player participant : getPlayers()) {
-            if (participant != null && participant.isOnline()) {
-                if (Practice.getInstance().isReplay() && !kit.getGameRules().isBuild()) {
-                    for (String msg : Locale.MATCH_SHOW_REPLAY.formatLines(participant)) {
-                        if (msg.contains("%CLICKABLE%")) {
-                            ChatComponentBuilder builder = new ChatComponentBuilder(Locale.MATCH_SHOW_REPLAY_RECEIVED_CLICKABLE.format(participant
-                            ));
-                            builder.attachToEachPart(ChatHelper.click("/replay play " + participant.getUniqueId()));
-                            builder.attachToEachPart(ChatHelper.hover(Locale.MATCH_SHOW_REPLAY_HOVER.format(participant)));
-
-                            participant.sendMessage(builder.create());
-                        } else {
-                            participant.sendMessage(msg);
-                        }
-                    }
-                }
-            }
-        }
-
         Practice.getInstance().getCache().getMatches().remove(this);
     }
 
@@ -375,29 +370,20 @@ public abstract class Match {
             MatchSnapshot.getSnapshots().put(snapshot.getUuid(), snapshot);
         }
 
-        List<BaseComponent[]> endingMessages = generateEndComponents();
 
         // Send ending messages to game participants
         for (GameParticipant<MatchGamePlayer> gameParticipant : getParticipants()) {
             for (MatchGamePlayer gamePlayer : gameParticipant.getPlayers()) {
                 if (!gamePlayer.isDisconnected()) {
                     Player player = gamePlayer.getPlayer();
-
-                    if (player != null) {
-                        for (BaseComponent[] components : endingMessages) {
-                            player.sendMessage(components);
-                        }
-                    }
+                    sendEndMessage(player);
                 }
             }
         }
 
         // Send ending messages to spectators
         for (Player player : getSpectatorsAsPlayers()) {
-            for (BaseComponent[] components : endingMessages) {
-                player.sendMessage(components);
-            }
-
+            sendEndMessage(player);
             removeSpectator(player);
         }
     }
@@ -800,7 +786,7 @@ public abstract class Match {
         return players;
     }
 
-    public abstract List<BaseComponent[]> generateEndComponents();
+    public abstract void sendEndMessage(Player player);
 
 
     public void sendDeathMessage(Player dead, Player killer, boolean finalKill) {

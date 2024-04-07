@@ -30,7 +30,7 @@ public class ProfileRematchData {
     private final UUID target;
     private final Kit kit;
     private final long timestamp;
-    private Arena arena;
+    private final Arena arena;
     private boolean sent;
     private boolean receive;
     private boolean cancelled;
@@ -41,6 +41,7 @@ public class ProfileRematchData {
         this.target = target;
         this.kit = kit;
         this.timestamp = System.currentTimeMillis();
+        this.arena = Arena.getRandomArena(kit);
     }
 
     public void request() {
@@ -80,7 +81,7 @@ public class ProfileRematchData {
             BaseComponent[] lineComponents = new ChatComponentBuilder("")
                     .parse(line)
                     .attachToEachPart(ChatHelper.hover(Locale.REMATCH_RECEIVED_REQUEST_HOVER.format(target)))
-                    .attachToEachPart(ChatHelper.click("/rematch"))
+                    .attachToEachPart(ChatHelper.click("/rematch " + sender.getName()))
                     .create();
 
             components.add(lineComponents);

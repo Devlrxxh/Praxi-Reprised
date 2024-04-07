@@ -116,23 +116,29 @@ MATCH:
     - '&7&m------------------------------------------------'
     - '<theme>Post-Match Inventories &7&o&7(Click to view)'
     - '%INVENTORIES%'
+    - '%ENDMESSAGE%'
     - '%ELO_CHANGES%'
     - '&7&m------------------------------------------------'
   END_WINNER_INVENTORY: '&aWinner{0}: '
   END_LOSER_INVENTORY: '&cLoser{0}: '
   CLICK_TO_VIEW_NAME: '&e{0}'
   CLICK_TO_VIEW_HOVER: '&eClick to view {0}&e''''s inventory.'
+  REPLAY:
+    SHOW_REPLAY:
+      - '%CLICKABLE%'
+    RECEIVED_HOVER: '&aClick here to see a replay of your fight.'
+    RECEIVED_CLICKABLE: '&7Want to replay your match? &a(CLICK HERE)'
+  REMATCH:
+    MESSAGE:
+      - '%CLICKABLE%'
+    RECEIVED_HOVER: '&aClick here to see a replay of your fight.'
+    RECEIVED_CLICKABLE: '&7Want to replay your match? &a(CLICK HERE)'
   ELO_CHANGES:
     - '&a{0} +{1} ({2}) &7| &c{3} -{4} ({5})'
   PLAYER_KILLED: '&a{1} &7killed &c{0}&7.'
   PLAYER_DIED: '{0} &7committed suicide.'
   PLAYER_FINAL_KILL: '&a{1} &7killed &c{0}&7. &b&lFINAL KILL'
   PLAYER_DIED_FINAL: '{0} &7committed suicide. &b&lFINAL KILL'
-  REPLAY:
-    SHOW_REPLAY:
-      - '%CLICKABLE%'
-    RECEIVED_HOVER: '&aClick here to see a replay of your fight.'
-    RECEIVED_CLICKABLE: '&7Want to replay your match? &a(CLICK HERE)'
   ROUNDS_TO_WIN: ''
 REMATCH:
   SENT_REQUEST:

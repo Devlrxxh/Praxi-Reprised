@@ -3,6 +3,7 @@ package me.lrxh.practice.util;
 import lombok.experimental.UtilityClass;
 import me.lrxh.practice.Practice;
 import me.lrxh.practice.profile.SpawnTeleportEvent;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
@@ -20,10 +21,7 @@ import org.bukkit.util.Vector;
 import org.github.paperspigot.Title;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @UtilityClass
 public class PlayerUtil {
@@ -76,6 +74,34 @@ public class PlayerUtil {
         } else {
             return null;
         }
+    }
+
+    public void sendMessage(Player player, ChatComponentBuilder[]... chatComponentBuilders) {
+        List<BaseComponent[]> components = new ArrayList<>();
+        for (ChatComponentBuilder[] builderArray : chatComponentBuilders) {
+            for (ChatComponentBuilder chatComponentBuilder : builderArray) {
+                components.add(chatComponentBuilder.create());
+            }
+        }
+        if (player != null) {
+            BaseComponent[] concatenatedComponents = concatenateComponents(components);
+            player.sendMessage(concatenatedComponents);
+        }
+    }
+
+
+    private BaseComponent[] concatenateComponents(List<BaseComponent[]> components) {
+        int totalLength = 0;
+        for (BaseComponent[] component : components) {
+            totalLength += component.length;
+        }
+        BaseComponent[] concatenatedComponents = new BaseComponent[totalLength];
+        int currentIndex = 0;
+        for (BaseComponent[] component : components) {
+            System.arraycopy(component, 0, concatenatedComponents, currentIndex, component.length);
+            currentIndex += component.length;
+        }
+        return concatenatedComponents;
     }
 
     public static void sendTitle(Player player, String header, String footer, int duration) {
