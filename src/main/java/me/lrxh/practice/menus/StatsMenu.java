@@ -102,13 +102,14 @@ public class StatsMenu extends Menu {
                 line = line.replaceAll("<elo>", String.valueOf(profile.getKitData().get(queue.getKit()).getElo()));
 
                 if (line.contains("<description>")) {
-                    if (!queue.getKit().getDescription().equalsIgnoreCase("none")) {
-                        line = line.replaceAll("<description>", queue.getKit().getDescription());
-                        lore.add(line);
+                    List<String> descriptionLines = queue.getKit().getDescription();
+                    for (String descriptionLine : descriptionLines) {
+                        lore.add(line.replaceAll("<description>", descriptionLine));
                     }
                 } else {
                     lore.add(line);
                 }
+
 
             }
 

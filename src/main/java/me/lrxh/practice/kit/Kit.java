@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -30,12 +31,12 @@ public class Kit {
     private boolean enabled;
     private String knockbackProfile;
     private ItemStack displayIcon;
-    private String description;
+    private List<String> description;
 
     public Kit(String name) {
         this.name = name;
         this.displayIcon = new ItemStack(Material.DIAMOND_SWORD);
-        this.description = "&7" + name + "description";
+        this.description = Collections.singletonList("&7" + name + "description");
     }
 
     public static void init() {
@@ -54,7 +55,7 @@ public class Kit {
             kit.setDisplayIcon(new ItemBuilder(Material.valueOf(config.getString(path + ".icon.material")))
                     .durability(config.getInt(path + ".icon.durability"))
                     .build());
-            kit.setDescription(config.getString(path + ".description"));
+            kit.setDescription(config.getStringList(path + ".description"));
             if (config.contains(path + ".loadout.armor")) {
                 kit.getKitLoadout().setArmor(InventoryUtil.deserializeInventory(config.getString(path + ".loadout.armor")));
             }

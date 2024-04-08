@@ -1,7 +1,9 @@
 kits:
   Classic:
     enabled: true
-    description: '&7Kit with no enchantments'
+    description:
+      - '&7&0Kit with no'
+      - '&7&0enchantments'
     icon:
       material: DIAMOND_SWORD
       durability: 0
@@ -9,26 +11,27 @@ kits:
       armor: t@309;t@308;t@307;t@306;
       contents: t@276;t@346;t@261;t@322:a@8;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@262:a@12;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;
     game-rules:
-      sumo: false
+      allow-build: true
       spleef: false
-      parkour: false
+      sumo: false
       health-regeneration: true
       hit-delay: 20
-      allow-build: false
-      show-health: false
       boxing: false
+      bedwars: false
+      show-health: false
     edit-rules:
       allow-potion-fill: false
     knockback-profile: builduhc
   NoDebuff:
     enabled: true
-    description: '&7The PotPvP'
+    description:
+      - '&7&0The PotPvP'
     icon:
       material: POTION
       durability: 16421
     loadout:
       armor: t@313:e@0@2:e@34@3:e@2@4;t@312:e@0@2:e@34@3;t@311:e@0@2:e@34@3;t@310:e@0@2:e@34@3;
-      contents: t@276:e@16@3:e@20@2:e@34@3;t@368:a@16;t@373:d@3:pd@3-1=12-3600-0;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;
+      contents: t@276:e@16@3:e@34@3:e@20@2;t@368:a@16;t@373:d@8259:pd@3-1=12-9600-0;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@364:a@64;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@16421:pd@5-2=6-1-1;t@373:d@34:pd@2-2=1-1800-1;
     game-rules:
       enabled: true
       build: false
@@ -40,6 +43,7 @@ kits:
       allow-build: false
       show-health: false
       boxing: false
+      bedwars: false
     edit-rules:
       allow-potion-fill: false
       items:
@@ -62,7 +66,8 @@ kits:
     knockback-profile: nodebuff
   Sumo:
     enabled: true
-    description: '&7First to fall loses'
+    description:
+      - '&7&0First to fall loses'
     icon:
       material: LEASH
       durability: 0
@@ -84,7 +89,8 @@ kits:
     knockback-profile: sumo
   Boxing:
     enabled: true
-    description: '&7First to 100 hits wins'
+    description:
+      - '&7&0First to 100 hits wins'
     icon:
       material: DIAMOND_CHESTPLATE
       durability: 0
@@ -102,13 +108,14 @@ kits:
     knockback-profile: boxing
   BuildUHC:
     enabled: true
-    description: '&7Ultra Hardcore'
+    description: '&7&0Ultra Hardcore'
     icon:
       material: LAVA_BUCKET
       durability: 0
     loadout:
       armor: t@313:e@4@2:e@34@3;t@312:e@0@1:e@34@3;t@311:e@0@1:e@34@3;t@310:e@4@2:e@34@3;
-      contents: t@276:e@16@1:e@34@3;t@346:e@34@3;t@261:e@48@2:e@34@3;t@322:a@6;t@322:a@3:dn@ยง6Golden Head;t@327;t@326;t@4:a@64;t@278;t@262:a@64;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;null;null;t@5:a@64;null;null;null;null;null;null;t@327;t@326;t@4:a@64;t@279;
+      contents: t@276:e@16@1:e@34@3;t@346:e@34@3;t@261:e@48@2:e@34@3;t@322:a@6;t@322:a@3:dn@à¸¢à¸‡6Golden
+        Head;t@327;t@326;t@4:a@64;t@278;t@262:a@64;t@0;t@0;t@0;t@0;t@0;t@0;t@5:a@64;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@0;t@5:a@64;t@0;t@0;t@0;t@0;t@0;t@0;t@327;t@326;t@4:a@64;t@279;
     game-rules:
       allow-build: true
       spleef: false
@@ -118,3 +125,41 @@ kits:
       boxing: false
       bedwars: false
     knockback-profile: builduhc
+  Gapple:
+    enabled: true
+    description:
+      - 'none'
+    icon:
+      material: GOLDEN_APPLE
+      durability: 1
+    loadout:
+      armor: t@313:e@0@4:e@34@3;t@312:e@0@4:e@34@3;t@311:e@0@4:e@34@3;t@310:e@0@4:e@34@3;
+      contents: t@276:e@16@5:e@34@3:e@20@2;t@322:d@1:a@64;t@310:e@0@4:e@34@3;t@311:e@0@4:e@34@3;t@312:e@0@4:e@34@3;t@313:e@0@4;t@373:d@8258:pd@2-1=1-9600-0;t@373:d@8265:pd@9-1=5-9600-0;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;t@373:d@8258:pd@2-1=1-9600-0;t@373:d@8265:pd@9-1=5-9600-0;null;
+    game-rules:
+      allow-build: false
+      spleef: false
+      sumo: false
+      bedwars: false
+      health-regeneration: false
+      hit-delay: 20
+      boxing: false
+  Bedfight:
+    enabled: true
+    description:
+      - '&7&0Break your opponent''''s'
+      - 'to stop them from respawning'
+    icon:
+      material: BED
+      durability: 0
+    loadout:
+      armor: t@301;t@300;t@299;t@298;
+      contents: t@268;t@35:a@64;t@359;t@270:e@32@1;t@271:e@32@1;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;null;
+    game-rules:
+      allow-build: true
+      spleef: false
+      sumo: false
+      bedwars: true
+      health-regeneration: false
+      hit-delay: 20
+      boxing: false
+      show-health: false

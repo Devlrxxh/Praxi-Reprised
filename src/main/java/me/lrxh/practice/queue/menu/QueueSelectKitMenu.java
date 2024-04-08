@@ -99,10 +99,17 @@ public class QueueSelectKitMenu extends Menu {
                 line = line.replaceAll("<queueing>", String.valueOf(queue.getQueuing()));
                 line = line.replaceAll("<kit>", queue.getKit().getName());
                 line = replaceLeaderboardPlaceholders(line, queue);
-                if (!line.contains("<description>") || !queue.getKit().getDescription().equalsIgnoreCase("none")) {
-                    line = line.replaceAll("<description>", queue.getKit().getDescription());
+                if (line.contains("<description>")) {
+                    if (!queue.getKit().getDescription().contains("none")) {
+                        List<String> descriptionLines = queue.getKit().getDescription();
+                        for (String descriptionLine : descriptionLines) {
+                            lore.add(line.replaceAll("<description>", descriptionLine));
+                        }
+                    }
+                } else {
                     lore.add(line);
                 }
+
             });
 
             String kitName = Practice.getInstance().getMenusConfig().getString(ranked ?

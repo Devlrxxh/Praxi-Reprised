@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
+
 @CommandAlias("kit")
 @CommandPermission("practice.admin.kit")
 @Description("Command to manage and create kits.")
@@ -215,7 +217,7 @@ public class KitCommand extends BaseCommand {
         Kit kit = Kit.getByName(kitName);
         if (kit == null) return;
 
-        kit.setDescription(description);
+        kit.setDescription(Collections.singletonList(description));
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's description.");
@@ -232,7 +234,7 @@ public class KitCommand extends BaseCommand {
         Kit kit = Kit.getByName(kitName);
         if (kit == null) return;
 
-        kit.setDescription("none");
+        kit.setDescription(Collections.singletonList("none"));
         kit.save();
 
         player.sendMessage(CC.GREEN + "You updated the kit's description.");
