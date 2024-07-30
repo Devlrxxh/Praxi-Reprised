@@ -87,8 +87,8 @@ public final class PlaceholderUtil {
                     line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));
                     line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
                     line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
-                    line = line.replaceAll("<diffrence>", getDifference(player, false));
-                    line = line.replaceAll("<diffrence>", getDifference(player, true));
+                    line = line.replaceAll("<hitDifference>", getDifference(player, false));
+                    line = line.replaceAll("<mmcHitDifference>", getDifference(player, true));
                     line = line.replaceAll("<combo>", getHitCombo(player, false));
                     line = line.replaceAll("<mmcCombo>", getHitCombo(player, true));
 
