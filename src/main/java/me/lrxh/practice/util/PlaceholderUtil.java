@@ -119,32 +119,39 @@ public final class PlaceholderUtil {
     public String getDifference(Player player, boolean isMMCDifference) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
-        Int playerHits = match.getGamePlayer(player).getHits();
-        Int opponentHits = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()
-        String noAdvantage = isMMCDifference ? "&a(+0)" : "&e(0)"
+        Integer playerHits = match.getGamePlayer(player).getHits();
+        Integer opponentHits = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits();
 
         if (playerHits - opponentHits > 0) {
             return CC.translate("&a(+" + (playerHits - opponentHits) + ")");
-        } else if (player - opponent < 0) {
-            return CC.translate("&c(" + (playerHits - opponentHits + ")");
+        } else if (playerHits - opponentHits < 0) {
+            return CC.translate("&c(" + (playerHits - opponentHits) + ")");
         } else {
-            return CC.translate(noAdvantage);
+            if (isMMCDifference) {
+                return CC.translate("&a(+0)");
+            } else {
+                return CC.translate("&e(0)");
+            }        
         }
     }
 
     public String getHitCombo(Player player, boolean isMMCCombo) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
-        Int playerCombo = match.getGamePlayer(player).getCombo();
-        Int opponentCombo = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getCombo()
-        String noCombo = isMMC ? "&f1st to 100 wins!" : "&fNo Combo"
-
+        Integer playerCombo = match.getGamePlayer(player).getCombo();
+        Integer opponentCombo = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getCombo();
+        String hitCombo = "";
+        
         if (playerCombo > 1) {
-            return CC.translate("&a" + playerCombo + " Combo");
+            hitCombo = "&a" + playerCombo + " Combo";
         } else if (opponentCombo > 1) {
-            return CC.translate("&c" + opponentCombo + " Combo");
-        } else if (opponentCombo = 0 && playerCombo = 0) {
-            return CC.translate(isMMCCombo);
+            hitCombo = "&c" + opponentCombo + " Combo";
+        } else if (opponentCombo < 2 && playerCombo < 2 && isMMCCombo) {
+            hitCombo = "&f1st to 100 wins!";
+        } else if (opponentCombo < 2 && playerCombo < 2 && !isMMCCombo) {
+            hitCombo = "&fNo Combo";
         }
+
+        return CC.translate(hitCombo);
     }
 }
