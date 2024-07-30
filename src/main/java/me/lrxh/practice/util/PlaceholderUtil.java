@@ -116,7 +116,7 @@ public final class PlaceholderUtil {
         return formattedLines;
     }
 
-    public String getDifference(Player player, boolean isMMC) {
+    public String getDifference(Player player, boolean isMMCDifference) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
         Int playerHits = match.getGamePlayer(player).getHits();
@@ -132,7 +132,7 @@ public final class PlaceholderUtil {
         }
     }
 
-    public String getHitCombo(Player player, boolean isMMC) {
+    public String getHitCombo(Player player, boolean isMMCCombo) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
         Int playerCombo = match.getGamePlayer(player).getCombo();
