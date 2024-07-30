@@ -121,14 +121,14 @@ public final class PlaceholderUtil {
         Match match = profile.getMatch();
         Int playerHits = match.getGamePlayer(player).getHits();
         Int opponentHits = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()
-        String noAdvantage = isMMC ? "&a(+0)" : "&e(0)"
+        String noAdvantage = isMMCDifference ? "&a(+0)" : "&e(0)"
 
         if (playerHits - opponentHits > 0) {
             return CC.translate("&a(+" + (playerHits - opponentHits) + ")");
         } else if (player - opponent < 0) {
             return CC.translate("&c(" + (playerHits - opponentHits + ")");
         } else {
-            return CC.translate("&e(0)");
+            return CC.translate(noAdvantage);
         }
     }
 
@@ -144,7 +144,7 @@ public final class PlaceholderUtil {
         } else if (opponentCombo > 1) {
             return CC.translate("&c" + opponentCombo + " Combo");
         } else if (opponentCombo = 0 && playerCombo = 0) {
-            return CC.translate(isMMC);
+            return CC.translate(isMMCCombo);
         }
     }
 }
