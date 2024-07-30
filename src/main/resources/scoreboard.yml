@@ -103,7 +103,7 @@ MATCH:
     - "&7&m--------------------"
     - "<theme>Fighting: &f<opponent>"
     - " "
-    - "<theme>Hits: <diffrence>"
+    - "<theme>Hits: <hitDifference>"
     - " &aHits: &f<your-hits>"
     - " &cThem: &f<their-hits>"
     - " "
