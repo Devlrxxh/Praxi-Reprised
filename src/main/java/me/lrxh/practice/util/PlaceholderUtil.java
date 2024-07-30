@@ -82,13 +82,15 @@ public final class PlaceholderUtil {
                 }
 
                 if (match.getOpponent(player.getUniqueId()) != null) {
-                    line = line.replaceAll("<diffrence>", getDifference(player));
                     line = line.replaceAll("<opponent>", match.getOpponent(player.getUniqueId()).getName());
                     line = line.replaceAll("<duration>", match.getDuration());
                     line = line.replaceAll("<opponent-ping>", String.valueOf(BukkitReflection.getPing(match.getOpponent(player.getUniqueId()))));
                     line = line.replaceAll("<your-hits>", String.valueOf(match.getGamePlayer(player).getHits()));
                     line = line.replaceAll("<their-hits>", String.valueOf(match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()));
-                    line = line.replaceAll("<diffrence>", getDifference(player));
+                    line = line.replaceAll("<diffrence>", getDifference(player, false));
+                    line = line.replaceAll("<diffrence>", getDifference(player, true));
+                    line = line.replaceAll("<combo>", getHitCombo(player, false));
+                    line = line.replaceAll("<mmcCombo>", getHitCombo(player, true));
 
                     if (match.getKit().getGameRules().isBedwars()) {
                         line = line.replaceAll("<bedA>", match.isBedABroken() ? CC.RED + CC.X : CC.GREEN + CC.CHECKMARK);
@@ -114,16 +116,35 @@ public final class PlaceholderUtil {
         return formattedLines;
     }
 
-    public String getDifference(Player player) {
+    public String getDifference(Player player, boolean isMMC) {
         Profile profile = Profile.getByUuid(player.getUniqueId());
         Match match = profile.getMatch();
-        if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits() > 0) {
-            return CC.translate("&a(+" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
-        } else if (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits() < 0) {
-            return CC.translate("&c(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
+        Int playerHits = match.getGamePlayer(player).getHits();
+        Int opponentHits = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()
+        String noAdvantage = isMMC ? "&a(+0)" : "&e(0)"
+
+        if (playerHits - opponentHits > 0) {
+            return CC.translate("&a(+" + (playerHits - opponentHits) + ")");
+        } else if (player - opponent < 0) {
+            return CC.translate("&c(" + (playerHits - opponentHits + ")");
         } else {
-            return CC.translate("&e(" + (match.getGamePlayer(player).getHits() - match.getGamePlayer(match.getOpponent(player.getUniqueId())).getHits()) + ")");
+            return CC.translate("&e(0)");
         }
     }
 
+    public String getHitCombo(Player player, boolean isMMC) {
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+        Match match = profile.getMatch();
+        Int playerCombo = match.getGamePlayer(player).getCombo();
+        Int opponentCombo = match.getGamePlayer(match.getOpponent(player.getUniqueId())).getCombo()
+        String noCombo = isMMC ? "&f1st to 100 wins!" : "&fNo Combo"
+
+        if (playerCombo > 1) {
+            return CC.translate("&a" + playerCombo + " Combo");
+        } else if (opponentCombo > 1) {
+            return CC.translate("&c" + opponentCombo + " Combo");
+        } else if (opponentCombo = 0 && playerCombo = 0) {
+            return CC.translate(isMMC);
+        }
+    }
 }
